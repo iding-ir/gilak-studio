@@ -1,5 +1,5 @@
 {
-  "name": "gilak-eyedropper",
+  "name": "@gilak/eyedropper",
   "version": "0.0.1",
   "description": "A React eyedropper color picker component for Gilak Studio",
   "author": "Aydin Ghane Kh. <https://github.com/iding-ir>",

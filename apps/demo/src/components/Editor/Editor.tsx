@@ -1,5 +1,5 @@
-import { Canvas } from 'gilak-color-picker'
-import { useColorPicker } from 'gilak-color-picker'
+import { Canvas } from '@gilak/color-picker'
+import { useColorPicker } from '@gilak/color-picker'
 import styles from './Editor.module.scss'
 import Icon from '../../assets/icon-eyedropper.svg'
 import { useEffect, useRef, useState } from 'react'

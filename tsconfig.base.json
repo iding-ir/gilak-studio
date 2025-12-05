@@ -14,6 +14,15 @@
     "moduleDetection": "force",
     "jsx": "react-jsx",
 
+    /* Path Mapping */
+    "baseUrl": ".",
+    "paths": {
+      "@gilak/color-picker": ["./packages/gilak-color-picker/src"],
+      "@gilak/color-picker/*": ["./packages/gilak-color-picker/src/*"],
+      "@gilak/eyedropper": ["./packages/gilak-eyedropper/src"],
+      "@gilak/eyedropper/*": ["./packages/gilak-eyedropper/src/*"]
+    },
+
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,

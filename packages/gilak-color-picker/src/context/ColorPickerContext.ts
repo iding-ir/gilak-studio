@@ -1,4 +1,4 @@
 import { createContext } from 'react'
-import { ColorPickerState } from '../types'
+import type { ColorPickerState } from '../types'
 
 export const ColorPickerContext = createContext<ColorPickerState | null>(null)

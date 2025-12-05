@@ -1,5 +1,5 @@
 import { use } from 'react'
-import { ColorPickerState } from '../types'
+import type { ColorPickerState } from '../types'
 import { ColorPickerContext } from './ColorPickerContext'
 
 /**

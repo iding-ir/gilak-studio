@@ -1,4 +1,4 @@
-import { ColorPickerConfig, ColorPickerAction } from '../types'
+import type { ColorPickerConfig, ColorPickerAction } from '../types'
 
 export const colorPickerReducer = (
   state: ColorPickerConfig,

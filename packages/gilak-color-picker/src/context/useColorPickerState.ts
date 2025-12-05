@@ -1,5 +1,5 @@
 import { useReducer } from 'react'
-import { ColorPickerConfig, ColorPickerState } from '../types'
+import type { ColorPickerConfig, ColorPickerState } from '../types'
 import { colorPickerReducer } from './reducer'
 
 export const useColorPickerState = (config: ColorPickerConfig): ColorPickerState => {

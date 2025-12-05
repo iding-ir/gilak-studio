@@ -3,7 +3,7 @@
   "changelog": "@changesets/cli/changelog",
   "commit": false,
   "fixed": [],
-  "linked": [["gilak-color-picker", "gilak-eyedropper"]],
+  "linked": [["@gilak/color-picker", "@gilak/eyedropper"]],
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",

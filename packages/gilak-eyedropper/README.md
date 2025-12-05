@@ -1,19 +1,19 @@
-# gilak-eyedropper
+# @gilak/eyedropper
 
 A React eyedropper color picker component for Gilak Studio.
 
 ## Installation
 
 ```bash
-npm install gilak-eyedropper
+npm install @gilak/eyedropper
 # or
-pnpm add gilak-eyedropper
+pnpm add @gilak/eyedropper
 ```
 
 ## Usage
 
 ```jsx
-import { GilakEyedropper } from 'gilak-eyedropper'
+import { GilakEyedropper } from '@gilak/eyedropper'
 
 function App() {
   return <GilakEyedropper />

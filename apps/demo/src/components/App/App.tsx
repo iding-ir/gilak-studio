@@ -1,4 +1,4 @@
-import { ColorPickerProvider } from 'gilak-color-picker'
+import { ColorPickerProvider } from '@gilak/color-picker'
 import { Editor } from '../Editor'
 
 export const App: React.FC = () => {

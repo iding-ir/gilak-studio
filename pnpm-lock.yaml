@@ -86,10 +86,10 @@ importers:
 
   apps/demo:
     dependencies:
-      gilak-color-picker:
+      '@gilak/color-picker':
         specifier: workspace:*
         version: link:../../packages/gilak-color-picker
-      gilak-eyedropper:
+      '@gilak/eyedropper':
         specifier: workspace:*
         version: link:../../packages/gilak-eyedropper
       i18next:

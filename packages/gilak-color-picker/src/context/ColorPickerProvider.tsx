@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import { DEFAULT_COLOR, DEFAULT_RADIUS, DEFAULT_SIZE, DEFAULT_WIDTH } from '../constants'
 import { ColorPickerContext } from './ColorPickerContext'
 import { useColorPickerState } from './useColorPickerState'

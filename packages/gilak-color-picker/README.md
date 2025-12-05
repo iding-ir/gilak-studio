@@ -1,19 +1,19 @@
-# gilak-color-picker
+# @gilak/color-picker
 
 A React canvas component for Gilak Studio.
 
 ## Installation
 
 ```bash
-npm install gilak-color-picker
+npm install @gilak/color-picker
 # or
-pnpm add gilak-color-picker
+pnpm add @gilak/color-picker
 ```
 
 ## Usage
 
 ```tsx
-import { Canvas } from 'gilak-color-picker'
+import { Canvas } from '@gilak/color-picker'
 
 function App() {
   return <Canvas />

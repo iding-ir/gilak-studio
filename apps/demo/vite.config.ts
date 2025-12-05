@@ -19,8 +19,8 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      'gilak-color-picker': resolve(__dirname, '../../packages/gilak-color-picker/src'),
-      'gilak-eyedropper': resolve(__dirname, '../../packages/gilak-eyedropper/src'),
+      '@gilak/color-picker': resolve(__dirname, '../../packages/gilak-color-picker/src'),
+      '@gilak/eyedropper': resolve(__dirname, '../../packages/gilak-eyedropper/src'),
     },
   },
   css: {

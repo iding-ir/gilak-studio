@@ -1,5 +1,5 @@
 {
-  "name": "gilak-color-picker",
+  "name": "@gilak/color-picker",
   "version": "0.0.1",
   "description": "A React canvas component for Gilak Studio",
   "author": "Aydin Ghane Kh. <https://github.com/iding-ir>",
