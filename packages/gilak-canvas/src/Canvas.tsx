@@ -1,29 +1,29 @@
 import React from 'react'
 import styles from './Canvas.module.scss'
-import { useColorPicker } from '../../context'
-import { Magnifier } from '../Magnifier'
+import { useCanvasEffect } from './hooks/use-canvas-effect'
 
 export interface CanvasProps {
+  children?: React.ReactNode
   ref?: React.RefObject<HTMLCanvasElement | null>
   width?: string | number
   height?: string | number
   onClick?: (event: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => void
-  onSelect?: (color: string) => void
+  onEnter?: () => void
+  onLeave?: () => void
 }
 
 export const Canvas: React.FC<CanvasProps> = ({
+  children,
   ref,
   width = '100%',
   height = '100%',
   onClick,
-  onSelect,
+  onEnter,
+  onLeave,
 }) => {
   const canvasRef = ref as React.RefObject<HTMLCanvasElement>
-  const { isHovered, isActive, setIsHovered } = useColorPicker()
 
-  const handleHover = (isHovering: boolean) => {
-    setIsHovered(isHovering)
-  }
+  useCanvasEffect(canvasRef)
 
   return (
     <div className={styles.container}>
@@ -32,12 +32,11 @@ export const Canvas: React.FC<CanvasProps> = ({
         className={styles.canvas}
         width={width}
         height={height}
-        onPointerEnter={() => handleHover(true)}
-        onPointerLeave={() => handleHover(false)}
         onClick={onClick}
+        onPointerEnter={onEnter}
+        onPointerLeave={onLeave}
       />
-
-      {isActive && isHovered && <Magnifier onSelect={onSelect} canvasRef={canvasRef} />}
+      {children}
     </div>
   )
 }

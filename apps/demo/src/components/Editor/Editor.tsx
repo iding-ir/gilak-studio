@@ -1,19 +1,21 @@
-import { Canvas } from '@gilak/color-picker'
-import { useColorPicker } from '@gilak/color-picker'
+import { Canvas, drawRandomEffect } from '@gilak/canvas'
+import { Magnifier, useColorPicker } from '@gilak/color-picker'
 import { ColorSwatch } from '@gilak/color-swatch'
 import styles from './Editor.module.scss'
-import Icon from '../../assets/icon-eyedropper.svg'
-import { useRef, useState } from 'react'
-import { useCanvasEffect } from '../../hooks/use-canvas-effect'
+import IconColorPicker from '../../assets/icon-eyedropper.svg'
+import IconCanvas from '../../assets/icon-dice.svg'
+import { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 
 export const Editor: React.FC = () => {
   const { t } = useTranslation()
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const [color, setColor] = useState<string>('')
-  const { setIsActive } = useColorPicker()
+  const { color, isActive, isHovered, setIsActive, setIsHovered } = useColorPicker()
 
-  useCanvasEffect(canvasRef)
+  const handleRandomize = () => {
+    if (!canvasRef.current) return
+    drawRandomEffect(canvasRef.current)
+  }
 
   return (
     <div className={styles.root}>
@@ -22,7 +24,12 @@ export const Editor: React.FC = () => {
           <ul>
             <li>
               <button disabled={false} onClick={() => setIsActive(true)}>
-                <Icon />
+                <IconColorPicker />
+              </button>
+            </li>
+            <li>
+              <button onClick={handleRandomize}>
+                <IconCanvas />
               </button>
             </li>
           </ul>
@@ -42,8 +49,11 @@ export const Editor: React.FC = () => {
           width="500px"
           height="500px"
           onClick={() => setIsActive(false)}
-          onSelect={(color) => setColor(color)}
-        />
+          onEnter={() => setIsHovered(true)}
+          onLeave={() => setIsHovered(false)}
+        >
+          {isActive && isHovered && <Magnifier canvasRef={canvasRef} />}
+        </Canvas>
       </main>
     </div>
   )

@@ -1,19 +1,19 @@
 {
-  "name": "@gilak/color-picker",
+  "name": "@gilak/canvas",
   "version": "0.0.1",
-  "description": "A React canvas component for Gilak Studio",
+  "description": "A React canvas component with random visual effects",
   "author": "Aydin Ghane Kh. <https://github.com/iding-ir>",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/iding-ir/gilak-studio.git",
-    "directory": "packages/gilak-color-picker"
+    "directory": "packages/gilak-canvas"
   },
   "keywords": [
     "react",
     "canvas",
-    "gilak",
-    "drawing"
+    "visual-effects",
+    "gilak"
   ],
   "homepage": "https://github.com/iding-ir/gilak-studio#readme",
   "bugs": {
@@ -24,16 +24,16 @@
     "**/*.scss"
   ],
   "type": "module",
-  "main": "./dist/gilak-color-picker.umd.js",
-  "module": "./dist/gilak-color-picker.es.js",
+  "main": "./dist/gilak-canvas.umd.js",
+  "module": "./dist/gilak-canvas.es.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/gilak-color-picker.es.js",
-      "require": "./dist/gilak-color-picker.umd.js"
+      "import": "./dist/gilak-canvas.es.js",
+      "require": "./dist/gilak-canvas.umd.js"
     },
-    "./dist/gilak-color-picker.css": "./dist/gilak-color-picker.css"
+    "./dist/gilak-canvas.css": "./dist/gilak-canvas.css"
   },
   "files": [
     "dist"
@@ -53,7 +53,6 @@
     "react-dom": "^19.2.0"
   },
   "dependencies": {
-    "@gilak/canvas": "workspace:*",
     "clsx": "^2.1.1"
   }
 }

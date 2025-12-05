@@ -3,7 +3,7 @@
   "changelog": "@changesets/cli/changelog",
   "commit": false,
   "fixed": [],
-  "linked": [["@gilak/color-picker", "@gilak/color-swatch"]],
+  "linked": [["@gilak/canvas", "@gilak/color-picker", "@gilak/color-swatch"]],
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",

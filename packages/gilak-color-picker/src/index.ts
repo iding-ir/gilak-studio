@@ -1,5 +1,5 @@
 // Components
-export { Canvas, Magnifier, Text } from './components'
+export { Magnifier, Text } from './components'
 
 // Context & Hooks
 export { ColorPickerProvider, useColorPicker } from './context'

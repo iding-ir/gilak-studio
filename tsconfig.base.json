@@ -17,6 +17,8 @@
     /* Path Mapping */
     "baseUrl": ".",
     "paths": {
+      "@gilak/canvas": ["./packages/gilak-canvas/src"],
+      "@gilak/canvas/*": ["./packages/gilak-canvas/src/*"],
       "@gilak/color-picker": ["./packages/gilak-color-picker/src"],
       "@gilak/color-picker/*": ["./packages/gilak-color-picker/src/*"],
       "@gilak/color-swatch": ["./packages/gilak-color-swatch/src"],

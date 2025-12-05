@@ -19,6 +19,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
+      '@gilak/canvas': resolve(__dirname, '../../packages/gilak-canvas/src'),
       '@gilak/color-picker': resolve(__dirname, '../../packages/gilak-color-picker/src'),
       '@gilak/color-swatch': resolve(__dirname, '../../packages/gilak-color-swatch/src'),
     },

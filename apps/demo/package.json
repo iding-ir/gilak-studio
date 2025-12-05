@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@gilak/canvas": "workspace:*",
     "@gilak/color-picker": "workspace:*",
     "@gilak/color-swatch": "workspace:*",
     "i18next": "^25.7.1",
