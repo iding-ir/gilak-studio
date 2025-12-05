@@ -1,5 +1,5 @@
 {
-  "name": "gilak-canvas",
+  "name": "gilak-color-picker",
   "version": "0.0.1",
   "description": "A React canvas component for Gilak Studio",
   "author": "Aydin Ghane Kh. <https://github.com/iding-ir>",
@@ -7,7 +7,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/iding-ir/gilak-studio.git",
-    "directory": "packages/gilak-canvas"
+    "directory": "packages/gilak-color-picker"
   },
   "keywords": [
     "react",
@@ -25,16 +25,16 @@
     "**/i18n/config.ts"
   ],
   "type": "module",
-  "main": "./dist/gilak-canvas.umd.js",
-  "module": "./dist/gilak-canvas.es.js",
+  "main": "./dist/gilak-color-picker.umd.js",
+  "module": "./dist/gilak-color-picker.es.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/gilak-canvas.es.js",
-      "require": "./dist/gilak-canvas.umd.js"
+      "import": "./dist/gilak-color-picker.es.js",
+      "require": "./dist/gilak-color-picker.umd.js"
     },
-    "./dist/gilak-canvas.css": "./dist/gilak-canvas.css"
+    "./dist/gilak-color-picker.css": "./dist/gilak-color-picker.css"
   },
   "files": [
     "dist"

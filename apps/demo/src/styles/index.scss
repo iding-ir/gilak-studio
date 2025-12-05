@@ -34,3 +34,10 @@ body * {
   font-size: 1rem;
   line-height: 1.4;
 }
+
+html *,
+html *::after,
+html *::before {
+  box-sizing: border-box;
+  user-select: none;
+}

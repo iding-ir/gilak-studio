@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { GilakCanvas } from './GilakCanvas'
+import { Canvas } from './Canvas'
 
 const meta = {
-  title: 'Components/GilakCanvas',
-  component: GilakCanvas,
+  title: 'Components/Canvas',
+  component: Canvas,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof GilakCanvas>
+} satisfies Meta<typeof Canvas>
 
 export default meta
 type Story = StoryObj<typeof meta>

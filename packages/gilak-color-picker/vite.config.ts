@@ -9,7 +9,7 @@ export default defineConfig({
     react(),
     svgr({
       svgrOptions: {
-        exportType: 'named',
+        exportType: 'default',
         ref: true,
         svgo: false,
         titleProp: true,
@@ -34,9 +34,9 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      name: 'GilakCanvas',
+      name: 'Canvas',
       formats: ['es', 'umd'],
-      fileName: (format) => `gilak-canvas.${format}.js`,
+      fileName: (format) => `gilak-color-picker.${format}.js`,
     },
     rollupOptions: {
       external: ['react', 'react-dom'],
@@ -45,7 +45,7 @@ export default defineConfig({
           react: 'React',
           'react-dom': 'ReactDOM',
         },
-        assetFileNames: 'gilak-canvas.[ext]',
+        assetFileNames: 'gilak-color-picker.[ext]',
       },
     },
   },

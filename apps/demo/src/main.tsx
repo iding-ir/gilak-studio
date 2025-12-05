@@ -1,8 +1,9 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import 'modern-normalize/modern-normalize.css'
+import { App } from './components/App'
+import './styles/reset.scss'
 import './styles/index.scss'
-import App from './App.tsx'
+import './i18n/config'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

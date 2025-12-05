@@ -4,7 +4,7 @@ A monorepo of React component packages for Gilak Studio, built with Vite, TypeSc
 
 ## Packages
 
-- **[gilak-canvas](./packages/gilak-canvas)** - A React canvas component
+- **[gilak-color-picker](./packages/gilak-color-picker)** - A React canvas component
 - **[gilak-eyedropper](./packages/gilak-eyedropper)** - A React eyedropper color picker component
 
 ## Getting Started
@@ -44,7 +44,7 @@ gilak-studio/
  apps/
     demo/          # Demo application
  packages/
-    gilak-canvas/  # Canvas component package
+    gilak-color-picker/  # Canvas component package
     gilak-eyedropper/ # Eyedropper component package
  .storybook/        # Storybook configuration
 ```

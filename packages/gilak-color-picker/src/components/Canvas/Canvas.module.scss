@@ -1,0 +1,9 @@
+.container {
+  display: inline-block;
+  position: relative;
+  border: 1px solid #cccccc;
+
+  .canvas {
+    display: block;
+  }
+}
