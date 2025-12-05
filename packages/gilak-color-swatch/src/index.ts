@@ -1,4 +1,4 @@
-import './ColorSwatch.module.scss'
+import './components/ColorSwatch.module.scss'
 
-export { ColorSwatch } from './ColorSwatch'
-export type { ColorSwatchProps } from './ColorSwatch'
+export { ColorSwatch } from './components'
+export type { ColorSwatchProps } from './components'

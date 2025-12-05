@@ -1,5 +1,10 @@
-export { Canvas } from './Canvas'
-export type { CanvasProps } from './Canvas'
+// Components
+export { Canvas } from './components'
+export type { CanvasProps } from './components'
 
-export { useCanvasEffect, drawRandomEffect } from './hooks/use-canvas-effect'
-export type { EffectType } from './hooks/use-canvas-effect'
+// Hooks
+export { useCanvasEffect } from './hooks'
+
+// Methods
+export { drawRandomEffect } from './methods'
+export type { EffectType } from './methods'

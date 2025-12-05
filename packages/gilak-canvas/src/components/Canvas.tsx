@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './Canvas.module.scss'
-import { useCanvasEffect } from './hooks/use-canvas-effect'
+import { useCanvasEffect } from '../hooks'
 
 export interface CanvasProps {
   children?: React.ReactNode

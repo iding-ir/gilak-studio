@@ -6,7 +6,7 @@ export { ColorPickerProvider, useColorPicker } from './context'
 export { useMagnifier } from './hooks'
 
 // Types
-export type { ColorPickerConfig, ColorPickerState, ColorPickerAction } from './types'
+export type { ColorPickerConfig, ColorPickerState, ColorPickerAction } from './context'
 
 // Constants
 export {
@@ -16,17 +16,3 @@ export {
   DEFAULT_CURRENT_COLOR,
   DEFAULT_SELECTED_COLOR,
 } from './constants'
-
-// Re-export utilities from @gilak/utils for backward compatibility
-export {
-  convertArrayToHex,
-  getContrastColor,
-  getCanvasColor,
-  getBackgroundColor,
-  debounce,
-  throttle,
-  // Deprecated aliases
-  arrayToHex,
-  getBlackAndWhiteColor,
-  pickColorFromCanvas,
-} from '@gilak/utils'

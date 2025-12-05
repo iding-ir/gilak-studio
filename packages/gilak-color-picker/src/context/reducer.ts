@@ -1,4 +1,23 @@
-import type { ColorPickerConfig, ColorPickerAction } from '../types'
+export type ColorPickerConfig = {
+  isActive: boolean
+  radius: number
+  size: number
+  width: number
+  currentColor: string
+  selectedColor: string
+  canvas: HTMLCanvasElement | null
+  isHovered: boolean
+}
+
+export type ColorPickerAction =
+  | { type: 'SET_ACTIVE'; payload: boolean }
+  | { type: 'SET_RADIUS'; payload: number }
+  | { type: 'SET_SIZE'; payload: number }
+  | { type: 'SET_WIDTH'; payload: number }
+  | { type: 'SET_CURRENT_COLOR'; payload: string }
+  | { type: 'SET_SELECTED_COLOR'; payload: string }
+  | { type: 'SET_HOVERED'; payload: boolean }
+  | { type: 'RESET'; payload: ColorPickerConfig }
 
 export const colorPickerReducer = (
   state: ColorPickerConfig,

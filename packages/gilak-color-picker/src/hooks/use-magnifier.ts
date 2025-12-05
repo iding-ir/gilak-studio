@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { getCanvasColor } from '@gilak/utils'
 import { useColorPicker } from '../context'
-import { renderMagnifierCanvas } from '../methods/render-magnifier-canvas'
+import { renderMagnifierCanvas } from '../methods'
 
 export const useMagnifier = ({
   onSelect,

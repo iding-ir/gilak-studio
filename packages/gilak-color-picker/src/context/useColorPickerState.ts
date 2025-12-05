@@ -1,6 +1,22 @@
 import { useCallback, useMemo, useReducer } from 'react'
-import type { ColorPickerConfig, ColorPickerState } from '../types'
-import { colorPickerReducer } from './reducer'
+import { colorPickerReducer, type ColorPickerConfig } from './reducer'
+
+export type ColorPickerState = {
+  isActive: boolean
+  setIsActive: (value: boolean) => void
+  radius: number
+  setRadius: (value: number) => void
+  size: number
+  setSize: (value: number) => void
+  width: number
+  setWidth: (value: number) => void
+  currentColor: string
+  setCurrentColor: (value: string) => void
+  selectedColor: string
+  setSelectedColor: (value: string) => void
+  isHovered: boolean
+  setIsHovered: (value: boolean) => void
+}
 
 export const useColorPickerState = (config: ColorPickerConfig): ColorPickerState => {
   const [state, dispatch] = useReducer(colorPickerReducer, config)

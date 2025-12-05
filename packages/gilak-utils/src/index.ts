@@ -1,8 +1,15 @@
 // Color utilities
-export { convertArrayToHex, getBackgroundColor, getContrastColor } from './color'
+export { convertArrayToHex, getBackgroundColor, getContrastColor, randomColor } from './color'
 
 // Canvas utilities
-export { getCanvasColor } from './canvas'
+export {
+  getCanvasColor,
+  drawQuadrants,
+  drawGradient,
+  drawCircles,
+  drawWaves,
+  drawCheckerboard,
+} from './canvas'
 
 // Performance utilities
 export { debounce, throttle } from './performance'

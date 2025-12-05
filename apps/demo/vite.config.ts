@@ -22,6 +22,7 @@ export default defineConfig({
       '@gilak/canvas': resolve(__dirname, '../../packages/gilak-canvas/src'),
       '@gilak/color-picker': resolve(__dirname, '../../packages/gilak-color-picker/src'),
       '@gilak/color-swatch': resolve(__dirname, '../../packages/gilak-color-swatch/src'),
+      '@gilak/utils': resolve(__dirname, '../../packages/gilak-utils/src'),
     },
   },
   css: {
