@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import type { ReactNode } from 'react'
 import { DEFAULT_COLOR, DEFAULT_RADIUS, DEFAULT_SIZE, DEFAULT_WIDTH } from '../constants'
 import { ColorPickerContext } from './ColorPickerContext'
@@ -36,15 +37,20 @@ export const ColorPickerProvider = ({
   canvas?: HTMLCanvasElement | null
   isHovered?: boolean
 }) => {
-  const value = useColorPickerState({
-    isActive,
-    radius,
-    size,
-    width,
-    color,
-    canvas,
-    isHovered,
-  })
+  const config = useMemo(
+    () => ({
+      isActive,
+      radius,
+      size,
+      width,
+      color,
+      canvas,
+      isHovered,
+    }),
+    [isActive, radius, size, width, color, canvas, isHovered]
+  )
+
+  const value = useColorPickerState(config)
 
   return <ColorPickerContext value={value}>{children}</ColorPickerContext>
 }
