@@ -41,7 +41,7 @@
   ],
   "scripts": {
     "dev": "vite build --watch",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "lint": "eslint .",
     "prepublishOnly": "pnpm build"
   },
@@ -51,8 +51,7 @@
   },
   "devDependencies": {
     "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "vite-plugin-dts": "^4.3.0"
+    "react-dom": "^19.2.0"
   },
   "dependencies": {
     "clsx": "^2.1.1",

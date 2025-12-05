@@ -1,0 +1,14 @@
+{
+  "name": "@gilak-studio/build-config",
+  "version": "0.0.1",
+  "description": "Shared build configuration for Gilak Studio packages",
+  "private": true,
+  "type": "module",
+  "main": "./vite.config.base.ts",
+  "exports": {
+    "./vite": "./vite.config.base.ts"
+  },
+  "files": [
+    "vite.config.base.ts"
+  ]
+}

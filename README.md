@@ -41,12 +41,14 @@ pnpm storybook
 
 ```
 gilak-studio/
- apps/
-    demo/          # Demo application
- packages/
-    gilak-color-picker/  # Canvas component package
-    gilak-eyedropper/ # Eyedropper component package
- .storybook/        # Storybook configuration
+├── apps/
+│   └── demo/                    # Demo application
+├── packages/
+│   ├── build-config/            # Shared build configuration
+│   ├── gilak-color-picker/      # Canvas component package
+│   └── gilak-eyedropper/        # Eyedropper component package
+├── .storybook/                  # Storybook configuration
+└── tsconfig.base.json           # Shared TypeScript configuration
 ```
 
 ## Tech Stack
