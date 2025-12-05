@@ -2,41 +2,15 @@ import { Canvas } from '@gilak/color-picker'
 import { useColorPicker } from '@gilak/color-picker'
 import styles from './Editor.module.scss'
 import Icon from '../../assets/icon-eyedropper.svg'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
+import { useCanvasEffect } from '../../hooks/use-canvas-effect'
 
 export const Editor: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [color, setColor] = useState<string>()
   const { setIsActive } = useColorPicker()
 
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    const w = canvas.width
-    const h = canvas.height
-    const midX = w / 2
-    const midY = h / 2
-
-    // Top-left: green
-    ctx.fillStyle = 'green'
-    ctx.fillRect(0, 0, midX, midY)
-
-    // Top-right: blue
-    ctx.fillStyle = 'blue'
-    ctx.fillRect(midX, 0, midX, midY)
-
-    // Bottom-left: orange
-    ctx.fillStyle = 'orange'
-    ctx.fillRect(0, midY, midX, midY)
-
-    // Bottom-right: red
-    ctx.fillStyle = 'red'
-    ctx.fillRect(midX, midY, midX, midY)
-  }, [])
+  useCanvasEffect(canvasRef)
 
   return (
     <div className={styles.root}>
