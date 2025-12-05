@@ -18,8 +18,12 @@ export const useColorPickerState = (config: ColorPickerConfig): ColorPickerState
     (value: number) => dispatch({ type: 'SET_WIDTH', payload: value }),
     []
   )
-  const setColor = useCallback(
-    (value: string) => dispatch({ type: 'SET_COLOR', payload: value }),
+  const setCurrentColor = useCallback(
+    (value: string) => dispatch({ type: 'SET_CURRENT_COLOR', payload: value }),
+    []
+  )
+  const setSelectedColor = useCallback(
+    (value: string) => dispatch({ type: 'SET_SELECTED_COLOR', payload: value }),
     []
   )
   const setIsHovered = useCallback(
@@ -37,8 +41,10 @@ export const useColorPickerState = (config: ColorPickerConfig): ColorPickerState
       setSize,
       width: state.width,
       setWidth,
-      color: state.color,
-      setColor,
+      currentColor: state.currentColor,
+      setCurrentColor,
+      selectedColor: state.selectedColor,
+      setSelectedColor,
       isHovered: state.isHovered,
       setIsHovered,
     }),
@@ -47,13 +53,15 @@ export const useColorPickerState = (config: ColorPickerConfig): ColorPickerState
       state.radius,
       state.size,
       state.width,
-      state.color,
+      state.currentColor,
+      state.selectedColor,
       state.isHovered,
       setIsActive,
       setRadius,
       setSize,
       setWidth,
-      setColor,
+      setCurrentColor,
+      setSelectedColor,
       setIsHovered,
     ]
   )

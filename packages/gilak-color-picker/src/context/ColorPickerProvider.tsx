@@ -1,6 +1,12 @@
 import { useMemo } from 'react'
 import type { ReactNode } from 'react'
-import { DEFAULT_COLOR, DEFAULT_RADIUS, DEFAULT_SIZE, DEFAULT_WIDTH } from '../constants'
+import {
+  DEFAULT_CURRENT_COLOR,
+  DEFAULT_SELECTED_COLOR,
+  DEFAULT_RADIUS,
+  DEFAULT_SIZE,
+  DEFAULT_WIDTH,
+} from '../constants'
 import { ColorPickerContext } from './ColorPickerContext'
 import { useColorPickerState } from './useColorPickerState'
 
@@ -13,7 +19,8 @@ import { useColorPickerState } from './useColorPickerState'
  * @param {number} [props.radius=DEFAULT_RADIUS] - The magnifier radius of the color picker in each direction.
  * @param {number} [props.size=DEFAULT_SIZE] - The grid size of the color picker magnifier in pixels.
  * @param {number} [props.width=DEFAULT_WIDTH] - The border width of the magnifier border to preview current color.
- * @param {string} [props.color=DEFAULT_COLOR] - The default color of the magnifier.
+ * @param {string} [props.currentColor=DEFAULT_CURRENT_COLOR] - The current color being hovered in the magnifier.
+ * @param {string} [props.selectedColor=DEFAULT_SELECTED_COLOR] - The selected color after clicking.
  * @param {HTMLCanvasElement | null} [props.canvas=null] - The canvas element to be used.
  *
  * @returns {JSX.Element} The provider component that wraps its children with the color picker context.
@@ -24,7 +31,8 @@ export const ColorPickerProvider = ({
   radius = DEFAULT_RADIUS,
   size = DEFAULT_SIZE,
   width = DEFAULT_WIDTH,
-  color = DEFAULT_COLOR,
+  currentColor = DEFAULT_CURRENT_COLOR,
+  selectedColor = DEFAULT_SELECTED_COLOR,
   canvas = null,
   isHovered = false,
 }: {
@@ -33,7 +41,8 @@ export const ColorPickerProvider = ({
   radius?: number
   size?: number
   width?: number
-  color?: string
+  currentColor?: string
+  selectedColor?: string
   canvas?: HTMLCanvasElement | null
   isHovered?: boolean
 }) => {
@@ -43,11 +52,12 @@ export const ColorPickerProvider = ({
       radius,
       size,
       width,
-      color,
+      currentColor,
+      selectedColor,
       canvas,
       isHovered,
     }),
-    [isActive, radius, size, width, color, canvas, isHovered]
+    [isActive, radius, size, width, currentColor, selectedColor, canvas, isHovered]
   )
 
   const value = useColorPickerState(config)

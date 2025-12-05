@@ -10,14 +10,14 @@ export const Magnifier = ({
   canvasRef: React.RefObject<HTMLCanvasElement | null>
   onSelect?: (color: string) => void
 }) => {
-  const { color, width } = useColorPicker()
+  const { currentColor, width } = useColorPicker()
   const { containerRef, magnifierRef } = useMagnifier({ onSelect, canvasRef })
 
   return (
     <div className={styles.container} ref={containerRef}>
       <canvas
         ref={magnifierRef}
-        style={{ borderColor: color, borderWidth: width }}
+        style={{ borderColor: currentColor, borderWidth: width }}
         width={0}
         height={0}
       />

@@ -10,7 +10,8 @@ import { useTranslation } from 'react-i18next'
 export const Editor: React.FC = () => {
   const { t } = useTranslation()
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const { color, isActive, isHovered, setIsActive, setIsHovered } = useColorPicker()
+  const { selectedColor, isActive, isHovered, setIsActive, setIsHovered, setSelectedColor } =
+    useColorPicker()
 
   const handleRandomize = () => {
     if (!canvasRef.current) return
@@ -37,7 +38,7 @@ export const Editor: React.FC = () => {
 
         <ColorSwatch
           id="color-swatch"
-          value={color}
+          value={selectedColor}
           readOnly
           placeholder={t('colorSwatch.placeholder')}
         />
@@ -52,7 +53,7 @@ export const Editor: React.FC = () => {
           onEnter={() => setIsHovered(true)}
           onLeave={() => setIsHovered(false)}
         >
-          {isActive && isHovered && <Magnifier canvasRef={canvasRef} />}
+          {isActive && isHovered && <Magnifier canvasRef={canvasRef} onSelect={setSelectedColor} />}
         </Canvas>
       </main>
     </div>

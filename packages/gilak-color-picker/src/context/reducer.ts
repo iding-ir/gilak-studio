@@ -13,8 +13,10 @@ export const colorPickerReducer = (
       return { ...state, size: action.payload }
     case 'SET_WIDTH':
       return { ...state, width: action.payload }
-    case 'SET_COLOR':
-      return { ...state, color: action.payload }
+    case 'SET_CURRENT_COLOR':
+      return { ...state, currentColor: action.payload }
+    case 'SET_SELECTED_COLOR':
+      return { ...state, selectedColor: action.payload }
     case 'SET_HOVERED':
       return { ...state, isHovered: action.payload }
     case 'RESET':

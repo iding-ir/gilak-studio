@@ -13,7 +13,7 @@ export const useMagnifier = ({
   const containerRef = useRef<HTMLDivElement>(null)
   const magnifierRef = useRef<HTMLCanvasElement>(null)
   const rafRef = useRef<number | null>(null)
-  const { radius, size, isActive, isHovered, setColor, setIsActive } = useColorPicker()
+  const { radius, size, isActive, isHovered, setCurrentColor, setIsActive } = useColorPicker()
 
   useEffect(() => {
     const canvas = canvasRef?.current
@@ -51,7 +51,7 @@ export const useMagnifier = ({
         const color = pickColorFromCanvas({ canvas, x, y })
 
         if (color) {
-          setColor(color)
+          setCurrentColor(color)
         }
 
         renderMagnifierCanvas({
@@ -78,7 +78,7 @@ export const useMagnifier = ({
         rafRef.current = null
       }
     }
-  }, [canvasRef, isActive, isHovered, onSelect, radius, setColor, setIsActive, size])
+  }, [canvasRef, isActive, isHovered, onSelect, radius, setCurrentColor, setIsActive, size])
 
   return { containerRef, magnifierRef }
 }

@@ -9,7 +9,13 @@ export { useMagnifier } from './hooks'
 export type { ColorPickerConfig, ColorPickerState, ColorPickerAction } from './types'
 
 // Constants
-export { DEFAULT_SIZE, DEFAULT_RADIUS, DEFAULT_WIDTH, DEFAULT_COLOR } from './constants'
+export {
+  DEFAULT_SIZE,
+  DEFAULT_RADIUS,
+  DEFAULT_WIDTH,
+  DEFAULT_CURRENT_COLOR,
+  DEFAULT_SELECTED_COLOR,
+} from './constants'
 
 // Utilities
 export { arrayToHex, getBlackAndWhiteColor } from './methods'
