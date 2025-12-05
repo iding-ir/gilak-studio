@@ -7,7 +7,7 @@ import { useCanvasEffect } from '../../hooks/use-canvas-effect'
 
 export const Editor: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const [color, setColor] = useState<string>()
+  const [color, setColor] = useState<string>('')
   const { setIsActive } = useColorPicker()
 
   useCanvasEffect(canvasRef)
