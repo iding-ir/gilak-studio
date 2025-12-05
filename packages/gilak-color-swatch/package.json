@@ -1,18 +1,18 @@
 {
-  "name": "@gilak/eyedropper",
+  "name": "@gilak/color-swatch",
   "version": "0.0.1",
-  "description": "A React eyedropper color picker component for Gilak Studio",
+  "description": "A React color swatch component for displaying selected colors",
   "author": "Aydin Ghane Kh. <https://github.com/iding-ir>",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/iding-ir/gilak-studio.git",
-    "directory": "packages/gilak-eyedropper"
+    "directory": "packages/gilak-color-swatch"
   },
   "keywords": [
     "react",
-    "eyedropper",
-    "color-picker",
+    "color-swatch",
+    "color-display",
     "gilak"
   ],
   "homepage": "https://github.com/iding-ir/gilak-studio#readme",
@@ -24,16 +24,16 @@
     "**/*.scss"
   ],
   "type": "module",
-  "main": "./dist/gilak-eyedropper.umd.js",
-  "module": "./dist/gilak-eyedropper.es.js",
+  "main": "./dist/gilak-color-swatch.umd.js",
+  "module": "./dist/gilak-color-swatch.es.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/gilak-eyedropper.es.js",
-      "require": "./dist/gilak-eyedropper.umd.js"
+      "import": "./dist/gilak-color-swatch.es.js",
+      "require": "./dist/gilak-color-swatch.umd.js"
     },
-    "./dist/gilak-eyedropper.css": "./dist/gilak-eyedropper.css"
+    "./dist/gilak-color-swatch.css": "./dist/gilak-color-swatch.css"
   },
   "files": [
     "dist"

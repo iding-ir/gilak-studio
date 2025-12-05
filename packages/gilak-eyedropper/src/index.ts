@@ -1,1 +1,0 @@
-export { GilakEyedropper } from './GilakEyedropper'

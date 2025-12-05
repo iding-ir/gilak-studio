@@ -1,11 +1,14 @@
 import { Canvas } from '@gilak/color-picker'
 import { useColorPicker } from '@gilak/color-picker'
+import { ColorSwatch } from '@gilak/color-swatch'
 import styles from './Editor.module.scss'
 import Icon from '../../assets/icon-eyedropper.svg'
 import { useRef, useState } from 'react'
 import { useCanvasEffect } from '../../hooks/use-canvas-effect'
+import { useTranslation } from 'react-i18next'
 
 export const Editor: React.FC = () => {
+  const { t } = useTranslation()
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [color, setColor] = useState<string>('')
   const { setIsActive } = useColorPicker()
@@ -25,7 +28,12 @@ export const Editor: React.FC = () => {
           </ul>
         </nav>
 
-        <input name="color" readOnly type="text" value={color} />
+        <ColorSwatch
+          id="color-swatch"
+          value={color}
+          readOnly
+          placeholder={t('colorSwatch.placeholder')}
+        />
       </header>
 
       <main className={styles.main}>

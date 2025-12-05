@@ -5,13 +5,15 @@ import nl from './locales/nl.json'
 
 i18n.use(initReactI18next).init({
   resources: {
-    en: { demo: en },
-    nl: { demo: nl },
+    en: {
+      translation: en,
+    },
+    nl: {
+      translation: nl,
+    },
   },
   lng: 'en',
   fallbackLng: 'en',
-  ns: ['demo'],
-  defaultNS: 'demo',
   interpolation: {
     escapeValue: false,
   },

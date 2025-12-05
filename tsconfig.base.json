@@ -19,8 +19,8 @@
     "paths": {
       "@gilak/color-picker": ["./packages/gilak-color-picker/src"],
       "@gilak/color-picker/*": ["./packages/gilak-color-picker/src/*"],
-      "@gilak/eyedropper": ["./packages/gilak-eyedropper/src"],
-      "@gilak/eyedropper/*": ["./packages/gilak-eyedropper/src/*"]
+      "@gilak/color-swatch": ["./packages/gilak-color-swatch/src"],
+      "@gilak/color-swatch/*": ["./packages/gilak-color-swatch/src/*"]
     },
 
     /* Linting */

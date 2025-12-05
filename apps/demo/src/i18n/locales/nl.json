@@ -1,5 +1,8 @@
 {
   "title": "Gilak Studio Demo",
   "subtitle": "Demonstratie van de gilak-color-picker en gilak-eyedropper pakketten",
-  "footer": "Dit zijn placeholder componenten uit de workspace pakketten"
+  "footer": "Dit zijn placeholder componenten uit de workspace pakketten",
+  "colorSwatch": {
+    "placeholder": "Kleurstaal"
+  }
 }

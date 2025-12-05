@@ -5,7 +5,7 @@ A monorepo of React component packages for Gilak Studio, built with Vite, TypeSc
 ## Packages
 
 - **[@gilak/color-picker](./packages/gilak-color-picker)** - A React canvas component
-- **[@gilak/eyedropper](./packages/gilak-eyedropper)** - A React eyedropper color picker component
+- **[@gilak/color-swatch](./packages/gilak-color-swatch)** - A React color swatch component for displaying selected colors
 
 ## Getting Started
 

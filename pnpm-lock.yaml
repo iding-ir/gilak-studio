@@ -89,9 +89,9 @@ importers:
       '@gilak/color-picker':
         specifier: workspace:*
         version: link:../../packages/gilak-color-picker
-      '@gilak/eyedropper':
+      '@gilak/color-swatch':
         specifier: workspace:*
-        version: link:../../packages/gilak-eyedropper
+        version: link:../../packages/gilak-color-swatch
       i18next:
         specifier: ^25.7.1
         version: 25.7.1(typescript@5.9.3)
@@ -120,7 +120,7 @@ importers:
         specifier: ^19.2.0
         version: 19.2.1(react@19.2.1)
 
-  packages/gilak-eyedropper:
+  packages/gilak-color-swatch:
     dependencies:
       clsx:
         specifier: ^2.1.1
