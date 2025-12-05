@@ -1,0 +1,17 @@
+# Ignore build outputs
+dist
+build
+coverage
+
+# Ignore dependencies
+node_modules
+pnpm-lock.yaml
+
+# Ignore generated files
+.turbo
+*.tsbuildinfo
+storybook-static
+
+# Ignore changesets
+.changeset/*.md
+!.changeset/README.md

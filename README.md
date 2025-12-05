@@ -1,73 +1,61 @@
-# React + TypeScript + Vite
+# Gilak Studio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A monorepo of React component packages for Gilak Studio, built with Vite, TypeScript, and Turborepo.
 
-Currently, two official plugins are available:
+## Packages
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **[gilak-canvas](./packages/gilak-canvas)** - A React canvas component
+- **[gilak-eyedropper](./packages/gilak-eyedropper)** - A React eyedropper color picker component
 
-## React Compiler
+## Getting Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+# Install dependencies
+pnpm install
 
-## Expanding the ESLint configuration
+# Build all packages
+pnpm build
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+# Run demo app
+pnpm dev
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Run Storybook
+pnpm storybook
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Development Workflow
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Making Changes
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. Make your changes to packages
+2. Create a changeset: `pnpm changeset`
+3. Commit your changes including the changeset file
+
+### Releasing
+
+1. Version packages: `pnpm version-packages`
+2. Commit version changes
+3. Publish: `pnpm release`
+
+## Project Structure
+
 ```
+gilak-studio/
+ apps/
+    demo/          # Demo application
+ packages/
+    gilak-canvas/  # Canvas component package
+    gilak-eyedropper/ # Eyedropper component package
+ .storybook/        # Storybook configuration
+```
+
+## Tech Stack
+
+- **Build**: Vite, TypeScript
+- **Monorepo**: Turborepo, pnpm workspaces
+- **Versioning**: Changesets
+- **Documentation**: Storybook
+
+## License
+
+MIT [Aydin Ghane Kh.](https://github.com/iding-ir)

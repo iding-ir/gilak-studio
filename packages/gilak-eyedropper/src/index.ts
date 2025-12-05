@@ -1,0 +1,1 @@
+export { GilakEyedrop } from './GilakEyedrop'

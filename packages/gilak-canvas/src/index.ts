@@ -1,0 +1,1 @@
+export { GilakCanvas } from './GilakCanvas'
