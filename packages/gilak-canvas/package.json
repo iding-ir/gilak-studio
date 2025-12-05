@@ -19,7 +19,11 @@
   "bugs": {
     "url": "https://github.com/iding-ir/gilak-studio/issues"
   },
-  "sideEffects": false,
+  "sideEffects": [
+    "**/*.css",
+    "**/*.scss",
+    "**/i18n/config.ts"
+  ],
   "type": "module",
   "main": "./dist/gilak-canvas.umd.js",
   "module": "./dist/gilak-canvas.es.js",
@@ -29,7 +33,8 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/gilak-canvas.es.js",
       "require": "./dist/gilak-canvas.umd.js"
-    }
+    },
+    "./dist/gilak-canvas.css": "./dist/gilak-canvas.css"
   },
   "files": [
     "dist"
@@ -48,5 +53,10 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "vite-plugin-dts": "^4.3.0"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "i18next": "^25.7.1",
+    "react-i18next": "^16.3.5"
   }
 }

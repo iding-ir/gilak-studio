@@ -1,0 +1,36 @@
+@charset "utf-8";
+@use "./config.scss" as *;
+
+html,
+body,
+#root {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+html {
+  font-size: 14px;
+  color: #666666;
+
+  @media only screen and (min-width: $breakpoint-md) {
+    font-size: 15px;
+  }
+
+  @media only screen and (min-width: $breakpoint-lg) {
+    font-size: 16px;
+  }
+
+  @media only screen and (min-width: $breakpoint-xl) {
+    font-size: 18px;
+  }
+
+  @media only screen and (min-width: $breakpoint-xxl) {
+    font-size: 20px;
+  }
+}
+
+body * {
+  font-size: 1rem;
+  line-height: 1.4;
+}

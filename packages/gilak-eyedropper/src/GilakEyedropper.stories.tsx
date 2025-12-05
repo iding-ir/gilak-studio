@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { GilakEyedrop } from './GilakEyedrop'
+import { GilakEyedropper } from './GilakEyedropper'
 
 const meta = {
-  title: 'Components/GilakEyedrop',
-  component: GilakEyedrop,
+  title: 'Components/GilakEyedropper',
+  component: GilakEyedropper,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof GilakEyedrop>
+} satisfies Meta<typeof GilakEyedropper>
 
 export default meta
 type Story = StoryObj<typeof meta>

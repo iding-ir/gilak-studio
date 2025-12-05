@@ -1,9 +1,9 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import styles from './GilakCanvas.module.scss'
+import styles from './GilakEyedropper.module.scss'
 
-export const GilakCanvas: React.FC = () => {
-  const { t } = useTranslation('canvas')
+export const GilakEyedropper: React.FC = () => {
+  const { t } = useTranslation('eyedropper')
 
   return (
     <div className={styles.container}>

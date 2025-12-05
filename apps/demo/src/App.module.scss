@@ -1,0 +1,29 @@
+.root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+
+  .header {
+    margin-bottom: 2rem;
+
+    .title {
+      font-size: 3rem;
+      margin: 0 0 1rem 0;
+    }
+
+    .subtitle {
+      color: #888;
+      margin: 0;
+    }
+  }
+
+  .card {
+    padding: 2em;
+  }
+
+  .footer {
+    color: #888;
+    margin-top: 2rem;
+  }
+}

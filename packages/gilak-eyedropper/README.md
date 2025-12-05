@@ -12,11 +12,11 @@ pnpm add gilak-eyedropper
 
 ## Usage
 
-```tsx
-import { GilakEyedrop } from 'gilak-eyedropper'
+```jsx
+import { GilakEyedropper } from 'gilak-eyedropper'
 
 function App() {
-  return <GilakEyedrop />
+  return <GilakEyedropper />
 }
 ```
 

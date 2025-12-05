@@ -1,22 +1,26 @@
+import './i18n/config'
 import { GilakCanvas } from 'gilak-canvas'
-import { GilakEyedrop } from 'gilak-eyedropper'
-import './App.css'
+import { GilakEyedropper } from 'gilak-eyedropper'
+import { useTranslation } from 'react-i18next'
+import styles from './App.module.scss'
 
 function App() {
+  const { t } = useTranslation('demo')
+
   return (
-    <>
-      <div>
-        <h1>Gilak Studio Demo</h1>
-        <p>Demonstrating the gilak-canvas and gilak-eyedropper packages</p>
+    <div className={styles.root}>
+      <div className={styles.header}>
+        <h1 className={styles.title}>{t('title')}</h1>
+        <p className={styles.subtitle}>{t('subtitle')}</p>
       </div>
 
-      <div className="card">
+      <div className={styles.card}>
         <GilakCanvas />
-        <GilakEyedrop />
+        <GilakEyedropper />
       </div>
 
-      <p className="read-the-docs">These are placeholder components from the workspace packages</p>
-    </>
+      <p className={styles.footer}>{t('footer')}</p>
+    </div>
   )
 }
 

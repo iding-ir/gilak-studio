@@ -10,9 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "gilak-canvas": "workspace:*",
+    "gilak-eyedropper": "workspace:*",
+    "i18next": "^25.7.1",
+    "modern-normalize": "^3.0.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "gilak-canvas": "workspace:*",
-    "gilak-eyedropper": "workspace:*"
+    "react-i18next": "^16.3.5"
   }
 }
