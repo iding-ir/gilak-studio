@@ -1,5 +1,3 @@
-// import './i18n/config'
-
 // Components
 export { Canvas, Magnifier, Text } from './components'
 
