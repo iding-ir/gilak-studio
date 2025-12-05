@@ -17,25 +17,38 @@ export const renderMagnifierCanvas = ({
     return
   }
 
-  const canvasCtx = canvas.getContext('2d')
-  const magnifierCtx = magnifier.getContext('2d')
+  const canvasCtx = canvas.getContext('2d', { willReadFrequently: true })
+  const magnifierCtx = magnifier.getContext('2d', {
+    alpha: true,
+    desynchronized: true, // Better performance for animations
+  })
 
   if (!canvasCtx || !magnifierCtx) {
     return
   }
 
   const diameter = radius * 2 + 1
-  const imageData = canvasCtx.getImageData(x - diameter / 2, y - diameter / 2, diameter, diameter)
   magnifier.width = diameter * size
   magnifier.height = diameter * size
 
-  // Draw magnified image
+  // Draw magnified image with optimized rendering
   magnifierCtx.clearRect(0, 0, magnifier.width, magnifier.height)
-  magnifierCtx.putImageData(imageData, 0, 0)
 
-  magnifierCtx.scale(size, size)
-  magnifierCtx.drawImage(magnifier, 0, 0)
-  magnifierCtx.scale(1 / size, 1 / size)
+  // Disable image smoothing for pixel-perfect magnification
+  magnifierCtx.imageSmoothingEnabled = false
+
+  // Draw directly from source canvas with scaling
+  magnifierCtx.drawImage(
+    canvas,
+    x - diameter / 2,
+    y - diameter / 2,
+    diameter,
+    diameter,
+    0,
+    0,
+    diameter * size,
+    diameter * size
+  )
 
   // Draw grids
   magnifierCtx.strokeStyle = 'rgba(0,0,0,1)'
