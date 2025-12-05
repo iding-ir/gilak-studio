@@ -17,6 +17,16 @@ export {
   DEFAULT_SELECTED_COLOR,
 } from './constants'
 
-// Utilities
-export { arrayToHex, getBlackAndWhiteColor } from './methods'
-export { debounce, throttle } from './utils'
+// Re-export utilities from @gilak/utils for backward compatibility
+export {
+  convertArrayToHex,
+  getContrastColor,
+  getCanvasColor,
+  getBackgroundColor,
+  debounce,
+  throttle,
+  // Deprecated aliases
+  arrayToHex,
+  getBlackAndWhiteColor,
+  pickColorFromCanvas,
+} from '@gilak/utils'

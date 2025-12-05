@@ -1,0 +1,48 @@
+{
+  "name": "@gilak/utils",
+  "version": "0.0.1",
+  "description": "Utility functions for Gilak Studio packages",
+  "author": "Aydin Ghane Kh. <https://github.com/iding-ir>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iding-ir/gilak-studio.git",
+    "directory": "packages/gilak-utils"
+  },
+  "keywords": [
+    "utilities",
+    "utils",
+    "helpers",
+    "gilak"
+  ],
+  "homepage": "https://github.com/iding-ir/gilak-studio#readme",
+  "bugs": {
+    "url": "https://github.com/iding-ir/gilak-studio/issues"
+  },
+  "type": "module",
+  "main": "./dist/gilak-utils.umd.cjs",
+  "module": "./dist/gilak-utils.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/gilak-utils.js",
+      "require": "./dist/gilak-utils.umd.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "vite build",
+    "lint": "eslint .",
+    "prepublishOnly": "pnpm build"
+  },
+  "devDependencies": {
+    "@gilak-studio/build-config": "workspace:*",
+    "typescript": "~5.9.3",
+    "vite": "^7.2.4",
+    "vite-plugin-dts": "^4.3.0"
+  }
+}

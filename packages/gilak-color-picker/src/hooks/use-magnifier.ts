@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
+import { getCanvasColor } from '@gilak/utils'
 import { useColorPicker } from '../context'
-import { pickColorFromCanvas } from '../methods/pick-color-from-canvas'
 import { renderMagnifierCanvas } from '../methods/render-magnifier-canvas'
 
 export const useMagnifier = ({
@@ -23,7 +23,7 @@ export const useMagnifier = ({
 
     const onPointerDown = (event: PointerEvent) => {
       const { offsetX, offsetY } = event
-      const color = pickColorFromCanvas({ canvas, x: offsetX, y: offsetY })
+      const color = getCanvasColor({ canvas, x: offsetX, y: offsetY })
 
       if (color) {
         onSelect?.(color)
@@ -48,7 +48,7 @@ export const useMagnifier = ({
         containerRef.current?.style.setProperty('transform', transform)
         containerRef.current?.style.setProperty('display', display)
 
-        const color = pickColorFromCanvas({ canvas, x, y })
+        const color = getCanvasColor({ canvas, x, y })
 
         if (color) {
           setCurrentColor(color)

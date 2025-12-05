@@ -128,6 +128,9 @@ importers:
       '@gilak/canvas':
         specifier: workspace:*
         version: link:../gilak-canvas
+      '@gilak/utils':
+        specifier: workspace:*
+        version: link:../gilak-utils
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -151,6 +154,21 @@ importers:
       react-dom:
         specifier: ^19.2.0
         version: 19.2.1(react@19.2.1)
+
+  packages/gilak-utils:
+    devDependencies:
+      '@gilak-studio/build-config':
+        specifier: workspace:*
+        version: link:../build-config
+      typescript:
+        specifier: ~5.9.3
+        version: 5.9.3
+      vite:
+        specifier: ^7.2.4
+        version: 7.2.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2)
+      vite-plugin-dts:
+        specifier: ^4.3.0
+        version: 4.5.4(@types/node@24.10.1)(rollup@4.53.3)(typescript@5.9.3)(vite@7.2.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2))
 
 packages:
 
