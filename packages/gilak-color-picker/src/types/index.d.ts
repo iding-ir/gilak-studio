@@ -8,17 +8,26 @@ export type ColorPickerConfig = {
   isHovered: boolean
 }
 
+export type ColorPickerAction =
+  | { type: 'SET_ACTIVE'; payload: boolean }
+  | { type: 'SET_RADIUS'; payload: number }
+  | { type: 'SET_SIZE'; payload: number }
+  | { type: 'SET_WIDTH'; payload: number }
+  | { type: 'SET_COLOR'; payload: string }
+  | { type: 'SET_HOVERED'; payload: boolean }
+  | { type: 'RESET'; payload: ColorPickerConfig }
+
 export type ColorPickerState = {
   isActive: boolean
-  setIsActive: React.Dispatch<React.SetStateAction<boolean>>
+  setIsActive: (value: boolean) => void
   radius: number
-  setRadius: React.Dispatch<React.SetStateAction<number>>
+  setRadius: (value: number) => void
   size: number
-  setSize: React.Dispatch<React.SetStateAction<number>>
+  setSize: (value: number) => void
   width: number
-  setWidth: React.Dispatch<React.SetStateAction<number>>
+  setWidth: (value: number) => void
   color: string
-  setColor: React.Dispatch<React.SetStateAction<string>>
+  setColor: (value: string) => void
   isHovered: boolean
-  setIsHovered: React.Dispatch<React.SetStateAction<boolean>>
+  setIsHovered: (value: boolean) => void
 }

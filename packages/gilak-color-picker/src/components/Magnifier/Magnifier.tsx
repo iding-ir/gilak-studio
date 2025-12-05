@@ -1,4 +1,4 @@
-import { useColorPicker } from '../../context/hook'
+import { useColorPicker } from '../../context'
 import { useMagnifier } from '../../hooks/use-magnifier'
 import { Text } from '../Text'
 import styles from './Magnifier.module.scss'

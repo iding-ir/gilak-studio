@@ -1,5 +1,4 @@
 // import './i18n/config'
 export { Canvas } from './components/Canvas/Canvas'
 export { Magnifier } from './components/Magnifier'
-export { useColorPicker } from './context/hook'
-export { ColorPickerProvider } from './context/provider'
+export { useColorPicker, ColorPickerProvider } from './context'

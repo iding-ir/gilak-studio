@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './Canvas.module.scss'
-import { useColorPicker } from '../../context/hook'
+import { useColorPicker } from '../../context'
 import { Magnifier } from '../Magnifier'
 
 export interface CanvasProps {

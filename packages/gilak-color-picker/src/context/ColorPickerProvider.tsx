@@ -1,8 +1,7 @@
 import { ReactNode } from 'react'
-
-import { ColorPickerContext } from '.'
 import { DEFAULT_COLOR, DEFAULT_RADIUS, DEFAULT_SIZE, DEFAULT_WIDTH } from '../constants'
-import { useColorPickerState } from './state'
+import { ColorPickerContext } from './ColorPickerContext'
+import { useColorPickerState } from './useColorPickerState'
 
 /**
  * Provides the color picker context to its children.
@@ -16,7 +15,7 @@ import { useColorPickerState } from './state'
  * @param {string} [props.color=DEFAULT_COLOR] - The default color of the magnifier.
  * @param {HTMLCanvasElement | null} [props.canvas=null] - The canvas element to be used.
  *
- * @returns {JSX.Element} The provider component that wraps its children with the EyeDropper context.
+ * @returns {JSX.Element} The provider component that wraps its children with the color picker context.
  */
 export const ColorPickerProvider = ({
   children,
@@ -47,5 +46,5 @@ export const ColorPickerProvider = ({
     isHovered,
   })
 
-  return <ColorPickerContext.Provider value={value}>{children}</ColorPickerContext.Provider>
+  return <ColorPickerContext value={value}>{children}</ColorPickerContext>
 }

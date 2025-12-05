@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 
 import styles from './Text.module.scss'
 import { getBlackAndWhiteColor } from '../../methods/get-black-and-white'
-import { useColorPicker } from '../../context/hook'
+import { useColorPicker } from '../../context'
 
 export const Text = () => {
   const { color } = useColorPicker()

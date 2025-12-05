@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { useColorPicker } from '../context/hook'
+import { useColorPicker } from '../context'
 import { throttle } from '../utils/throttle'
 import { pickColorFromCanvas } from '../methods/pick-color-from-canvas'
 import { renderMagnifierCanvas } from '../methods/render-magnifier-canvas'
