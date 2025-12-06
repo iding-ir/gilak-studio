@@ -28,10 +28,15 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/gilak-stylist.js",
       "require": "./dist/gilak-stylist.umd.cjs"
-    }
+    },
+    "./scss": "./src/index.scss",
+    "./tokens": "./src/tokens/_index.scss",
+    "./functions": "./src/functions/_index.scss",
+    "./themes": "./src/themes/_index.scss"
   },
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "scripts": {
     "dev": "vite build --watch",
@@ -41,6 +46,7 @@
   },
   "devDependencies": {
     "@gilak-studio/build-config": "workspace:*",
+    "sass": "^1.83.4",
     "typescript": "~5.9.3",
     "vite": "^7.2.4",
     "vite-plugin-dts": "^4.3.0"

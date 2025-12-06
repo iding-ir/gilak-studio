@@ -13,6 +13,7 @@
     "@gilak/canvas": "workspace:*",
     "@gilak/color-picker": "workspace:*",
     "@gilak/color-swatch": "workspace:*",
+    "@gilak/stylist": "workspace:*",
     "i18next": "^25.7.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",

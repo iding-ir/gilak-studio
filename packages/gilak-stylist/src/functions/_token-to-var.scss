@@ -1,17 +1,11 @@
 @use "sass:map";
 @use "sass:meta";
 
-// Convert token map to variables and CSS custom properties
+// Convert token map to CSS custom properties
 @mixin tokens-to-vars($token-map, $prefix) {
   @each $key, $value in $token-map {
-    // Generate SASS variable name
-    $var-name: #{$prefix}-#{$key};
-
-    // Create SASS variable (global scope)
-    #{$var-name}: $value !global;
-
     // Create CSS custom property
-    --#{$var-name}: #{$value};
+    --#{$prefix}-#{$key}: #{$value};
   }
 }
 

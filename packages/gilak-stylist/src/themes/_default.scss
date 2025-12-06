@@ -27,6 +27,9 @@
   @include tokens-to-vars(tokens.$transition, "transition");
   @include tokens-to-vars(tokens.$easing, "easing");
 
+  // Icons
+  @include tokens-to-vars(tokens.$icon, "icon");
+
   // Colors - loop through each color type
   @each $color-name, $variants in tokens.$colors {
     @include tokens-to-vars($variants, "color-#{$color-name}");

@@ -95,6 +95,9 @@ importers:
       '@gilak/color-swatch':
         specifier: workspace:*
         version: link:../../packages/gilak-color-swatch
+      '@gilak/stylist':
+        specifier: workspace:*
+        version: link:../../packages/gilak-stylist
       i18next:
         specifier: ^25.7.1
         version: 25.7.1(typescript@5.9.3)
@@ -112,6 +115,9 @@ importers:
 
   packages/gilak-canvas:
     dependencies:
+      '@gilak/stylist':
+        specifier: workspace:*
+        version: link:../gilak-stylist
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -128,6 +134,9 @@ importers:
       '@gilak/canvas':
         specifier: workspace:*
         version: link:../gilak-canvas
+      '@gilak/stylist':
+        specifier: workspace:*
+        version: link:../gilak-stylist
       '@gilak/utils':
         specifier: workspace:*
         version: link:../gilak-utils
@@ -144,6 +153,9 @@ importers:
 
   packages/gilak-color-swatch:
     dependencies:
+      '@gilak/stylist':
+        specifier: workspace:*
+        version: link:../gilak-stylist
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -154,6 +166,24 @@ importers:
       react-dom:
         specifier: ^19.2.0
         version: 19.2.1(react@19.2.1)
+
+  packages/gilak-stylist:
+    devDependencies:
+      '@gilak-studio/build-config':
+        specifier: workspace:*
+        version: link:../build-config
+      sass:
+        specifier: ^1.83.4
+        version: 1.93.3
+      typescript:
+        specifier: ~5.9.3
+        version: 5.9.3
+      vite:
+        specifier: ^7.2.4
+        version: 7.2.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2)
+      vite-plugin-dts:
+        specifier: ^4.3.0
+        version: 4.5.4(@types/node@24.10.1)(rollup@4.53.3)(typescript@5.9.3)(vite@7.2.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2))
 
   packages/gilak-utils:
     devDependencies:
@@ -4353,7 +4383,6 @@ snapshots:
   chokidar@4.0.3:
     dependencies:
       readdirp: 4.1.2
-    optional: true
 
   ci-info@3.9.0: {}
 
@@ -5263,8 +5292,7 @@ snapshots:
       pify: 4.0.1
       strip-bom: 3.0.0
 
-  readdirp@4.1.2:
-    optional: true
+  readdirp@4.1.2: {}
 
   recast@0.23.11:
     dependencies:
@@ -5439,7 +5467,6 @@ snapshots:
       source-map-js: 1.2.1
     optionalDependencies:
       '@parcel/watcher': 2.5.1
-    optional: true
 
   scheduler@0.27.0: {}
 

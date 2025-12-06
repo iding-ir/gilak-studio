@@ -53,6 +53,7 @@
     "react-dom": "^19.2.0"
   },
   "dependencies": {
+    "@gilak/stylist": "workspace:*",
     "clsx": "^2.1.1"
   }
 }

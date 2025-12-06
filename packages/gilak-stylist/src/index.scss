@@ -10,5 +10,8 @@
 // Export tokens
 @forward "tokens";
 
+// Export mixins
+@forward "mixins";
+
 // Export themes (includes CSS variable generation)
 @forward "themes";

@@ -1,5 +1,5 @@
 @charset "utf-8";
-@use "./config.scss" as *;
+@use "@gilak/stylist/scss" as *;
 
 html,
 body,
@@ -11,28 +11,28 @@ body,
 
 html {
   font-size: 14px;
-  color: #666666;
+  color: var(--color-neutral-lg);
 
-  @media only screen and (min-width: $breakpoint-md) {
+  @include media-md {
     font-size: 15px;
   }
 
-  @media only screen and (min-width: $breakpoint-lg) {
+  @include media-lg {
     font-size: 16px;
   }
 
-  @media only screen and (min-width: $breakpoint-xl) {
+  @include media-xl {
     font-size: 18px;
   }
 
-  @media only screen and (min-width: $breakpoint-xxl) {
+  @include media-xxl {
     font-size: 20px;
   }
 }
 
 body * {
-  font-size: 1rem;
-  line-height: 1.4;
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-sm);
 }
 
 html *,
