@@ -1,0 +1,41 @@
+@use "../mixins" as *;
+
+html,
+body,
+#root {
+  height: 100vh; /* fallback */
+  height: 100dvh;
+}
+
+html {
+  font-size: 14px;
+  color: var(--color-neutral-lg);
+
+  @include media-md {
+    font-size: 15px;
+  }
+
+  @include media-lg {
+    font-size: 16px;
+  }
+
+  @include media-xl {
+    font-size: 18px;
+  }
+
+  @include media-xxl {
+    font-size: 20px;
+  }
+
+  *,
+  *::after,
+  *::before {
+    box-sizing: border-box;
+  }
+}
+
+body * {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-sm);
+}

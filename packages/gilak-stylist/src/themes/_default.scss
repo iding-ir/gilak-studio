@@ -7,6 +7,7 @@
   @include tokens-to-vars(tokens.$spacing, "spacing");
 
   // Typography
+  @include tokens-to-vars(tokens.$font-family, "font-family");
   @include tokens-to-vars(tokens.$font-size, "font-size");
   @include tokens-to-vars(tokens.$font-weight, "font-weight");
   @include tokens-to-vars(tokens.$line-height, "line-height");

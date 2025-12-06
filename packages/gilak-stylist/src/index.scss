@@ -1,6 +1,9 @@
 // Gilak Stylist - Design System
 // Main entry point
 
+// Export base styles (reset)
+@forward "base";
+
 // Export primitives
 @forward "primitives";
 
