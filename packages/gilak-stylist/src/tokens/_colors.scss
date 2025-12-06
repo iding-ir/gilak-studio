@@ -1,0 +1,5 @@
+@use "../primitives/colors" as primitives;
+@use "../functions/color-variants" as fns;
+
+// Generate color token palettes from primitives
+$colors: fns.generate-color-palettes(primitives.$color-primitives);

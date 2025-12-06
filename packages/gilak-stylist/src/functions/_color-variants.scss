@@ -1,0 +1,52 @@
+@use "sass:map";
+@use "sass:color";
+
+// Color variant adjustments
+$color-variant-adjustments: (
+  xxs: 35%,
+  // lighten
+  xs: 25%,
+  // lighten
+  sm: 15%,
+  // lighten
+  md: 0%,
+  // base
+  lg: -15%,
+  // darken
+  xl: -25%,
+  // darken
+  xxl: -35%, // darken
+) !default;
+
+// Generate color variants from a base color
+@function generate-color-variants($base-color) {
+  $variants: ();
+
+  @each $size, $adjustment in $color-variant-adjustments {
+    $variant: color.adjust($base-color, $lightness: $adjustment);
+    $variants: map.merge(
+      $variants,
+      (
+        $size: $variant,
+      )
+    );
+  }
+
+  @return $variants;
+}
+
+// Generate all color palettes from primitives
+@function generate-color-palettes($primitives) {
+  $palettes: ();
+
+  @each $name, $base in $primitives {
+    $palettes: map.merge(
+      $palettes,
+      (
+        $name: generate-color-variants($base),
+      )
+    );
+  }
+
+  @return $palettes;
+}

@@ -1,0 +1,11 @@
+// Gilak Stylist - Design System
+// Main entry point
+
+// Export primitives
+@forward "primitives";
+
+// Export functions
+@forward "functions";
+
+// Export tokens
+@forward "tokens";
