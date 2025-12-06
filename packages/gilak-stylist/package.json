@@ -32,7 +32,8 @@
     "./scss": "./src/index.scss",
     "./tokens": "./src/tokens/_index.scss",
     "./functions": "./src/functions/_index.scss",
-    "./themes": "./src/themes/_index.scss"
+    "./themes": "./src/themes/_index.scss",
+    "./mixins": "./src/mixins/_index.scss"
   },
   "files": [
     "dist",

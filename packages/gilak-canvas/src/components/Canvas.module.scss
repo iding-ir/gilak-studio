@@ -1,9 +1,6 @@
-@use "@gilak/stylist/scss" as *;
-
 .container {
   display: inline-block;
   position: relative;
-  border: 1px solid var(--color-neutral-sm);
 
   .canvas {
     display: block;

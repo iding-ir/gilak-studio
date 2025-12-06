@@ -3,19 +3,15 @@
 
 // Color variant adjustments
 $color-variant-adjustments: (
-  xxs: 35%,
-  // lighten
-  xs: 25%,
-  // lighten
-  sm: 15%,
-  // lighten
+  xxxs: 50%,
+  xxs: 30%,
+  xs: 20%,
+  sm: 10%,
   md: 0%,
-  // base
-  lg: -15%,
-  // darken
-  xl: -25%,
-  // darken
-  xxl: -35%, // darken
+  lg: -10%,
+  xl: -20%,
+  xxl: -30%,
+  xxxl: -50%,
 ) !default;
 
 // Generate color variants from a base color
@@ -23,7 +19,8 @@ $color-variant-adjustments: (
   $variants: ();
 
   @each $size, $adjustment in $color-variant-adjustments {
-    $variant: color.adjust($base-color, $lightness: $adjustment);
+    $variant: color.scale($base-color, $lightness: $adjustment);
+
     $variants: map.merge(
       $variants,
       (

@@ -1,0 +1,68 @@
+{
+  "name": "@gilak/floating-window",
+  "version": "0.0.1",
+  "description": "A React floating window component with draggable functionality",
+  "author": "Aydin Ghane Kh. <https://github.com/iding-ir>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iding-ir/gilak-studio.git",
+    "directory": "packages/gilak-floating-window"
+  },
+  "keywords": [
+    "react",
+    "floating-window",
+    "draggable",
+    "ui",
+    "gilak"
+  ],
+  "homepage": "https://github.com/iding-ir/gilak-studio#readme",
+  "bugs": {
+    "url": "https://github.com/iding-ir/gilak-studio/issues"
+  },
+  "sideEffects": [
+    "**/*.css",
+    "**/*.scss"
+  ],
+  "type": "module",
+  "main": "./dist/gilak-floating-window.umd.js",
+  "module": "./dist/gilak-floating-window.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/gilak-floating-window.es.js",
+      "require": "./dist/gilak-floating-window.umd.js"
+    },
+    "./dist/gilak-floating-window.css": "./dist/gilak-floating-window.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "vite build",
+    "lint": "eslint .",
+    "prepublishOnly": "pnpm build"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "devDependencies": {
+    "@gilak/stylist": "workspace:*",
+    "@types/react": "^19.0.6",
+    "@types/react-dom": "^19.0.2",
+    "eslint": "^9.17.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "sass": "^1.83.0",
+    "typescript": "~5.7.2",
+    "vite": "^6.0.5",
+    "vite-plugin-dts": "^4.3.0",
+    "vite-plugin-svgr": "^4.3.0"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1"
+  }
+}

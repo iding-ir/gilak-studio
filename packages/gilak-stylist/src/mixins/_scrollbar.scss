@@ -1,10 +1,10 @@
 // Scrollbar utility mixins
 
 // Custom scrollbar styling with cross-browser support
-// @param {Color} $color - Scrollbar thumb color (default: var(--color-neutral-md))
+// @param {Color} $color - Scrollbar thumb color (default: var(--color-light-md))
 // @param {Length} $width - Scrollbar width (default: 8px)
 // @param {Boolean} $hide-until-hover - Only show scrollbar on hover/focus (default: false)
-@mixin scrollbar($color: var(--color-neutral-md), $width: 8px, $hide-until-hover: false) {
+@mixin scrollbar($color: var(--color-light-lg), $width: 8px, $hide-until-hover: false) {
   // Firefox
   scrollbar-width: thin;
   scrollbar-color: $color transparent;

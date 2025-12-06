@@ -6,14 +6,13 @@
   top: 0;
   left: 0;
   border-radius: var(--radius-full);
-  border: 0.3rem solid var(--color-neutral-lightest);
   touch-action: none;
   pointer-events: none;
 
   canvas {
     display: block;
     border-radius: var(--radius-full);
-    border: 1rem solid var(--color-neutral-lg);
+    border: 1rem solid var(--color-light-lg);
     box-shadow: var(--shadow-lg);
     touch-action: none;
     pointer-events: none;
