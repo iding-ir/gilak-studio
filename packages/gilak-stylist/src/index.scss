@@ -9,3 +9,6 @@
 
 // Export tokens
 @forward "tokens";
+
+// Export themes (includes CSS variable generation)
+@forward "themes";

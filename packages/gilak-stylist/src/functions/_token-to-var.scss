@@ -1,0 +1,32 @@
+@use "sass:map";
+@use "sass:meta";
+
+// Convert token map to variables and CSS custom properties
+@mixin tokens-to-vars($token-map, $prefix) {
+  @each $key, $value in $token-map {
+    // Generate SASS variable name
+    $var-name: #{$prefix}-#{$key};
+
+    // Create SASS variable (global scope)
+    #{$var-name}: $value !global;
+
+    // Create CSS custom property
+    --#{$var-name}: #{$value};
+  }
+}
+
+// Get a nested token value safely
+@function get-token($map, $keys...) {
+  $value: $map;
+
+  @each $key in $keys {
+    @if meta.type-of($value) == "map" and map.has-key($value, $key) {
+      $value: map.get($value, $key);
+    } @else {
+      @warn 'Token not found: #{$keys}';
+      @return null;
+    }
+  }
+
+  @return $value;
+}
