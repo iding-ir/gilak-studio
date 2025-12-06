@@ -1,0 +1,96 @@
+@use "@gilak/stylist/scss" as *;
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color: var(--icon-bg-color, currentColor);
+
+  .image {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    mask-size: 70%;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-image: var(--icon-url);
+    -webkit-mask-size: 70%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-image: var(--icon-url);
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: var(--icon-color, transparent);
+      z-index: -2;
+    }
+  }
+
+  &.xxs {
+    width: var(--icon-xxs);
+    height: var(--icon-xxs);
+
+    &.rounded {
+      border-radius: var(--radius-xxs);
+    }
+  }
+
+  &.xs {
+    width: var(--icon-xs);
+    height: var(--icon-xs);
+
+    &.rounded {
+      border-radius: var(--radius-xs);
+    }
+  }
+
+  &.sm {
+    width: var(--icon-sm);
+    height: var(--icon-sm);
+
+    &.rounded {
+      border-radius: var(--radius-sm);
+    }
+  }
+
+  &.md {
+    width: var(--icon-md);
+    height: var(--icon-md);
+
+    &.rounded {
+      border-radius: var(--radius-md);
+    }
+  }
+
+  &.lg {
+    width: var(--icon-lg);
+    height: var(--icon-lg);
+
+    &.rounded {
+      border-radius: var(--radius-lg);
+    }
+  }
+
+  &.xl {
+    width: var(--icon-xl);
+    height: var(--icon-xl);
+
+    &.rounded {
+      border-radius: var(--radius-xl);
+    }
+  }
+
+  &.xxl {
+    width: var(--icon-xxl);
+    height: var(--icon-xxl);
+
+    &.rounded {
+      border-radius: var(--radius-xxl);
+    }
+  }
+}

@@ -156,6 +156,9 @@ importers:
 
   packages/gilak-color-swatch:
     dependencies:
+      '@gilak/components':
+        specifier: workspace:*
+        version: link:../gilak-components
       '@gilak/stylist':
         specifier: workspace:*
         version: link:../gilak-stylist

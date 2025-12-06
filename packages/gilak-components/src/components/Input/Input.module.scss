@@ -1,0 +1,220 @@
+@use "@gilak/stylist/scss" as *;
+
+.label {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "label label"
+    "icon input";
+  border: 1px solid var(--color-neutral-xs);
+  overflow: hidden;
+
+  .text {
+    grid-area: label;
+    font-weight: var(--font-weight-md);
+    color: inherit;
+  }
+
+  .icon {
+    grid-area: icon;
+  }
+
+  .input {
+    grid-area: input;
+    color: inherit;
+    width: 100%;
+    border: none;
+    background-color: var(--color-neutral-xxs);
+    outline: none;
+
+    &::placeholder {
+      color: var(--color-neutral-md);
+    }
+
+    &:hover {
+      border-color: var(--color-neutral-md);
+    }
+
+    &:focus {
+      border-color: var(--color-primary-md);
+      box-shadow: 0 0 0 3px var(--color-primary-xxs);
+    }
+
+    &:disabled {
+      background-color: var(--color-neutral-lightest);
+      color: var(--color-neutral-md);
+      cursor: not-allowed;
+      opacity: 0.6;
+
+      &:hover {
+        border-color: var(--color-neutral-xs);
+      }
+    }
+
+    &:read-only {
+      background-color: var(--color-neutral-lightest);
+      cursor: default;
+
+      &:focus {
+        border-color: var(--color-neutral-md);
+        box-shadow: none;
+      }
+    }
+  }
+
+  &.fullWidth {
+    width: 100%;
+  }
+
+  &.error {
+    border-color: var(--color-error-md);
+  }
+
+  &.xxs {
+    &.rounded {
+      border-radius: var(--radius-xxs);
+    }
+
+    .text {
+      font-size: var(--font-size-xxs);
+    }
+
+    .icon {
+      width: var(--icon-xxs);
+      height: var(--icon-xxs);
+    }
+
+    .input {
+      font-size: var(--font-size-xxs);
+      line-height: var(--icon-xxs);
+      padding: 0 calc(var(--spacing-xxs) / 4);
+    }
+  }
+
+  &.xs {
+    &.rounded {
+      border-radius: var(--radius-xs);
+    }
+
+    .text {
+      font-size: var(--font-size-xs);
+    }
+
+    .icon {
+      width: var(--icon-xs);
+      height: var(--icon-xs);
+    }
+
+    .input {
+      font-size: var(--font-size-xs);
+      line-height: var(--icon-xs);
+      padding: 0 calc(var(--spacing-xs) / 4);
+    }
+  }
+
+  &.sm {
+    &.rounded {
+      border-radius: var(--radius-sm);
+    }
+
+    .text {
+      font-size: var(--font-size-sm);
+    }
+
+    .icon {
+      width: var(--icon-sm);
+      height: var(--icon-sm);
+    }
+
+    .input {
+      font-size: var(--font-size-sm);
+      line-height: var(--icon-sm);
+      padding: 0 calc(var(--spacing-sm) / 4);
+    }
+  }
+
+  &.md {
+    &.rounded {
+      border-radius: var(--radius-md);
+    }
+
+    .text {
+      font-size: var(--font-size-md);
+    }
+
+    .icon {
+      width: var(--icon-md);
+      height: var(--icon-md);
+    }
+
+    .input {
+      font-size: var(--font-size-md);
+      line-height: var(--icon-md);
+      padding: 0 calc(var(--spacing-md) / 4);
+    }
+  }
+
+  &.lg {
+    &.rounded {
+      border-radius: var(--radius-lg);
+    }
+
+    .text {
+      font-size: var(--font-size-lg);
+    }
+
+    .icon {
+      width: var(--icon-lg);
+      height: var(--icon-lg);
+    }
+
+    .input {
+      font-size: var(--font-size-lg);
+      line-height: var(--icon-lg);
+      padding: 0 calc(var(--spacing-lg) / 4);
+    }
+  }
+
+  &.xl {
+    &.rounded {
+      border-radius: var(--radius-xl);
+    }
+
+    .text {
+      font-size: var(--font-size-xl);
+    }
+
+    .icon {
+      width: var(--icon-xl);
+      height: var(--icon-xl);
+    }
+
+    .input {
+      font-size: var(--font-size-xl);
+      line-height: var(--icon-xl);
+      padding: 0 calc(var(--spacing-xl) / 4);
+    }
+  }
+
+  &.xxl {
+    &.rounded {
+      border-radius: var(--radius-xxl);
+    }
+
+    .text {
+      font-size: var(--font-size-xxl);
+    }
+
+    .icon {
+      width: var(--icon-xxl);
+      height: var(--icon-xxl);
+    }
+
+    .input {
+      font-size: var(--font-size-xxl);
+      line-height: var(--icon-xxl);
+      padding: 0 calc(var(--spacing-xxl) / 4);
+    }
+  }
+}

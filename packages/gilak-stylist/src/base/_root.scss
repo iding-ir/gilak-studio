@@ -9,7 +9,6 @@ body,
 
 html {
   font-size: 14px;
-  color: var(--color-neutral-lg);
 
   @include media-md {
     font-size: 15px;
@@ -37,5 +36,5 @@ html {
 body * {
   font-family: var(--font-family-base);
   font-size: var(--font-size-md);
-  line-height: var(--line-height-sm);
+  color: var(--color-neutral-lg);
 }

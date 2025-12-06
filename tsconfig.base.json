@@ -23,6 +23,8 @@
       "@gilak/color-picker/*": ["./packages/gilak-color-picker/src/*"],
       "@gilak/color-swatch": ["./packages/gilak-color-swatch/src"],
       "@gilak/color-swatch/*": ["./packages/gilak-color-swatch/src/*"],
+      "@gilak/components": ["./packages/gilak-components/src"],
+      "@gilak/components/*": ["./packages/gilak-components/src/*"],
       "@gilak/utils": ["./packages/gilak-utils/src"],
       "@gilak/utils/*": ["./packages/gilak-utils/src/*"]
     },

@@ -4,37 +4,6 @@
   display: flex;
   align-items: center;
   gap: 0;
-  background-color: var(--color-neutral-xxs);
   overflow: hidden;
   flex: 1;
-
-  label {
-    flex-shrink: 0;
-    height: 100%;
-    width: var(--icon-xl);
-    border-right: 1px solid var(--color-neutral-xs);
-  }
-
-  input {
-    flex: 1;
-    font-size: var(--font-size-md);
-    color: var(--color-neutral-xl);
-    padding: 0 var(--spacing-md);
-    height: 100%;
-    border: none;
-    background-color: transparent;
-    outline: none;
-
-    &::placeholder {
-      color: var(--color-neutral-md);
-    }
-
-    &:focus {
-      outline: none;
-    }
-
-    &[readonly] {
-      cursor: default;
-    }
-  }
 }

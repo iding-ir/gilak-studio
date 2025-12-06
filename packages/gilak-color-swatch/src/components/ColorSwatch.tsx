@@ -1,38 +1,45 @@
 import React from 'react'
+import { Input, type TshirtSize } from '@gilak/components'
 import styles from './ColorSwatch.module.scss'
 
 export interface ColorSwatchProps {
-  id?: string
-  name?: string
   value: string
-  onChange?: (color: string) => void
-  readOnly?: boolean
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   placeholder?: string
+  label?: string
+  icon?: string
+  size?: TshirtSize
+  color?: string
+  backgroundColor?: string
 }
 
 export const ColorSwatch: React.FC<ColorSwatchProps> = ({
-  id = 'gilak-color-swatch',
-  name = 'gilak-color-swatch',
   value,
   onChange,
-  readOnly = true,
   placeholder = '',
+  label = '',
+  icon,
+  size = 'md',
+  color,
+  backgroundColor,
 }) => {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange?.(e.target.value)
-  }
-
   return (
     <div className={styles.root}>
-      <label htmlFor={id} style={{ backgroundColor: value || 'transparent' }} />
-      <input
-        id={id}
+      {/* <label htmlFor={id} style={{ backgroundColor: value || 'transparent' }} /> */}
+      <Input
         type="text"
-        name={name}
+        id="gilak-color-swatch"
+        name="gilak-color-swatch"
         value={value}
-        onChange={handleChange}
-        readOnly={readOnly}
+        onChange={onChange}
+        readOnly={true}
         placeholder={placeholder}
+        label={label}
+        icon={icon}
+        size={size}
+        fullWidth={true}
+        color={color}
+        backgroundColor={backgroundColor}
       />
     </div>
   )
