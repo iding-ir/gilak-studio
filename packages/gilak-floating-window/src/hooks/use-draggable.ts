@@ -10,6 +10,9 @@ export interface UseDraggableOptions {
   disabled?: boolean
   onDragStart?: () => void
   onDragEnd?: () => void
+  restrictToParent?: boolean
+  initialWidth?: number
+  initialHeight?: number
 }
 
 export interface UseDraggableReturn {
@@ -30,6 +33,9 @@ export const useDraggable = ({
   disabled = false,
   onDragStart,
   onDragEnd,
+  restrictToParent = false,
+  initialWidth,
+  initialHeight,
 }: UseDraggableOptions = {}): UseDraggableReturn => {
   const [position, setPosition] = useState<Position>(initialPosition)
   const [isDragging, setIsDragging] = useState(false)
@@ -39,6 +45,23 @@ export const useDraggable = ({
   const elementStartPos = useRef<Position>({ x: 0, y: 0 })
   const nextPosition = useRef<Position>(initialPosition)
   const frameRequested = useRef(false)
+  const parentRectRef = useRef<DOMRect | null>(null)
+
+  const clampPosition = useCallback(
+    (pos: Position): Position => {
+      if (!restrictToParent || !targetRef.current || !parentRectRef.current) return pos
+      const parentRect = parentRectRef.current
+      const el = targetRef.current
+      const width = initialWidth ?? el.offsetWidth
+      const height = initialHeight ?? el.offsetHeight
+      let x = pos.x
+      let y = pos.y
+      x = Math.max(0, Math.min(x, parentRect.width - width))
+      y = Math.max(0, Math.min(y, parentRect.height - height))
+      return { x, y }
+    },
+    [restrictToParent, initialWidth, initialHeight]
+  )
 
   const handlePointerMove = useCallback(
     (event: PointerEvent) => {
@@ -47,20 +70,24 @@ export const useDraggable = ({
       const deltaX = event.clientX - dragStartPos.current.x
       const deltaY = event.clientY - dragStartPos.current.y
 
-      nextPosition.current = {
+      let newPos = {
         x: elementStartPos.current.x + deltaX,
         y: elementStartPos.current.y + deltaY,
       }
+      newPos = clampPosition(newPos)
+      nextPosition.current = newPos
 
       if (!frameRequested.current) {
         frameRequested.current = true
-        requestAnimationFrame(() => {
-          setPosition(nextPosition.current)
+        window.requestAnimationFrame(() => {
+          if (nextPosition.current.x !== position.x || nextPosition.current.y !== position.y) {
+            setPosition(nextPosition.current)
+          }
           frameRequested.current = false
         })
       }
     },
-    [disabled]
+    [disabled, clampPosition, position.x, position.y]
   )
 
   const handlePointerDown = useCallback(
@@ -79,6 +106,10 @@ export const useDraggable = ({
 
       elementStartPos.current = { ...position }
 
+      if (restrictToParent && targetRef.current && targetRef.current.parentElement) {
+        parentRectRef.current = targetRef.current.parentElement.getBoundingClientRect()
+      }
+
       const handlePointerUp = () => {
         setIsDragging(false)
         onDragEnd?.()
@@ -90,7 +121,7 @@ export const useDraggable = ({
       document.addEventListener('pointermove', handlePointerMove)
       document.addEventListener('pointerup', handlePointerUp)
     },
-    [disabled, position, handlePointerMove, onDragStart, onDragEnd]
+    [disabled, position, handlePointerMove, onDragStart, onDragEnd, restrictToParent]
   )
 
   return {

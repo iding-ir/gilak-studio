@@ -1,7 +1,7 @@
 @use "@gilak/stylist/mixins" as mixins;
 
 .window {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   display: grid;

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import clsx from 'clsx'
 import { useDraggable } from '../../hooks'
 import styles from './FloatingWindow.module.scss'
@@ -16,58 +16,76 @@ export interface FloatingWindowProps {
   className?: string
   onDragStart?: () => void
   onDragEnd?: () => void
+  restrictToParent?: boolean
 }
 
-export const FloatingWindow: React.FC<FloatingWindowProps> = ({
-  title,
-  children,
-  toolbar,
-  draggable = false,
-  initialX = 0,
-  initialY = 0,
-  initialWidth,
-  initialHeight,
-  zIndex,
-  className,
-  onDragStart,
-  onDragEnd,
-}) => {
-  const { position, isDragging, handleRef, targetRef, handlePointerDown } = useDraggable({
-    initialPosition: { x: initialX, y: initialY },
-    disabled: !draggable,
+export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
+  ({
+    title,
+    children,
+    toolbar,
+    draggable = false,
+    initialX = 0,
+    initialY = 0,
+    initialWidth,
+    initialHeight,
+    zIndex,
+    className,
     onDragStart,
     onDragEnd,
-  })
+    restrictToParent = false,
+  }) => {
+    const { position, isDragging, handleRef, targetRef, handlePointerDown } = useDraggable({
+      initialPosition: { x: initialX, y: initialY },
+      disabled: !draggable,
+      onDragStart,
+      onDragEnd,
+      restrictToParent,
+      initialWidth,
+      initialHeight,
+    })
 
-  const windowStyle: React.CSSProperties = {
-    transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
-    zIndex,
-    width: initialWidth,
-    height: initialHeight,
-  }
+    // Memoize window style
+    const windowStyle = useMemo(
+      () => ({
+        transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
+        zIndex,
+        width: initialWidth,
+        height: initialHeight,
+      }),
+      [position.x, position.y, zIndex, initialWidth, initialHeight]
+    )
 
-  return (
-    <div
-      ref={targetRef as React.RefObject<HTMLDivElement>}
-      className={clsx(
-        styles.window,
-        {
-          [styles.draggable]: draggable,
-          [styles.dragging]: isDragging,
-        },
-        className
-      )}
-      style={windowStyle}
-    >
-      <header
-        ref={handleRef as React.RefObject<HTMLElement>}
-        className={styles.header}
-        onPointerDown={draggable ? handlePointerDown : undefined}
+    // Memoize className
+    const windowClassName = useMemo(
+      () =>
+        clsx(
+          styles.window,
+          {
+            [styles.draggable]: draggable,
+            [styles.dragging]: isDragging,
+          },
+          className
+        ),
+      [draggable, isDragging, className]
+    )
+
+    return (
+      <div
+        ref={targetRef as React.RefObject<HTMLDivElement>}
+        className={windowClassName}
+        style={windowStyle}
       >
-        <h3 className={styles.title}>{title}</h3>
-      </header>
-      {toolbar && <div className={styles.toolbar}>{toolbar}</div>}
-      <div className={styles.body}>{children}</div>
-    </div>
-  )
-}
+        <header
+          ref={handleRef as React.RefObject<HTMLElement>}
+          className={styles.header}
+          onPointerDown={draggable ? handlePointerDown : undefined}
+        >
+          <h3 className={styles.title}>{title}</h3>
+        </header>
+        {toolbar && <div className={styles.toolbar}>{toolbar}</div>}
+        <div className={styles.body}>{children}</div>
+      </div>
+    )
+  }
+)

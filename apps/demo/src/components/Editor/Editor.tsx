@@ -97,6 +97,7 @@ export const Editor: React.FC = () => {
           initialWidth={400}
           initialHeight={300}
           zIndex={1100}
+          restrictToParent={true}
         >
           dolor sit amet consectetur adipisicing elit. Quisquam, quod. Sed do eiusmod tempor
           incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
