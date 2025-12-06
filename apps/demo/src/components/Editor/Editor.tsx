@@ -63,6 +63,7 @@ export const Editor: React.FC = () => {
 
       <main className={styles.main}>
         <FloatingWindow
+          id="floating-window-1"
           title={
             'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'
           }
@@ -72,6 +73,8 @@ export const Editor: React.FC = () => {
           initialWidth={520}
           initialHeight={540}
           zIndex={1100}
+          restrictToParent={true}
+          savePosition={true}
         >
           <Canvas
             ref={canvasRef}
@@ -88,6 +91,7 @@ export const Editor: React.FC = () => {
         </FloatingWindow>
 
         <FloatingWindow
+          id="editor-window-2"
           title={
             'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'
           }
@@ -98,6 +102,7 @@ export const Editor: React.FC = () => {
           initialHeight={300}
           zIndex={1100}
           restrictToParent={true}
+          savePosition={true}
         >
           dolor sit amet consectetur adipisicing elit. Quisquam, quod. Sed do eiusmod tempor
           incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud

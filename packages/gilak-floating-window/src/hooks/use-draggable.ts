@@ -1,4 +1,5 @@
 import { useCallback, useRef, useState } from 'react'
+import { useSavedPosition } from './use-saved-position'
 
 export interface Position {
   x: number
@@ -6,6 +7,7 @@ export interface Position {
 }
 
 export interface UseDraggableOptions {
+  id?: string
   initialPosition?: Position
   disabled?: boolean
   onDragStart?: () => void
@@ -13,6 +15,7 @@ export interface UseDraggableOptions {
   restrictToParent?: boolean
   initialWidth?: number
   initialHeight?: number
+  savePosition?: boolean
 }
 
 export interface UseDraggableReturn {
@@ -23,12 +26,8 @@ export interface UseDraggableReturn {
   handlePointerDown: (event: React.PointerEvent<HTMLElement>) => void
 }
 
-/**
- * Custom hook for adding draggable functionality to an element
- * @param options - Configuration options for draggable behavior
- * @returns Refs and handlers needed to make an element draggable
- */
 export const useDraggable = ({
+  id,
   initialPosition = { x: 0, y: 0 },
   disabled = false,
   onDragStart,
@@ -36,14 +35,16 @@ export const useDraggable = ({
   restrictToParent = false,
   initialWidth,
   initialHeight,
+  savePosition = false,
 }: UseDraggableOptions = {}): UseDraggableReturn => {
-  const [position, setPosition] = useState<Position>(initialPosition)
+  const { savedPosition, saveCurrentPosition } = useSavedPosition(id, savePosition, initialPosition)
+  const [position, setPosition] = useState<Position>(savedPosition)
   const [isDragging, setIsDragging] = useState(false)
   const handleRef = useRef<HTMLElement>(null)
   const targetRef = useRef<HTMLElement>(null)
   const dragStartPos = useRef<Position>({ x: 0, y: 0 })
   const elementStartPos = useRef<Position>({ x: 0, y: 0 })
-  const nextPosition = useRef<Position>(initialPosition)
+  const nextPosition = useRef<Position>(savedPosition)
   const frameRequested = useRef(false)
   const parentRectRef = useRef<DOMRect | null>(null)
 
@@ -114,6 +115,10 @@ export const useDraggable = ({
         setIsDragging(false)
         onDragEnd?.()
 
+        if (savePosition && id) {
+          saveCurrentPosition(nextPosition.current ?? { x: position.x, y: position.y })
+        }
+
         document.removeEventListener('pointermove', handlePointerMove)
         document.removeEventListener('pointerup', handlePointerUp)
       }
@@ -121,7 +126,17 @@ export const useDraggable = ({
       document.addEventListener('pointermove', handlePointerMove)
       document.addEventListener('pointerup', handlePointerUp)
     },
-    [disabled, position, handlePointerMove, onDragStart, onDragEnd, restrictToParent]
+    [
+      disabled,
+      position,
+      handlePointerMove,
+      onDragStart,
+      onDragEnd,
+      restrictToParent,
+      savePosition,
+      id,
+      saveCurrentPosition,
+    ]
   )
 
   return {

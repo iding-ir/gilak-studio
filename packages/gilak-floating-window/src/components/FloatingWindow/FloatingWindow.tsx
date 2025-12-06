@@ -17,10 +17,13 @@ export interface FloatingWindowProps {
   onDragStart?: () => void
   onDragEnd?: () => void
   restrictToParent?: boolean
+  id?: string
+  savePosition?: boolean
 }
 
 export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
   ({
+    id,
     title,
     children,
     toolbar,
@@ -34,8 +37,10 @@ export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
     onDragStart,
     onDragEnd,
     restrictToParent = false,
+    savePosition = false,
   }) => {
     const { position, isDragging, handleRef, targetRef, handlePointerDown } = useDraggable({
+      id,
       initialPosition: { x: initialX, y: initialY },
       disabled: !draggable,
       onDragStart,
@@ -43,9 +48,9 @@ export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
       restrictToParent,
       initialWidth,
       initialHeight,
+      savePosition,
     })
 
-    // Memoize window style
     const windowStyle = useMemo(
       () => ({
         transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
@@ -56,7 +61,6 @@ export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
       [position.x, position.y, zIndex, initialWidth, initialHeight]
     )
 
-    // Memoize className
     const windowClassName = useMemo(
       () =>
         clsx(
