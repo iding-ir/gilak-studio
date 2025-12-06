@@ -1,0 +1,56 @@
+// Scrollbar utility mixins
+
+// Custom scrollbar styling with cross-browser support
+// @param {Color} $color - Scrollbar thumb color (default: var(--color-neutral-md))
+// @param {Length} $width - Scrollbar width (default: 8px)
+// @param {Boolean} $hide-until-hover - Only show scrollbar on hover/focus (default: false)
+@mixin scrollbar($color: var(--color-neutral-md), $width: 8px, $hide-until-hover: false) {
+  // Firefox
+  scrollbar-width: thin;
+  scrollbar-color: $color transparent;
+
+  @if $hide-until-hover {
+    scrollbar-width: none;
+
+    &:hover,
+    &:focus,
+    &:focus-within {
+      scrollbar-width: thin;
+    }
+  }
+
+  // Webkit browsers (Chrome, Safari, Edge)
+  &::-webkit-scrollbar {
+    width: $width;
+    height: $width;
+
+    @if $hide-until-hover {
+      width: 0;
+      height: 0;
+    }
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $color;
+    border-radius: calc($width / 2);
+    border: 2px solid transparent;
+    background-clip: content-box;
+
+    &:hover {
+      background-color: color-mix(in srgb, $color 80%, black);
+    }
+  }
+
+  @if $hide-until-hover {
+    &:hover::-webkit-scrollbar,
+    &:focus::-webkit-scrollbar,
+    &:focus-within::-webkit-scrollbar {
+      width: $width;
+      height: $width;
+    }
+  }
+}
