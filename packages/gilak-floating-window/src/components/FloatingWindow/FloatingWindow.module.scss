@@ -33,6 +33,10 @@
     box-shadow: var(--shadow-md);
   }
 
+  &.resizing {
+    box-shadow: var(--shadow-md);
+  }
+
   .header {
     grid-area: header;
     display: flex;
@@ -85,6 +89,9 @@
       display: inline-flex;
       margin-left: auto;
       cursor: nwse-resize;
+      /* bigger hit target and prevent touch gestures from interfering */
+      padding: var(--spacing-xs);
+      touch-action: none;
     }
   }
 }

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import clsx from 'clsx'
-import { useDraggable } from '../../hooks'
+import { useDraggable, useResizable } from '../../hooks'
 import { Icon } from '@gilak/components'
 import IconResize from '../../assets/icon-resize.svg?url'
 import styles from './FloatingWindow.module.scss'
@@ -23,6 +23,14 @@ export interface FloatingWindowProps {
   id?: string
   savePosition?: boolean
   resizable?: boolean
+  minWidth?: number
+  minHeight?: number
+  maxWidth?: number
+  maxHeight?: number
+  persistSize?: boolean
+  onResizeStart?: () => void
+  onResize?: (w?: number, h?: number) => void
+  onResizeEnd?: () => void
 }
 
 export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
@@ -44,6 +52,14 @@ export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
     restrictToParent = false,
     savePosition = false,
     resizable,
+    minWidth,
+    minHeight,
+    maxWidth,
+    maxHeight,
+    persistSize = false,
+    onResizeStart,
+    onResize,
+    onResizeEnd,
   }) => {
     const { position, isDragging, handleRef, targetRef, handlePointerDown } = useDraggable({
       id,
@@ -57,14 +73,43 @@ export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
       savePosition,
     })
 
+    const {
+      size: resizeSize,
+      isResizing,
+      handlePointerDown: handleResizePointerDown,
+    } = useResizable({
+      id,
+      targetRef,
+      initialWidth,
+      initialHeight,
+      disabled: !resizable,
+      minWidth,
+      minHeight,
+      maxWidth,
+      maxHeight,
+      persistSize,
+      onResizeStart,
+      onResize,
+      onResizeEnd,
+    })
+
     const windowStyle = useMemo(
       () => ({
         transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
         zIndex,
-        width: initialWidth,
-        height: initialHeight,
+        width: resizable ? (resizeSize.width ?? initialWidth) : initialWidth,
+        height: resizable ? (resizeSize.height ?? initialHeight) : initialHeight,
       }),
-      [position.x, position.y, zIndex, initialWidth, initialHeight]
+      [
+        position.x,
+        position.y,
+        zIndex,
+        initialWidth,
+        initialHeight,
+        resizable,
+        resizeSize?.width,
+        resizeSize?.height,
+      ]
     )
 
     const windowClassName = useMemo(
@@ -74,10 +119,11 @@ export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
           {
             [styles.draggable]: draggable,
             [styles.dragging]: isDragging,
+            [styles.resizing]: isResizing,
           },
           className
         ),
-      [draggable, isDragging, className]
+      [draggable, isDragging, isResizing, className]
     )
 
     return (
@@ -98,7 +144,7 @@ export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
         <footer className={styles.footer}>
           <div className={styles.content}>{footer}</div>
           {resizable && (
-            <div className={styles.resizeHandle}>
+            <div className={styles.resizeHandle} onPointerDown={handleResizePointerDown}>
               <Icon
                 icon={IconResize}
                 size="md"
