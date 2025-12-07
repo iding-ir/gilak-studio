@@ -1,4 +1,5 @@
 import React, { createContext, ReactNode, useReducer, useCallback } from 'react'
+import styles from './provider.module.scss'
 import { State, Action, FloatingWindowMeta } from './types'
 import { reducer, initialState } from './reducer'
 
@@ -58,7 +59,11 @@ export const FloatingWindowProvider: React.FC<{ children?: ReactNode }> = ({ chi
     bringToFront,
   }
 
-  return <FloatingWindowContext.Provider value={value}>{children}</FloatingWindowContext.Provider>
+  return (
+    <FloatingWindowContext.Provider value={value}>
+      <div className={styles.container}>{children}</div>
+    </FloatingWindowContext.Provider>
+  )
 }
 
 export default FloatingWindowContext

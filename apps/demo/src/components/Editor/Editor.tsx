@@ -24,45 +24,45 @@ export const Editor: React.FC = () => {
   }
 
   return (
-    <FloatingWindowProvider>
-      <div className={styles.root}>
-        <header className={styles.header}>
-          <nav className={styles.nav}>
-            <ul>
-              <li>
-                <button disabled={false} onClick={() => setIsActive(true)}>
-                  <Icon
-                    icon={IconColorPickerUrl}
-                    size="lg"
-                    color={selectedColor}
-                    backgroundColor={getContrastColor(selectedColor)}
-                  />
-                </button>
-              </li>
-              <li>
-                <button onClick={handleRandomize}>
-                  <Icon
-                    icon={IconCanvasUrl}
-                    size="lg"
-                    color={selectedColor}
-                    backgroundColor={getContrastColor(selectedColor)}
-                  />
-                </button>
-              </li>
-            </ul>
-          </nav>
+    <div className={styles.root}>
+      <header className={styles.header}>
+        <nav className={styles.nav}>
+          <ul>
+            <li>
+              <button disabled={false} onClick={() => setIsActive(true)}>
+                <Icon
+                  icon={IconColorPickerUrl}
+                  size="lg"
+                  color={selectedColor}
+                  backgroundColor={getContrastColor(selectedColor)}
+                />
+              </button>
+            </li>
+            <li>
+              <button onClick={handleRandomize}>
+                <Icon
+                  icon={IconCanvasUrl}
+                  size="lg"
+                  color={selectedColor}
+                  backgroundColor={getContrastColor(selectedColor)}
+                />
+              </button>
+            </li>
+          </ul>
+        </nav>
 
-          <ColorSwatch
-            size="lg"
-            value={selectedColor}
-            placeholder={t('colorSwatch.placeholder')}
-            icon={IconBucketUrl}
-            color={selectedColor}
-            backgroundColor={getContrastColor(selectedColor)}
-          />
-        </header>
+        <ColorSwatch
+          size="lg"
+          value={selectedColor}
+          placeholder={t('colorSwatch.placeholder')}
+          icon={IconBucketUrl}
+          color={selectedColor}
+          backgroundColor={getContrastColor(selectedColor)}
+        />
+      </header>
 
-        <main className={styles.main}>
+      <main className={styles.main}>
+        <FloatingWindowProvider>
           <FloatingWindow
             id="floating-window-1"
             title={
@@ -131,8 +131,8 @@ export const Editor: React.FC = () => {
             Ex sequi nostrum quibusdam id, saepe ad non aut cupiditate laborum, voluptas veritatis
             inventore minima temporibus corporis dolor amet distinctio eaque sapiente.
           </FloatingWindow>
-        </main>
-      </div>
-    </FloatingWindowProvider>
+        </FloatingWindowProvider>
+      </main>
+    </div>
   )
 }

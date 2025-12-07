@@ -3,7 +3,7 @@
 
 // Color variant adjustments
 $color-variant-adjustments: (
-  xxxs: 24%,
+  xxxs: 30%,
   xxs: 16%,
   xs: 8%,
   sm: 4%,
@@ -11,7 +11,7 @@ $color-variant-adjustments: (
   lg: -4%,
   xl: -8%,
   xxl: -16%,
-  xxxl: -24%,
+  xxxl: -30%,
 ) !default;
 
 // Generate color variants from a base color

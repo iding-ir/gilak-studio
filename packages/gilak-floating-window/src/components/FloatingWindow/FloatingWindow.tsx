@@ -1,33 +1,35 @@
 import React, { useMemo } from 'react'
 import clsx from 'clsx'
-import { useDraggable, useResizable } from '../../hooks'
+import { useDraggable, useResizable, useMaximizable } from '../../hooks'
 import { Icon } from '@gilak/components'
 import IconResize from '../../assets/icon-resize.svg?url'
+import IconMaximize from '../../assets/icon-maximize.svg?url'
+import IconMaximized from '../../assets/icon-maximized.svg?url'
 import styles from './FloatingWindow.module.scss'
 
 export interface FloatingWindowProps {
-  title?: string
+  id?: string
   children?: React.ReactNode
-  toolbar?: React.ReactNode
+  className?: string
+  title?: string
   footer?: React.ReactNode
-  draggable?: boolean
   initialX?: number
   initialY?: number
   initialWidth?: number
   initialHeight?: number
-  zIndex?: number
-  className?: string
-  onDragStart?: () => void
-  onDragEnd?: () => void
-  restrictToParent?: boolean
-  id?: string
-  savePosition?: boolean
-  resizable?: boolean
   minWidth?: number
   minHeight?: number
   maxWidth?: number
   maxHeight?: number
+  zIndex?: number
+  savePosition?: boolean
+  draggable?: boolean
+  resizable?: boolean
+  maximizable?: boolean
   persistSize?: boolean
+  restrictToParent?: boolean
+  onDragStart?: () => void
+  onDragEnd?: () => void
   onResizeStart?: () => void
   onResize?: (w?: number, h?: number) => void
   onResizeEnd?: () => void
@@ -36,35 +38,37 @@ export interface FloatingWindowProps {
 export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
   ({
     id,
-    title,
     children,
-    toolbar,
+    className,
+    title,
     footer,
-    draggable = false,
     initialX = 0,
     initialY = 0,
     initialWidth,
     initialHeight,
-    zIndex,
-    className,
-    onDragStart,
-    onDragEnd,
-    restrictToParent = false,
-    savePosition = false,
-    resizable,
     minWidth,
     minHeight,
     maxWidth,
     maxHeight,
-    persistSize = false,
+    zIndex,
+    savePosition = true,
+    draggable = true,
+    resizable = true,
+    maximizable = true,
+    persistSize = true,
+    restrictToParent = true,
+    onDragStart,
+    onDragEnd,
     onResizeStart,
     onResize,
     onResizeEnd,
   }) => {
+    const { maximized, toggleMaximized } = useMaximizable()
+
     const { position, isDragging, handleRef, targetRef, handlePointerDown } = useDraggable({
       id,
       initialPosition: { x: initialX, y: initialY },
-      disabled: !draggable,
+      disabled: !draggable || maximized,
       onDragStart,
       onDragEnd,
       restrictToParent,
@@ -117,13 +121,16 @@ export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
         clsx(
           styles.window,
           {
-            [styles.draggable]: draggable,
+            [styles.maximized]: maximized,
+          },
+          {
+            [styles.draggable]: draggable && !maximized,
             [styles.dragging]: isDragging,
             [styles.resizing]: isResizing,
           },
           className
         ),
-      [draggable, isDragging, isResizing, className]
+      [draggable, isDragging, isResizing, className, maximized]
     )
 
     return (
@@ -139,11 +146,32 @@ export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
         >
           <h3 className={styles.title}>{title}</h3>
         </header>
-        {toolbar && <div className={styles.toolbar}>{toolbar}</div>}
+        <div className={styles.toolbar}>
+          {maximizable && !maximized && (
+            <Icon
+              icon={IconMaximize}
+              size="md"
+              color="var(--color-dark-md)"
+              backgroundColor="transparent"
+              className={styles.button}
+              onClick={toggleMaximized}
+            />
+          )}
+          {maximizable && maximized && (
+            <Icon
+              icon={IconMaximized}
+              size="md"
+              color="var(--color-dark-md)"
+              backgroundColor="transparent"
+              className={styles.button}
+              onClick={toggleMaximized}
+            />
+          )}
+        </div>
         <div className={styles.body}>{children}</div>
         <footer className={styles.footer}>
           <div className={styles.content}>{footer}</div>
-          {resizable && (
+          {resizable && !maximized && (
             <div className={styles.resizeHandle} onPointerDown={handleResizePointerDown}>
               <Icon
                 icon={IconResize}
