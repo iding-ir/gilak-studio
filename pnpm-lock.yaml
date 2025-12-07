@@ -197,6 +197,9 @@ importers:
       '@gilak/components':
         specifier: workspace:*
         version: link:../gilak-components
+      '@gilak/utils':
+        specifier: workspace:*
+        version: link:../gilak-utils
       clsx:
         specifier: ^2.1.1
         version: 2.1.1

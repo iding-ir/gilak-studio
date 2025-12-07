@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { getItemSync, setItemSync } from '@gilak/utils'
 
 export interface Size {
   width?: number
@@ -46,14 +47,11 @@ export const useResizable = ({
 }: UseResizableOptions): UseResizableReturn => {
   const savedSize = useMemo((): Size => {
     if (persistSize && id) {
-      const raw = window.localStorage.getItem(sizeKey(id))
-      if (raw) {
-        const parsed = JSON.parse(raw)
-        if (parsed && typeof parsed === 'object') {
-          const w = typeof parsed.width === 'number' ? parsed.width : undefined
-          const h = typeof parsed.height === 'number' ? parsed.height : undefined
-          return { width: w, height: h }
-        }
+      const parsed = getItemSync<{ width?: number; height?: number }>(sizeKey(id))
+      if (parsed && typeof parsed === 'object') {
+        const w = typeof parsed.width === 'number' ? parsed.width : undefined
+        const h = typeof parsed.height === 'number' ? parsed.height : undefined
+        return { width: w, height: h }
       }
     }
     return { width: initialWidth, height: initialHeight }
@@ -168,7 +166,7 @@ export const useResizable = ({
 
         if (persistSize && id) {
           const ns = nextSize.current
-          window.localStorage.setItem(sizeKey(id), JSON.stringify({ width: ns.w, height: ns.h }))
+          setItemSync(sizeKey(id), { width: ns.w, height: ns.h })
         }
 
         document.removeEventListener('pointermove', handlePointerMove)

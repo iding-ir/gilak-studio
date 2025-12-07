@@ -18,3 +18,15 @@ export { debounce, throttle } from './performance'
 export { convertArrayToHex as arrayToHex } from './color/convert-array-to-hex'
 export { getContrastColor as getBlackAndWhiteColor } from './color/get-contrast-color'
 export { getCanvasColor as pickColorFromCanvas } from './canvas/get-canvas-color'
+
+// Storage utilities
+export {
+  getItem,
+  setItem,
+  removeItem,
+  keysWithPrefix,
+  getItemSync,
+  setItemSync,
+  removeItemSync,
+  keysWithPrefixSync,
+} from './storage'
