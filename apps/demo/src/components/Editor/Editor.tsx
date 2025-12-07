@@ -32,7 +32,7 @@ export const Editor: React.FC = () => {
               <button disabled={false} onClick={() => setIsActive(true)}>
                 <Icon
                   icon={IconColorPickerUrl}
-                  size="xl"
+                  size="lg"
                   color={selectedColor}
                   backgroundColor={getContrastColor(selectedColor)}
                 />
@@ -42,7 +42,7 @@ export const Editor: React.FC = () => {
               <button onClick={handleRandomize}>
                 <Icon
                   icon={IconCanvasUrl}
-                  size="xl"
+                  size="lg"
                   color={selectedColor}
                   backgroundColor={getContrastColor(selectedColor)}
                 />
@@ -52,7 +52,7 @@ export const Editor: React.FC = () => {
         </nav>
 
         <ColorSwatch
-          size="xl"
+          size="lg"
           value={selectedColor}
           placeholder={t('colorSwatch.placeholder')}
           icon={IconBucketUrl}
@@ -67,6 +67,7 @@ export const Editor: React.FC = () => {
           title={
             'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'
           }
+          footer="2025 Gilak Studio"
           draggable
           initialX={0}
           initialY={0}
@@ -75,6 +76,7 @@ export const Editor: React.FC = () => {
           zIndex={1100}
           restrictToParent={true}
           savePosition={true}
+          resizable={true}
         >
           <Canvas
             ref={canvasRef}
@@ -95,6 +97,7 @@ export const Editor: React.FC = () => {
           title={
             'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'
           }
+          footer="2025 Gilak Studio"
           draggable
           initialX={0}
           initialY={0}
@@ -103,6 +106,7 @@ export const Editor: React.FC = () => {
           zIndex={1100}
           restrictToParent={true}
           savePosition={true}
+          resizable={true}
         >
           dolor sit amet consectetur adipisicing elit. Quisquam, quod. Sed do eiusmod tempor
           incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud

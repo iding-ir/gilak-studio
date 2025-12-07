@@ -1,12 +1,15 @@
 import React, { useMemo } from 'react'
 import clsx from 'clsx'
 import { useDraggable } from '../../hooks'
+import { Icon } from '@gilak/components'
+import IconResize from '../../assets/icon-resize.svg?url'
 import styles from './FloatingWindow.module.scss'
 
 export interface FloatingWindowProps {
   title?: string
   children?: React.ReactNode
   toolbar?: React.ReactNode
+  footer?: React.ReactNode
   draggable?: boolean
   initialX?: number
   initialY?: number
@@ -19,6 +22,7 @@ export interface FloatingWindowProps {
   restrictToParent?: boolean
   id?: string
   savePosition?: boolean
+  resizable?: boolean
 }
 
 export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
@@ -27,6 +31,7 @@ export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
     title,
     children,
     toolbar,
+    footer,
     draggable = false,
     initialX = 0,
     initialY = 0,
@@ -38,6 +43,7 @@ export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
     onDragEnd,
     restrictToParent = false,
     savePosition = false,
+    resizable,
   }) => {
     const { position, isDragging, handleRef, targetRef, handlePointerDown } = useDraggable({
       id,
@@ -89,6 +95,19 @@ export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
         </header>
         {toolbar && <div className={styles.toolbar}>{toolbar}</div>}
         <div className={styles.body}>{children}</div>
+        <footer className={styles.footer}>
+          <div className={styles.content}>{footer}</div>
+          {resizable && (
+            <div className={styles.resizeHandle}>
+              <Icon
+                icon={IconResize}
+                size="md"
+                color="var(--color-dark-md)"
+                backgroundColor="transparent"
+              />
+            </div>
+          )}
+        </footer>
       </div>
     )
   }

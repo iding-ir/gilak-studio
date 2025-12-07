@@ -194,6 +194,9 @@ importers:
 
   packages/gilak-floating-window:
     dependencies:
+      '@gilak/components':
+        specifier: workspace:*
+        version: link:../gilak-components
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
