@@ -87,6 +87,7 @@ export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
       y: posY,
       width: ctxWidth,
       height: ctxHeight,
+      zIndex: ctxZ,
     } = useWindow(id)
 
     const targetRef = useRef<HTMLDivElement | null>(null)
@@ -131,7 +132,7 @@ export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
         })}
         style={{
           transform: `translate3d(${posX}px, ${posY}px, 0)`,
-          zIndex,
+          zIndex: ctxZ ?? zIndex,
           width: resizable ? (ctxWidth ?? initialWidth) : initialWidth,
           height: resizable ? (ctxHeight ?? initialHeight) : initialHeight,
         }}

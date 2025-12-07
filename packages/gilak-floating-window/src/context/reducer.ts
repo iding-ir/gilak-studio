@@ -6,8 +6,11 @@ export function reducer(state: State, action: Action): State {
   switch (action.type) {
     case 'REGISTER': {
       const w = action.payload as FloatingWindowMeta
+      const incomingZ = w.zIndex ?? state.topZIndex
+      const nextTop = Math.max(state.topZIndex, incomingZ)
       return {
         ...state,
+        topZIndex: nextTop,
         windows: { ...state.windows, [w.id]: { ...state.windows[w.id], ...w } },
       }
     }
@@ -41,6 +44,16 @@ export function reducer(state: State, action: Action): State {
       const { id, resizing } = action.payload as { id: string; resizing: boolean }
       const win = state.windows[id] || { id }
       return { ...state, windows: { ...state.windows, [id]: { ...win, resizing } } }
+    }
+    case 'BRING_TO_FRONT': {
+      const { id } = action.payload as { id: string }
+      const next = state.topZIndex + 1
+      const win = state.windows[id] || { id }
+      return {
+        ...state,
+        topZIndex: next,
+        windows: { ...state.windows, [id]: { ...win, zIndex: next } },
+      }
     }
     default:
       return state

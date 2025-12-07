@@ -30,3 +30,4 @@ export type Action =
   | { type: 'SET_SIZE'; payload: { id: string; width: number; height: number } }
   | { type: 'SET_DRAGGING'; payload: { id: string; dragging: boolean } }
   | { type: 'SET_RESIZING'; payload: { id: string; resizing: boolean } }
+  | { type: 'BRING_TO_FRONT'; payload: { id: string } }

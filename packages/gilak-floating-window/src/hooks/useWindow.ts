@@ -17,6 +17,7 @@ export function useWindow(id: string) {
   const y = ctx.state.windows[id]?.y
   const width = ctx.state.windows[id]?.width
   const height = ctx.state.windows[id]?.height
+  const zIndex = ctx.state.windows[id]?.zIndex
 
   const open = useCallback(() => {
     ctx.dispatch({ type: 'SET_STATUS', payload: { id, status: 'open' } })
@@ -28,6 +29,11 @@ export function useWindow(id: string) {
 
   const maximize = useCallback(() => {
     ctx.dispatch({ type: 'SET_STATUS', payload: { id, status: 'maximized' } })
+    ctx.dispatch({ type: 'BRING_TO_FRONT', payload: { id } })
+  }, [ctx, id])
+
+  const bringToFront = useCallback(() => {
+    ctx.dispatch({ type: 'BRING_TO_FRONT', payload: { id } })
   }, [ctx, id])
 
   return {
@@ -44,9 +50,11 @@ export function useWindow(id: string) {
     y,
     width,
     height,
+    zIndex,
     maximize,
     minimize,
     open,
+    bringToFront,
   }
 }
 

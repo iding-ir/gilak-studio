@@ -24,7 +24,7 @@ export function useDrag({
   onDragEnd,
 }: Params) {
   const ctx = useFloatingWindowContext()
-  const { maximized, isDragging } = useWindow(id)
+  const { maximized, isDragging, bringToFront } = useWindow(id)
 
   const dragStartPos = useRef<{ x: number; y: number }>({ x: 0, y: 0 })
   const elementStartPos = useRef<{ x: number; y: number }>({ x: initialX, y: initialY })
@@ -88,6 +88,7 @@ export function useDrag({
 
       event.preventDefault()
 
+      bringToFront?.()
       ctx.dispatch({ type: 'SET_DRAGGING', payload: { id, dragging: true } })
       onDragStart?.()
 
@@ -124,6 +125,7 @@ export function useDrag({
       initialX,
       initialY,
       targetRef,
+      bringToFront,
     ]
   )
 

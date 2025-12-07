@@ -25,7 +25,12 @@ export const Header: React.FC<HeaderProps> = ({
   minimizable,
   onDragPointerDown,
 }) => {
-  const { minimized, maximized, isDragging, maximize, minimize, open } = useWindow(id)
+  const { minimized, maximized, isDragging, maximize, minimize, open, bringToFront } = useWindow(id)
+
+  const handlePointerDown = (event: React.PointerEvent<HTMLElement>) => {
+    bringToFront()
+    if (draggable && onDragPointerDown) onDragPointerDown(event)
+  }
 
   return (
     <header
@@ -35,7 +40,7 @@ export const Header: React.FC<HeaderProps> = ({
         [styles.minimized]: minimized,
         [styles.dragging]: isDragging,
       })}
-      onPointerDown={draggable ? onDragPointerDown : undefined}
+      onPointerDown={handlePointerDown}
     >
       <h3 className={styles.title}>{title}</h3>
       <div className={styles.toolbar}>
