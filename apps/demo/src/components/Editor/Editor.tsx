@@ -15,12 +15,14 @@ import '@gilak/floating-window/dist/gilak-floating-window.css'
 export const Editor: React.FC = () => {
   const { t } = useTranslation()
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const canvasRef2 = useRef<HTMLCanvasElement>(null)
   const { selectedColor, isActive, isHovered, setIsActive, setIsHovered, setSelectedColor } =
     useColorPicker()
 
   const handleRandomize = () => {
-    if (!canvasRef.current) return
+    if (!canvasRef.current || !canvasRef2.current) return
     drawRandomEffect(canvasRef.current)
+    drawRandomEffect(canvasRef2.current)
   }
 
   return (
@@ -71,14 +73,14 @@ export const Editor: React.FC = () => {
             footer="2025 Gilak Studio"
             initialX={0}
             initialY={0}
-            initialWidth={520}
-            initialHeight={540}
+            initialWidth={600}
+            initialHeight={600}
             zIndex={1100}
           >
             <Canvas
               ref={canvasRef}
-              width="500px"
-              height="500px"
+              width="400"
+              height="400"
               onClick={() => setIsActive(false)}
               onEnter={() => setIsHovered(true)}
               onLeave={() => setIsHovered(false)}
@@ -90,38 +92,29 @@ export const Editor: React.FC = () => {
           </FloatingWindow>
 
           <FloatingWindow
-            id="editor-window-2"
+            id="floating-window-2"
             title={
               'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'
             }
             footer="2025 Gilak Studio"
-            initialX={0}
+            initialX={800}
             initialY={0}
-            initialWidth={400}
-            initialHeight={300}
+            initialWidth={600}
+            initialHeight={600}
             zIndex={1100}
           >
-            dolor sit amet consectetur adipisicing elit. Quisquam, quod. Sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-            dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-            mollit anim id est laborum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Et
-            odit rerum vel eaque eius consectetur provident placeat beatae tempora quae iusto quas
-            nulla iste iure dolores, dignissimos ipsam quia asperiores. Molestiae, quidem! Lorem
-            ipsum dolor sit amet consectetur adipisicing elit. Ex sequi nostrum quibusdam id, saepe
-            ad non aut cupiditate laborum, voluptas veritatis inventore minima temporibus corporis
-            dolor amet distinctio eaque sapiente. dolor sit amet consectetur adipisicing elit.
-            Quisquam, quod. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-            enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-            commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-            dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet
-            consectetur adipisicing elit. Et odit rerum vel eaque eius consectetur provident placeat
-            beatae tempora quae iusto quas nulla iste iure dolores, dignissimos ipsam quia
-            asperiores. Molestiae, quidem! Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Ex sequi nostrum quibusdam id, saepe ad non aut cupiditate laborum, voluptas veritatis
-            inventore minima temporibus corporis dolor amet distinctio eaque sapiente.
+            <Canvas
+              ref={canvasRef2}
+              width="400"
+              height="400"
+              onClick={() => setIsActive(false)}
+              onEnter={() => setIsHovered(true)}
+              onLeave={() => setIsHovered(false)}
+            >
+              {isActive && isHovered && (
+                <Magnifier canvasRef={canvasRef2} onSelect={setSelectedColor} />
+              )}
+            </Canvas>
           </FloatingWindow>
         </FloatingWindowProvider>
       </main>
