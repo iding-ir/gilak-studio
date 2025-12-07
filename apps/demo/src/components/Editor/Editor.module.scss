@@ -5,23 +5,26 @@
   padding: var(--spacing-md);
   width: 100%;
   height: 100%;
-  background-color: var(--color-light-xxs);
+  background-color: var(--color-dark-xxxs);
 
   .header {
     display: flex;
     flex-direction: row;
-    gap: var(--spacing-md);
-    padding: var(--spacing-md);
+    gap: var(--spacing-sm);
+    padding: var(--spacing-xs);
+    border-radius: var(--radius-md);
+    background-color: var(--color-light-xl);
 
     .nav {
       ul {
         display: flex;
         flex-direction: row;
-        gap: var(--spacing-md);
+        gap: var(--spacing-sm);
 
         li {
           button {
-            display: contents;
+            all: unset;
+            display: flex;
             padding: 0;
             margin: 0;
             border: none;

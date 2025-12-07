@@ -25,7 +25,6 @@ export const ColorSwatch: React.FC<ColorSwatchProps> = ({
 }) => {
   return (
     <div className={styles.root}>
-      {/* <label htmlFor={id} style={{ backgroundColor: value || 'transparent' }} /> */}
       <Input
         type="text"
         id="gilak-color-swatch"

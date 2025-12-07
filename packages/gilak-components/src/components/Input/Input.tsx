@@ -39,7 +39,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           [styles.fullWidth]: fullWidth,
           [styles.rounded]: rounded,
         })}
-        style={{ color, backgroundColor }}
+        style={{ color }}
       >
         {label && <span className={styles.text}>{label}</span>}
         {icon && (
