@@ -1,6 +1,22 @@
-/* Container to scope absolutely positioned floating windows */
 .container {
+  display: flex;
+  flex-direction: column;
   position: relative;
   width: 100%;
   height: 100%;
+
+  .windows {
+    flex-grow: 1;
+  }
+
+  .taskbar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-xs);
+    align-items: center;
+    border-radius: var(--radius-md);
+    background-color: var(--color-light-lg);
+  }
 }

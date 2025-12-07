@@ -1,17 +1,18 @@
-import React, { useMemo } from 'react'
+import React, { useRef } from 'react'
 import clsx from 'clsx'
-import { useDraggable, useResizable, useMaximizable } from '../../hooks'
+import { useRegister, useDrag, useResize, useWindow } from '../../hooks'
+import { Header } from '../Header'
 import { Icon } from '@gilak/components'
 import IconResize from '../../assets/icon-resize.svg?url'
-import IconMaximize from '../../assets/icon-maximize.svg?url'
-import IconMaximized from '../../assets/icon-maximized.svg?url'
 import styles from './FloatingWindow.module.scss'
+import { Status } from '../../context'
 
 export interface FloatingWindowProps {
-  id?: string
+  id: string
   children?: React.ReactNode
   className?: string
   title?: string
+  status?: Status
   footer?: React.ReactNode
   initialX?: number
   initialY?: number
@@ -22,11 +23,10 @@ export interface FloatingWindowProps {
   maxWidth?: number
   maxHeight?: number
   zIndex?: number
-  savePosition?: boolean
   draggable?: boolean
   resizable?: boolean
   maximizable?: boolean
-  persistSize?: boolean
+  minimizable?: boolean
   restrictToParent?: boolean
   onDragStart?: () => void
   onDragEnd?: () => void
@@ -40,22 +40,22 @@ export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
     id,
     children,
     className,
-    title,
+    title = '',
+    status = 'open',
     footer,
     initialX = 0,
     initialY = 0,
-    initialWidth,
-    initialHeight,
-    minWidth,
-    minHeight,
+    initialWidth = 400,
+    initialHeight = 300,
+    minWidth = 300,
+    minHeight = 200,
     maxWidth,
     maxHeight,
-    zIndex,
-    savePosition = true,
+    zIndex = 1000,
     draggable = true,
     resizable = true,
     maximizable = true,
-    persistSize = true,
+    minimizable = true,
     restrictToParent = true,
     onDragStart,
     onDragEnd,
@@ -63,116 +63,92 @@ export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
     onResize,
     onResizeEnd,
   }) => {
-    const { maximized, toggleMaximized } = useMaximizable()
-
-    const { position, isDragging, handleRef, targetRef, handlePointerDown } = useDraggable({
+    useRegister({
       id,
-      initialPosition: { x: initialX, y: initialY },
-      disabled: !draggable || maximized,
-      onDragStart,
-      onDragEnd,
-      restrictToParent,
-      initialWidth,
-      initialHeight,
-      savePosition,
+      title,
+      status,
+      draggable,
+      resizable,
+      maximizable,
+      minimizable,
+      x: initialX,
+      y: initialY,
+      width: initialWidth,
+      height: initialHeight,
+      zIndex,
+      dragging: false,
+      resizing: false,
     })
 
     const {
-      size: resizeSize,
-      isResizing,
-      handlePointerDown: handleResizePointerDown,
-    } = useResizable({
+      maximized,
+      minimized,
+      x: posX,
+      y: posY,
+      width: ctxWidth,
+      height: ctxHeight,
+    } = useWindow(id)
+
+    const targetRef = useRef<HTMLDivElement | null>(null)
+
+    const { onPointerDown: onDragPointerDown, isDragging } = useDrag({
       id,
       targetRef,
+      draggable,
+      restrictToParent,
+      initialX,
+      initialY,
+      onDragStart,
+      onDragEnd,
+    })
+
+    const { onPointerDown: onResizePointerDown, isResizing } = useResize({
+      id,
+      targetRef,
+      resizable,
       initialWidth,
       initialHeight,
-      disabled: !resizable,
       minWidth,
       minHeight,
       maxWidth,
       maxHeight,
-      persistSize,
       onResizeStart,
       onResize,
       onResizeEnd,
     })
 
-    const windowStyle = useMemo(
-      () => ({
-        transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
-        zIndex,
-        width: resizable ? (resizeSize.width ?? initialWidth) : initialWidth,
-        height: resizable ? (resizeSize.height ?? initialHeight) : initialHeight,
-      }),
-      [
-        position.x,
-        position.y,
-        zIndex,
-        initialWidth,
-        initialHeight,
-        resizable,
-        resizeSize?.width,
-        resizeSize?.height,
-      ]
-    )
-
-    const windowClassName = useMemo(
-      () =>
-        clsx(
-          styles.window,
-          {
-            [styles.maximized]: maximized,
-          },
-          {
-            [styles.draggable]: draggable && !maximized,
-            [styles.dragging]: isDragging,
-            [styles.resizing]: isResizing,
-          },
-          className
-        ),
-      [draggable, isDragging, isResizing, className, maximized]
-    )
+    if (minimized) return null
 
     return (
       <div
         ref={targetRef as React.RefObject<HTMLDivElement>}
-        className={windowClassName}
-        style={windowStyle}
+        className={clsx(styles.window, className, {
+          [styles.maximized]: maximized,
+          [styles.minimized]: minimized,
+          [styles.draggable]: draggable && !maximized,
+          [styles.dragging]: isDragging,
+          [styles.resizing]: isResizing,
+        })}
+        style={{
+          transform: `translate3d(${posX}px, ${posY}px, 0)`,
+          zIndex,
+          width: resizable ? (ctxWidth ?? initialWidth) : initialWidth,
+          height: resizable ? (ctxHeight ?? initialHeight) : initialHeight,
+        }}
       >
-        <header
-          ref={handleRef as React.RefObject<HTMLElement>}
-          className={styles.header}
-          onPointerDown={draggable ? handlePointerDown : undefined}
-        >
-          <h3 className={styles.title}>{title}</h3>
-        </header>
-        <div className={styles.toolbar}>
-          {maximizable && !maximized && (
-            <Icon
-              icon={IconMaximize}
-              size="md"
-              color="var(--color-dark-md)"
-              backgroundColor="transparent"
-              className={styles.button}
-              onClick={toggleMaximized}
-            />
-          )}
-          {maximizable && maximized && (
-            <Icon
-              icon={IconMaximized}
-              size="md"
-              color="var(--color-dark-md)"
-              backgroundColor="transparent"
-              className={styles.button}
-              onClick={toggleMaximized}
-            />
-          )}
-        </div>
+        <Header
+          id={id}
+          title={title}
+          draggable={draggable && !maximized}
+          maximizable={maximizable}
+          minimizable={true}
+          onDragPointerDown={draggable ? onDragPointerDown : undefined}
+        />
         <div className={styles.body}>{children}</div>
         <footer className={styles.footer}>
           <div className={styles.content}>{footer}</div>
           {resizable && !maximized && (
-            <div className={styles.resizeHandle} onPointerDown={handleResizePointerDown}>
+            <div className={styles.resizeHandle} onPointerDown={onResizePointerDown}>
               <Icon
                 icon={IconResize}
                 size="md"

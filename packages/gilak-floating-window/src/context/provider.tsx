@@ -1,19 +1,12 @@
-import React, { createContext, ReactNode, useReducer, useCallback } from 'react'
+import React, { createContext, ReactNode, useReducer } from 'react'
 import styles from './provider.module.scss'
-import { State, Action, FloatingWindowMeta } from './types'
+import { State, Action } from './types'
 import { reducer, initialState } from './reducer'
+import { Header } from '../components/Header'
 
 export type ContextValue = {
   state: State
   dispatch: React.Dispatch<Action>
-  register: (meta: FloatingWindowMeta) => void
-  unregister: (id: string) => void
-  open: (id: string) => void
-  close: (id: string) => void
-  toggle: (id: string) => void
-  setPosition: (id: string, x: number, y: number) => void
-  setSize: (id: string, width: number, height: number) => void
-  bringToFront: (id: string) => void
 }
 
 const FloatingWindowContext = createContext<ContextValue | undefined>(undefined)
@@ -21,47 +14,35 @@ const FloatingWindowContext = createContext<ContextValue | undefined>(undefined)
 export const FloatingWindowProvider: React.FC<{ children?: ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
-  const register = useCallback((meta: FloatingWindowMeta) => {
-    dispatch({ type: 'REGISTER', payload: meta })
-  }, [])
-
-  const unregister = useCallback((id: string) => {
-    dispatch({ type: 'UNREGISTER', payload: { id } })
-  }, [])
-
-  const open = useCallback((id: string) => dispatch({ type: 'OPEN', payload: { id } }), [])
-  const close = useCallback((id: string) => dispatch({ type: 'CLOSE', payload: { id } }), [])
-  const toggle = useCallback((id: string) => dispatch({ type: 'TOGGLE', payload: { id } }), [])
-  const setPosition = useCallback(
-    (id: string, x: number, y: number) => dispatch({ type: 'SET_POSITION', payload: { id, x, y } }),
-    []
-  )
-  const setSize = useCallback(
-    (id: string, width: number, height: number) =>
-      dispatch({ type: 'SET_SIZE', payload: { id, width, height } }),
-    []
-  )
-  const bringToFront = useCallback(
-    (id: string) => dispatch({ type: 'BRING_TO_FRONT', payload: { id } }),
-    []
-  )
-
   const value: ContextValue = {
     state,
     dispatch,
-    register,
-    unregister,
-    open,
-    close,
-    toggle,
-    setPosition,
-    setSize,
-    bringToFront,
   }
+
+  const minimizedWindows = Object.values(state.windows).filter((w) => w.status === 'minimized')
 
   return (
     <FloatingWindowContext.Provider value={value}>
-      <div className={styles.container}>{children}</div>
+      <div className={styles.container}>
+        <div className={styles.windows}>{children}</div>
+        {minimizedWindows.length > 0 && (
+          <div className={styles.taskbar}>
+            {Object.values(state.windows)
+              .filter((w) => w.status === 'minimized')
+              .map((w) => (
+                <Header
+                  key={w.id}
+                  id={w.id}
+                  title={w.title}
+                  draggable={false}
+                  maximizable={w.maximizable}
+                  minimizable={w.minimizable}
+                  onDragPointerDown={() => null}
+                />
+              ))}
+          </div>
+        )}
+      </div>
     </FloatingWindowContext.Provider>
   )
 }

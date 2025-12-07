@@ -3,8 +3,7 @@ export { FloatingWindow } from './components'
 export type { FloatingWindowProps } from './components'
 
 // Hooks
-export { useDraggable } from './hooks'
-export type { Position, UseDraggableOptions, UseDraggableReturn } from './hooks'
+export { useRegister, useDrag, useResize, useWindow } from './hooks'
 
 // Context
 export { FloatingWindowProvider, useFloatingWindowContext } from './context'

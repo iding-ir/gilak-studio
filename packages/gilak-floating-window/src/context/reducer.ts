@@ -1,4 +1,4 @@
-import { State, Action, FloatingWindowMeta } from './types'
+import { State, Action, FloatingWindowMeta, Status } from './types'
 
 export const initialState: State = { windows: {}, topZIndex: 1000 }
 
@@ -17,20 +17,10 @@ export function reducer(state: State, action: Action): State {
       delete rest[id]
       return { ...state, windows: rest }
     }
-    case 'OPEN': {
-      const id = action.payload.id
+    case 'SET_STATUS': {
+      const { id, status } = action.payload as { id: string; status: Status }
       const win = state.windows[id] || { id }
-      return { ...state, windows: { ...state.windows, [id]: { ...win, open: true } } }
-    }
-    case 'CLOSE': {
-      const id = action.payload.id
-      const win = state.windows[id] || { id }
-      return { ...state, windows: { ...state.windows, [id]: { ...win, open: false } } }
-    }
-    case 'TOGGLE': {
-      const id = action.payload.id
-      const win = state.windows[id] || { id, open: false }
-      return { ...state, windows: { ...state.windows, [id]: { ...win, open: !win.open } } }
+      return { ...state, windows: { ...state.windows, [id]: { ...win, status } } }
     }
     case 'SET_POSITION': {
       const { id, x, y } = action.payload as { id: string; x: number; y: number }
@@ -42,14 +32,15 @@ export function reducer(state: State, action: Action): State {
       const win = state.windows[id] || { id }
       return { ...state, windows: { ...state.windows, [id]: { ...win, width, height } } }
     }
-    case 'BRING_TO_FRONT': {
-      const { id } = action.payload as { id: string }
-      const nextZ = state.topZIndex + 1
+    case 'SET_DRAGGING': {
+      const { id, dragging } = action.payload as { id: string; dragging: boolean }
       const win = state.windows[id] || { id }
-      return {
-        topZIndex: nextZ,
-        windows: { ...state.windows, [id]: { ...win, zIndex: nextZ } },
-      }
+      return { ...state, windows: { ...state.windows, [id]: { ...win, dragging } } }
+    }
+    case 'SET_RESIZING': {
+      const { id, resizing } = action.payload as { id: string; resizing: boolean }
+      const win = state.windows[id] || { id }
+      return { ...state, windows: { ...state.windows, [id]: { ...win, resizing } } }
     }
     default:
       return state

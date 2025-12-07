@@ -69,15 +69,11 @@ export const Editor: React.FC = () => {
               'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'
             }
             footer="2025 Gilak Studio"
-            draggable
             initialX={0}
             initialY={0}
             initialWidth={520}
             initialHeight={540}
             zIndex={1100}
-            restrictToParent={true}
-            savePosition={true}
-            resizable={true}
           >
             <Canvas
               ref={canvasRef}
@@ -99,15 +95,11 @@ export const Editor: React.FC = () => {
               'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'
             }
             footer="2025 Gilak Studio"
-            draggable
             initialX={0}
             initialY={0}
             initialWidth={400}
             initialHeight={300}
             zIndex={1100}
-            restrictToParent={true}
-            savePosition={true}
-            resizable={true}
           >
             dolor sit amet consectetur adipisicing elit. Quisquam, quod. Sed do eiusmod tempor
             incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud

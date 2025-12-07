@@ -1,11 +1,20 @@
+export type Status = 'open' | 'minimized' | 'maximized'
+
 export type FloatingWindowMeta = {
   id: string
-  open?: boolean
-  x?: number
-  y?: number
-  width?: number
-  height?: number
-  zIndex?: number
+  title: string
+  status: Status
+  draggable: boolean
+  resizable: boolean
+  maximizable: boolean
+  minimizable: boolean
+  dragging: boolean
+  resizing: boolean
+  x: number
+  y: number
+  width: number
+  height: number
+  zIndex: number
 }
 
 export type State = {
@@ -16,9 +25,8 @@ export type State = {
 export type Action =
   | { type: 'REGISTER'; payload: FloatingWindowMeta }
   | { type: 'UNREGISTER'; payload: { id: string } }
-  | { type: 'OPEN'; payload: { id: string } }
-  | { type: 'CLOSE'; payload: { id: string } }
-  | { type: 'TOGGLE'; payload: { id: string } }
+  | { type: 'SET_STATUS'; payload: { id: string; status: Status } }
   | { type: 'SET_POSITION'; payload: { id: string; x: number; y: number } }
   | { type: 'SET_SIZE'; payload: { id: string; width: number; height: number } }
-  | { type: 'BRING_TO_FRONT'; payload: { id: string } }
+  | { type: 'SET_DRAGGING'; payload: { id: string; dragging: boolean } }
+  | { type: 'SET_RESIZING'; payload: { id: string; resizing: boolean } }
