@@ -1,23 +1,14 @@
 import { useCallback } from 'react'
-import { useFloatingWindowContext } from '../context'
+import { FloatingWindowMeta, useFloatingWindowContext } from '../context'
 
-export function useWindow(id: string) {
+export function useWindow(id: string): FloatingWindowMeta & {
+  maximize: () => void
+  minimize: () => void
+  open: () => void
+  bringToFront: () => void
+} {
   const ctx = useFloatingWindowContext()
-
-  const maximized = ctx.state.windows[id]?.status === 'maximized'
-  const minimized = ctx.state.windows[id]?.status === 'minimized'
-  const opened = ctx.state.windows[id]?.status === 'open'
-  const draggable = !!ctx.state.windows[id]?.draggable
-  const resizable = !!ctx.state.windows[id]?.resizable
-  const maximizable = !!ctx.state.windows[id]?.maximizable
-  const minimizable = !!ctx.state.windows[id]?.minimizable
-  const isDragging = !!ctx.state.windows[id]?.dragging
-  const isResizing = !!ctx.state.windows[id]?.resizing
-  const x = ctx.state.windows[id]?.x
-  const y = ctx.state.windows[id]?.y
-  const width = ctx.state.windows[id]?.width
-  const height = ctx.state.windows[id]?.height
-  const zIndex = ctx.state.windows[id]?.zIndex
+  const win = ctx.state.windows[id]
 
   const open = useCallback(() => {
     ctx.dispatch({ type: 'SET_STATUS', payload: { id, status: 'open' } })
@@ -36,26 +27,7 @@ export function useWindow(id: string) {
     ctx.dispatch({ type: 'BRING_TO_FRONT', payload: { id } })
   }, [ctx, id])
 
-  return {
-    maximized,
-    minimized,
-    opened,
-    draggable,
-    resizable,
-    maximizable,
-    minimizable,
-    isDragging,
-    isResizing,
-    x,
-    y,
-    width,
-    height,
-    zIndex,
-    maximize,
-    minimize,
-    open,
-    bringToFront,
-  }
+  return { ...win, maximize, minimize, open, bringToFront }
 }
 
 export default useWindow

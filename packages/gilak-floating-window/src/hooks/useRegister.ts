@@ -1,48 +1,19 @@
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { useFloatingWindowContext } from '../context'
 import { FloatingWindowMeta } from '../context/types'
 
-export function useRegister({
-  id,
-  title,
-  status,
-  draggable,
-  resizable,
-  maximizable,
-  minimizable,
-  x,
-  y,
-  width,
-  height,
-  zIndex,
-}: FloatingWindowMeta) {
+export function useRegister(meta: FloatingWindowMeta) {
   const ctx = useFloatingWindowContext()
-  // keep a stable payload ref so effect deps stay minimal
-  const payloadRef = useRef({
-    id,
-    title,
-    status,
-    draggable,
-    resizable,
-    maximizable,
-    minimizable,
-    dragging: false,
-    resizing: false,
-    x,
-    y,
-    width,
-    height,
-    zIndex,
-  })
 
   useEffect(() => {
-    ctx.dispatch({ type: 'REGISTER', payload: payloadRef.current })
+    ctx.dispatch({ type: 'REGISTER', payload: meta })
+
     return () => {
-      ctx.dispatch({ type: 'UNREGISTER', payload: { id } })
+      ctx.dispatch({ type: 'UNREGISTER', payload: { id: meta.id } })
     }
     // intentionally only depend on id
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id])
+  }, [meta.id])
 }
 
 export default useRegister

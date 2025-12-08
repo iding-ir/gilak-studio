@@ -20,14 +20,14 @@
     "url": "https://github.com/iding-ir/gilak-studio/issues"
   },
   "type": "module",
-  "main": "./dist/gilak-utils.umd.cjs",
-  "module": "./dist/gilak-utils.js",
+  "main": "./dist/gilak-utils.umd.js",
+  "module": "./dist/gilak-utils.es.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/gilak-utils.js",
-      "require": "./dist/gilak-utils.umd.cjs"
+      "import": "./dist/gilak-utils.es.js",
+      "require": "./dist/gilak-utils.umd.js"
     }
   },
   "files": [

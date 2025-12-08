@@ -25,7 +25,7 @@ export const Header: React.FC<HeaderProps> = ({
   minimizable,
   onDragPointerDown,
 }) => {
-  const { minimized, maximized, isDragging, maximize, minimize, open, bringToFront } = useWindow(id)
+  const { status, dragging, maximize, minimize, open, bringToFront } = useWindow(id)
 
   const handlePointerDown = (event: React.PointerEvent<HTMLElement>) => {
     bringToFront()
@@ -36,15 +36,15 @@ export const Header: React.FC<HeaderProps> = ({
     <header
       className={clsx(styles.header, {
         [styles.draggable]: draggable,
-        [styles.maximized]: maximized,
-        [styles.minimized]: minimized,
-        [styles.dragging]: isDragging,
+        [styles.maximized]: status === 'maximized',
+        [styles.minimized]: status === 'minimized',
+        [styles.dragging]: dragging,
       })}
       onPointerDown={handlePointerDown}
     >
       <h3 className={styles.title}>{title}</h3>
       <div className={styles.toolbar}>
-        {maximizable && !maximized && (
+        {maximizable && status !== 'maximized' && (
           <Icon
             icon={IconMaximize}
             size="md"
@@ -54,7 +54,7 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={maximize}
           />
         )}
-        {maximizable && maximized && (
+        {maximizable && status === 'maximized' && (
           <Icon
             icon={IconMaximized}
             size="md"
@@ -64,24 +64,24 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={open}
           />
         )}
-        {minimizable && !minimized && (
+        {minimizable && status !== 'minimized' && (
           <Icon
             icon={IconMinimize}
             size="md"
             color="var(--color-dark-md)"
             backgroundColor="transparent"
             className={styles.button}
-            onClick={() => minimize()}
+            onClick={minimize}
           />
         )}
-        {minimizable && minimized && (
+        {minimizable && status === 'minimized' && (
           <Icon
             icon={IconMinimized}
             size="md"
             color="var(--color-dark-md)"
             backgroundColor="transparent"
             className={styles.button}
-            onClick={() => open()}
+            onClick={open}
           />
         )}
       </div>

@@ -1,17 +1,20 @@
+import { setItemSync } from '@gilak/utils'
+import { Position, Size } from '../types'
 import { State, Action, FloatingWindowMeta, Status } from './types'
+import { storageKey } from '../methods/storage-key'
 
 export const initialState: State = { windows: {}, topZIndex: 1000 }
 
 export function reducer(state: State, action: Action): State {
   switch (action.type) {
     case 'REGISTER': {
-      const w = action.payload as FloatingWindowMeta
-      const incomingZ = w.zIndex ?? state.topZIndex
+      const win = action.payload as FloatingWindowMeta
+      const incomingZ = win.z ?? state.topZIndex
       const nextTop = Math.max(state.topZIndex, incomingZ)
       return {
         ...state,
         topZIndex: nextTop,
-        windows: { ...state.windows, [w.id]: { ...state.windows[w.id], ...w } },
+        windows: { ...state.windows, [win.id]: { ...state.windows[win.id], ...win } },
       }
     }
     case 'UNREGISTER': {
@@ -23,36 +26,46 @@ export function reducer(state: State, action: Action): State {
     case 'SET_STATUS': {
       const { id, status } = action.payload as { id: string; status: Status }
       const win = state.windows[id] || { id }
+      setItemSync(storageKey(id), { ...win, status })
+
       return { ...state, windows: { ...state.windows, [id]: { ...win, status } } }
     }
     case 'SET_POSITION': {
-      const { id, x, y } = action.payload as { id: string; x: number; y: number }
+      const { id, position } = action.payload as { id: string; position: Position }
       const win = state.windows[id] || { id }
-      return { ...state, windows: { ...state.windows, [id]: { ...win, x, y } } }
+      setItemSync(storageKey(id), { ...win, position })
+
+      return { ...state, windows: { ...state.windows, [id]: { ...win, position } } }
     }
     case 'SET_SIZE': {
-      const { id, width, height } = action.payload as { id: string; width: number; height: number }
+      const { id, size } = action.payload as { id: string; size: Size }
       const win = state.windows[id] || { id }
-      return { ...state, windows: { ...state.windows, [id]: { ...win, width, height } } }
+      setItemSync(storageKey(id), { ...win, size })
+
+      return { ...state, windows: { ...state.windows, [id]: { ...win, size } } }
     }
     case 'SET_DRAGGING': {
       const { id, dragging } = action.payload as { id: string; dragging: boolean }
       const win = state.windows[id] || { id }
+
       return { ...state, windows: { ...state.windows, [id]: { ...win, dragging } } }
     }
     case 'SET_RESIZING': {
       const { id, resizing } = action.payload as { id: string; resizing: boolean }
       const win = state.windows[id] || { id }
+
       return { ...state, windows: { ...state.windows, [id]: { ...win, resizing } } }
     }
     case 'BRING_TO_FRONT': {
       const { id } = action.payload as { id: string }
       const next = state.topZIndex + 1
       const win = state.windows[id] || { id }
+      setItemSync(storageKey(id), { ...win, z: next })
+
       return {
         ...state,
         topZIndex: next,
-        windows: { ...state.windows, [id]: { ...win, zIndex: next } },
+        windows: { ...state.windows, [id]: { ...win, z: next } },
       }
     }
     default:

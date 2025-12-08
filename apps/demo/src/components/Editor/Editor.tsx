@@ -66,14 +66,10 @@ export const Editor: React.FC = () => {
         <FloatingWindowProvider>
           <FloatingWindow
             id="floating-window-1"
-            title={
-              'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'
-            }
+            title="1"
             footer="2025 Gilak Studio"
-            initialX={0}
-            initialY={0}
-            initialWidth={600}
-            initialHeight={600}
+            initialPosition={{ x: 0, y: 0 }}
+            initialSize={{ w: 600, h: 600 }}
             zIndex={1100}
           >
             <Canvas
@@ -92,14 +88,10 @@ export const Editor: React.FC = () => {
 
           <FloatingWindow
             id="floating-window-2"
-            title={
-              'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'
-            }
+            title="2"
             footer="2025 Gilak Studio"
-            initialX={800}
-            initialY={0}
-            initialWidth={600}
-            initialHeight={600}
+            initialPosition={{ x: 800, y: 0 }}
+            initialSize={{ w: 600, h: 600 }}
             zIndex={1100}
           >
             <Canvas

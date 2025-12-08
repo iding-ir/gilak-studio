@@ -1,4 +1,5 @@
 import { RefObject, useCallback, useRef } from 'react'
+import { Position } from '../types'
 import { useFloatingWindowContext } from '../context'
 import useWindow from './useWindow'
 
@@ -7,10 +8,9 @@ type Params = {
   targetRef: RefObject<HTMLElement | null>
   draggable?: boolean
   restrictToParent?: boolean
-  initialX?: number
-  initialY?: number
-  onDragStart?: () => void
-  onDragEnd?: () => void
+  initialPosition?: Position
+  onDragStart?: (pos?: Position) => void
+  onDragEnd?: (pos?: Position) => void
 }
 
 export function useDrag({
@@ -18,23 +18,22 @@ export function useDrag({
   targetRef,
   draggable = true,
   restrictToParent = true,
-  initialX = 0,
-  initialY = 0,
+  initialPosition = { x: 0, y: 0 },
   onDragStart,
   onDragEnd,
 }: Params) {
   const ctx = useFloatingWindowContext()
-  const { maximized, isDragging, bringToFront } = useWindow(id)
+  const { status, dragging, bringToFront } = useWindow(id)
 
-  const dragStartPos = useRef<{ x: number; y: number }>({ x: 0, y: 0 })
-  const elementStartPos = useRef<{ x: number; y: number }>({ x: initialX, y: initialY })
-  const nextPosition = useRef<{ x: number; y: number }>({ x: initialX, y: initialY })
+  const dragStartPos = useRef<Position>({ x: 0, y: 0 })
+  const elementStartPos = useRef<Position>(initialPosition)
+  const nextPosition = useRef<Position>(initialPosition)
+  const lastDispatchedPosition = useRef<Position>(initialPosition)
   const frameRequested = useRef(false)
   const parentRectRef = useRef<DOMRect | null>(null)
-  const lastDispatchedPosition = useRef<{ x: number; y: number }>({ x: initialX, y: initialY })
 
   const clampPosition = useCallback(
-    (pos: { x: number; y: number }) => {
+    (pos: Position) => {
       if (!restrictToParent || !targetRef.current || !parentRectRef.current) return pos
       const parentRect = parentRectRef.current
       const el = targetRef.current
@@ -49,7 +48,7 @@ export function useDrag({
     [restrictToParent, targetRef]
   )
 
-  const dragDisabled = !draggable || maximized
+  const dragDisabled = !draggable || status === 'maximized'
 
   const handlePointerMove = useCallback(
     (event: PointerEvent) => {
@@ -71,8 +70,8 @@ export function useDrag({
           const np = nextPosition.current
           const last = lastDispatchedPosition.current
           if (np.x !== last.x || np.y !== last.y) {
-            ctx.dispatch({ type: 'SET_POSITION', payload: { id, x: np.x, y: np.y } })
-            lastDispatchedPosition.current = { x: np.x, y: np.y }
+            ctx.dispatch({ type: 'SET_POSITION', payload: { id, position: np } })
+            lastDispatchedPosition.current = np
           }
           frameRequested.current = false
         })
@@ -84,18 +83,18 @@ export function useDrag({
   const handlePointerDown = useCallback(
     (event: React.PointerEvent<HTMLElement>) => {
       if (!draggable || event.button !== 0) return
-      if (maximized) return
+      if (status === 'maximized') return
 
       event.preventDefault()
 
       bringToFront?.()
       ctx.dispatch({ type: 'SET_DRAGGING', payload: { id, dragging: true } })
-      onDragStart?.()
+      onDragStart?.(elementStartPos.current)
 
       dragStartPos.current = { x: event.clientX, y: event.clientY }
 
-      const currentX = ctx.state.windows[id]?.x ?? initialX
-      const currentY = ctx.state.windows[id]?.y ?? initialY
+      const currentX = ctx.state.windows[id]?.position.x ?? initialPosition.x
+      const currentY = ctx.state.windows[id]?.position.y ?? initialPosition.y
       elementStartPos.current = { x: currentX, y: currentY }
       lastDispatchedPosition.current = { x: currentX, y: currentY }
 
@@ -105,7 +104,7 @@ export function useDrag({
 
       const handlePointerUp = () => {
         ctx.dispatch({ type: 'SET_DRAGGING', payload: { id, dragging: false } })
-        onDragEnd?.()
+        onDragEnd?.(lastDispatchedPosition.current)
         document.removeEventListener('pointermove', handlePointerMove)
         document.removeEventListener('pointerup', handlePointerUp)
       }
@@ -119,17 +118,17 @@ export function useDrag({
       onDragStart,
       onDragEnd,
       restrictToParent,
-      maximized,
+      status,
       ctx,
       id,
-      initialX,
-      initialY,
+      initialPosition.x,
+      initialPosition.y,
       targetRef,
       bringToFront,
     ]
   )
 
-  return { onPointerDown: handlePointerDown, isDragging }
+  return { onPointerDown: handlePointerDown, dragging }
 }
 
 export default useDrag

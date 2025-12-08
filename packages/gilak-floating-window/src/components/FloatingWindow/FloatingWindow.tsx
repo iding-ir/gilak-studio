@@ -1,38 +1,36 @@
-import React, { useRef } from 'react'
+import React, { RefObject, useRef, useState } from 'react'
 import clsx from 'clsx'
 import { useRegister, useDrag, useResize, useWindow } from '../../hooks'
 import { Header } from '../Header'
 import { Icon } from '@gilak/components'
 import IconResize from '../../assets/icon-resize.svg?url'
 import styles from './FloatingWindow.module.scss'
-import { Status } from '../../context'
-
+import { FloatingWindowMeta, Status } from '../../context'
+import { getItemSync } from '@gilak/utils'
+import { storageKey } from '../../methods/storage-key'
+import { Position, Size } from '../../types'
 export interface FloatingWindowProps {
   id: string
   children?: React.ReactNode
   className?: string
   title?: string
-  status?: Status
+  initialStatus?: Status
   footer?: React.ReactNode
-  initialX?: number
-  initialY?: number
-  initialWidth?: number
-  initialHeight?: number
-  minWidth?: number
-  minHeight?: number
-  maxWidth?: number
-  maxHeight?: number
+  initialPosition?: Position
+  initialSize?: Size
+  minSize?: Size
+  maxSize?: Size
   zIndex?: number
   draggable?: boolean
   resizable?: boolean
   maximizable?: boolean
   minimizable?: boolean
   restrictToParent?: boolean
-  onDragStart?: () => void
-  onDragEnd?: () => void
-  onResizeStart?: () => void
-  onResize?: (w?: number, h?: number) => void
-  onResizeEnd?: () => void
+  onDragStart?: (position?: Position) => void
+  onDragEnd?: (position?: Position) => void
+  onResizeStart?: (size?: Size) => void
+  onResize?: (size?: Size) => void
+  onResizeEnd?: (size?: Size) => void
 }
 
 export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
@@ -41,16 +39,12 @@ export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
     children,
     className,
     title = '',
-    status = 'open',
+    initialStatus = 'open',
     footer,
-    initialX = 0,
-    initialY = 0,
-    initialWidth = 400,
-    initialHeight = 300,
-    minWidth = 300,
-    minHeight = 200,
-    maxWidth,
-    maxHeight,
+    initialPosition = { x: 0, y: 0 },
+    initialSize = { w: 400, h: 300 },
+    minSize = { w: 300, h: 200 },
+    maxSize,
     zIndex = 1000,
     draggable = true,
     resizable = true,
@@ -63,84 +57,73 @@ export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
     onResize,
     onResizeEnd,
   }) => {
+    const targetRef = useRef<HTMLDivElement | null>(null)
+    const [savedState] = useState<FloatingWindowMeta | null>(() => {
+      return getItemSync<FloatingWindowMeta>(storageKey(id)) ?? null
+    })
+
     useRegister({
       id,
       title,
-      status,
+      status: savedState?.status ?? initialStatus,
       draggable,
       resizable,
       maximizable,
       minimizable,
-      x: initialX,
-      y: initialY,
-      width: initialWidth,
-      height: initialHeight,
-      zIndex,
+      position: savedState?.position ?? initialPosition,
+      size: savedState?.size ?? initialSize,
+      z: savedState?.z ?? zIndex,
       dragging: false,
       resizing: false,
     })
 
-    const {
-      maximized,
-      minimized,
-      x: posX,
-      y: posY,
-      width: ctxWidth,
-      height: ctxHeight,
-      zIndex: ctxZ,
-    } = useWindow(id)
+    const win = useWindow(id)
+    const { status, position, size, z: ctxZ, resizing } = win
 
-    const targetRef = useRef<HTMLDivElement | null>(null)
-
-    const { onPointerDown: onDragPointerDown, isDragging } = useDrag({
+    const { onPointerDown: onDragPointerDown, dragging } = useDrag({
       id,
       targetRef,
       draggable,
       restrictToParent,
-      initialX,
-      initialY,
+      initialPosition,
       onDragStart,
       onDragEnd,
     })
 
-    const { onPointerDown: onResizePointerDown, isResizing } = useResize({
+    const { onPointerDown: onResizePointerDown } = useResize({
       id,
       targetRef,
       resizable,
-      initialWidth,
-      initialHeight,
-      minWidth,
-      minHeight,
-      maxWidth,
-      maxHeight,
+      initialSize,
+      minSize,
+      maxSize,
       onResizeStart,
       onResize,
       onResizeEnd,
     })
 
-    if (minimized) return null
+    if (status === 'minimized') return null
 
     return (
       <div
-        ref={targetRef as React.RefObject<HTMLDivElement>}
+        ref={targetRef as RefObject<HTMLDivElement>}
         className={clsx(styles.window, className, {
-          [styles.maximized]: maximized,
-          [styles.minimized]: minimized,
-          [styles.draggable]: draggable && !maximized,
-          [styles.dragging]: isDragging,
-          [styles.resizing]: isResizing,
+          [styles.maximized]: status === 'maximized',
+          [styles.draggable]: draggable && status !== 'maximized',
+          [styles.dragging]: dragging,
+          [styles.resizing]: resizing,
         })}
         style={{
-          transform: `translate3d(${posX}px, ${posY}px, 0)`,
+          transform: `translate3d(${position?.x}px, ${position?.y}px, 0)`,
           zIndex: ctxZ ?? zIndex,
-          width: resizable ? (ctxWidth ?? initialWidth) : initialWidth,
-          height: resizable ? (ctxHeight ?? initialHeight) : initialHeight,
+          width: resizable ? (size?.w ?? initialSize.w) : initialSize.w,
+          height: resizable ? (size?.h ?? initialSize.h) : initialSize.h,
         }}
       >
         <Header
           id={id}
           title={title}
-          draggable={draggable && !maximized}
+          draggable={draggable && status !== 'maximized'}
           maximizable={maximizable}
           minimizable={true}
           onDragPointerDown={draggable ? onDragPointerDown : undefined}
@@ -148,7 +131,7 @@ export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
         <div className={styles.body}>{children}</div>
         <footer className={styles.footer}>
           <div className={styles.content}>{footer}</div>
-          {resizable && !maximized && (
+          {resizable && status !== 'maximized' && (
             <div className={styles.resizeHandle} onPointerDown={onResizePointerDown}>
               <Icon
                 icon={IconResize}
