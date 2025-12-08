@@ -1,16 +1,18 @@
 import { Canvas, drawRandomEffect, PaintCanvas } from '@gilak/canvas'
 import { Magnifier, useColorPicker } from '@gilak/color-picker'
 import { ColorSwatch } from '@gilak/color-swatch'
-import { Icon } from '@gilak/components'
+import { Dropdown, Icon } from '@gilak/components'
 import { FloatingWindow, FloatingWindowProvider } from '@gilak/floating-window'
 import styles from './Editor.module.scss'
 import IconColorPickerUrl from '../../assets/icon-eyedropper.svg?url'
 import IconCanvasUrl from '../../assets/icon-dice.svg?url'
 import IconBucketUrl from '../../assets/icon-bucket.svg?url'
 import IconBrush from '../../assets/icon-brush.svg?url'
+import IconBrushTypes from '../../assets/brush-circle.svg?url'
 import { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { getContrastColor } from '@gilak/utils'
+import { BrushTypes } from '../BrushTypes'
 
 export const Editor: React.FC = () => {
   const { t } = useTranslation()
@@ -28,7 +30,7 @@ export const Editor: React.FC = () => {
     <div className={styles.root}>
       <header className={styles.header}>
         <nav className={styles.nav}>
-          <ul>
+          <ul className={styles.ul}>
             <li>
               <button onClick={() => setIsActive(true)}>
                 <Icon
@@ -48,6 +50,20 @@ export const Editor: React.FC = () => {
                   backgroundColor="var(--color-light-xxs)"
                 />
               </button>
+            </li>
+            <li>
+              <Dropdown
+                icon={
+                  <Icon
+                    icon={IconBrushTypes}
+                    size="lg"
+                    color="var(--color-dark-xxxl)"
+                    backgroundColor="var(--color-light-xxs)"
+                  />
+                }
+              >
+                <BrushTypes />
+              </Dropdown>
             </li>
             <li>
               <button onClick={handleRandomize}>

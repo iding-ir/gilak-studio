@@ -1,0 +1,56 @@
+@use "@gilak/stylist/scss" as *;
+
+.list {
+  display: grid;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-light-xxl);
+
+  &.vertical {
+    grid-auto-flow: row;
+    grid-auto-rows: max-content;
+
+    &.two {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    &.three {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    &.four {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  &.horizontal {
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+
+    &.two {
+      grid-template-rows: repeat(2, 1fr);
+    }
+
+    &.three {
+      grid-template-rows: repeat(3, 1fr);
+    }
+
+    &.four {
+      grid-template-rows: repeat(4, 1fr);
+    }
+  }
+
+  .item {
+    display: flex;
+    color: var(--color-dark-lg);
+    padding: var(--spacing-xs);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-light-xxs);
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--color-light-sm);
+    }
+  }
+}

@@ -1,0 +1,13 @@
+.root {
+  position: relative;
+
+  .trigger {
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  .dropdownMenu {
+    position: absolute;
+    z-index: 10000;
+  }
+}

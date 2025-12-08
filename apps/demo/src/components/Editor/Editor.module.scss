@@ -16,7 +16,7 @@
     background-color: var(--color-light-xl);
 
     .nav {
-      ul {
+      & > ul {
         display: flex;
         flex-direction: row;
         gap: var(--spacing-sm);
