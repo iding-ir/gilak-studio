@@ -40,9 +40,6 @@
     "prepublishOnly": "pnpm build"
   },
   "devDependencies": {
-    "@gilak-studio/build-config": "workspace:*",
-    "typescript": "~5.9.3",
-    "vite": "^7.2.4",
-    "vite-plugin-dts": "^4.3.0"
+    "@gilak-studio/build-config": "workspace:*"
   }
 }

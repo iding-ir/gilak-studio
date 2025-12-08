@@ -10,5 +10,12 @@
   },
   "files": [
     "vite.config.base.ts"
-  ]
+  ],
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.1.2",
+    "vite": "^7.2.7",
+    "vite-plugin-dts": "^4.5.4",
+    "vite-plugin-lib-inject-css": "^2.2.2",
+    "vite-plugin-svgr": "^4.5.0"
+  }
 }

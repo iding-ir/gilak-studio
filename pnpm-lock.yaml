@@ -25,7 +25,7 @@ importers:
         version: 8.6.14(@storybook/test@8.6.14(storybook@8.6.14(prettier@3.7.4)))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(storybook@8.6.14(prettier@3.7.4))(typescript@5.9.3)
       '@storybook/react-vite':
         specifier: ^8.4.7
-        version: 8.6.14(@storybook/test@8.6.14(storybook@8.6.14(prettier@3.7.4)))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(rollup@4.53.3)(storybook@8.6.14(prettier@3.7.4))(typescript@5.9.3)(vite@7.2.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2))
+        version: 8.6.14(@storybook/test@8.6.14(storybook@8.6.14(prettier@3.7.4)))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(rollup@4.53.3)(storybook@8.6.14(prettier@3.7.4))(typescript@5.9.3)(vite@7.2.7(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2))
       '@types/node':
         specifier: ^24.10.1
         version: 24.10.1
@@ -37,7 +37,7 @@ importers:
         version: 19.2.3(@types/react@19.2.7)
       '@vitejs/plugin-react':
         specifier: ^5.1.1
-        version: 5.1.1(vite@7.2.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2))
+        version: 5.1.2(vite@7.2.7(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2))
       eslint:
         specifier: ^9.39.1
         version: 9.39.1
@@ -76,13 +76,13 @@ importers:
         version: 8.48.1(eslint@9.39.1)(typescript@5.9.3)
       vite:
         specifier: ^7.2.4
-        version: 7.2.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2)
+        version: 7.2.7(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2)
       vite-plugin-dts:
         specifier: ^4.3.0
-        version: 4.5.4(@types/node@24.10.1)(rollup@4.53.3)(typescript@5.9.3)(vite@7.2.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2))
+        version: 4.5.4(@types/node@24.10.1)(rollup@4.53.3)(typescript@5.9.3)(vite@7.2.7(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2))
       vite-plugin-svgr:
         specifier: ^4.5.0
-        version: 4.5.0(rollup@4.53.3)(typescript@5.9.3)(vite@7.2.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2))
+        version: 4.5.0(rollup@4.53.3)(typescript@5.9.3)(vite@7.2.7(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2))
 
   apps/demo:
     dependencies:
@@ -117,7 +117,23 @@ importers:
         specifier: ^16.3.5
         version: 16.3.5(i18next@25.7.1(typescript@5.9.3))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(typescript@5.9.3)
 
-  packages/build-config: {}
+  packages/build-config:
+    devDependencies:
+      '@vitejs/plugin-react':
+        specifier: ^5.1.2
+        version: 5.1.2(vite@7.2.7(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2))
+      vite:
+        specifier: ^7.2.7
+        version: 7.2.7(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2)
+      vite-plugin-dts:
+        specifier: ^4.5.4
+        version: 4.5.4(@types/node@24.10.1)(rollup@4.53.3)(typescript@5.9.3)(vite@7.2.7(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2))
+      vite-plugin-lib-inject-css:
+        specifier: ^2.2.2
+        version: 2.2.2(vite@7.2.7(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2))
+      vite-plugin-svgr:
+        specifier: ^4.5.0
+        version: 4.5.0(rollup@4.53.3)(typescript@5.9.3)(vite@7.2.7(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2))
 
   packages/gilak-canvas:
     dependencies:
@@ -203,78 +219,91 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      react:
+        specifier: ^18.0.0 || ^19.0.0
+        version: 19.2.1
+      react-dom:
+        specifier: ^18.0.0 || ^19.0.0
+        version: 19.2.1(react@19.2.1)
     devDependencies:
       '@gilak/stylist':
         specifier: workspace:*
         version: link:../gilak-stylist
-      '@types/react':
-        specifier: ^19.0.6
-        version: 19.2.7
-      '@types/react-dom':
-        specifier: ^19.0.2
-        version: 19.2.3(@types/react@19.2.7)
-      eslint:
-        specifier: ^9.17.0
-        version: 9.39.1
-      react:
-        specifier: ^19.0.0
-        version: 19.2.1
-      react-dom:
-        specifier: ^19.0.0
-        version: 19.2.1(react@19.2.1)
-      sass:
-        specifier: ^1.83.0
-        version: 1.93.3
-      typescript:
-        specifier: ~5.7.2
-        version: 5.7.3
-      vite:
-        specifier: ^6.0.5
-        version: 6.4.1(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2)
-      vite-plugin-dts:
-        specifier: ^4.3.0
-        version: 4.5.4(@types/node@24.10.1)(rollup@4.53.3)(typescript@5.7.3)(vite@6.4.1(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2))
-      vite-plugin-svgr:
-        specifier: ^4.3.0
-        version: 4.5.0(rollup@4.53.3)(typescript@5.7.3)(vite@6.4.1(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2))
 
   packages/gilak-stylist:
     devDependencies:
       '@gilak-studio/build-config':
         specifier: workspace:*
         version: link:../build-config
-      sass:
-        specifier: ^1.83.4
-        version: 1.93.3
-      typescript:
-        specifier: ~5.9.3
-        version: 5.9.3
-      vite:
-        specifier: ^7.2.4
-        version: 7.2.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2)
-      vite-plugin-dts:
-        specifier: ^4.3.0
-        version: 4.5.4(@types/node@24.10.1)(rollup@4.53.3)(typescript@5.9.3)(vite@7.2.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2))
 
   packages/gilak-utils:
     devDependencies:
       '@gilak-studio/build-config':
         specifier: workspace:*
         version: link:../build-config
-      typescript:
-        specifier: ~5.9.3
-        version: 5.9.3
-      vite:
-        specifier: ^7.2.4
-        version: 7.2.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2)
-      vite-plugin-dts:
-        specifier: ^4.3.0
-        version: 4.5.4(@types/node@24.10.1)(rollup@4.53.3)(typescript@5.9.3)(vite@7.2.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2))
 
 packages:
 
   '@adobe/css-tools@4.4.4':
     resolution: {integrity: sha512-Elp+iwUx5rN5+Y8xLt5/GRoG20WGoDCQ/1Fb+1LiGtvwbDavuSk0jhD/eZdckHAuzcDzccnkv+rEjyWfRx18gg==}
+
+  '@ast-grep/napi-darwin-arm64@0.36.3':
+    resolution: {integrity: sha512-uM0Hrm5gcHqaBL64ktmPBFMTorTlPKWsUfi0E2Cg09GJfeYWvZmicCqgd7qVtjURmQvFQdb4JSqHIkJvws6Uqw==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@ast-grep/napi-darwin-x64@0.36.3':
+    resolution: {integrity: sha512-wEMeQw8lRL66puG2m8m0kDRQDtubygj59HA/cmut2V5SPx/13BN3wuEk6JPv97gqGUCUGhG2+5Z6UZ/Ll2q01Q==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [darwin]
+
+  '@ast-grep/napi-linux-arm64-gnu@0.36.3':
+    resolution: {integrity: sha512-sMsTMaUjW7SM8KPbLviCSBuM4zgJcwvie1yZI92HKSlFzC7ABe7X7UvyUREB+JwqccDVEL5yOJAjqB8eFSCizw==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [linux]
+
+  '@ast-grep/napi-linux-arm64-musl@0.36.3':
+    resolution: {integrity: sha512-2XRmNYuovZu0Pa4J3or4PKMkQZnXXfpVcCrPwWB/2ytX7XUo+TWLgYE8rPVnJOyw5zujkveFb0XUrro9mQgLzw==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [linux]
+
+  '@ast-grep/napi-linux-x64-gnu@0.36.3':
+    resolution: {integrity: sha512-mTwPRbBi1feGqR2b5TWC5gkEDeRi8wfk4euF5sKNihfMGHj6pdfINHQ3QvLVO4C7z0r/wgWLAvditFA0b997dg==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [linux]
+
+  '@ast-grep/napi-linux-x64-musl@0.36.3':
+    resolution: {integrity: sha512-tMGPrT+zuZzJK6n1cD1kOii7HYZE9gUXjwtVNE/uZqXEaWP6lmkfoTMbLjnxEe74VQbmaoDGh1/cjrDBnqC6Uw==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [linux]
+
+  '@ast-grep/napi-win32-arm64-msvc@0.36.3':
+    resolution: {integrity: sha512-7pFyr9+dyV+4cBJJ1I57gg6PDXP3GBQeVAsEEitzEruxx4Hb4cyNro54gGtlsS+6ty+N0t004tPQxYO2VrsPIg==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [win32]
+
+  '@ast-grep/napi-win32-ia32-msvc@0.36.3':
+    resolution: {integrity: sha512-MPAgccH9VscRaFuEBMzDGPS+3c4cKNVGIVJ7WSNa1nZtLQ0eFEaPJ7pyDnCezgVSxfNFVYBvKyyF/vcm7Qc9+A==}
+    engines: {node: '>= 10'}
+    cpu: [ia32]
+    os: [win32]
+
+  '@ast-grep/napi-win32-x64-msvc@0.36.3':
+    resolution: {integrity: sha512-TIVtuSbXhty9kaSEfr4ULWx5PAuUeGgUkFaR60lmOs7sGTWgpig+suwKfTmevoAblFknCW/aMHOwziwJoUZA6A==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [win32]
+
+  '@ast-grep/napi@0.36.3':
+    resolution: {integrity: sha512-ExypohE8L7FvKBHxu7UpwcV9XVfyS+AqNZKyKIfxYwJyD9l7Gw6pmMYd7J2uopJsPEIUf44/emEFds6nFUx/dw==}
+    engines: {node: '>= 10'}
 
   '@babel/code-frame@7.27.1':
     resolution: {integrity: sha512-cjQ7ZlQ0Mv3b47hABuTevyTuYN4i+loJKGeV9flcCgIK37cCXRh+L1bd3iBHlynerhQ7BhCkn2BPbQUL+rGqFg==}
@@ -800,8 +829,8 @@ packages:
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
 
-  '@rolldown/pluginutils@1.0.0-beta.47':
-    resolution: {integrity: sha512-8QagwMH3kNCuzD8EWL8R2YPW5e4OrHNSAHRFDdmFqEwEaD/KcNKjVoumo+gP2vW5eKB2UPbM6vTYiGZX0ixLnw==}
+  '@rolldown/pluginutils@1.0.0-beta.53':
+    resolution: {integrity: sha512-vENRlFU4YbrwVqNDZ7fLvy+JR1CRkyr01jhSiDpE1u6py3OMzQfztQU2jxykW3ALNxO4kSlqIDeYyD0Y9RcQeQ==}
 
   '@rollup/pluginutils@5.3.0':
     resolution: {integrity: sha512-5EdhGZtnu3V88ces7s53hhfK5KSASnJZv8Lulpc04cWO3REESroJXg73DFsOmgbU2BhwV0E20bu2IDZb3VKW4Q==}
@@ -1304,8 +1333,8 @@ packages:
     resolution: {integrity: sha512-BmxxndzEWhE4TIEEMBs8lP3MBWN3jFPs/p6gPm/wkv02o41hI6cq9AuSmGAaTTHPtA1FTi2jBre4A9rm5ZmX+Q==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@vitejs/plugin-react@5.1.1':
-    resolution: {integrity: sha512-WQfkSw0QbQ5aJ2CHYw23ZGkqnRwqKHD/KYsMeTkZzPT4Jcf0DcBxBtwMJxnu6E7oxw5+JC6ZAiePgh28uJ1HBA==}
+  '@vitejs/plugin-react@5.1.2':
+    resolution: {integrity: sha512-EcA07pHJouywpzsoTUqNh5NwGayl2PPVEJKUSinGGSxFGYn+shYbqMGBg6FXDqgXum9Ou/ecb+411ssw8HImJQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     peerDependencies:
       vite: ^4.2.0 || ^5.0.0 || ^6.0.0 || ^7.0.0
@@ -2875,11 +2904,6 @@ packages:
       eslint: ^8.57.0 || ^9.0.0
       typescript: '>=4.8.4 <6.0.0'
 
-  typescript@5.7.3:
-    resolution: {integrity: sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw==}
-    engines: {node: '>=14.17'}
-    hasBin: true
-
   typescript@5.8.2:
     resolution: {integrity: sha512-aJn6wq13/afZp/jT9QZmwEjDqqvSGp1VT5GVg+f/t6/oVyrgXM6BY1h9BRh/O5p3PlUPAe+WuiEZOmb/49RqoQ==}
     engines: {node: '>=14.17'}
@@ -2941,53 +2965,18 @@ packages:
       vite:
         optional: true
 
+  vite-plugin-lib-inject-css@2.2.2:
+    resolution: {integrity: sha512-NF30p0GwtfSAmVlxo2NgPXM2rEdtgV7LFi4lkzajKD7P3Ru/ZAFmI533M0Z5qyMZpvNMxVGkewzpjD0HOWtbDQ==}
+    peerDependencies:
+      vite: '*'
+
   vite-plugin-svgr@4.5.0:
     resolution: {integrity: sha512-W+uoSpmVkSmNOGPSsDCWVW/DDAyv+9fap9AZXBvWiQqrboJ08j2vh0tFxTD/LjwqwAd3yYSVJgm54S/1GhbdnA==}
     peerDependencies:
       vite: '>=2.6.0'
 
-  vite@6.4.1:
-    resolution: {integrity: sha512-+Oxm7q9hDoLMyJOYfUYBuHQo+dkAloi33apOPP56pzj+vsdJDzr+j1NISE5pyaAuKL4A3UD34qd0lx5+kfKp2g==}
-    engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
-    hasBin: true
-    peerDependencies:
-      '@types/node': ^18.0.0 || ^20.0.0 || >=22.0.0
-      jiti: '>=1.21.0'
-      less: '*'
-      lightningcss: ^1.21.0
-      sass: '*'
-      sass-embedded: '*'
-      stylus: '*'
-      sugarss: '*'
-      terser: ^5.16.0
-      tsx: ^4.8.1
-      yaml: ^2.4.2
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      jiti:
-        optional: true
-      less:
-        optional: true
-      lightningcss:
-        optional: true
-      sass:
-        optional: true
-      sass-embedded:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-      tsx:
-        optional: true
-      yaml:
-        optional: true
-
-  vite@7.2.6:
-    resolution: {integrity: sha512-tI2l/nFHC5rLh7+5+o7QjKjSR04ivXDF4jcgV0f/bTQ+OJiITy5S6gaynVsEM+7RqzufMnVbIon6Sr5x1SDYaQ==}
+  vite@7.2.7:
+    resolution: {integrity: sha512-ITcnkFeR3+fI8P1wMgItjGrR10170d8auB4EpMLPqmx6uxElH3a/hHGQabSHKdqd4FXWO1nFIp9rRn7JQ34ACQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -3100,6 +3089,45 @@ packages:
 snapshots:
 
   '@adobe/css-tools@4.4.4': {}
+
+  '@ast-grep/napi-darwin-arm64@0.36.3':
+    optional: true
+
+  '@ast-grep/napi-darwin-x64@0.36.3':
+    optional: true
+
+  '@ast-grep/napi-linux-arm64-gnu@0.36.3':
+    optional: true
+
+  '@ast-grep/napi-linux-arm64-musl@0.36.3':
+    optional: true
+
+  '@ast-grep/napi-linux-x64-gnu@0.36.3':
+    optional: true
+
+  '@ast-grep/napi-linux-x64-musl@0.36.3':
+    optional: true
+
+  '@ast-grep/napi-win32-arm64-msvc@0.36.3':
+    optional: true
+
+  '@ast-grep/napi-win32-ia32-msvc@0.36.3':
+    optional: true
+
+  '@ast-grep/napi-win32-x64-msvc@0.36.3':
+    optional: true
+
+  '@ast-grep/napi@0.36.3':
+    optionalDependencies:
+      '@ast-grep/napi-darwin-arm64': 0.36.3
+      '@ast-grep/napi-darwin-x64': 0.36.3
+      '@ast-grep/napi-linux-arm64-gnu': 0.36.3
+      '@ast-grep/napi-linux-arm64-musl': 0.36.3
+      '@ast-grep/napi-linux-x64-gnu': 0.36.3
+      '@ast-grep/napi-linux-x64-musl': 0.36.3
+      '@ast-grep/napi-win32-arm64-msvc': 0.36.3
+      '@ast-grep/napi-win32-ia32-msvc': 0.36.3
+      '@ast-grep/napi-win32-x64-msvc': 0.36.3
 
   '@babel/code-frame@7.27.1':
     dependencies:
@@ -3518,12 +3546,12 @@ snapshots:
       wrap-ansi: 8.1.0
       wrap-ansi-cjs: wrap-ansi@7.0.0
 
-  '@joshwooding/vite-plugin-react-docgen-typescript@0.5.0(typescript@5.9.3)(vite@7.2.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2))':
+  '@joshwooding/vite-plugin-react-docgen-typescript@0.5.0(typescript@5.9.3)(vite@7.2.7(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2))':
     dependencies:
       glob: 10.5.0
       magic-string: 0.27.0
       react-docgen-typescript: 2.4.0(typescript@5.9.3)
-      vite: 7.2.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2)
+      vite: 7.2.7(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2)
     optionalDependencies:
       typescript: 5.9.3
 
@@ -3680,7 +3708,7 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
-  '@rolldown/pluginutils@1.0.0-beta.47': {}
+  '@rolldown/pluginutils@1.0.0-beta.53': {}
 
   '@rollup/pluginutils@5.3.0(rollup@4.53.3)':
     dependencies:
@@ -3891,13 +3919,13 @@ snapshots:
       react: 19.2.1
       react-dom: 19.2.1(react@19.2.1)
 
-  '@storybook/builder-vite@8.6.14(storybook@8.6.14(prettier@3.7.4))(vite@7.2.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2))':
+  '@storybook/builder-vite@8.6.14(storybook@8.6.14(prettier@3.7.4))(vite@7.2.7(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2))':
     dependencies:
       '@storybook/csf-plugin': 8.6.14(storybook@8.6.14(prettier@3.7.4))
       browser-assert: 1.2.1
       storybook: 8.6.14(prettier@3.7.4)
       ts-dedent: 2.2.0
-      vite: 7.2.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2)
+      vite: 7.2.7(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2)
 
   '@storybook/components@8.6.14(storybook@8.6.14(prettier@3.7.4))':
     dependencies:
@@ -3956,11 +3984,11 @@ snapshots:
       react-dom: 19.2.1(react@19.2.1)
       storybook: 8.6.14(prettier@3.7.4)
 
-  '@storybook/react-vite@8.6.14(@storybook/test@8.6.14(storybook@8.6.14(prettier@3.7.4)))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(rollup@4.53.3)(storybook@8.6.14(prettier@3.7.4))(typescript@5.9.3)(vite@7.2.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2))':
+  '@storybook/react-vite@8.6.14(@storybook/test@8.6.14(storybook@8.6.14(prettier@3.7.4)))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(rollup@4.53.3)(storybook@8.6.14(prettier@3.7.4))(typescript@5.9.3)(vite@7.2.7(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2))':
     dependencies:
-      '@joshwooding/vite-plugin-react-docgen-typescript': 0.5.0(typescript@5.9.3)(vite@7.2.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2))
+      '@joshwooding/vite-plugin-react-docgen-typescript': 0.5.0(typescript@5.9.3)(vite@7.2.7(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2))
       '@rollup/pluginutils': 5.3.0(rollup@4.53.3)
-      '@storybook/builder-vite': 8.6.14(storybook@8.6.14(prettier@3.7.4))(vite@7.2.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2))
+      '@storybook/builder-vite': 8.6.14(storybook@8.6.14(prettier@3.7.4))(vite@7.2.7(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2))
       '@storybook/react': 8.6.14(@storybook/test@8.6.14(storybook@8.6.14(prettier@3.7.4)))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(storybook@8.6.14(prettier@3.7.4))(typescript@5.9.3)
       find-up: 5.0.0
       magic-string: 0.30.21
@@ -3970,7 +3998,7 @@ snapshots:
       resolve: 1.22.11
       storybook: 8.6.14(prettier@3.7.4)
       tsconfig-paths: 4.2.0
-      vite: 7.2.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2)
+      vite: 7.2.7(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2)
     optionalDependencies:
       '@storybook/test': 8.6.14(storybook@8.6.14(prettier@3.7.4))
     transitivePeerDependencies:
@@ -4052,17 +4080,6 @@ snapshots:
       '@svgr/babel-plugin-transform-react-native-svg': 8.1.0(@babel/core@7.28.5)
       '@svgr/babel-plugin-transform-svg-component': 8.0.0(@babel/core@7.28.5)
 
-  '@svgr/core@8.1.0(typescript@5.7.3)':
-    dependencies:
-      '@babel/core': 7.28.5
-      '@svgr/babel-preset': 8.1.0(@babel/core@7.28.5)
-      camelcase: 6.3.0
-      cosmiconfig: 8.3.6(typescript@5.7.3)
-      snake-case: 3.0.4
-    transitivePeerDependencies:
-      - supports-color
-      - typescript
-
   '@svgr/core@8.1.0(typescript@5.9.3)':
     dependencies:
       '@babel/core': 7.28.5
@@ -4078,16 +4095,6 @@ snapshots:
     dependencies:
       '@babel/types': 7.28.5
       entities: 4.5.0
-
-  '@svgr/plugin-jsx@8.1.0(@svgr/core@8.1.0(typescript@5.7.3))':
-    dependencies:
-      '@babel/core': 7.28.5
-      '@svgr/babel-preset': 8.1.0(@babel/core@7.28.5)
-      '@svgr/core': 8.1.0(typescript@5.7.3)
-      '@svgr/hast-util-to-babel-ast': 8.0.0
-      svg-parser: 2.0.4
-    transitivePeerDependencies:
-      - supports-color
 
   '@svgr/plugin-jsx@8.1.0(@svgr/core@8.1.0(typescript@5.9.3))':
     dependencies:
@@ -4267,15 +4274,15 @@ snapshots:
       '@typescript-eslint/types': 8.48.1
       eslint-visitor-keys: 4.2.1
 
-  '@vitejs/plugin-react@5.1.1(vite@7.2.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2))':
+  '@vitejs/plugin-react@5.1.2(vite@7.2.7(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2))':
     dependencies:
       '@babel/core': 7.28.5
       '@babel/plugin-transform-react-jsx-self': 7.27.1(@babel/core@7.28.5)
       '@babel/plugin-transform-react-jsx-source': 7.27.1(@babel/core@7.28.5)
-      '@rolldown/pluginutils': 1.0.0-beta.47
+      '@rolldown/pluginutils': 1.0.0-beta.53
       '@types/babel__core': 7.20.5
       react-refresh: 0.18.0
-      vite: 7.2.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2)
+      vite: 7.2.7(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2)
     transitivePeerDependencies:
       - supports-color
 
@@ -4340,19 +4347,6 @@ snapshots:
     dependencies:
       de-indent: 1.0.2
       he: 1.2.0
-
-  '@vue/language-core@2.2.0(typescript@5.7.3)':
-    dependencies:
-      '@volar/language-core': 2.4.26
-      '@vue/compiler-dom': 3.5.25
-      '@vue/compiler-vue2': 2.7.16
-      '@vue/shared': 3.5.25
-      alien-signals: 0.4.14
-      minimatch: 9.0.5
-      muggle-string: 0.4.1
-      path-browserify: 1.0.1
-    optionalDependencies:
-      typescript: 5.7.3
 
   '@vue/language-core@2.2.0(typescript@5.9.3)':
     dependencies:
@@ -4533,6 +4527,7 @@ snapshots:
   chokidar@4.0.3:
     dependencies:
       readdirp: 4.1.2
+    optional: true
 
   ci-info@3.9.0: {}
 
@@ -4568,15 +4563,6 @@ snapshots:
   confbox@0.2.2: {}
 
   convert-source-map@2.0.0: {}
-
-  cosmiconfig@8.3.6(typescript@5.7.3):
-    dependencies:
-      import-fresh: 3.3.1
-      js-yaml: 4.1.1
-      parse-json: 5.2.0
-      path-type: 4.0.0
-    optionalDependencies:
-      typescript: 5.7.3
 
   cosmiconfig@8.3.6(typescript@5.9.3):
     dependencies:
@@ -5451,7 +5437,8 @@ snapshots:
       pify: 4.0.1
       strip-bom: 3.0.0
 
-  readdirp@4.1.2: {}
+  readdirp@4.1.2:
+    optional: true
 
   recast@0.23.11:
     dependencies:
@@ -5626,6 +5613,7 @@ snapshots:
       source-map-js: 1.2.1
     optionalDependencies:
       '@parcel/watcher': 2.5.1
+    optional: true
 
   scheduler@0.27.0: {}
 
@@ -5821,8 +5809,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  typescript@5.7.3: {}
-
   typescript@5.8.2: {}
 
   typescript@5.9.3: {}
@@ -5866,26 +5852,7 @@ snapshots:
 
   varint@6.0.0: {}
 
-  vite-plugin-dts@4.5.4(@types/node@24.10.1)(rollup@4.53.3)(typescript@5.7.3)(vite@6.4.1(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2)):
-    dependencies:
-      '@microsoft/api-extractor': 7.55.1(@types/node@24.10.1)
-      '@rollup/pluginutils': 5.3.0(rollup@4.53.3)
-      '@volar/typescript': 2.4.26
-      '@vue/language-core': 2.2.0(typescript@5.7.3)
-      compare-versions: 6.1.1
-      debug: 4.4.3
-      kolorist: 1.8.0
-      local-pkg: 1.1.2
-      magic-string: 0.30.21
-      typescript: 5.7.3
-    optionalDependencies:
-      vite: 6.4.1(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2)
-    transitivePeerDependencies:
-      - '@types/node'
-      - rollup
-      - supports-color
-
-  vite-plugin-dts@4.5.4(@types/node@24.10.1)(rollup@4.53.3)(typescript@5.9.3)(vite@7.2.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2)):
+  vite-plugin-dts@4.5.4(@types/node@24.10.1)(rollup@4.53.3)(typescript@5.9.3)(vite@7.2.7(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2)):
     dependencies:
       '@microsoft/api-extractor': 7.55.1(@types/node@24.10.1)
       '@rollup/pluginutils': 5.3.0(rollup@4.53.3)
@@ -5898,50 +5865,31 @@ snapshots:
       magic-string: 0.30.21
       typescript: 5.9.3
     optionalDependencies:
-      vite: 7.2.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2)
+      vite: 7.2.7(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2)
     transitivePeerDependencies:
       - '@types/node'
       - rollup
       - supports-color
 
-  vite-plugin-svgr@4.5.0(rollup@4.53.3)(typescript@5.7.3)(vite@6.4.1(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2)):
+  vite-plugin-lib-inject-css@2.2.2(vite@7.2.7(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2)):
     dependencies:
-      '@rollup/pluginutils': 5.3.0(rollup@4.53.3)
-      '@svgr/core': 8.1.0(typescript@5.7.3)
-      '@svgr/plugin-jsx': 8.1.0(@svgr/core@8.1.0(typescript@5.7.3))
-      vite: 6.4.1(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2)
-    transitivePeerDependencies:
-      - rollup
-      - supports-color
-      - typescript
+      '@ast-grep/napi': 0.36.3
+      magic-string: 0.30.21
+      picocolors: 1.1.1
+      vite: 7.2.7(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2)
 
-  vite-plugin-svgr@4.5.0(rollup@4.53.3)(typescript@5.9.3)(vite@7.2.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2)):
+  vite-plugin-svgr@4.5.0(rollup@4.53.3)(typescript@5.9.3)(vite@7.2.7(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2)):
     dependencies:
       '@rollup/pluginutils': 5.3.0(rollup@4.53.3)
       '@svgr/core': 8.1.0(typescript@5.9.3)
       '@svgr/plugin-jsx': 8.1.0(@svgr/core@8.1.0(typescript@5.9.3))
-      vite: 7.2.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2)
+      vite: 7.2.7(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2)
     transitivePeerDependencies:
       - rollup
       - supports-color
       - typescript
 
-  vite@6.4.1(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2):
-    dependencies:
-      esbuild: 0.25.12
-      fdir: 6.5.0(picomatch@4.0.3)
-      picomatch: 4.0.3
-      postcss: 8.5.6
-      rollup: 4.53.3
-      tinyglobby: 0.2.15
-    optionalDependencies:
-      '@types/node': 24.10.1
-      fsevents: 2.3.3
-      sass: 1.93.3
-      sass-embedded: 1.93.3
-      yaml: 2.8.2
-
-  vite@7.2.6(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2):
+  vite@7.2.7(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2):
     dependencies:
       esbuild: 0.25.12
       fdir: 6.5.0(picomatch@4.0.3)

@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 import dts from 'vite-plugin-dts'
 import svgr from 'vite-plugin-svgr'
 import { resolve } from 'path'
+import { libInjectCss } from 'vite-plugin-lib-inject-css'
 
 interface LibraryConfig {
   entry: string
@@ -14,6 +15,7 @@ export function createLibraryConfig(config: LibraryConfig): UserConfig {
   return defineConfig({
     plugins: [
       react(),
+      libInjectCss(),
       svgr({
         svgrOptions: {
           exportType: 'default',

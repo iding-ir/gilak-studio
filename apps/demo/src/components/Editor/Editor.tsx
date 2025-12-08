@@ -10,7 +10,6 @@ import IconBucketUrl from '../../assets/icon-bucket.svg?url'
 import { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { getContrastColor } from '@gilak/utils'
-import '@gilak/floating-window/dist/gilak-floating-window.css'
 
 export const Editor: React.FC = () => {
   const { t } = useTranslation()

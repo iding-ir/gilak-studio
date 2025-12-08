@@ -1,14 +1,19 @@
-import { defineConfig } from 'vite'
-import { resolve } from 'path'
-import dts from 'vite-plugin-dts'
+import { createLibraryConfig } from '../build-config/vite.config.base'
+import { defineConfig, mergeConfig } from 'vite'
 
-export default defineConfig({
-  plugins: [dts({ rollupTypes: true })],
-  build: {
-    lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
-      name: 'GilakUtils',
-      fileName: 'gilak-utils',
-    },
-  },
+const baseConfig = createLibraryConfig({
+  entry: 'src/index.ts',
+  name: 'GilakUtils',
+  fileName: 'gilak-utils',
 })
+
+export default mergeConfig(
+  baseConfig,
+  defineConfig({
+    build: {
+      rollupOptions: {
+        external: ['react', 'react-dom'],
+      },
+    },
+  })
+)
