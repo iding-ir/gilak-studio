@@ -10,14 +10,13 @@ import IconBucketUrl from '../../assets/icon-bucket.svg?url'
 import IconBrush from '../../assets/icon-brush.svg?url'
 import IconBrushTypes from '../../assets/brush-circle.svg?url'
 import { useRef, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { getContrastColor } from '@gilak/utils'
 import { BrushTypes } from '../BrushTypes'
+import type { BrushType } from '../BrushTypes/BrushTypes'
 
 export const Editor: React.FC = () => {
-  const { t } = useTranslation()
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [paintMode, setPaintMode] = useState(false)
+  const [brush, setBrush] = useState<BrushType>('circle')
   const { selectedColor, isActive, isHovered, setIsActive, setIsHovered, setSelectedColor } =
     useColorPicker()
 
@@ -62,7 +61,7 @@ export const Editor: React.FC = () => {
                   />
                 }
               >
-                <BrushTypes />
+                <BrushTypes brush={brush} onChange={setBrush} />
               </Dropdown>
             </li>
             <li>
@@ -79,12 +78,24 @@ export const Editor: React.FC = () => {
         </nav>
 
         <ColorSwatch
-          size="lg"
-          value={selectedColor}
-          placeholder={t('colorSwatch.placeholder')}
+          size="sm"
           icon={IconBucketUrl}
           color={selectedColor}
-          backgroundColor={getContrastColor(selectedColor)}
+          colors={[
+            '#ffffff',
+            '#000000',
+            '#D62828',
+            '#F77F00',
+            '#FFCF33',
+            '#1B9E4B',
+            '#009DAE',
+            '#3056D3',
+            '#2A2A72',
+            '#9C4DF4',
+            '#E6D2B5',
+            '#8A8A8A',
+          ]}
+          onChange={setSelectedColor}
         />
       </header>
 
@@ -92,8 +103,8 @@ export const Editor: React.FC = () => {
         <FloatingWindowProvider>
           <FloatingWindow
             id="floating-window-1"
-            title="1"
-            footer="2025 Gilak Studio"
+            title="Color Picker"
+            footer="Select a color from a randomized canvas"
             initialPosition={{ x: 0, y: 0 }}
             initialSize={{ w: 600, h: 600 }}
             zIndex={1100}
@@ -114,8 +125,8 @@ export const Editor: React.FC = () => {
 
           <FloatingWindow
             id="floating-window-2"
-            title="2"
-            footer="2025 Gilak Studio"
+            title="Drawing Canvas"
+            footer="Pick your brush and start drawing!"
             initialPosition={{ x: 800, y: 0 }}
             initialSize={{ w: 600, h: 600 }}
             zIndex={1100}

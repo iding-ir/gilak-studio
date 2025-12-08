@@ -7,6 +7,11 @@
   position: relative;
   background-color: var(--icon-bg-color, currentColor);
 
+  &.selected {
+    outline: 2px solid var(--color-primary-lg);
+    outline-offset: 2px;
+  }
+
   .image {
     display: inline-block;
     position: relative;

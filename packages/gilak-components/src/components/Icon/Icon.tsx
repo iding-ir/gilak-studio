@@ -10,6 +10,7 @@ export interface IconProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'c
   backgroundColor?: string
   className?: string
   rounded?: boolean
+  selected?: boolean
 }
 
 export const Icon: React.FC<IconProps> = ({
@@ -19,6 +20,7 @@ export const Icon: React.FC<IconProps> = ({
   backgroundColor = 'transparent',
   className,
   rounded = true,
+  selected = false,
   ...props
 }) => {
   const rootStyles = {
@@ -29,7 +31,10 @@ export const Icon: React.FC<IconProps> = ({
 
   return (
     <i
-      className={clsx(styles.root, styles[size], { [styles.rounded]: rounded }, className)}
+      className={clsx(styles.root, styles[size], className, {
+        [styles.rounded]: rounded,
+        [styles.selected]: selected,
+      })}
       style={rootStyles}
       {...props}
     >
