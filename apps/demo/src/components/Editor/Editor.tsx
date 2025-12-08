@@ -34,8 +34,8 @@ export const Editor: React.FC = () => {
                 <Icon
                   icon={IconColorPickerUrl}
                   size="lg"
-                  color={selectedColor}
-                  backgroundColor={getContrastColor(selectedColor)}
+                  color="var(--color-dark-xxxl)"
+                  backgroundColor="var(--color-light-xxs)"
                 />
               </button>
             </li>
@@ -44,8 +44,8 @@ export const Editor: React.FC = () => {
                 <Icon
                   icon={IconBrush}
                   size="lg"
-                  color={selectedColor}
-                  backgroundColor={getContrastColor(selectedColor)}
+                  color="var(--color-dark-xxxl)"
+                  backgroundColor="var(--color-light-xxs)"
                 />
               </button>
             </li>
@@ -54,8 +54,8 @@ export const Editor: React.FC = () => {
                 <Icon
                   icon={IconCanvasUrl}
                   size="lg"
-                  color={selectedColor}
-                  backgroundColor={getContrastColor(selectedColor)}
+                  color="var(--color-dark-xxxl)"
+                  backgroundColor="var(--color-light-xxs)"
                 />
               </button>
             </li>
@@ -104,7 +104,13 @@ export const Editor: React.FC = () => {
             initialSize={{ w: 600, h: 600 }}
             zIndex={1100}
           >
-            <PaintCanvas enabled={paintMode} width={600} height={400} />
+            <PaintCanvas
+              enabled={paintMode}
+              width={600}
+              height={400}
+              color={selectedColor}
+              size={2}
+            />
           </FloatingWindow>
         </FloatingWindowProvider>
       </main>

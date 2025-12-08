@@ -1,6 +1,19 @@
 import { useEffect, useRef } from 'react'
+import { type BrushType, drawBrushType } from './brushTypes'
 
-export function usePaint(canvasRef: React.RefObject<HTMLCanvasElement | null>, enabled: boolean) {
+export function usePaint({
+  canvasRef,
+  enabled,
+  color,
+  size,
+  brushType,
+}: {
+  canvasRef: React.RefObject<HTMLCanvasElement>
+  enabled: boolean
+  color: string
+  size: number
+  brushType: BrushType
+}) {
   const drawing = useRef(false)
   const lastPos = useRef<{ x: number; y: number } | null>(null)
   const savedImage = useRef<ImageData | null>(null)
@@ -19,17 +32,6 @@ export function usePaint(canvasRef: React.RefObject<HTMLCanvasElement | null>, e
       }
     }
 
-    function drawCircle(x: number, y: number) {
-      if (!ctx) return
-      ctx.save()
-      ctx.beginPath()
-      ctx.arc(x, y, 8, 0, 2 * Math.PI)
-      ctx.strokeStyle = 'rgba(0,0,0,0.3)'
-      ctx.lineWidth = 2
-      ctx.stroke()
-      ctx.restore()
-    }
-
     function handlePointerMove(e: MouseEvent) {
       const pos = getPos(e)
       if (!ctx) return
@@ -37,8 +39,8 @@ export function usePaint(canvasRef: React.RefObject<HTMLCanvasElement | null>, e
         ctx.beginPath()
         ctx.moveTo(lastPos.current.x, lastPos.current.y)
         ctx.lineTo(pos.x, pos.y)
-        ctx.strokeStyle = '#222'
-        ctx.lineWidth = 2
+        ctx.strokeStyle = color
+        ctx.lineWidth = size
         ctx.stroke()
         lastPos.current = pos
         savedImage.current = ctx.getImageData(0, 0, canvas.width, canvas.height)
@@ -48,7 +50,7 @@ export function usePaint(canvasRef: React.RefObject<HTMLCanvasElement | null>, e
         } else {
           ctx.clearRect(0, 0, canvas.width, canvas.height)
         }
-        drawCircle(pos.x, pos.y)
+        drawBrushType(ctx, pos.x, pos.y, size, brushType)
       }
     }
 
@@ -80,5 +82,5 @@ export function usePaint(canvasRef: React.RefObject<HTMLCanvasElement | null>, e
       if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height)
       savedImage.current = null
     }
-  }, [canvasRef, enabled])
+  }, [canvasRef, enabled, brushType, color, size])
 }
