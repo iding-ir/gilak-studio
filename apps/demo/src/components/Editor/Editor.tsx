@@ -1,4 +1,4 @@
-import { Canvas, drawRandomEffect } from '@gilak/canvas'
+import { Canvas, drawRandomEffect, PaintCanvas } from '@gilak/canvas'
 import { Magnifier, useColorPicker } from '@gilak/color-picker'
 import { ColorSwatch } from '@gilak/color-swatch'
 import { Icon } from '@gilak/components'
@@ -7,21 +7,21 @@ import styles from './Editor.module.scss'
 import IconColorPickerUrl from '../../assets/icon-eyedropper.svg?url'
 import IconCanvasUrl from '../../assets/icon-dice.svg?url'
 import IconBucketUrl from '../../assets/icon-bucket.svg?url'
-import { useRef } from 'react'
+import IconBrush from '../../assets/icon-brush.svg?url'
+import { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { getContrastColor } from '@gilak/utils'
 
 export const Editor: React.FC = () => {
   const { t } = useTranslation()
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const canvasRef2 = useRef<HTMLCanvasElement>(null)
+  const [paintMode, setPaintMode] = useState(false)
   const { selectedColor, isActive, isHovered, setIsActive, setIsHovered, setSelectedColor } =
     useColorPicker()
 
   const handleRandomize = () => {
-    if (!canvasRef.current || !canvasRef2.current) return
+    if (!canvasRef.current) return
     drawRandomEffect(canvasRef.current)
-    drawRandomEffect(canvasRef2.current)
   }
 
   return (
@@ -30,9 +30,19 @@ export const Editor: React.FC = () => {
         <nav className={styles.nav}>
           <ul>
             <li>
-              <button disabled={false} onClick={() => setIsActive(true)}>
+              <button onClick={() => setIsActive(true)}>
                 <Icon
                   icon={IconColorPickerUrl}
+                  size="lg"
+                  color={selectedColor}
+                  backgroundColor={getContrastColor(selectedColor)}
+                />
+              </button>
+            </li>
+            <li>
+              <button onClick={() => setPaintMode(true)}>
+                <Icon
+                  icon={IconBrush}
                   size="lg"
                   color={selectedColor}
                   backgroundColor={getContrastColor(selectedColor)}
@@ -94,18 +104,7 @@ export const Editor: React.FC = () => {
             initialSize={{ w: 600, h: 600 }}
             zIndex={1100}
           >
-            <Canvas
-              ref={canvasRef2}
-              width="400"
-              height="400"
-              onClick={() => setIsActive(false)}
-              onEnter={() => setIsHovered(true)}
-              onLeave={() => setIsHovered(false)}
-            >
-              {isActive && isHovered && (
-                <Magnifier canvasRef={canvasRef2} onSelect={setSelectedColor} />
-              )}
-            </Canvas>
+            <PaintCanvas enabled={paintMode} width={600} height={400} />
           </FloatingWindow>
         </FloatingWindowProvider>
       </main>
