@@ -1,7 +1,7 @@
 import { Canvas, drawRandomEffect, PaintCanvas } from '@gilak/canvas'
 import { Magnifier, useColorPicker } from '@gilak/color-picker'
 import { ColorSwatch } from '@gilak/color-swatch'
-import { Dropdown, Icon } from '@gilak/components'
+import { Dropdown, Icon, ResizableScreen } from '@gilak/components'
 import { FloatingWindow, FloatingWindowProvider } from '@gilak/floating-window'
 import styles from './Editor.module.scss'
 import IconColorPickerUrl from '../../assets/icon-eyedropper.svg?url'
@@ -109,18 +109,20 @@ export const Editor: React.FC = () => {
             initialSize={{ w: 600, h: 600 }}
             zIndex={1100}
           >
-            <Canvas
-              ref={canvasRef}
-              width="400"
-              height="400"
-              onClick={() => setIsActive(false)}
-              onEnter={() => setIsHovered(true)}
-              onLeave={() => setIsHovered(false)}
-            >
-              {isActive && isHovered && (
-                <Magnifier canvasRef={canvasRef} onSelect={setSelectedColor} />
-              )}
-            </Canvas>
+            <ResizableScreen zoomLevel={50}>
+              <Canvas
+                ref={canvasRef}
+                width="400"
+                height="400"
+                onClick={() => setIsActive(false)}
+                onEnter={() => setIsHovered(true)}
+                onLeave={() => setIsHovered(false)}
+              >
+                {isActive && isHovered && (
+                  <Magnifier canvasRef={canvasRef} onSelect={setSelectedColor} />
+                )}
+              </Canvas>
+            </ResizableScreen>
           </FloatingWindow>
 
           <FloatingWindow

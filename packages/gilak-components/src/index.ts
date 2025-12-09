@@ -10,4 +10,10 @@ export type { DropdownProps } from './components/DropDown'
 export { List } from './components/List'
 export type { ListProps } from './components/List'
 
+export { ResizableScreen } from './components/ResizableScreen'
+export type { ResizableScreenProps } from './components/ResizableScreen'
+
+export { Select } from './components/Select'
+export type { SelectProps } from './components/Select'
+
 export type { TshirtSize } from './types'

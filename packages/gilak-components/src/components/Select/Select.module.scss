@@ -1,0 +1,14 @@
+@use "@gilak/stylist/scss" as *;
+
+.root {
+  all: unset;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  color: var(--color-dark-lg);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-light-xl);
+  cursor: pointer;
+
+  option {
+    color: var(--color-dark-lg);
+  }
+}
