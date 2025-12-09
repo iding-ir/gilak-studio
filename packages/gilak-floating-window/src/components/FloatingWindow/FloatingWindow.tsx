@@ -1,11 +1,9 @@
-import React, { RefObject, useRef, useState } from 'react'
+import React, { RefObject, useRef } from 'react'
 import clsx from 'clsx'
 import { useRegister, useDrag, useResize, useWindow } from '../../hooks'
 import { Header } from '../Header'
 import styles from './FloatingWindow.module.scss'
-import { FloatingWindowMeta, Status } from '../../context'
-import { getItemSync } from '@gilak/utils'
-import { storageKey } from '../../methods/storage-key'
+import { Status } from '../../context'
 import { Position, Size } from '../../types'
 import { Footer } from '../Footer/Footer'
 export interface FloatingWindowProps {
@@ -57,29 +55,25 @@ export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
     onResizeEnd,
   }) => {
     const targetRef = useRef<HTMLDivElement | null>(null)
-    const [savedState] = useState<FloatingWindowMeta | null>(() => {
-      return getItemSync<FloatingWindowMeta>(storageKey(id)) ?? null
-    })
 
     useRegister({
       id,
       title,
-      status: savedState?.status ?? initialStatus,
+      status: initialStatus,
       draggable,
       resizable,
       maximizable,
       minimizable,
-      position: savedState?.position ?? initialPosition,
-      size: savedState?.size ?? initialSize,
-      z: savedState?.z ?? zIndex,
+      position: initialPosition,
+      size: initialSize,
+      z: zIndex,
       dragging: false,
       resizing: false,
     })
 
-    const win = useWindow(id)
-    const { status, position, size, z: ctxZ, resizing } = win
+    const { status, position, size, z: ctxZ, resizing } = useWindow(id)
 
-    const { onPointerDown: onDragPointerDown, dragging } = useDrag({
+    const { dragging, onPointerDown: onDragPointerDown } = useDrag({
       id,
       targetRef,
       draggable,

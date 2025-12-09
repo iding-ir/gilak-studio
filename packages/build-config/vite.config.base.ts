@@ -29,6 +29,8 @@ export function createLibraryConfig(config: LibraryConfig): UserConfig {
         include: ['src'],
         exclude: ['**/*.stories.tsx', '**/*.stories.ts'],
         rollupTypes: true,
+        insertTypesEntry: true,
+        outDir: 'dist',
       }),
     ],
     css: {

@@ -50,10 +50,12 @@
     "react-dom": "^18.0.0 || ^19.0.0"
   },
   "devDependencies": {
-    "@gilak/stylist": "workspace:*"
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
   },
   "dependencies": {
     "@gilak/components": "workspace:*",
+    "@gilak/stylist": "workspace:*",
     "@gilak/utils": "workspace:*",
     "clsx": "^2.1.1"
   }

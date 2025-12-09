@@ -78,7 +78,7 @@ importers:
         specifier: ^7.2.4
         version: 7.2.7(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2)
       vite-plugin-dts:
-        specifier: ^4.3.0
+        specifier: ^4.5.4
         version: 4.5.4(@types/node@24.10.1)(rollup@4.53.3)(typescript@5.9.3)(vite@7.2.7(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(yaml@2.8.2))
       vite-plugin-svgr:
         specifier: ^4.5.0
@@ -181,6 +181,9 @@ importers:
       '@gilak/stylist':
         specifier: workspace:*
         version: link:../gilak-stylist
+      '@gilak/utils':
+        specifier: workspace:*
+        version: link:../gilak-utils
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -213,6 +216,9 @@ importers:
       '@gilak/components':
         specifier: workspace:*
         version: link:../gilak-components
+      '@gilak/stylist':
+        specifier: workspace:*
+        version: link:../gilak-stylist
       '@gilak/utils':
         specifier: workspace:*
         version: link:../gilak-utils
@@ -225,10 +231,6 @@ importers:
       react-dom:
         specifier: ^18.0.0 || ^19.0.0
         version: 19.2.1(react@19.2.1)
-    devDependencies:
-      '@gilak/stylist':
-        specifier: workspace:*
-        version: link:../gilak-stylist
 
   packages/gilak-stylist:
     devDependencies:

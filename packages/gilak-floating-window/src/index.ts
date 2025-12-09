@@ -8,3 +8,6 @@ export { useRegister, useDrag, useResize, useWindow } from './hooks'
 // Context
 export { FloatingWindowProvider, useFloatingWindowContext } from './context'
 export type { FloatingWindowMeta } from './context'
+
+// Types
+export * from './types'

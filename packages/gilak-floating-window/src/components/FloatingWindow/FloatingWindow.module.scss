@@ -13,11 +13,11 @@
   will-change: transform;
 
   &.dragging {
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-lg);
   }
 
   &.resizing {
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-lg);
   }
 
   .toolbar {
