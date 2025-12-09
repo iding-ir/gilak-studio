@@ -3,19 +3,21 @@ import styles from './Dropdown.module.scss'
 import clsx from 'clsx'
 
 export interface DropdownProps {
-  icon: ReactNode
+  trigger: ReactNode
+  openDefault?: boolean
   children: ReactNode
   openOnHover?: boolean
   className?: string
 }
 
 export const Dropdown: React.FC<DropdownProps> = ({
-  icon,
+  trigger,
+  openDefault = false,
   children,
   openOnHover = false,
   className,
 }) => {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(openDefault)
   const triggerRef = useRef<HTMLDivElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
 
@@ -45,7 +47,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
   return (
     <div className={clsx(styles.root, className)}>
       <div ref={triggerRef} {...triggerProps} className={styles.trigger}>
-        {icon}
+        {trigger}
       </div>
       {open && (
         <div ref={menuRef} className={styles.dropdownMenu}>

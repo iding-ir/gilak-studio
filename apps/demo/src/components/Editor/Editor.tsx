@@ -1,7 +1,7 @@
 import { Canvas, drawRandomEffect, PaintCanvas } from '@gilak/canvas'
 import { Magnifier, useColorPicker } from '@gilak/color-picker'
 import { ColorSwatch } from '@gilak/color-swatch'
-import { Dropdown, Icon, ResizableScreen } from '@gilak/components'
+import { Dropdown, Icon, Menu, ResizableScreen } from '@gilak/components'
 import { FloatingWindow, FloatingWindowProvider } from '@gilak/floating-window'
 import styles from './Editor.module.scss'
 import IconColorPickerUrl from '../../assets/icon-eyedropper.svg?url'
@@ -29,74 +29,83 @@ export const Editor: React.FC = () => {
     <div className={styles.root}>
       <header className={styles.header}>
         <nav className={styles.nav}>
-          <ul className={styles.ul}>
-            <li>
-              <button onClick={() => setIsActive(true)}>
-                <Icon
-                  icon={IconColorPickerUrl}
-                  size="lg"
-                  color="var(--color-dark-xxxl)"
-                  backgroundColor="var(--color-light-xxs)"
-                />
-              </button>
-            </li>
-            <li>
-              <button onClick={() => setPaintMode(true)}>
-                <Icon
-                  icon={IconBrush}
-                  size="lg"
-                  color="var(--color-dark-xxxl)"
-                  backgroundColor="var(--color-light-xxs)"
-                />
-              </button>
-            </li>
-            <li>
-              <Dropdown
-                icon={
-                  <Icon
-                    icon={IconBrushTypes}
-                    size="lg"
-                    color="var(--color-dark-xxxl)"
-                    backgroundColor="var(--color-light-xxs)"
-                  />
-                }
-              >
-                <BrushTypes brush={brush} onChange={setBrush} />
-              </Dropdown>
-            </li>
-            <li>
-              <button onClick={handleRandomize}>
-                <Icon
-                  icon={IconCanvasUrl}
-                  size="lg"
-                  color="var(--color-dark-xxxl)"
-                  backgroundColor="var(--color-light-xxs)"
-                />
-              </button>
-            </li>
-          </ul>
+          <Menu label="" root={true} direction="row" open={true}>
+            <Menu label="File" direction="column">
+              <Menu label="New"></Menu>
+              <Menu label="Open"></Menu>
+            </Menu>
+            <Menu label="View"></Menu>
+            <Menu label="Help"></Menu>
+          </Menu>
         </nav>
-
-        <ColorSwatch
-          size="sm"
-          icon={IconBucketUrl}
-          color={selectedColor}
-          colors={[
-            '#ffffff',
-            '#000000',
-            '#D62828',
-            '#F77F00',
-            '#FFCF33',
-            '#1B9E4B',
-            '#009DAE',
-            '#3056D3',
-            '#2A2A72',
-            '#9C4DF4',
-            '#E6D2B5',
-            '#8A8A8A',
-          ]}
-          onChange={setSelectedColor}
-        />
+        <ul className={styles.tools}>
+          <li className={styles.tool}>
+            <button onClick={() => setIsActive(true)}>
+              <Icon
+                icon={IconColorPickerUrl}
+                size="lg"
+                color="var(--color-dark-xxxl)"
+                backgroundColor="var(--color-light-xxs)"
+              />
+            </button>
+          </li>
+          <li className={styles.tool}>
+            <button onClick={() => setPaintMode(true)}>
+              <Icon
+                icon={IconBrush}
+                size="lg"
+                color="var(--color-dark-xxxl)"
+                backgroundColor="var(--color-light-xxs)"
+              />
+            </button>
+          </li>
+          <li className={styles.tool}>
+            <Dropdown
+              trigger={
+                <Icon
+                  icon={IconBrushTypes}
+                  size="lg"
+                  color="var(--color-dark-xxxl)"
+                  backgroundColor="var(--color-light-xxs)"
+                />
+              }
+            >
+              <BrushTypes brush={brush} onChange={setBrush} />
+            </Dropdown>
+          </li>
+          <li className={styles.tool}>
+            <button onClick={handleRandomize}>
+              <Icon
+                icon={IconCanvasUrl}
+                size="lg"
+                color="var(--color-dark-xxxl)"
+                backgroundColor="var(--color-light-xxs)"
+              />
+            </button>
+          </li>
+          <li className={styles.tool}>
+            <ColorSwatch
+              size="sm"
+              icon={IconBucketUrl}
+              color={selectedColor}
+              colors={[
+                '#ffffff',
+                '#000000',
+                '#D62828',
+                '#F77F00',
+                '#FFCF33',
+                '#1B9E4B',
+                '#009DAE',
+                '#3056D3',
+                '#2A2A72',
+                '#9C4DF4',
+                '#E6D2B5',
+                '#8A8A8A',
+              ]}
+              onChange={setSelectedColor}
+            />
+          </li>
+        </ul>
       </header>
 
       <main className={styles.main}>

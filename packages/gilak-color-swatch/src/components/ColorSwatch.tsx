@@ -21,7 +21,7 @@ export const ColorSwatch: React.FC<ColorSwatchProps> = ({
   return (
     <div className={styles.root}>
       <Dropdown
-        icon={
+        trigger={
           <Icon icon={icon} size="lg" color={color} backgroundColor={getContrastColor(color)} />
         }
       >
