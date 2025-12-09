@@ -29,8 +29,9 @@ export const BrushTypes = ({
 }) => {
   return (
     <List
-      direction="vertical"
+      direction="column"
       count={3}
+      theme="light"
       items={[
         <Icon
           selected={brush === 'circle'}

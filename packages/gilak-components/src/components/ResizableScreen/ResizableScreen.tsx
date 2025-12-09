@@ -1,4 +1,4 @@
-import React, { type ReactNode } from 'react'
+import React, { type ChangeEvent, useState, type ReactNode } from 'react'
 import styles from './ResizableScreen.module.scss'
 import { Select } from '../Select'
 
@@ -12,11 +12,9 @@ export interface ResizableScreenProps {
 }
 
 export const ResizableScreen: React.FC<ResizableScreenProps> = ({ children, zoomLevel = 100 }) => {
-  const [currentZoomLevel, setCurrentZoomLevel] = React.useState(zoomLevel)
+  const [currentZoomLevel, setCurrentZoomLevel] = useState(zoomLevel)
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.target.value)
-
+  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setCurrentZoomLevel(Number(e.target.value) as Zoom)
   }
 
@@ -30,6 +28,7 @@ export const ResizableScreen: React.FC<ResizableScreenProps> = ({ children, zoom
       <div className={styles.footer}>
         <Select
           options={zoomLevels.map((z) => ({ value: z.toString(), text: `${z}%` }))}
+          selected={currentZoomLevel.toString()}
           onChange={handleChange}
         />
       </div>

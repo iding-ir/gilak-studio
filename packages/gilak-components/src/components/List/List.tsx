@@ -5,16 +5,25 @@ import clsx from 'clsx'
 
 export interface ListProps {
   items: ReactNode[]
-  direction?: 'horizontal' | 'vertical'
+  direction?: 'row' | 'column'
   count?: 1 | 2 | 3 | 4
+  frameless?: boolean
+  theme?: 'primary' | 'light'
 }
 
-export const List = ({ items, direction, count }: ListProps): React.ReactElement => {
+export const List = ({
+  items,
+  direction,
+  count,
+  frameless = false,
+  theme = 'light',
+}: ListProps): React.ReactElement => {
   return (
     <ul
-      className={clsx(styles.list, {
-        [styles.horizontal]: direction === 'horizontal',
-        [styles.vertical]: direction === 'vertical',
+      className={clsx(styles.list, styles[theme], {
+        [styles.frameless]: frameless,
+        [styles.row]: direction === 'row',
+        [styles.column]: direction === 'column',
         [styles.two]: count === 2,
         [styles.three]: count === 3,
         [styles.four]: count === 4,

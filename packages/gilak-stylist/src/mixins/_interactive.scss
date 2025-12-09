@@ -1,0 +1,28 @@
+@mixin interactive(
+  $color: var(--color-dark-lg),
+  $bg-color: transparent,
+  $hover-color: var(--color-light-sm),
+  $hover-bg-color: var(--color-primary-lg)
+) {
+  color: $color;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-xs);
+  background-color: $bg-color;
+  user-select: none;
+  cursor: pointer;
+
+  &:visited {
+    color: $color;
+    background-color: $bg-color;
+  }
+
+  &:hover {
+    color: $hover-color;
+    background-color: $hover-bg-color;
+  }
+
+  &:focus {
+    outline: 2px solid var(--color-accent-xl);
+    outline-offset: 2px;
+  }
+}

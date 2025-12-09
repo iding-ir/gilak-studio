@@ -5,11 +5,24 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  background-color: var(--icon-bg-color, currentColor);
+
+  &:not(.frameless) {
+    background-color: var(--icon-bg-color);
+    box-shadow: var(--shadow-sm);
+  }
+
+  &.interactive {
+    cursor: pointer;
+
+    &:hover .image::before {
+      background-color: var(--color-primary-md);
+      transition: all var(--transition-lg);
+    }
+  }
 
   &.selected {
     outline: 2px solid var(--color-primary-lg);
-    outline-offset: 2px;
+    outline-offset: 0px;
   }
 
   .image {
@@ -21,10 +34,6 @@
     mask-repeat: no-repeat;
     mask-position: center;
     mask-image: var(--icon-url);
-    -webkit-mask-size: 70%;
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-position: center;
-    -webkit-mask-image: var(--icon-url);
     overflow: hidden;
 
     &::before {

@@ -39,53 +39,33 @@ export const Editor: React.FC = () => {
           </Menu>
         </nav>
         <ul className={styles.tools}>
-          <li className={styles.tool}>
-            <button onClick={() => setIsActive(true)}>
-              <Icon
-                icon={IconColorPickerUrl}
-                size="lg"
-                color="var(--color-dark-xxxl)"
-                backgroundColor="var(--color-light-xxs)"
-              />
-            </button>
+          <li>
+            <Icon
+              icon={IconColorPickerUrl}
+              size="md"
+              selected={isActive}
+              onClick={() => setIsActive(true)}
+            />
           </li>
-          <li className={styles.tool}>
-            <button onClick={() => setPaintMode(true)}>
-              <Icon
-                icon={IconBrush}
-                size="lg"
-                color="var(--color-dark-xxxl)"
-                backgroundColor="var(--color-light-xxs)"
-              />
-            </button>
+          <li>
+            <Icon
+              icon={IconBrush}
+              size="md"
+              selected={paintMode}
+              onClick={() => setPaintMode(true)}
+            />
           </li>
-          <li className={styles.tool}>
-            <Dropdown
-              trigger={
-                <Icon
-                  icon={IconBrushTypes}
-                  size="lg"
-                  color="var(--color-dark-xxxl)"
-                  backgroundColor="var(--color-light-xxs)"
-                />
-              }
-            >
+          <li>
+            <Dropdown trigger={<Icon icon={IconBrushTypes} size="md" interactive />}>
               <BrushTypes brush={brush} onChange={setBrush} />
             </Dropdown>
           </li>
-          <li className={styles.tool}>
-            <button onClick={handleRandomize}>
-              <Icon
-                icon={IconCanvasUrl}
-                size="lg"
-                color="var(--color-dark-xxxl)"
-                backgroundColor="var(--color-light-xxs)"
-              />
-            </button>
+          <li>
+            <Icon icon={IconCanvasUrl} size="md" onClick={handleRandomize} />
           </li>
-          <li className={styles.tool}>
+          <li>
             <ColorSwatch
-              size="sm"
+              size="md"
               icon={IconBucketUrl}
               color={selectedColor}
               colors={[
@@ -115,14 +95,14 @@ export const Editor: React.FC = () => {
             title="Color Picker"
             footer="Select a color from a randomized canvas"
             initialPosition={{ x: 0, y: 0 }}
-            initialSize={{ w: 600, h: 600 }}
+            initialSize={{ w: 600, h: 500 }}
             zIndex={1100}
           >
             <ResizableScreen zoomLevel={50}>
               <Canvas
                 ref={canvasRef}
-                width="400"
-                height="400"
+                width={400}
+                height={300}
                 onClick={() => setIsActive(false)}
                 onEnter={() => setIsHovered(true)}
                 onLeave={() => setIsHovered(false)}
@@ -138,14 +118,14 @@ export const Editor: React.FC = () => {
             id="floating-window-2"
             title="Drawing Canvas"
             footer="Pick your brush and start drawing!"
-            initialPosition={{ x: 800, y: 0 }}
-            initialSize={{ w: 600, h: 600 }}
+            initialPosition={{ x: 640, y: 0 }}
+            initialSize={{ w: 600, h: 500 }}
             zIndex={1100}
           >
             <PaintCanvas
               enabled={paintMode}
-              width={600}
-              height={400}
+              width={400}
+              height={300}
               color={selectedColor}
               size={2}
             />

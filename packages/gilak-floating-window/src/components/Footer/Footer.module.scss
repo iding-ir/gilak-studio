@@ -1,0 +1,27 @@
+.root {
+  grid-area: footer;
+  display: flex;
+  flex-direction: row;
+  height: var(--icon-lg);
+
+  .content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: var(--color-dark-sm);
+    font-size: var(--font-size-sm);
+    padding: 0 var(--spacing-md);
+  }
+
+  .resize-handle {
+    display: flex;
+    flex-direction: column-reverse;
+    margin-left: auto;
+    touch-action: none;
+
+    .icon {
+      cursor: nwse-resize;
+    }
+  }
+}

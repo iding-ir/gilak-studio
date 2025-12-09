@@ -1,7 +1,8 @@
-import React, { type ReactNode } from 'react'
+import React, { type PointerEvent, type ReactNode } from 'react'
 import styles from './Menu.module.scss'
 import clsx from 'clsx'
 import { Dropdown } from '../DropDown'
+import { List } from '../List'
 
 export type MenuDirection = 'row' | 'column'
 
@@ -10,6 +11,7 @@ export interface MenuProps {
   label: string
   direction?: MenuDirection
   open?: boolean
+  href?: string
   children?: ReactNode
   onClick?: () => void
 }
@@ -19,9 +21,15 @@ export const Menu: React.FC<MenuProps> = ({
   direction = 'row',
   label,
   open = false,
+  href,
   children,
   onClick,
 }) => {
+  const handleClick = (event: PointerEvent<HTMLAnchorElement>) => {
+    event.preventDefault()
+    onClick?.()
+  }
+
   const className = clsx(styles.root, {
     [styles.firstLevel]: root,
   })
@@ -29,7 +37,9 @@ export const Menu: React.FC<MenuProps> = ({
   if (root) {
     return (
       <div className={className}>
-        <Child direction={direction}>{children}</Child>
+        <Child direction={direction} root={root}>
+          {children}
+        </Child>
       </div>
     )
   }
@@ -37,28 +47,57 @@ export const Menu: React.FC<MenuProps> = ({
   if (!children) {
     return (
       <div className={className}>
-        <Label label={label} onClick={onClick} />
+        <Label label={label} href={href} onClick={handleClick} />
       </div>
     )
   }
 
   return (
     <div className={className}>
-      <Dropdown openDefault={open} trigger={<Label label={label} onClick={onClick} />}>
-        <Child direction={direction}>{children}</Child>
+      <Dropdown
+        openDefault={open}
+        trigger={<Label label={label} href={href} onClick={handleClick} />}
+      >
+        <Child direction={direction} root={root}>
+          {children}
+        </Child>
       </Dropdown>
     </div>
   )
 }
 
-const Child = ({ direction, children }: { direction: MenuDirection; children?: ReactNode }) => {
-  return <div className={clsx(styles.children, styles[direction])}>{children}</div>
+const Child = ({
+  direction,
+  root,
+  children,
+}: {
+  direction: MenuDirection
+  root: boolean
+  children?: ReactNode
+}) => {
+  return (
+    <List
+      direction={direction}
+      count={1}
+      frameless={root}
+      theme={root ? 'primary' : 'light'}
+      items={React.Children.toArray(children)}
+    />
+  )
 }
 
-const Label = ({ label, onClick }: { label: string; onClick?: () => void }) => {
+const Label = ({
+  label,
+  href,
+  onClick,
+}: {
+  label: string
+  href?: string
+  onClick?: (event: PointerEvent<HTMLAnchorElement>) => void
+}) => {
   return (
-    <span className={styles.label} onClick={onClick}>
+    <a className={styles.label} href={href} onClick={onClick}>
       {label}
-    </span>
+    </a>
   )
 }

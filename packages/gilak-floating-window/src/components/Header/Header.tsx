@@ -45,44 +45,16 @@ export const Header: React.FC<HeaderProps> = ({
       <h3 className={styles.title}>{title}</h3>
       <div className={styles.toolbar}>
         {maximizable && status !== 'maximized' && (
-          <Icon
-            icon={IconMaximize}
-            size="md"
-            color="var(--color-dark-md)"
-            backgroundColor="transparent"
-            className={styles.button}
-            onClick={maximize}
-          />
+          <Icon icon={IconMaximize} size="sm" onClick={maximize} />
         )}
         {maximizable && status === 'maximized' && (
-          <Icon
-            icon={IconMaximized}
-            size="md"
-            color="var(--color-dark-md)"
-            backgroundColor="transparent"
-            className={styles.button}
-            onClick={open}
-          />
+          <Icon icon={IconMaximized} size="sm" onClick={open} />
         )}
         {minimizable && status !== 'minimized' && (
-          <Icon
-            icon={IconMinimize}
-            size="md"
-            color="var(--color-dark-md)"
-            backgroundColor="transparent"
-            className={styles.button}
-            onClick={minimize}
-          />
+          <Icon icon={IconMinimize} size="sm" onClick={minimize} />
         )}
         {minimizable && status === 'minimized' && (
-          <Icon
-            icon={IconMinimized}
-            size="md"
-            color="var(--color-dark-md)"
-            backgroundColor="transparent"
-            className={styles.button}
-            onClick={open}
-          />
+          <Icon icon={IconMinimized} size="sm" onClick={open} />
         )}
       </div>
     </header>

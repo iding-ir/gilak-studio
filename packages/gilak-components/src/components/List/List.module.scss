@@ -2,12 +2,42 @@
 
 .list {
   display: grid;
-  gap: var(--spacing-xs);
-  padding: var(--spacing-xs);
-  border-radius: var(--radius-sm);
-  background-color: var(--color-light-xxl);
+  gap: var(--spacing-sm);
 
-  &.vertical {
+  .item {
+    display: grid;
+  }
+
+  &.primary {
+    background-color: var(--color-primary-md);
+
+    .item {
+      @include interactive(
+        $color: var(--color-light-md),
+        $bg-color: var(--color-primary-md),
+        $hover-color: var(--color-light-xl),
+        $hover-bg-color: var(--color-primary-xl)
+      );
+    }
+  }
+
+  &.light {
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+    background-color: var(--color-light-md);
+
+    .item {
+      @include interactive(
+        $color: var(--color-dark-md),
+        $bg-color: var(--color-light-md),
+        $hover-color: var(--color-light-md),
+        $hover-bg-color: var(--color-primary-md)
+      );
+    }
+  }
+
+  &.column {
     grid-auto-flow: row;
     grid-auto-rows: max-content;
 
@@ -24,7 +54,7 @@
     }
   }
 
-  &.horizontal {
+  &.row {
     grid-auto-flow: column;
     grid-auto-columns: max-content;
 
@@ -38,19 +68,6 @@
 
     &.four {
       grid-template-rows: repeat(4, 1fr);
-    }
-  }
-
-  .item {
-    display: flex;
-    color: var(--color-dark-lg);
-    padding: var(--spacing-xs);
-    border-radius: var(--radius-sm);
-    background-color: var(--color-light-xxs);
-    cursor: pointer;
-
-    &:hover {
-      background-color: var(--color-light-sm);
     }
   }
 }

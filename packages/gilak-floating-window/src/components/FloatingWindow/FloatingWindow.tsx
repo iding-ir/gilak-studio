@@ -2,13 +2,12 @@ import React, { RefObject, useRef, useState } from 'react'
 import clsx from 'clsx'
 import { useRegister, useDrag, useResize, useWindow } from '../../hooks'
 import { Header } from '../Header'
-import { Icon } from '@gilak/components'
-import IconResize from '../../assets/icon-resize.svg?url'
 import styles from './FloatingWindow.module.scss'
 import { FloatingWindowMeta, Status } from '../../context'
 import { getItemSync } from '@gilak/utils'
 import { storageKey } from '../../methods/storage-key'
 import { Position, Size } from '../../types'
+import { Footer } from '../Footer/Footer'
 export interface FloatingWindowProps {
   id: string
   children?: React.ReactNode
@@ -129,19 +128,12 @@ export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
           onDragPointerDown={draggable ? onDragPointerDown : undefined}
         />
         <div className={styles.body}>{children}</div>
-        <footer className={styles.footer}>
-          <div className={styles.content}>{footer}</div>
-          {resizable && status !== 'maximized' && (
-            <div className={styles.resizeHandle} onPointerDown={onResizePointerDown}>
-              <Icon
-                icon={IconResize}
-                size="md"
-                color="var(--color-dark-md)"
-                backgroundColor="transparent"
-              />
-            </div>
-          )}
-        </footer>
+        <Footer
+          footer={footer}
+          resizable={resizable}
+          status={status}
+          onResizePointerDown={onResizePointerDown}
+        />
       </div>
     )
   }
