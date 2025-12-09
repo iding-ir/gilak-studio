@@ -79,8 +79,6 @@ export function usePaint({
       canvas.removeEventListener('mousemove', handlePointerMove)
       canvas.removeEventListener('mousedown', handlePointerDown)
       window.removeEventListener('mouseup', handlePointerUp)
-      if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height)
-      savedImage.current = null
     }
   }, [canvasRef, enabled, brushType, color, brushSize])
 }

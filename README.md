@@ -4,10 +4,6 @@ A monorepo of React component packages for Gilak Studio, built with Vite, TypeSc
 
 ## Packages
 
-- **[@gilak/canvas](./packages/gilak-canvas)** - A React canvas component with random visual effects
-- **[@gilak/color-picker](./packages/gilak-color-picker)** - A React canvas component
-- **[@gilak/color-swatch](./packages/gilak-color-swatch)** - A React color swatch component for displaying selected colors
-
 ## Getting Started
 
 ```bash
