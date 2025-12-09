@@ -11,6 +11,7 @@ export type ColorPickerConfig = {
 
 export type ColorPickerAction =
   | { type: 'SET_ACTIVE'; payload: boolean }
+  | { type: 'TOGGLE_ACTIVE' }
   | { type: 'SET_RADIUS'; payload: number }
   | { type: 'SET_SIZE'; payload: number }
   | { type: 'SET_WIDTH'; payload: number }
@@ -26,6 +27,8 @@ export const colorPickerReducer = (
   switch (action.type) {
     case 'SET_ACTIVE':
       return { ...state, isActive: action.payload }
+    case 'TOGGLE_ACTIVE':
+      return { ...state, isActive: !state.isActive }
     case 'SET_RADIUS':
       return { ...state, radius: action.payload }
     case 'SET_SIZE':

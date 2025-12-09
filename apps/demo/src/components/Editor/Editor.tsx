@@ -9,6 +9,7 @@ import IconCanvasUrl from '../../assets/icon-dice.svg?url'
 import IconBucketUrl from '../../assets/icon-bucket.svg?url'
 import IconBrush from '../../assets/icon-brush.svg?url'
 import IconBrushTypes from '../../assets/brush-circle.svg?url'
+import IconBrushSizes from '../../assets/brush-circle-empty.svg?url'
 import { useRef, useState } from 'react'
 import { BrushTypes } from '../BrushTypes'
 import type { BrushType } from '../BrushTypes/BrushTypes'
@@ -20,8 +21,15 @@ export const Editor: React.FC = () => {
   const [paintMode, setPaintMode] = useState(false)
   const [brushType, setBrushType] = useState<BrushType>('circle')
   const [brushSize, setBrushSize] = useState<BrushSize>(2)
-  const { selectedColor, isActive, isHovered, setIsActive, setIsHovered, setSelectedColor } =
-    useColorPicker()
+  const {
+    selectedColor,
+    isActive,
+    isHovered,
+    setIsActive,
+    toggleActive,
+    setIsHovered,
+    setSelectedColor,
+  } = useColorPicker()
 
   const handleRandomize = () => {
     if (!canvasRef.current) return
@@ -79,7 +87,7 @@ export const Editor: React.FC = () => {
                   icon={IconColorPickerUrl}
                   size="md"
                   selected={isActive}
-                  onClick={() => setIsActive(true)}
+                  onClick={toggleActive}
                 />
                 <div className={styles.ellipsis}>Pick a color from a randomized canvas</div>
               </>
@@ -121,7 +129,12 @@ export const Editor: React.FC = () => {
                 >
                   <BrushTypes brush={brushType} onChange={setBrushType} />
                 </Dropdown>
-                <BrushSizes brush={brushSize} onChange={setBrushSize} />
+                <Dropdown
+                  position="top"
+                  trigger={<Icon icon={IconBrushSizes} size="md" interactive />}
+                >
+                  <BrushSizes brush={brushSize} onChange={setBrushSize} />
+                </Dropdown>
                 <div className={styles.ellipsis}>Choose your brush and start drawing!</div>
               </>
             }

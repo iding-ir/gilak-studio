@@ -14,12 +14,9 @@
     box-shadow: var(--shadow-sm);
   }
 
-  &.interactive {
-  }
-
   &.selected {
     outline: 2px solid var(--color-primary-lg);
-    outline-offset: 0px;
+    outline-offset: 2px;
   }
 
   &.xxs {

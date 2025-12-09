@@ -1,7 +1,10 @@
-import React, { type ChangeEvent, useState, type ReactNode } from 'react'
+import React, { useState, type ReactNode } from 'react'
 import IconZoom from './icon-zoom.svg?url'
 import styles from './ResizableScreen.module.scss'
-import { Select } from '../Select'
+import { List } from '../List'
+import { Text } from '../Text'
+import { Dropdown } from '../DropDown'
+import { Icon } from '../Icon'
 
 const zoomLevels = [10, 25, 50, 75, 100, 125, 150, 175, 200] as const
 
@@ -15,10 +18,6 @@ export interface ResizableScreenProps {
 export const ResizableScreen: React.FC<ResizableScreenProps> = ({ children, zoomLevel = 100 }) => {
   const [currentZoomLevel, setCurrentZoomLevel] = useState(zoomLevel)
 
-  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setCurrentZoomLevel(Number(e.target.value) as Zoom)
-  }
-
   return (
     <div className={styles.root}>
       <div className={styles.screen}>
@@ -27,12 +26,30 @@ export const ResizableScreen: React.FC<ResizableScreenProps> = ({ children, zoom
         </div>
       </div>
       <div className={styles.footer}>
-        <Select
-          options={zoomLevels.map((z) => ({ value: z.toString(), text: `${z}%` }))}
-          icon={IconZoom}
-          selected={currentZoomLevel.toString()}
-          onChange={handleChange}
-        />
+        <Dropdown
+          position="top"
+          trigger={
+            <div className={styles.zoomTrigger}>
+              <Icon icon={IconZoom} size="sm" interactive frameless />
+              <Text size="xs" frameless text={`${currentZoomLevel}%`} />
+            </div>
+          }
+        >
+          <List
+            direction="column"
+            count={1}
+            theme="light"
+            items={zoomLevels.map((z) => (
+              <Text
+                selected={currentZoomLevel === z}
+                size="xs"
+                frameless
+                onClick={() => setCurrentZoomLevel(z)}
+                text={`${z.toString()}%`}
+              />
+            ))}
+          />
+        </Dropdown>
       </div>
     </div>
   )

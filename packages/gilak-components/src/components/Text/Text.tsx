@@ -11,7 +11,6 @@ export interface TextProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string
   rounded?: boolean
   selected?: boolean
-  interactive?: boolean
   frameless?: boolean
 }
 
@@ -23,7 +22,6 @@ export const Text: React.FC<TextProps> = ({
   className,
   rounded = true,
   selected = false,
-  interactive = false,
   frameless = false,
   ...props
 }) => {
@@ -38,7 +36,6 @@ export const Text: React.FC<TextProps> = ({
         [styles.rounded]: rounded,
         [styles.selected]: selected,
         [styles.frameless]: frameless,
-        [styles.interactive]: interactive || !!props.onClick,
       })}
       style={rootStyles}
       {...props}

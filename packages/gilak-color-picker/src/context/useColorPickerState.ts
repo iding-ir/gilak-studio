@@ -4,6 +4,7 @@ import { colorPickerReducer, type ColorPickerConfig } from './reducer'
 export type ColorPickerState = {
   isActive: boolean
   setIsActive: (value: boolean) => void
+  toggleActive: () => void
   radius: number
   setRadius: (value: number) => void
   size: number
@@ -25,6 +26,7 @@ export const useColorPickerState = (config: ColorPickerConfig): ColorPickerState
     (value: boolean) => dispatch({ type: 'SET_ACTIVE', payload: value }),
     []
   )
+  const toggleActive = useCallback(() => dispatch({ type: 'TOGGLE_ACTIVE' }), [])
   const setRadius = useCallback(
     (value: number) => dispatch({ type: 'SET_RADIUS', payload: value }),
     []
@@ -51,6 +53,7 @@ export const useColorPickerState = (config: ColorPickerConfig): ColorPickerState
     () => ({
       isActive: state.isActive,
       setIsActive,
+      toggleActive,
       radius: state.radius,
       setRadius,
       size: state.size,
@@ -73,6 +76,7 @@ export const useColorPickerState = (config: ColorPickerConfig): ColorPickerState
       state.selectedColor,
       state.isHovered,
       setIsActive,
+      toggleActive,
       setRadius,
       setSize,
       setWidth,

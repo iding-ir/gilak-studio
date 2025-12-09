@@ -16,5 +16,15 @@
   .footer {
     display: flex;
     flex-direction: row;
+
+    .zoomTrigger {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--spacing-xs);
+      border-radius: var(--radius-md);
+      background-color: var(--color-light-lg);
+    }
   }
 }
