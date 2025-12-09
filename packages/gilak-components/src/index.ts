@@ -19,4 +19,7 @@ export type { SelectProps } from './components/Select'
 export { Menu } from './components/Menu'
 export type { MenuProps } from './components/Menu'
 
+export { Text } from './components/Text'
+export type { TextProps } from './components/Text'
+
 export type { TshirtSize } from './types'

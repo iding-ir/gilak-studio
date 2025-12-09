@@ -1,3 +1,5 @@
+@use "@gilak/stylist/mixins" as mixins;
+
 .root {
   display: flex;
   flex-direction: column;
@@ -38,5 +40,11 @@
     height: 100%;
     padding: var(--spacing-sm);
     overflow: hidden;
+  }
+
+  .ellipsis {
+    display: block;
+    width: 100%;
+    @include mixins.ellipsis();
   }
 }

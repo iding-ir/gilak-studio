@@ -1,6 +1,6 @@
 import React from 'react'
 import { getContrastColor } from '@gilak/utils'
-import { Dropdown, Icon, List, type TshirtSize } from '@gilak/components'
+import { Dropdown, Icon, Input, List, type TshirtSize } from '@gilak/components'
 import styles from './ColorSwatch.module.scss'
 import IconEmpty from '../assets/icon-empty.svg'
 
@@ -20,15 +20,16 @@ export const ColorSwatch: React.FC<ColorSwatchProps> = ({
   onChange,
 }) => {
   return (
-    <div className={styles.root}>
+    <div className={styles.root} style={{ backgroundColor: color }}>
       <Dropdown
+        position="bottom-right"
         trigger={
           <Icon
             icon={icon}
             size={size}
-            color={color}
-            interactive
-            backgroundColor={getContrastColor(color)}
+            color={getContrastColor(color)}
+            backgroundColor="transparent"
+            frameless
           />
         }
       >
@@ -49,6 +50,12 @@ export const ColorSwatch: React.FC<ColorSwatchProps> = ({
           ))}
         />
       </Dropdown>
+      <Input
+        value={color}
+        readOnly
+        type="text"
+        style={{ backgroundColor: color, color: getContrastColor(color), width: '6rem' }}
+      />
     </div>
   )
 }

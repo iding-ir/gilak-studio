@@ -1,4 +1,11 @@
 @use "@gilak/stylist/scss" as *;
 
 .root {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: stretch;
+  padding: var(--spacing-xs);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xs);
 }

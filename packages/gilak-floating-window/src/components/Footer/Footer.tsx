@@ -19,9 +19,9 @@ export const Footer: React.FC<FooterProps> = ({
 }: FooterProps) => {
   return (
     <footer className={styles.root}>
-      <div className={styles.content}>{footer}</div>
+      {footer}
       {resizable && status !== 'maximized' && (
-        <div className={styles.resizeHandle} onPointerDown={onResizePointerDown}>
+        <div className={styles.resize} onPointerDown={onResizePointerDown}>
           <Icon icon={IconResize} size="md" className={styles.icon} frameless />
         </div>
       )}

@@ -2,12 +2,23 @@ import React, { useState, useRef, useEffect, type ReactNode } from 'react'
 import styles from './Dropdown.module.scss'
 import clsx from 'clsx'
 
+export type Position =
+  | 'top'
+  | 'top-right'
+  | 'right'
+  | 'bottom-right'
+  | 'bottom'
+  | 'bottom-left'
+  | 'left'
+  | 'top-left'
+
 export interface DropdownProps {
   trigger: ReactNode
   openDefault?: boolean
   children: ReactNode
   openOnHover?: boolean
   className?: string
+  position?: Position
 }
 
 export const Dropdown: React.FC<DropdownProps> = ({
@@ -16,6 +27,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
   children,
   openOnHover = false,
   className,
+  position = 'bottom-right',
 }) => {
   const [open, setOpen] = useState(openDefault)
   const triggerRef = useRef<HTMLDivElement>(null)
@@ -45,7 +57,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
       }
 
   return (
-    <div className={clsx(styles.root, className)}>
+    <div className={clsx(styles.root, styles[position], className)}>
       <div ref={triggerRef} {...triggerProps} className={styles.trigger}>
         {trigger}
       </div>

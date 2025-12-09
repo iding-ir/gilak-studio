@@ -5,13 +5,13 @@ export function usePaint({
   canvasRef,
   enabled,
   color,
-  size,
+  brushSize,
   brushType,
 }: {
   canvasRef: React.RefObject<HTMLCanvasElement>
   enabled: boolean
   color: string
-  size: number
+  brushSize: number
   brushType: BrushType
 }) {
   const drawing = useRef(false)
@@ -40,7 +40,7 @@ export function usePaint({
         ctx.moveTo(lastPos.current.x, lastPos.current.y)
         ctx.lineTo(pos.x, pos.y)
         ctx.strokeStyle = color
-        ctx.lineWidth = size
+        ctx.lineWidth = brushSize
         ctx.stroke()
         lastPos.current = pos
         savedImage.current = ctx.getImageData(0, 0, canvas.width, canvas.height)
@@ -50,7 +50,7 @@ export function usePaint({
         } else {
           ctx.clearRect(0, 0, canvas.width, canvas.height)
         }
-        drawBrushType(ctx, pos.x, pos.y, size, brushType)
+        drawBrushType(ctx, pos.x, pos.y, brushSize, brushType)
       }
     }
 
@@ -82,5 +82,5 @@ export function usePaint({
       if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height)
       savedImage.current = null
     }
-  }, [canvasRef, enabled, brushType, color, size])
+  }, [canvasRef, enabled, brushType, color, brushSize])
 }

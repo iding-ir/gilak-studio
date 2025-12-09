@@ -1,4 +1,5 @@
 import React, { type ChangeEvent, useState, type ReactNode } from 'react'
+import IconZoom from './icon-zoom.svg?url'
 import styles from './ResizableScreen.module.scss'
 import { Select } from '../Select'
 
@@ -28,6 +29,7 @@ export const ResizableScreen: React.FC<ResizableScreenProps> = ({ children, zoom
       <div className={styles.footer}>
         <Select
           options={zoomLevels.map((z) => ({ value: z.toString(), text: `${z}%` }))}
+          icon={IconZoom}
           selected={currentZoomLevel.toString()}
           onChange={handleChange}
         />

@@ -8,22 +8,25 @@ export interface PaintCanvasProps {
   width?: number
   height?: number
   color?: string
-  size?: number
+  brushSize?: number
   brushType?: BrushType
 }
 
 const PaintCanvas = forwardRef<HTMLCanvasElement, PaintCanvasProps>(
-  ({ enabled, width = 800, height = 600, color = '#222', size = 2, brushType = 'circle' }, ref) => {
+  (
+    { enabled, width = 800, height = 600, color = '#222', brushSize = 2, brushType = 'circle' },
+    ref
+  ) => {
     const internalRef = useRef<HTMLCanvasElement>(null)
     const canvasRef = (ref ?? internalRef) as React.RefObject<HTMLCanvasElement>
-    usePaint({ canvasRef, enabled, color, size, brushType })
+    usePaint({ canvasRef, enabled, color, brushSize, brushType })
 
     return (
       <canvas
         ref={canvasRef}
         width={width}
         height={height}
-        className={styles.paintCanvas}
+        className={styles.canvas}
         style={{ cursor: enabled ? 'none' : 'default' }}
       />
     )

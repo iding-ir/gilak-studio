@@ -1,8 +1,4 @@
-.container {
-  display: inline-block;
-  position: relative;
-
-  .canvas {
-    display: block;
-  }
+.canvas {
+  display: block;
+  box-shadow: var(--shadow-md);
 }

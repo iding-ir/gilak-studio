@@ -1,5 +1,6 @@
 .root {
   position: relative;
+  display: grid;
 
   .trigger {
     width: 100%;
@@ -10,5 +11,73 @@
   .dropdownMenu {
     position: absolute;
     z-index: 10000;
+  }
+
+  &.top {
+    .dropdownMenu {
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-bottom: var(--spacing-xs);
+    }
+  }
+
+  &.top-right {
+    .dropdownMenu {
+      bottom: 100%;
+      left: 0;
+      margin-bottom: var(--spacing-xs);
+    }
+  }
+
+  &.right {
+    .dropdownMenu {
+      top: 50%;
+      left: 100%;
+      transform: translateY(-50%);
+      margin-left: var(--spacing-xs);
+    }
+  }
+
+  &.bottom-right {
+    .dropdownMenu {
+      top: 100%;
+      left: 0;
+      margin-top: var(--spacing-xs);
+    }
+  }
+
+  &.bottom {
+    .dropdownMenu {
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-top: var(--spacing-xs);
+    }
+  }
+
+  &.bottom-left {
+    .dropdownMenu {
+      top: 100%;
+      right: 0;
+      margin-top: var(--spacing-xs);
+    }
+  }
+
+  &.left {
+    .dropdownMenu {
+      top: 50%;
+      right: 100%;
+      transform: translateY(-50%);
+      margin-right: var(--spacing-xs);
+    }
+  }
+
+  &.top-left {
+    .dropdownMenu {
+      bottom: 100%;
+      right: 0;
+      margin-bottom: var(--spacing-xs);
+    }
   }
 }

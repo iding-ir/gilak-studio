@@ -12,11 +12,14 @@ import IconBrushTypes from '../../assets/brush-circle.svg?url'
 import { useRef, useState } from 'react'
 import { BrushTypes } from '../BrushTypes'
 import type { BrushType } from '../BrushTypes/BrushTypes'
+import { BrushSizes } from '../BrushSizes'
+import type { BrushSize } from '../BrushSizes/BrushSizes'
 
 export const Editor: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [paintMode, setPaintMode] = useState(false)
-  const [brush, setBrush] = useState<BrushType>('circle')
+  const [brushType, setBrushType] = useState<BrushType>('circle')
+  const [brushSize, setBrushSize] = useState<BrushSize>(2)
   const { selectedColor, isActive, isHovered, setIsActive, setIsHovered, setSelectedColor } =
     useColorPicker()
 
@@ -39,30 +42,6 @@ export const Editor: React.FC = () => {
           </Menu>
         </nav>
         <ul className={styles.tools}>
-          <li>
-            <Icon
-              icon={IconColorPickerUrl}
-              size="md"
-              selected={isActive}
-              onClick={() => setIsActive(true)}
-            />
-          </li>
-          <li>
-            <Icon
-              icon={IconBrush}
-              size="md"
-              selected={paintMode}
-              onClick={() => setPaintMode(true)}
-            />
-          </li>
-          <li>
-            <Dropdown trigger={<Icon icon={IconBrushTypes} size="md" interactive />}>
-              <BrushTypes brush={brush} onChange={setBrush} />
-            </Dropdown>
-          </li>
-          <li>
-            <Icon icon={IconCanvasUrl} size="md" onClick={handleRandomize} />
-          </li>
           <li>
             <ColorSwatch
               size="md"
@@ -93,7 +72,18 @@ export const Editor: React.FC = () => {
           <FloatingWindow
             id="floating-window-1"
             title="Color Picker"
-            footer="Select a color from a randomized canvas"
+            footer={
+              <>
+                <Icon icon={IconCanvasUrl} size="md" onClick={handleRandomize} />
+                <Icon
+                  icon={IconColorPickerUrl}
+                  size="md"
+                  selected={isActive}
+                  onClick={() => setIsActive(true)}
+                />
+                <div className={styles.ellipsis}>Pick a color from a randomized canvas</div>
+              </>
+            }
             initialPosition={{ x: 0, y: 0 }}
             initialSize={{ w: 600, h: 500 }}
             zIndex={1100}
@@ -117,18 +107,38 @@ export const Editor: React.FC = () => {
           <FloatingWindow
             id="floating-window-2"
             title="Drawing Canvas"
-            footer="Pick your brush and start drawing!"
+            footer={
+              <>
+                <Icon
+                  icon={IconBrush}
+                  size="md"
+                  selected={paintMode}
+                  onClick={() => setPaintMode((prev) => !prev)}
+                />
+                <Dropdown
+                  position="top-right"
+                  trigger={<Icon icon={IconBrushTypes} size="md" interactive />}
+                >
+                  <BrushTypes brush={brushType} onChange={setBrushType} />
+                </Dropdown>
+                <BrushSizes brush={brushSize} onChange={setBrushSize} />
+                <div className={styles.ellipsis}>Choose your brush and start drawing!</div>
+              </>
+            }
             initialPosition={{ x: 640, y: 0 }}
             initialSize={{ w: 600, h: 500 }}
             zIndex={1100}
           >
-            <PaintCanvas
-              enabled={paintMode}
-              width={400}
-              height={300}
-              color={selectedColor}
-              size={2}
-            />
+            <ResizableScreen zoomLevel={100}>
+              <PaintCanvas
+                enabled={paintMode}
+                width={400}
+                height={300}
+                color={selectedColor}
+                brushType={brushType}
+                brushSize={brushSize}
+              />
+            </ResizableScreen>
           </FloatingWindow>
         </FloatingWindowProvider>
       </main>

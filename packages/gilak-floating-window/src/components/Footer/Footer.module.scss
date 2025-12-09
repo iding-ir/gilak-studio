@@ -1,27 +1,24 @@
+@use "@gilak/stylist/mixins" as mixins;
+
 .root {
   grid-area: footer;
   display: flex;
   flex-direction: row;
-  height: var(--icon-lg);
+  align-items: center;
+  color: var(--color-dark-sm);
+  font-size: var(--font-size-sm);
+  padding: var(--spacing-sm);
+  gap: var(--spacing-sm);
+  max-width: 100%;
+}
 
-  .content {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    color: var(--color-dark-sm);
-    font-size: var(--font-size-sm);
-    padding: 0 var(--spacing-md);
-  }
+.resize {
+  display: flex;
+  flex-direction: column-reverse;
+  margin-left: auto;
+  touch-action: none;
 
-  .resize-handle {
-    display: flex;
-    flex-direction: column-reverse;
-    margin-left: auto;
-    touch-action: none;
-
-    .icon {
-      cursor: nwse-resize;
-    }
+  .icon {
+    cursor: nwse-resize;
   }
 }
