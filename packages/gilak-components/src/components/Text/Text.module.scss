@@ -7,11 +7,13 @@
   justify-content: center;
   position: relative;
   color: var(--fg-color);
-  padding: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background-color: var(--bg-color);
+  box-shadow: var(--shadow-sm);
 
-  &:not(.frameless) {
-    background-color: var(--bg-color);
-    box-shadow: var(--shadow-sm);
+  &.frameless {
+    background-color: transparent;
+    box-shadow: none;
   }
 
   &.selected {

@@ -13,20 +13,18 @@ export interface ListProps {
 
 export const List = ({
   items,
-  direction,
-  count,
+  direction = 'column',
+  count = 1,
   frameless = false,
   theme = 'light',
 }: ListProps): React.ReactElement => {
   return (
     <ul
-      className={clsx(styles.list, styles[theme], {
+      className={clsx(styles.list, styles[theme], styles[direction], {
         [styles.frameless]: frameless,
-        [styles.row]: direction === 'row',
-        [styles.column]: direction === 'column',
-        [styles.two]: count === 2,
-        [styles.three]: count === 3,
-        [styles.four]: count === 4,
+        [styles.count_2]: count === 2,
+        [styles.count_3]: count === 3,
+        [styles.count_4]: count === 4,
       })}
     >
       {items.map((item, idx) => (

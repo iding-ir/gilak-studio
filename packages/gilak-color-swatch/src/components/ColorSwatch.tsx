@@ -37,7 +37,6 @@ export const ColorSwatch: React.FC<ColorSwatchProps> = ({
           direction="column"
           count={3}
           theme="light"
-          frameless
           items={colors.map((c) => (
             <Icon
               icon={IconEmpty}
@@ -54,6 +53,7 @@ export const ColorSwatch: React.FC<ColorSwatchProps> = ({
         value={color}
         readOnly
         type="text"
+        name="color-swatch"
         style={{ backgroundColor: color, color: getContrastColor(color), width: '6rem' }}
       />
     </div>

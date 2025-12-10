@@ -3,6 +3,7 @@ import styles from './Menu.module.scss'
 import clsx from 'clsx'
 import { Dropdown } from '../DropDown'
 import { List } from '../List'
+import { Text } from '../Text'
 
 export type MenuDirection = 'row' | 'column'
 
@@ -96,8 +97,8 @@ const Label = ({
   onClick?: (event: PointerEvent<HTMLAnchorElement>) => void
 }) => {
   return (
-    <a className={styles.label} href={href} onClick={onClick}>
-      {label}
+    <a href={href} onClick={onClick}>
+      <Text size="md" text={label} frameless />
     </a>
   )
 }
