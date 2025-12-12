@@ -1,1 +1,6 @@
-export { BRUSH_TYPES, type BrushType, BRUSH_SIZES, type BrushSize } from './brush'
+export {
+  BRUSH_SIZES,
+  BRUSH_TYPES,
+  type BrushSize,
+  type BrushType,
+} from "./brush";

@@ -1,1 +1,1 @@
-export type { ColorType } from './color'
+export type { ColorType } from "./color";

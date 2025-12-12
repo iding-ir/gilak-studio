@@ -1,29 +1,30 @@
-import React from 'react'
-import styles from './Canvas.module.scss'
-import { useCanvasEffect } from '../hooks'
+import React from "react";
+
+import { useCanvasEffect } from "../hooks";
+import styles from "./Canvas.module.scss";
 
 export interface CanvasProps {
-  children?: React.ReactNode
-  ref?: React.RefObject<HTMLCanvasElement | null>
-  width?: string | number
-  height?: string | number
-  onClick?: (event: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => void
-  onEnter?: () => void
-  onLeave?: () => void
+  children?: React.ReactNode;
+  ref?: React.RefObject<HTMLCanvasElement | null>;
+  width?: string | number;
+  height?: string | number;
+  onClick?: (event: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => void;
+  onEnter?: () => void;
+  onLeave?: () => void;
 }
 
 export const Canvas: React.FC<CanvasProps> = ({
   children,
   ref,
-  width = '100%',
-  height = '100%',
+  width = "100%",
+  height = "100%",
   onClick,
   onEnter,
   onLeave,
 }) => {
-  const canvasRef = ref as React.RefObject<HTMLCanvasElement>
+  const canvasRef = ref as React.RefObject<HTMLCanvasElement>;
 
-  useCanvasEffect(canvasRef)
+  useCanvasEffect(canvasRef);
 
   return (
     <div className={styles.container}>
@@ -38,5 +39,5 @@ export const Canvas: React.FC<CanvasProps> = ({
       />
       {children}
     </div>
-  )
-}
+  );
+};

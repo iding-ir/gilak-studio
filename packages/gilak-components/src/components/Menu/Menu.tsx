@@ -1,25 +1,26 @@
-import React, { type PointerEvent, type ReactNode } from 'react'
-import styles from './Menu.module.scss'
-import clsx from 'clsx'
-import { Dropdown } from '../DropDown'
-import { List } from '../List'
-import { Text } from '../Text'
+import clsx from "clsx";
+import React, { type PointerEvent, type ReactNode } from "react";
 
-export type MenuDirection = 'row' | 'column'
+import { Dropdown } from "../DropDown";
+import { List } from "../List";
+import { Text } from "../Text";
+import styles from "./Menu.module.scss";
+
+export type MenuDirection = "row" | "column";
 
 export interface MenuProps {
-  root?: boolean
-  label: string
-  direction?: MenuDirection
-  open?: boolean
-  href?: string
-  children?: ReactNode
-  onClick?: () => void
+  root?: boolean;
+  label: string;
+  direction?: MenuDirection;
+  open?: boolean;
+  href?: string;
+  children?: ReactNode;
+  onClick?: () => void;
 }
 
 export const Menu: React.FC<MenuProps> = ({
   root = false,
-  direction = 'row',
+  direction = "row",
   label,
   open = false,
   href,
@@ -27,13 +28,13 @@ export const Menu: React.FC<MenuProps> = ({
   onClick,
 }) => {
   const handleClick = (event: PointerEvent<HTMLAnchorElement>) => {
-    event.preventDefault()
-    onClick?.()
-  }
+    event.preventDefault();
+    onClick?.();
+  };
 
   const className = clsx(styles.root, {
     [styles.firstLevel]: root,
-  })
+  });
 
   if (root) {
     return (
@@ -42,7 +43,7 @@ export const Menu: React.FC<MenuProps> = ({
           {children}
         </Child>
       </div>
-    )
+    );
   }
 
   if (!children) {
@@ -50,7 +51,7 @@ export const Menu: React.FC<MenuProps> = ({
       <div className={className}>
         <Label label={label} href={href} onClick={handleClick} />
       </div>
-    )
+    );
   }
 
   return (
@@ -64,41 +65,41 @@ export const Menu: React.FC<MenuProps> = ({
         </Child>
       </Dropdown>
     </div>
-  )
-}
+  );
+};
 
 const Child = ({
   direction,
   root,
   children,
 }: {
-  direction: MenuDirection
-  root: boolean
-  children?: ReactNode
+  direction: MenuDirection;
+  root: boolean;
+  children?: ReactNode;
 }) => {
   return (
     <List
       direction={direction}
       count={1}
       frameless={root}
-      theme={root ? 'primary' : 'light'}
+      theme={root ? "primary" : "light"}
       items={React.Children.toArray(children)}
     />
-  )
-}
+  );
+};
 
 const Label = ({
   label,
   href,
   onClick,
 }: {
-  label: string
-  href?: string
-  onClick?: (event: PointerEvent<HTMLAnchorElement>) => void
+  label: string;
+  href?: string;
+  onClick?: (event: PointerEvent<HTMLAnchorElement>) => void;
 }) => {
   return (
     <a href={href} onClick={onClick}>
       <Text size="md" text={label} frameless />
     </a>
-  )
-}
+  );
+};

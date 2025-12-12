@@ -1,2 +1,2 @@
-export { ColorSwatch } from './components'
-export type { ColorSwatchProps } from './components'
+export type { ColorSwatchProps } from "./components";
+export { ColorSwatch } from "./components";

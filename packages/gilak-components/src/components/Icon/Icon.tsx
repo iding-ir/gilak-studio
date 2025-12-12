@@ -1,25 +1,29 @@
-import React from 'react'
-import clsx from 'clsx'
-import styles from './Icon.module.scss'
-import type { TshirtSize } from '../../types'
+import clsx from "clsx";
+import React from "react";
 
-export interface IconProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'color'> {
-  icon: string
-  size?: TshirtSize
-  color?: string
-  backgroundColor?: string
-  className?: string
-  rounded?: boolean
-  selected?: boolean
-  interactive?: boolean
-  frameless?: boolean
+import type { TshirtSize } from "../../types";
+import styles from "./Icon.module.scss";
+
+export interface IconProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "color"
+> {
+  icon: string;
+  size?: TshirtSize;
+  color?: string;
+  backgroundColor?: string;
+  className?: string;
+  rounded?: boolean;
+  selected?: boolean;
+  interactive?: boolean;
+  frameless?: boolean;
 }
 
 export const Icon: React.FC<IconProps> = ({
   icon,
-  size = 'md',
-  color = 'var(--color-dark-xxl)',
-  backgroundColor = 'var(--color-light-xxxs)',
+  size = "md",
+  color = "var(--color-dark-xxl)",
+  backgroundColor = "var(--color-light-xxxs)",
   className,
   rounded = true,
   selected = false,
@@ -28,10 +32,10 @@ export const Icon: React.FC<IconProps> = ({
   ...props
 }) => {
   const rootStyles = {
-    '--icon-color': color,
-    '--icon-bg-color': backgroundColor,
-    '--icon-url': `url("${icon}")`,
-  } as React.CSSProperties
+    "--icon-color": color,
+    "--icon-bg-color": backgroundColor,
+    "--icon-url": `url("${icon}")`,
+  } as React.CSSProperties;
 
   return (
     <i
@@ -46,5 +50,5 @@ export const Icon: React.FC<IconProps> = ({
     >
       <span className={clsx(styles.image)} />
     </i>
-  )
-}
+  );
+};

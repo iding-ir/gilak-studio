@@ -1,24 +1,25 @@
-import React, { useState, useRef, useEffect, type ReactNode } from 'react'
-import styles from './Dropdown.module.scss'
-import clsx from 'clsx'
+import clsx from "clsx";
+import React, { type ReactNode, useEffect, useRef, useState } from "react";
+
+import styles from "./Dropdown.module.scss";
 
 export type Position =
-  | 'top'
-  | 'top-right'
-  | 'right'
-  | 'bottom-right'
-  | 'bottom'
-  | 'bottom-left'
-  | 'left'
-  | 'top-left'
+  | "top"
+  | "top-right"
+  | "right"
+  | "bottom-right"
+  | "bottom"
+  | "bottom-left"
+  | "left"
+  | "top-left";
 
 export interface DropdownProps {
-  trigger: ReactNode
-  openDefault?: boolean
-  children: ReactNode
-  openOnHover?: boolean
-  className?: string
-  position?: Position
+  trigger: ReactNode;
+  openDefault?: boolean;
+  children: ReactNode;
+  openOnHover?: boolean;
+  className?: string;
+  position?: Position;
 }
 
 export const Dropdown: React.FC<DropdownProps> = ({
@@ -27,25 +28,25 @@ export const Dropdown: React.FC<DropdownProps> = ({
   children,
   openOnHover = false,
   className,
-  position = 'bottom-right',
+  position = "bottom-right",
 }) => {
-  const [open, setOpen] = useState(openDefault)
-  const triggerRef = useRef<HTMLDivElement>(null)
-  const menuRef = useRef<HTMLDivElement>(null)
+  const [open, setOpen] = useState(openDefault);
+  const triggerRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!open) return
+    if (!open) return;
     const handlePointerDown = (event: PointerEvent) => {
       if (
         !triggerRef.current?.contains(event.target as Node) &&
         !menuRef.current?.contains(event.target as Node)
       ) {
-        setOpen(false)
+        setOpen(false);
       }
-    }
-    document.addEventListener('pointerdown', handlePointerDown)
-    return () => document.removeEventListener('pointerdown', handlePointerDown)
-  }, [open])
+    };
+    document.addEventListener("pointerdown", handlePointerDown);
+    return () => document.removeEventListener("pointerdown", handlePointerDown);
+  }, [open]);
 
   const triggerProps = openOnHover
     ? {
@@ -54,7 +55,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
       }
     : {
         onPointerDown: () => setOpen((state) => !state),
-      }
+      };
 
   return (
     <div className={clsx(styles.root, styles[position], className)}>
@@ -67,5 +68,5 @@ export const Dropdown: React.FC<DropdownProps> = ({
         </div>
       )}
     </div>
-  )
-}
+  );
+};

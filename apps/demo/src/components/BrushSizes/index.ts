@@ -1,1 +1,1 @@
-export { BrushSizes } from './BrushSizes'
+export { BrushSizes } from "./BrushSizes";

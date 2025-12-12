@@ -1,38 +1,39 @@
-import type { PayloadAction } from '@reduxjs/toolkit'
-import type { ColorType } from '@gilak/color-picker'
-import { createAppSlice } from '../../app/createAppSlice'
+import type { ColorType } from "@gilak/color-picker";
+import type { PayloadAction } from "@reduxjs/toolkit";
+
+import { createAppSlice } from "../../app/createAppSlice";
 
 export interface Color {
-  color: ColorType
-  background: ColorType
+  color: ColorType;
+  background: ColorType;
 }
 
 export const DEFAULT_COLOR: Color = {
-  color: '#000000',
-  background: '#ffffff',
-}
+  color: "#000000",
+  background: "#ffffff",
+};
 
 export interface ColorState {
-  selected?: Color
+  selected?: Color;
 }
 
 const initialState: ColorState = {
   selected: DEFAULT_COLOR,
-}
+};
 
 export const colorSlice = createAppSlice({
-  name: 'color',
+  name: "color",
   initialState,
   reducers: (create) => ({
     setColor: create.reducer((state, { payload }: PayloadAction<Color>) => {
-      state.selected = payload
+      state.selected = payload;
     }),
   }),
   selectors: {
     selectColor: ({ selected }) => selected,
   },
-})
+});
 
-export const { setColor } = colorSlice.actions
+export const { setColor } = colorSlice.actions;
 
-export const { selectColor } = colorSlice.selectors
+export const { selectColor } = colorSlice.selectors;

@@ -1,53 +1,62 @@
-import { useCallback, useMemo, useReducer } from 'react'
-import { colorPickerReducer, type ColorPickerConfig } from './reducer'
+import { useCallback, useMemo, useReducer } from "react";
+
+import { type ColorPickerConfig, colorPickerReducer } from "./reducer";
 
 export type ColorPickerState = {
-  isActive: boolean
-  setIsActive: (value: boolean) => void
-  toggleActive: () => void
-  radius: number
-  setRadius: (value: number) => void
-  size: number
-  setSize: (value: number) => void
-  width: number
-  setWidth: (value: number) => void
-  currentColor: string
-  setCurrentColor: (value: string) => void
-  selectedColor: string
-  setSelectedColor: (value: string) => void
-  isHovered: boolean
-  setIsHovered: (value: boolean) => void
-}
+  isActive: boolean;
+  setIsActive: (value: boolean) => void;
+  toggleActive: () => void;
+  radius: number;
+  setRadius: (value: number) => void;
+  size: number;
+  setSize: (value: number) => void;
+  width: number;
+  setWidth: (value: number) => void;
+  currentColor: string;
+  setCurrentColor: (value: string) => void;
+  selectedColor: string;
+  setSelectedColor: (value: string) => void;
+  isHovered: boolean;
+  setIsHovered: (value: boolean) => void;
+};
 
-export const useColorPickerState = (config: ColorPickerConfig): ColorPickerState => {
-  const [state, dispatch] = useReducer(colorPickerReducer, config)
+export const useColorPickerState = (
+  config: ColorPickerConfig,
+): ColorPickerState => {
+  const [state, dispatch] = useReducer(colorPickerReducer, config);
 
   const setIsActive = useCallback(
-    (value: boolean) => dispatch({ type: 'SET_ACTIVE', payload: value }),
-    []
-  )
-  const toggleActive = useCallback(() => dispatch({ type: 'TOGGLE_ACTIVE' }), [])
+    (value: boolean) => dispatch({ type: "SET_ACTIVE", payload: value }),
+    [],
+  );
+  const toggleActive = useCallback(
+    () => dispatch({ type: "TOGGLE_ACTIVE" }),
+    [],
+  );
   const setRadius = useCallback(
-    (value: number) => dispatch({ type: 'SET_RADIUS', payload: value }),
-    []
-  )
-  const setSize = useCallback((value: number) => dispatch({ type: 'SET_SIZE', payload: value }), [])
+    (value: number) => dispatch({ type: "SET_RADIUS", payload: value }),
+    [],
+  );
+  const setSize = useCallback(
+    (value: number) => dispatch({ type: "SET_SIZE", payload: value }),
+    [],
+  );
   const setWidth = useCallback(
-    (value: number) => dispatch({ type: 'SET_WIDTH', payload: value }),
-    []
-  )
+    (value: number) => dispatch({ type: "SET_WIDTH", payload: value }),
+    [],
+  );
   const setCurrentColor = useCallback(
-    (value: string) => dispatch({ type: 'SET_CURRENT_COLOR', payload: value }),
-    []
-  )
+    (value: string) => dispatch({ type: "SET_CURRENT_COLOR", payload: value }),
+    [],
+  );
   const setSelectedColor = useCallback(
-    (value: string) => dispatch({ type: 'SET_SELECTED_COLOR', payload: value }),
-    []
-  )
+    (value: string) => dispatch({ type: "SET_SELECTED_COLOR", payload: value }),
+    [],
+  );
   const setIsHovered = useCallback(
-    (value: boolean) => dispatch({ type: 'SET_HOVERED', payload: value }),
-    []
-  )
+    (value: boolean) => dispatch({ type: "SET_HOVERED", payload: value }),
+    [],
+  );
 
   return useMemo(
     () => ({
@@ -83,6 +92,6 @@ export const useColorPickerState = (config: ColorPickerConfig): ColorPickerState
       setCurrentColor,
       setSelectedColor,
       setIsHovered,
-    ]
-  )
-}
+    ],
+  );
+};

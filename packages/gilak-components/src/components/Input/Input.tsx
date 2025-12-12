@@ -1,18 +1,22 @@
-import React from 'react'
-import clsx from 'clsx'
-import { Icon } from '../Icon'
-import styles from './Input.module.scss'
-import type { TshirtSize } from '../../types'
+import clsx from "clsx";
+import React from "react";
 
-export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
-  size?: TshirtSize
-  error?: boolean
-  fullWidth?: boolean
-  label?: string
-  icon?: string
-  color?: string
-  backgroundColor?: string
-  rounded?: boolean
+import type { TshirtSize } from "../../types";
+import { Icon } from "../Icon";
+import styles from "./Input.module.scss";
+
+export interface InputProps extends Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  "size"
+> {
+  size?: TshirtSize;
+  error?: boolean;
+  fullWidth?: boolean;
+  label?: string;
+  icon?: string;
+  color?: string;
+  backgroundColor?: string;
+  rounded?: boolean;
 }
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -20,7 +24,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     {
       id,
       className,
-      size = 'md',
+      size = "md",
       error,
       fullWidth,
       label,
@@ -30,7 +34,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       rounded = true,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <label
@@ -52,10 +56,15 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             rounded={false}
           />
         )}
-        <input ref={ref} id={id} className={clsx(styles.input, className)} {...props} />
+        <input
+          ref={ref}
+          id={id}
+          className={clsx(styles.input, className)}
+          {...props}
+        />
       </label>
-    )
-  }
-)
+    );
+  },
+);
 
-Input.displayName = 'Input'
+Input.displayName = "Input";

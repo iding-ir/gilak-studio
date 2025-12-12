@@ -1,22 +1,23 @@
-import React from 'react'
-import type { ReactNode } from 'react'
-import styles from './List.module.scss'
-import clsx from 'clsx'
+import clsx from "clsx";
+import type { ReactNode } from "react";
+import React from "react";
+
+import styles from "./List.module.scss";
 
 export interface ListProps {
-  items: ReactNode[]
-  direction?: 'row' | 'column'
-  count?: 1 | 2 | 3 | 4
-  frameless?: boolean
-  theme?: 'primary' | 'light'
+  items: ReactNode[];
+  direction?: "row" | "column";
+  count?: 1 | 2 | 3 | 4;
+  frameless?: boolean;
+  theme?: "primary" | "light";
 }
 
 export const List = ({
   items,
-  direction = 'column',
+  direction = "column",
   count = 1,
   frameless = false,
-  theme = 'light',
+  theme = "light",
 }: ListProps): React.ReactElement => {
   return (
     <ul
@@ -33,5 +34,5 @@ export const List = ({
         </li>
       ))}
     </ul>
-  )
-}
+  );
+};

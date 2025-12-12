@@ -1,25 +1,32 @@
-import React, { createContext, type ReactNode, useReducer } from 'react'
-import styles from './provider.module.scss'
-import type { State, Action } from './types'
-import { reducer, initialState } from './reducer'
-import { Header } from '../components/Header'
+import React, { createContext, type ReactNode, useReducer } from "react";
+
+import { Header } from "../components/Header";
+import styles from "./provider.module.scss";
+import { initialState, reducer } from "./reducer";
+import type { Action, State } from "./types";
 
 export type ContextValue = {
-  state: State
-  dispatch: React.Dispatch<Action>
-}
+  state: State;
+  dispatch: React.Dispatch<Action>;
+};
 
-const FloatingWindowContext = createContext<ContextValue | undefined>(undefined)
+const FloatingWindowContext = createContext<ContextValue | undefined>(
+  undefined,
+);
 
-export const FloatingWindowProvider: React.FC<{ children?: ReactNode }> = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initialState)
+export const FloatingWindowProvider: React.FC<{ children?: ReactNode }> = ({
+  children,
+}) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const value: ContextValue = {
     state,
     dispatch,
-  }
+  };
 
-  const minimizedWindows = Object.values(state.windows).filter((w) => w.status === 'minimized')
+  const minimizedWindows = Object.values(state.windows).filter(
+    (w) => w.status === "minimized",
+  );
 
   return (
     <FloatingWindowContext.Provider value={value}>
@@ -28,7 +35,7 @@ export const FloatingWindowProvider: React.FC<{ children?: ReactNode }> = ({ chi
         {minimizedWindows.length > 0 && (
           <div className={styles.taskbar}>
             {Object.values(state.windows)
-              .filter((w) => w.status === 'minimized')
+              .filter((w) => w.status === "minimized")
               .map((w) => (
                 <Header
                   key={w.id}
@@ -44,7 +51,7 @@ export const FloatingWindowProvider: React.FC<{ children?: ReactNode }> = ({ chi
         )}
       </div>
     </FloatingWindowContext.Provider>
-  )
-}
+  );
+};
 
-export default FloatingWindowContext
+export default FloatingWindowContext;

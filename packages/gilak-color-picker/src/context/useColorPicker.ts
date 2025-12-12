@@ -1,6 +1,7 @@
-import { use } from 'react'
-import type { ColorPickerState } from './useColorPickerState'
-import { ColorPickerContext } from './ColorPickerContext'
+import { use } from "react";
+
+import { ColorPickerContext } from "./ColorPickerContext";
+import type { ColorPickerState } from "./useColorPickerState";
 
 /**
  * Hook to access color picker context state and methods.
@@ -15,11 +16,11 @@ import { ColorPickerContext } from './ColorPickerContext'
  * ```
  */
 export const useColorPicker = (): ColorPickerState => {
-  const context = use(ColorPickerContext)
+  const context = use(ColorPickerContext);
 
   if (!context) {
-    throw new Error('useColorPicker must be used within a ColorPickerProvider')
+    throw new Error("useColorPicker must be used within a ColorPickerProvider");
   }
 
-  return context
-}
+  return context;
+};

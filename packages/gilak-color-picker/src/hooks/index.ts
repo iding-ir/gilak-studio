@@ -1,1 +1,1 @@
-export { useMagnifier } from './use-magnifier'
+export { useMagnifier } from "./use-magnifier";

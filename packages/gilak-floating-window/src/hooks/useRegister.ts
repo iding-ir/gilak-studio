@@ -1,19 +1,20 @@
-import { useEffect } from 'react'
-import { useFloatingWindowContext } from '../context'
-import type { FloatingWindowMeta } from '../context/types'
+import { useEffect } from "react";
+
+import { useFloatingWindowContext } from "../context";
+import type { FloatingWindowMeta } from "../context/types";
 
 export function useRegister(meta: FloatingWindowMeta) {
-  const ctx = useFloatingWindowContext()
+  const ctx = useFloatingWindowContext();
 
   useEffect(() => {
-    ctx.dispatch({ type: 'REGISTER', payload: meta })
+    ctx.dispatch({ type: "REGISTER", payload: meta });
 
     return () => {
-      ctx.dispatch({ type: 'UNREGISTER', payload: { id: meta.id } })
-    }
+      ctx.dispatch({ type: "UNREGISTER", payload: { id: meta.id } });
+    };
     // intentionally only depend on id
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [meta.id])
+  }, [meta.id]);
 }
 
-export default useRegister
+export default useRegister;

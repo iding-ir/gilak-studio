@@ -1,12 +1,12 @@
-import { BRUSH_SIZES, type BrushSize } from '@gilak/canvas'
-import { List, Text } from '@gilak/components'
+import { BRUSH_SIZES, type BrushSize } from "@gilak/canvas";
+import { List, Text } from "@gilak/components";
 
 export const BrushSizes = ({
   brush,
   onChange,
 }: {
-  brush: BrushSize
-  onChange: (brush: BrushSize) => void
+  brush: BrushSize;
+  onChange: (brush: BrushSize) => void;
 }) => {
   return (
     <List
@@ -23,5 +23,5 @@ export const BrushSizes = ({
         />
       ))}
     />
-  )
-}
+  );
+};

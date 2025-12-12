@@ -1,33 +1,34 @@
-import React, { type RefObject, useRef } from 'react'
-import clsx from 'clsx'
-import { useRegister, useDrag, useResize, useWindow } from '../../hooks'
-import { Header } from '../Header'
-import styles from './FloatingWindow.module.scss'
-import type { Status } from '../../context'
-import type { Position, Size } from '../../types'
-import { Footer } from '../Footer/Footer'
+import clsx from "clsx";
+import React, { type RefObject, useRef } from "react";
+
+import type { Status } from "../../context";
+import { useDrag, useRegister, useResize, useWindow } from "../../hooks";
+import type { Position, Size } from "../../types";
+import { Footer } from "../Footer/Footer";
+import { Header } from "../Header";
+import styles from "./FloatingWindow.module.scss";
 export interface FloatingWindowProps {
-  id: string
-  children?: React.ReactNode
-  className?: string
-  title?: string
-  initialStatus?: Status
-  footer?: React.ReactNode
-  initialPosition?: Position
-  initialSize?: Size
-  minSize?: Size
-  maxSize?: Size
-  zIndex?: number
-  draggable?: boolean
-  resizable?: boolean
-  maximizable?: boolean
-  minimizable?: boolean
-  restrictToParent?: boolean
-  onDragStart?: (position?: Position) => void
-  onDragEnd?: (position?: Position) => void
-  onResizeStart?: (size?: Size) => void
-  onResize?: (size?: Size) => void
-  onResizeEnd?: (size?: Size) => void
+  id: string;
+  children?: React.ReactNode;
+  className?: string;
+  title?: string;
+  initialStatus?: Status;
+  footer?: React.ReactNode;
+  initialPosition?: Position;
+  initialSize?: Size;
+  minSize?: Size;
+  maxSize?: Size;
+  zIndex?: number;
+  draggable?: boolean;
+  resizable?: boolean;
+  maximizable?: boolean;
+  minimizable?: boolean;
+  restrictToParent?: boolean;
+  onDragStart?: (position?: Position) => void;
+  onDragEnd?: (position?: Position) => void;
+  onResizeStart?: (size?: Size) => void;
+  onResize?: (size?: Size) => void;
+  onResizeEnd?: (size?: Size) => void;
 }
 
 export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
@@ -35,8 +36,8 @@ export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
     id,
     children,
     className,
-    title = '',
-    initialStatus = 'open',
+    title = "",
+    initialStatus = "open",
     footer,
     initialPosition = { x: 0, y: 0 },
     initialSize = { w: 400, h: 300 },
@@ -54,7 +55,7 @@ export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
     onResize,
     onResizeEnd,
   }) => {
-    const targetRef = useRef<HTMLDivElement | null>(null)
+    const targetRef = useRef<HTMLDivElement | null>(null);
 
     useRegister({
       id,
@@ -69,9 +70,9 @@ export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
       z: zIndex,
       dragging: false,
       resizing: false,
-    })
+    });
 
-    const { status, position, size, z: ctxZ, resizing } = useWindow(id)
+    const { status, position, size, z: ctxZ, resizing } = useWindow(id);
 
     const { dragging, onPointerDown: onDragPointerDown } = useDrag({
       id,
@@ -81,7 +82,7 @@ export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
       initialPosition,
       onDragStart,
       onDragEnd,
-    })
+    });
 
     const { onPointerDown: onResizePointerDown } = useResize({
       id,
@@ -93,16 +94,16 @@ export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
       onResizeStart,
       onResize,
       onResizeEnd,
-    })
+    });
 
-    if (status === 'minimized') return null
+    if (status === "minimized") return null;
 
     return (
       <div
         ref={targetRef as RefObject<HTMLDivElement>}
         className={clsx(styles.window, className, {
-          [styles.maximized]: status === 'maximized',
-          [styles.draggable]: draggable && status !== 'maximized',
+          [styles.maximized]: status === "maximized",
+          [styles.draggable]: draggable && status !== "maximized",
           [styles.dragging]: dragging,
           [styles.resizing]: resizing,
         })}
@@ -116,7 +117,7 @@ export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
         <Header
           id={id}
           title={title}
-          draggable={draggable && status !== 'maximized'}
+          draggable={draggable && status !== "maximized"}
           maximizable={maximizable}
           minimizable={true}
           onDragPointerDown={draggable ? onDragPointerDown : undefined}
@@ -129,6 +130,6 @@ export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
           onResizePointerDown={onResizePointerDown}
         />
       </div>
-    )
-  }
-)
+    );
+  },
+);

@@ -1,1 +1,1 @@
-export { renderMagnifierCanvas } from './render-magnifier-canvas'
+export { renderMagnifierCanvas } from "./render-magnifier-canvas";

@@ -1,19 +1,23 @@
 // Components
-export { Magnifier, Text } from './components'
+export { Magnifier, Text } from "./components";
 
 // Context & Hooks
-export { ColorPickerProvider, useColorPicker } from './context'
-export { useMagnifier } from './hooks'
+export { ColorPickerProvider, useColorPicker } from "./context";
+export { useMagnifier } from "./hooks";
 
 // Types
-export type { ColorPickerConfig, ColorPickerState, ColorPickerAction } from './context'
-export type { ColorType } from './types'
+export type {
+  ColorPickerAction,
+  ColorPickerConfig,
+  ColorPickerState,
+} from "./context";
+export type { ColorType } from "./types";
 
 // Constants
 export {
-  DEFAULT_SIZE,
-  DEFAULT_RADIUS,
-  DEFAULT_WIDTH,
   DEFAULT_CURRENT_COLOR,
+  DEFAULT_RADIUS,
   DEFAULT_SELECTED_COLOR,
-} from './constants'
+  DEFAULT_SIZE,
+  DEFAULT_WIDTH,
+} from "./constants";

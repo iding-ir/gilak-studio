@@ -1,1 +1,1 @@
-export { BrushTypes } from './BrushTypes'
+export { BrushTypes } from "./BrushTypes";

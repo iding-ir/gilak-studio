@@ -1,2 +1,2 @@
-export { Magnifier } from './Magnifier'
-export { Text } from './Text'
+export { Magnifier } from "./Magnifier";
+export { Text } from "./Text";

@@ -1,11 +1,14 @@
-import { useEffect, type RefObject } from 'react'
-import { drawRandomEffect } from '../methods'
+import { type RefObject, useEffect } from "react";
 
-export const useCanvasEffect = (canvasRef: RefObject<HTMLCanvasElement | null>) => {
+import { drawRandomEffect } from "../methods";
+
+export const useCanvasEffect = (
+  canvasRef: RefObject<HTMLCanvasElement | null>,
+) => {
   useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
-    drawRandomEffect(canvas)
-  }, [canvasRef])
-}
+    drawRandomEffect(canvas);
+  }, [canvasRef]);
+};

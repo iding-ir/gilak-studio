@@ -1,19 +1,19 @@
 export function debounce<T extends (...args: unknown[]) => void>(
   func: T,
-  wait: number
+  wait: number,
 ): (...args: Parameters<T>) => void {
-  let timeout: ReturnType<typeof setTimeout> | null
+  let timeout: ReturnType<typeof setTimeout> | null;
 
   return function executedFunction(...args: Parameters<T>): void {
     const later = () => {
-      timeout = null
-      func(...args)
-    }
+      timeout = null;
+      func(...args);
+    };
 
     if (timeout) {
-      clearTimeout(timeout)
+      clearTimeout(timeout);
     }
 
-    timeout = setTimeout(later, wait)
-  }
+    timeout = setTimeout(later, wait);
+  };
 }

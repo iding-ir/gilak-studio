@@ -1,14 +1,14 @@
-import { defineConfig, type UserConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import dts from 'vite-plugin-dts'
-import svgr from 'vite-plugin-svgr'
-import { resolve } from 'path'
-import { libInjectCss } from 'vite-plugin-lib-inject-css'
+import react from "@vitejs/plugin-react";
+import { resolve } from "path";
+import { defineConfig, type UserConfig } from "vite";
+import dts from "vite-plugin-dts";
+import { libInjectCss } from "vite-plugin-lib-inject-css";
+import svgr from "vite-plugin-svgr";
 
 interface LibraryConfig {
-  entry: string
-  name: string
-  fileName: string
+  entry: string;
+  name: string;
+  fileName: string;
 }
 
 export function createLibraryConfig(config: LibraryConfig): UserConfig {
@@ -18,25 +18,25 @@ export function createLibraryConfig(config: LibraryConfig): UserConfig {
       libInjectCss(),
       svgr({
         svgrOptions: {
-          exportType: 'default',
+          exportType: "default",
           ref: true,
           svgo: false,
           titleProp: true,
         },
-        include: '**/*.svg',
+        include: "**/*.svg",
       }),
       dts({
-        include: ['src'],
-        exclude: ['**/*.stories.tsx', '**/*.stories.ts'],
+        include: ["src"],
+        exclude: ["**/*.stories.tsx", "**/*.stories.ts"],
         rollupTypes: true,
         insertTypesEntry: true,
-        outDir: 'dist',
+        outDir: "dist",
       }),
     ],
     css: {
       modules: {
-        localsConvention: 'camelCase',
-        generateScopedName: '[name]__[local]__[hash:base64:5]',
+        localsConvention: "camelCase",
+        generateScopedName: "[name]__[local]__[hash:base64:5]",
       },
       preprocessorOptions: {
         scss: {},
@@ -46,19 +46,19 @@ export function createLibraryConfig(config: LibraryConfig): UserConfig {
       lib: {
         entry: resolve(process.cwd(), config.entry),
         name: config.name,
-        formats: ['es', 'umd'],
+        formats: ["es", "umd"],
         fileName: (format) => `${config.fileName}.${format}.js`,
       },
       rollupOptions: {
-        external: ['react', 'react-dom'],
+        external: ["react", "react-dom"],
         output: {
           globals: {
-            react: 'React',
-            'react-dom': 'ReactDOM',
+            react: "React",
+            "react-dom": "ReactDOM",
           },
           assetFileNames: `${config.fileName}.[ext]`,
         },
       },
     },
-  })
+  });
 }

@@ -1,1 +1,1 @@
-export { useCanvasEffect } from './use-canvas-effect'
+export { useCanvasEffect } from "./use-canvas-effect";

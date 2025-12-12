@@ -1,27 +1,34 @@
-import React, { useState, type ReactNode } from 'react'
-import IconZoom from './icon-zoom.svg?url'
-import styles from './ResizableScreen.module.scss'
-import { List } from '../List'
-import { Text } from '../Text'
-import { Dropdown } from '../DropDown'
-import { Icon } from '../Icon'
+import React, { type ReactNode, useState } from "react";
 
-const zoomLevels = [10, 25, 50, 75, 100, 125, 150, 175, 200] as const
+import { Dropdown } from "../DropDown";
+import { Icon } from "../Icon";
+import { List } from "../List";
+import { Text } from "../Text";
+import IconZoom from "./icon-zoom.svg?url";
+import styles from "./ResizableScreen.module.scss";
 
-export type Zoom = (typeof zoomLevels)[number]
+const zoomLevels = [10, 25, 50, 75, 100, 125, 150, 175, 200] as const;
+
+export type Zoom = (typeof zoomLevels)[number];
 
 export interface ResizableScreenProps {
-  children: ReactNode
-  zoomLevel?: Zoom
+  children: ReactNode;
+  zoomLevel?: Zoom;
 }
 
-export const ResizableScreen: React.FC<ResizableScreenProps> = ({ children, zoomLevel = 100 }) => {
-  const [currentZoomLevel, setCurrentZoomLevel] = useState(zoomLevel)
+export const ResizableScreen: React.FC<ResizableScreenProps> = ({
+  children,
+  zoomLevel = 100,
+}) => {
+  const [currentZoomLevel, setCurrentZoomLevel] = useState(zoomLevel);
 
   return (
     <div className={styles.root}>
       <div className={styles.screen}>
-        <div className={styles.content} style={{ transform: `scale(${currentZoomLevel / 100})` }}>
+        <div
+          className={styles.content}
+          style={{ transform: `scale(${currentZoomLevel / 100})` }}
+        >
           {children}
         </div>
       </div>
@@ -52,5 +59,5 @@ export const ResizableScreen: React.FC<ResizableScreenProps> = ({ children, zoom
         </Dropdown>
       </div>
     </div>
-  )
-}
+  );
+};

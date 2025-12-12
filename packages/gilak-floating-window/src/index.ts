@@ -1,13 +1,13 @@
 // Components
-export { FloatingWindow } from './components'
-export type { FloatingWindowProps } from './components'
+export type { FloatingWindowProps } from "./components";
+export { FloatingWindow } from "./components";
 
 // Hooks
-export { useRegister, useDrag, useResize, useWindow } from './hooks'
+export { useDrag, useRegister, useResize, useWindow } from "./hooks";
 
 // Context
-export { FloatingWindowProvider, useFloatingWindowContext } from './context'
-export type { FloatingWindowMeta } from './context'
+export type { FloatingWindowMeta } from "./context";
+export { FloatingWindowProvider, useFloatingWindowContext } from "./context";
 
 // Types
-export * from './types'
+export * from "./types";

@@ -1,20 +1,27 @@
-import { useMemo } from 'react'
-import { getContrastColor } from '@gilak/utils'
+import { getContrastColor } from "@gilak/utils";
+import { useMemo } from "react";
 
-import styles from './Text.module.scss'
-import { useColorPicker } from '../../context'
+import { useColorPicker } from "../../context";
+import styles from "./Text.module.scss";
 
 export const Text = () => {
-  const { currentColor } = useColorPicker()
+  const { currentColor } = useColorPicker();
 
-  const contrastColor = useMemo(() => getContrastColor(currentColor), [currentColor])
+  const contrastColor = useMemo(
+    () => getContrastColor(currentColor),
+    [currentColor],
+  );
 
   return (
     <div
       className={styles.container}
-      style={{ color: contrastColor, backgroundColor: currentColor, borderColor: contrastColor }}
+      style={{
+        color: contrastColor,
+        backgroundColor: currentColor,
+        borderColor: contrastColor,
+      }}
     >
       {currentColor}
     </div>
-  )
-}
+  );
+};

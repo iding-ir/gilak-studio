@@ -1,3 +1,3 @@
-import type { CSSProperties } from 'react'
+import type { CSSProperties } from "react";
 
-export type ColorType = CSSProperties['color']
+export type ColorType = CSSProperties["color"];

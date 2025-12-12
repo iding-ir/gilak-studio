@@ -1,38 +1,39 @@
-import type { PayloadAction } from '@reduxjs/toolkit'
-import { createAppSlice } from '../../app/createAppSlice'
-import type { BrushSize, BrushType } from '@gilak/canvas/types/brush'
+import type { BrushSize, BrushType } from "@gilak/canvas/types/brush";
+import type { PayloadAction } from "@reduxjs/toolkit";
+
+import { createAppSlice } from "../../app/createAppSlice";
 
 export interface Brush {
-  type: BrushType
-  size: BrushSize
+  type: BrushType;
+  size: BrushSize;
 }
 
 export const DEFAULT_BRUSH: Brush = {
-  type: 'CIRCLE',
+  type: "CIRCLE",
   size: 2,
-}
+};
 
 export interface BrushState {
-  selected?: Brush
+  selected?: Brush;
 }
 
 const initialState: BrushState = {
   selected: DEFAULT_BRUSH,
-}
+};
 
 export const brushSlice = createAppSlice({
-  name: 'brush',
+  name: "brush",
   initialState,
   reducers: (create) => ({
     setBrush: create.reducer((state, { payload }: PayloadAction<Brush>) => {
-      state.selected = payload
+      state.selected = payload;
     }),
   }),
   selectors: {
     selectBrush: ({ selected }) => selected,
   },
-})
+});
 
-export const { setBrush } = brushSlice.actions
+export const { setBrush } = brushSlice.actions;
 
-export const { selectBrush } = brushSlice.selectors
+export const { selectBrush } = brushSlice.selectors;

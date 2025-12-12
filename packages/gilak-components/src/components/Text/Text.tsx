@@ -1,24 +1,25 @@
-import React from 'react'
-import clsx from 'clsx'
-import styles from './Text.module.scss'
-import type { TshirtSize } from '../../types'
+import clsx from "clsx";
+import React from "react";
+
+import type { TshirtSize } from "../../types";
+import styles from "./Text.module.scss";
 
 export interface TextProps extends React.HTMLAttributes<HTMLDivElement> {
-  text: string
-  size?: TshirtSize
-  color?: string
-  backgroundColor?: string
-  className?: string
-  rounded?: boolean
-  selected?: boolean
-  frameless?: boolean
+  text: string;
+  size?: TshirtSize;
+  color?: string;
+  backgroundColor?: string;
+  className?: string;
+  rounded?: boolean;
+  selected?: boolean;
+  frameless?: boolean;
 }
 
 export const Text: React.FC<TextProps> = ({
   text,
-  size = 'md',
-  color = 'inherit',
-  backgroundColor = 'inherit',
+  size = "md",
+  color = "inherit",
+  backgroundColor = "inherit",
   className,
   rounded = true,
   selected = false,
@@ -26,9 +27,9 @@ export const Text: React.FC<TextProps> = ({
   ...props
 }) => {
   const rootStyles = {
-    '--fg-color': color,
-    '--bg-color': backgroundColor,
-  } as React.CSSProperties
+    "--fg-color": color,
+    "--bg-color": backgroundColor,
+  } as React.CSSProperties;
 
   return (
     <i
@@ -42,5 +43,5 @@ export const Text: React.FC<TextProps> = ({
     >
       {text}
     </i>
-  )
-}
+  );
+};

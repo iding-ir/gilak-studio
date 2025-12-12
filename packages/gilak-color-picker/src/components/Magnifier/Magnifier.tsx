@@ -1,17 +1,17 @@
-import { useColorPicker } from '../../context'
-import { useMagnifier } from '../../hooks/use-magnifier'
-import { Text } from '../Text'
-import styles from './Magnifier.module.scss'
+import { useColorPicker } from "../../context";
+import { useMagnifier } from "../../hooks/use-magnifier";
+import { Text } from "../Text";
+import styles from "./Magnifier.module.scss";
 
 export const Magnifier = ({
   canvasRef,
   onSelect,
 }: {
-  canvasRef: React.RefObject<HTMLCanvasElement | null>
-  onSelect?: (color: string) => void
+  canvasRef: React.RefObject<HTMLCanvasElement | null>;
+  onSelect?: (color: string) => void;
 }) => {
-  const { currentColor, width } = useColorPicker()
-  const { containerRef, magnifierRef } = useMagnifier({ onSelect, canvasRef })
+  const { currentColor, width } = useColorPicker();
+  const { containerRef, magnifierRef } = useMagnifier({ onSelect, canvasRef });
 
   return (
     <div className={styles.container} ref={containerRef}>
@@ -24,5 +24,5 @@ export const Magnifier = ({
 
       <Text />
     </div>
-  )
-}
+  );
+};

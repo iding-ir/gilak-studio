@@ -1,57 +1,59 @@
-import { useEffect, useRef } from 'react'
-import { getCanvasColor } from '@gilak/utils'
-import { useColorPicker } from '../context'
-import { renderMagnifierCanvas } from '../methods'
+import { getCanvasColor } from "@gilak/utils";
+import { useEffect, useRef } from "react";
+
+import { useColorPicker } from "../context";
+import { renderMagnifierCanvas } from "../methods";
 
 export const useMagnifier = ({
   onSelect,
   canvasRef,
 }: {
-  onSelect?: (color: string) => void
-  canvasRef?: React.RefObject<HTMLCanvasElement | null>
+  onSelect?: (color: string) => void;
+  canvasRef?: React.RefObject<HTMLCanvasElement | null>;
 }) => {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const magnifierRef = useRef<HTMLCanvasElement>(null)
-  const rafRef = useRef<number | null>(null)
-  const { radius, size, isActive, isHovered, setCurrentColor, setIsActive } = useColorPicker()
+  const containerRef = useRef<HTMLDivElement>(null);
+  const magnifierRef = useRef<HTMLCanvasElement>(null);
+  const rafRef = useRef<number | null>(null);
+  const { radius, size, isActive, isHovered, setCurrentColor, setIsActive } =
+    useColorPicker();
 
   useEffect(() => {
-    const canvas = canvasRef?.current
+    const canvas = canvasRef?.current;
     if (!canvas || !isActive || !isHovered) {
-      return
+      return;
     }
 
     const onPointerDown = (event: PointerEvent) => {
-      const { offsetX, offsetY } = event
-      const color = getCanvasColor({ canvas, x: offsetX, y: offsetY })
+      const { offsetX, offsetY } = event;
+      const color = getCanvasColor({ canvas, x: offsetX, y: offsetY });
 
       if (color) {
-        onSelect?.(color)
+        onSelect?.(color);
       }
 
-      setIsActive(false)
-    }
+      setIsActive(false);
+    };
 
     const onPointerMove = (event: PointerEvent) => {
       // Skip if already processing
-      if (rafRef.current !== null) return
+      if (rafRef.current !== null) return;
 
       rafRef.current = requestAnimationFrame(() => {
-        rafRef.current = null
+        rafRef.current = null;
 
-        const x = event.offsetX
-        const y = event.offsetY
+        const x = event.offsetX;
+        const y = event.offsetY;
 
-        const transform = `translate3d(calc(${x}px - 50%), calc(${y}px - 50%), 0)`
-        const display = x && y ? 'block' : 'none'
+        const transform = `translate3d(calc(${x}px - 50%), calc(${y}px - 50%), 0)`;
+        const display = x && y ? "block" : "none";
 
-        containerRef.current?.style.setProperty('transform', transform)
-        containerRef.current?.style.setProperty('display', display)
+        containerRef.current?.style.setProperty("transform", transform);
+        containerRef.current?.style.setProperty("display", display);
 
-        const color = getCanvasColor({ canvas, x, y })
+        const color = getCanvasColor({ canvas, x, y });
 
         if (color) {
-          setCurrentColor(color)
+          setCurrentColor(color);
         }
 
         renderMagnifierCanvas({
@@ -61,24 +63,33 @@ export const useMagnifier = ({
           y,
           radius,
           size,
-        })
-      })
-    }
+        });
+      });
+    };
 
-    canvas.addEventListener('pointerdown', onPointerDown)
-    canvas.addEventListener('pointermove', onPointerMove)
+    canvas.addEventListener("pointerdown", onPointerDown);
+    canvas.addEventListener("pointermove", onPointerMove);
 
     return () => {
-      canvas.removeEventListener('pointerdown', onPointerDown)
-      canvas.removeEventListener('pointermove', onPointerMove)
+      canvas.removeEventListener("pointerdown", onPointerDown);
+      canvas.removeEventListener("pointermove", onPointerMove);
 
       // Cancel pending animation frame
       if (rafRef.current !== null) {
-        cancelAnimationFrame(rafRef.current)
-        rafRef.current = null
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
       }
-    }
-  }, [canvasRef, isActive, isHovered, onSelect, radius, setCurrentColor, setIsActive, size])
+    };
+  }, [
+    canvasRef,
+    isActive,
+    isHovered,
+    onSelect,
+    radius,
+    setCurrentColor,
+    setIsActive,
+    size,
+  ]);
 
-  return { containerRef, magnifierRef }
-}
+  return { containerRef, magnifierRef };
+};

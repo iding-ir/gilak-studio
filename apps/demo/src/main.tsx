@@ -1,15 +1,17 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { App } from './components/App'
-import './styles/index.scss'
-import './i18n/config'
-import { Provider } from 'react-redux'
-import { store } from './app/store'
+import "./styles/index.scss";
+import "./i18n/config";
 
-createRoot(document.getElementById('root')!).render(
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { Provider } from "react-redux";
+
+import { store } from "./app/store";
+import { App } from "./components/App";
+
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
       <App />
     </Provider>
-  </StrictMode>
-)
+  </StrictMode>,
+);

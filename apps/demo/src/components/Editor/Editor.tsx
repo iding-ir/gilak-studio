@@ -1,30 +1,31 @@
 import {
+  type BrushSize,
+  type BrushType,
   Canvas,
   drawRandomEffect,
   PaintCanvas,
-  type BrushSize,
-  type BrushType,
-} from '@gilak/canvas'
-import { Magnifier, useColorPicker } from '@gilak/color-picker'
-import { ColorSwatch } from '@gilak/color-swatch'
-import { Dropdown, Icon, Menu, ResizableScreen } from '@gilak/components'
-import { FloatingWindow, FloatingWindowProvider } from '@gilak/floating-window'
-import styles from './Editor.module.scss'
-import IconColorPickerUrl from '../../assets/icon-eyedropper.svg?url'
-import IconCanvasUrl from '../../assets/icon-dice.svg?url'
-import IconBucketUrl from '../../assets/icon-bucket.svg?url'
-import IconBrush from '../../assets/icon-brush.svg?url'
-import IconBrushTypes from '../../assets/brush-circle.svg?url'
-import IconBrushSizes from '../../assets/brush-circle-empty.svg?url'
-import { useRef, useState } from 'react'
-import { BrushTypes } from '../BrushTypes'
-import { BrushSizes } from '../BrushSizes'
+} from "@gilak/canvas";
+import { Magnifier, useColorPicker } from "@gilak/color-picker";
+import { ColorSwatch } from "@gilak/color-swatch";
+import { Dropdown, Icon, Menu, ResizableScreen } from "@gilak/components";
+import { FloatingWindow, FloatingWindowProvider } from "@gilak/floating-window";
+import { useRef, useState } from "react";
+
+import IconBrushTypes from "../../assets/brush-circle.svg?url";
+import IconBrushSizes from "../../assets/brush-circle-empty.svg?url";
+import IconBrush from "../../assets/icon-brush.svg?url";
+import IconBucketUrl from "../../assets/icon-bucket.svg?url";
+import IconCanvasUrl from "../../assets/icon-dice.svg?url";
+import IconColorPickerUrl from "../../assets/icon-eyedropper.svg?url";
+import { BrushSizes } from "../BrushSizes";
+import { BrushTypes } from "../BrushTypes";
+import styles from "./Editor.module.scss";
 
 export const Editor: React.FC = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const [paintMode, setPaintMode] = useState(false)
-  const [brushType, setBrushType] = useState<BrushType>('CIRCLE')
-  const [brushSize, setBrushSize] = useState<BrushSize>(2)
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [paintMode, setPaintMode] = useState(false);
+  const [brushType, setBrushType] = useState<BrushType>("CIRCLE");
+  const [brushSize, setBrushSize] = useState<BrushSize>(2);
   const {
     selectedColor,
     isActive,
@@ -33,12 +34,12 @@ export const Editor: React.FC = () => {
     toggleActive,
     setIsHovered,
     setSelectedColor,
-  } = useColorPicker()
+  } = useColorPicker();
 
   const handleRandomize = () => {
-    if (!canvasRef.current) return
-    drawRandomEffect(canvasRef.current)
-  }
+    if (!canvasRef.current) return;
+    drawRandomEffect(canvasRef.current);
+  };
 
   return (
     <div className={styles.root}>
@@ -60,18 +61,18 @@ export const Editor: React.FC = () => {
               icon={IconBucketUrl}
               color={selectedColor}
               colors={[
-                '#ffffff',
-                '#000000',
-                '#D62828',
-                '#F77F00',
-                '#FFCF33',
-                '#1B9E4B',
-                '#009DAE',
-                '#3056D3',
-                '#2A2A72',
-                '#9C4DF4',
-                '#E6D2B5',
-                '#8A8A8A',
+                "#ffffff",
+                "#000000",
+                "#D62828",
+                "#F77F00",
+                "#FFCF33",
+                "#1B9E4B",
+                "#009DAE",
+                "#3056D3",
+                "#2A2A72",
+                "#9C4DF4",
+                "#E6D2B5",
+                "#8A8A8A",
               ]}
               onChange={setSelectedColor}
             />
@@ -86,14 +87,20 @@ export const Editor: React.FC = () => {
             title="Color Picker"
             footer={
               <>
-                <Icon icon={IconCanvasUrl} size="md" onClick={handleRandomize} />
+                <Icon
+                  icon={IconCanvasUrl}
+                  size="md"
+                  onClick={handleRandomize}
+                />
                 <Icon
                   icon={IconColorPickerUrl}
                   size="md"
                   selected={isActive}
                   onClick={toggleActive}
                 />
-                <div className={styles.ellipsis}>Pick a color from a randomized canvas</div>
+                <div className={styles.ellipsis}>
+                  Pick a color from a randomized canvas
+                </div>
               </>
             }
             initialPosition={{ x: 0, y: 0 }}
@@ -110,7 +117,10 @@ export const Editor: React.FC = () => {
                 onLeave={() => setIsHovered(false)}
               >
                 {isActive && isHovered && (
-                  <Magnifier canvasRef={canvasRef} onSelect={setSelectedColor} />
+                  <Magnifier
+                    canvasRef={canvasRef}
+                    onSelect={setSelectedColor}
+                  />
                 )}
               </Canvas>
             </ResizableScreen>
@@ -139,7 +149,9 @@ export const Editor: React.FC = () => {
                 >
                   <BrushSizes brush={brushSize} onChange={setBrushSize} />
                 </Dropdown>
-                <div className={styles.ellipsis}>Choose your brush and start drawing!</div>
+                <div className={styles.ellipsis}>
+                  Choose your brush and start drawing!
+                </div>
               </>
             }
             initialPosition={{ x: 640, y: 0 }}
@@ -160,5 +172,5 @@ export const Editor: React.FC = () => {
         </FloatingWindowProvider>
       </main>
     </div>
-  )
-}
+  );
+};

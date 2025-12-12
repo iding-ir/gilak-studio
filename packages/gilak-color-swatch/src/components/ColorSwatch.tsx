@@ -1,20 +1,27 @@
-import React from 'react'
-import { getContrastColor } from '@gilak/utils'
-import { Dropdown, Icon, Input, List, type TshirtSize } from '@gilak/components'
-import styles from './ColorSwatch.module.scss'
-import IconEmpty from '../assets/icon-empty.svg'
+import {
+  Dropdown,
+  Icon,
+  Input,
+  List,
+  type TshirtSize,
+} from "@gilak/components";
+import { getContrastColor } from "@gilak/utils";
+import React from "react";
+
+import IconEmpty from "../assets/icon-empty.svg";
+import styles from "./ColorSwatch.module.scss";
 
 export interface ColorSwatchProps {
-  icon: string
-  size?: TshirtSize
-  color: string
-  colors: string[]
-  onChange: (color: string) => void
+  icon: string;
+  size?: TshirtSize;
+  color: string;
+  colors: string[];
+  onChange: (color: string) => void;
 }
 
 export const ColorSwatch: React.FC<ColorSwatchProps> = ({
   icon,
-  size = 'md',
+  size = "md",
   color,
   colors,
   onChange,
@@ -54,8 +61,12 @@ export const ColorSwatch: React.FC<ColorSwatchProps> = ({
         readOnly
         type="text"
         name="color-swatch"
-        style={{ backgroundColor: color, color: getContrastColor(color), width: '6rem' }}
+        style={{
+          backgroundColor: color,
+          color: getContrastColor(color),
+          width: "6rem",
+        }}
       />
     </div>
-  )
-}
+  );
+};
