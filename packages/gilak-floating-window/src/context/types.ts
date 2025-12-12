@@ -1,4 +1,4 @@
-import { Position, Size } from '../types'
+import type { Position, Size } from '../types'
 
 export type Status = 'open' | 'minimized' | 'maximized'
 

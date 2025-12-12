@@ -1,6 +1,6 @@
 import { setItemSync } from '@gilak/utils'
-import { Position, Size } from '../types'
-import { State, Action, FloatingWindowMeta, Status } from './types'
+import type { Position, Size } from '../types'
+import type { State, Action, FloatingWindowMeta, Status } from './types'
 import { storageKey } from '../methods/storage-key'
 
 export const initialState: State = { windows: {}, topZIndex: 1000 }

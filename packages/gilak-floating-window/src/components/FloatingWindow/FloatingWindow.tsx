@@ -1,10 +1,10 @@
-import React, { RefObject, useRef } from 'react'
+import React, { type RefObject, useRef } from 'react'
 import clsx from 'clsx'
 import { useRegister, useDrag, useResize, useWindow } from '../../hooks'
 import { Header } from '../Header'
 import styles from './FloatingWindow.module.scss'
-import { Status } from '../../context'
-import { Position, Size } from '../../types'
+import type { Status } from '../../context'
+import type { Position, Size } from '../../types'
 import { Footer } from '../Footer/Footer'
 export interface FloatingWindowProps {
   id: string

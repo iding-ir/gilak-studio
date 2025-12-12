@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
-import { type BrushType, drawBrushType } from './brushTypes'
+import { drawBrushType } from './brushTypes'
+import type { BrushSize, BrushType } from '../types/brush'
 
 export function usePaint({
   canvasRef,
@@ -11,7 +12,7 @@ export function usePaint({
   canvasRef: React.RefObject<HTMLCanvasElement>
   enabled: boolean
   color: string
-  brushSize: number
+  brushSize: BrushSize
   brushType: BrushType
 }) {
   const drawing = useRef(false)

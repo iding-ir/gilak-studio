@@ -10,3 +10,6 @@ export { usePaint } from './hooks/usePaint'
 // Methods
 export { drawRandomEffect } from './methods'
 export type { EffectType } from './methods'
+
+// Types
+export * from './types'

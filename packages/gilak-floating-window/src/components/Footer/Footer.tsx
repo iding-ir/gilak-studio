@@ -1,7 +1,7 @@
 import { Icon } from '@gilak/components'
 import IconResize from '../../assets/icon-resize.svg?url'
 import styles from './Footer.module.scss'
-import { Status } from '../../context'
+import type { Status } from '../../context'
 import type { PointerEvent, ReactNode } from 'react'
 
 interface FooterProps {

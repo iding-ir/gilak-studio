@@ -1,19 +1,10 @@
-export type BrushType =
-  | 'circle'
-  | 'square'
-  | 'diamond'
-  | 'triangle'
-  | 'star'
-  | 'horizontal'
-  | 'vertical'
-  | 'backslash'
-  | 'slash'
+import type { BrushSize, BrushType } from '../types/brush'
 
 export function drawBrushType(
   ctx: CanvasRenderingContext2D,
   x: number,
   y: number,
-  size: number,
+  size: BrushSize,
   brushType: BrushType
 ) {
   ctx.save()
@@ -22,26 +13,26 @@ export function drawBrushType(
   ctx.beginPath()
   const r = size * 2
   switch (brushType) {
-    case 'circle':
+    case 'CIRCLE':
       ctx.arc(x, y, r, 0, 2 * Math.PI)
       break
-    case 'square':
+    case 'SQUARE':
       ctx.rect(x - r, y - r, r * 2, r * 2)
       break
-    case 'diamond':
+    case 'DIAMOND':
       ctx.moveTo(x, y - r)
       ctx.lineTo(x + r, y)
       ctx.lineTo(x, y + r)
       ctx.lineTo(x - r, y)
       ctx.closePath()
       break
-    case 'triangle':
+    case 'TRIANGLE':
       ctx.moveTo(x, y - r)
       ctx.lineTo(x + r, y + r)
       ctx.lineTo(x - r, y + r)
       ctx.closePath()
       break
-    case 'star': {
+    case 'STAR': {
       const spikes = 5
       const step = Math.PI / spikes
       for (let i = 0; i < 2 * spikes; i++) {
@@ -55,19 +46,19 @@ export function drawBrushType(
       ctx.closePath()
       break
     }
-    case 'horizontal':
+    case 'HORIZONTAL':
       ctx.moveTo(x - r, y)
       ctx.lineTo(x + r, y)
       break
-    case 'vertical':
+    case 'VERTICAL':
       ctx.moveTo(x, y - r)
       ctx.lineTo(x, y + r)
       break
-    case 'backslash':
+    case 'BACKSLASH':
       ctx.moveTo(x - r, y - r)
       ctx.lineTo(x + r, y + r)
       break
-    case 'slash':
+    case 'SLASH':
       ctx.moveTo(x + r, y - r)
       ctx.lineTo(x - r, y + r)
       break

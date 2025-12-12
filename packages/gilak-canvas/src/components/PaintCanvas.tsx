@@ -1,20 +1,20 @@
 import React, { useRef, forwardRef } from 'react'
 import { usePaint } from '../hooks/usePaint'
 import styles from '../components/Canvas.module.scss'
-import type { BrushType } from '../hooks/brushTypes'
+import type { BrushSize, BrushType } from '../types/brush'
 
 export interface PaintCanvasProps {
   enabled: boolean
   width?: number
   height?: number
   color?: string
-  brushSize?: number
+  brushSize?: BrushSize
   brushType?: BrushType
 }
 
 const PaintCanvas = forwardRef<HTMLCanvasElement, PaintCanvasProps>(
   (
-    { enabled, width = 800, height = 600, color = '#222', brushSize = 2, brushType = 'circle' },
+    { enabled, width = 800, height = 600, color = '#222', brushSize = 2, brushType = 'CIRCLE' },
     ref
   ) => {
     const internalRef = useRef<HTMLCanvasElement>(null)

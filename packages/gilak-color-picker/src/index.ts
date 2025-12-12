@@ -7,6 +7,7 @@ export { useMagnifier } from './hooks'
 
 // Types
 export type { ColorPickerConfig, ColorPickerState, ColorPickerAction } from './context'
+export type { ColorType } from './types'
 
 // Constants
 export {

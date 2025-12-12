@@ -1,6 +1,6 @@
-import { RefObject, useCallback, useEffect, useRef } from 'react'
+import { type RefObject, useCallback, useEffect, useRef } from 'react'
 import { useFloatingWindowContext } from '../context'
-import { Size } from '../types'
+import type { Size } from '../types'
 
 type Params = {
   id: string

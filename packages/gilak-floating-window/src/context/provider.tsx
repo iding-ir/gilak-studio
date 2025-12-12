@@ -1,6 +1,6 @@
-import React, { createContext, ReactNode, useReducer } from 'react'
+import React, { createContext, type ReactNode, useReducer } from 'react'
 import styles from './provider.module.scss'
-import { State, Action } from './types'
+import type { State, Action } from './types'
 import { reducer, initialState } from './reducer'
 import { Header } from '../components/Header'
 

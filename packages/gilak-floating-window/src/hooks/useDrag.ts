@@ -1,5 +1,5 @@
-import { RefObject, useCallback, useRef } from 'react'
-import { Position } from '../types'
+import { type RefObject, useCallback, useRef } from 'react'
+import type { Position } from '../types'
 import { useFloatingWindowContext } from '../context'
 import useWindow from './useWindow'
 

@@ -1,5 +1,5 @@
 import { useCallback } from 'react'
-import { FloatingWindowMeta, useFloatingWindowContext } from '../context'
+import { type FloatingWindowMeta, useFloatingWindowContext } from '../context'
 
 export function useWindow(id: string): FloatingWindowMeta & {
   maximize: () => void

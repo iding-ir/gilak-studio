@@ -1,4 +1,10 @@
-import { Canvas, drawRandomEffect, PaintCanvas } from '@gilak/canvas'
+import {
+  Canvas,
+  drawRandomEffect,
+  PaintCanvas,
+  type BrushSize,
+  type BrushType,
+} from '@gilak/canvas'
 import { Magnifier, useColorPicker } from '@gilak/color-picker'
 import { ColorSwatch } from '@gilak/color-swatch'
 import { Dropdown, Icon, Menu, ResizableScreen } from '@gilak/components'
@@ -12,14 +18,12 @@ import IconBrushTypes from '../../assets/brush-circle.svg?url'
 import IconBrushSizes from '../../assets/brush-circle-empty.svg?url'
 import { useRef, useState } from 'react'
 import { BrushTypes } from '../BrushTypes'
-import type { BrushType } from '../BrushTypes/BrushTypes'
 import { BrushSizes } from '../BrushSizes'
-import type { BrushSize } from '../BrushSizes/BrushSizes'
 
 export const Editor: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [paintMode, setPaintMode] = useState(false)
-  const [brushType, setBrushType] = useState<BrushType>('circle')
+  const [brushType, setBrushType] = useState<BrushType>('CIRCLE')
   const [brushSize, setBrushSize] = useState<BrushSize>(2)
   const {
     selectedColor,

@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useFloatingWindowContext } from '../context'
-import { FloatingWindowMeta } from '../context/types'
+import type { FloatingWindowMeta } from '../context/types'
 
 export function useRegister(meta: FloatingWindowMeta) {
   const ctx = useFloatingWindowContext()

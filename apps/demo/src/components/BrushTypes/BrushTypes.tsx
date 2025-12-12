@@ -1,4 +1,5 @@
 import { Icon, List } from '@gilak/components'
+import type { BrushType } from '@gilak/canvas'
 import IconCircle from '../../assets/brush-circle.svg?url'
 import IconSquare from '../../assets/brush-square.svg?url'
 import IconTriangle from '../../assets/brush-triangle.svg?url'
@@ -8,17 +9,6 @@ import IconSlash from '../../assets/brush-slash.svg?url'
 import IconBackslash from '../../assets/brush-backslash.svg?url'
 import IconHorizontal from '../../assets/brush-horizontal.svg?url'
 import IconVerical from '../../assets/brush-vertical.svg?url'
-
-export type BrushType =
-  | 'circle'
-  | 'square'
-  | 'diamond'
-  | 'triangle'
-  | 'star'
-  | 'horizontal'
-  | 'vertical'
-  | 'backslash'
-  | 'slash'
 
 export const BrushTypes = ({
   brush,
@@ -34,58 +24,58 @@ export const BrushTypes = ({
       theme="light"
       items={[
         <Icon
-          selected={brush === 'circle'}
+          selected={brush === 'CIRCLE'}
           icon={IconCircle}
           size="sm"
-          onClick={() => onChange('circle')}
+          onClick={() => onChange('CIRCLE')}
         />,
         <Icon
-          selected={brush === 'square'}
+          selected={brush === 'SQUARE'}
           icon={IconSquare}
           size="sm"
-          onClick={() => onChange('square')}
+          onClick={() => onChange('SQUARE')}
         />,
         <Icon
-          selected={brush === 'diamond'}
+          selected={brush === 'DIAMOND'}
           icon={IconDisamond}
           size="sm"
-          onClick={() => onChange('diamond')}
+          onClick={() => onChange('DIAMOND')}
         />,
         <Icon
-          selected={brush === 'triangle'}
+          selected={brush === 'TRIANGLE'}
           icon={IconTriangle}
           size="sm"
-          onClick={() => onChange('triangle')}
+          onClick={() => onChange('TRIANGLE')}
         />,
         <Icon
-          selected={brush === 'star'}
+          selected={brush === 'STAR'}
           icon={IconStar}
           size="sm"
-          onClick={() => onChange('star')}
+          onClick={() => onChange('STAR')}
         />,
         <Icon
-          selected={brush === 'horizontal'}
+          selected={brush === 'HORIZONTAL'}
           icon={IconHorizontal}
           size="sm"
-          onClick={() => onChange('horizontal')}
+          onClick={() => onChange('HORIZONTAL')}
         />,
         <Icon
-          selected={brush === 'vertical'}
+          selected={brush === 'VERTICAL'}
           icon={IconVerical}
           size="sm"
-          onClick={() => onChange('vertical')}
+          onClick={() => onChange('VERTICAL')}
         />,
         <Icon
-          selected={brush === 'backslash'}
+          selected={brush === 'BACKSLASH'}
           icon={IconBackslash}
           size="sm"
-          onClick={() => onChange('backslash')}
+          onClick={() => onChange('BACKSLASH')}
         />,
         <Icon
-          selected={brush === 'slash'}
+          selected={brush === 'SLASH'}
           icon={IconSlash}
           size="sm"
-          onClick={() => onChange('slash')}
+          onClick={() => onChange('SLASH')}
         />,
       ]}
     />
