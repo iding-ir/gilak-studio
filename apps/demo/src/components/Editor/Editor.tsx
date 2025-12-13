@@ -1,9 +1,8 @@
 import {
   type BrushSize,
   type BrushType,
-  Canvas,
-  drawRandomEffect,
-  PaintCanvas,
+  DrawingCanvas,
+  RandomCanvas,
 } from "@gilak/canvas";
 import { Magnifier, useColorPicker } from "@gilak/color-picker";
 import { ColorSwatch } from "@gilak/color-swatch";
@@ -24,6 +23,7 @@ import styles from "./Editor.module.scss";
 export const Editor: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [paintMode, setPaintMode] = useState(false);
+  const [randomCounter, setRandomCounter] = useState(0);
   const [brushType, setBrushType] = useState<BrushType>("CIRCLE");
   const [brushSize, setBrushSize] = useState<BrushSize>(2);
   const {
@@ -35,11 +35,6 @@ export const Editor: React.FC = () => {
     setIsHovered,
     setSelectedColor,
   } = useColorPicker();
-
-  const handleRandomize = () => {
-    if (!canvasRef.current) return;
-    drawRandomEffect(canvasRef.current);
-  };
 
   return (
     <div className={styles.root}>
@@ -90,7 +85,7 @@ export const Editor: React.FC = () => {
                 <Icon
                   icon={IconCanvasUrl}
                   size="md"
-                  onClick={handleRandomize}
+                  onClick={() => setRandomCounter((prev) => prev + 1)}
                 />
                 <Icon
                   icon={IconColorPickerUrl}
@@ -107,14 +102,15 @@ export const Editor: React.FC = () => {
             initialSize={{ w: 600, h: 500 }}
             zIndex={1100}
           >
-            <ResizableScreen zoomLevel={50}>
-              <Canvas
+            <ResizableScreen zoomLevel={100}>
+              <RandomCanvas
                 ref={canvasRef}
+                refresh={randomCounter}
                 width={400}
                 height={300}
                 onClick={() => setIsActive(false)}
-                onEnter={() => setIsHovered(true)}
-                onLeave={() => setIsHovered(false)}
+                onPointerEnter={() => setIsHovered(true)}
+                onPointerLeave={() => setIsHovered(false)}
               >
                 {isActive && isHovered && (
                   <Magnifier
@@ -122,7 +118,7 @@ export const Editor: React.FC = () => {
                     onSelect={setSelectedColor}
                   />
                 )}
-              </Canvas>
+              </RandomCanvas>
             </ResizableScreen>
           </FloatingWindow>
 
@@ -159,7 +155,7 @@ export const Editor: React.FC = () => {
             zIndex={1100}
           >
             <ResizableScreen zoomLevel={100}>
-              <PaintCanvas
+              <DrawingCanvas
                 enabled={paintMode}
                 width={400}
                 height={300}

@@ -1,28 +1,33 @@
+import type { RefObject } from "react";
 import { useEffect, useRef } from "react";
 
-import type { BrushSize, BrushType } from "../types/brush";
-import { drawBrushType } from "./brushTypes";
+import { drawBrush } from "../methods/draw-brush";
+import type { BrushSize, BrushType } from "../types";
 
-export function usePaint({
-  canvasRef,
-  enabled,
-  color,
-  brushSize,
-  brushType,
-}: {
-  canvasRef: React.RefObject<HTMLCanvasElement>;
+export type UseDrawProps = {
+  ref?: RefObject<HTMLCanvasElement | null>;
   enabled: boolean;
   color: string;
+  backgroundColor: string;
   brushSize: BrushSize;
   brushType: BrushType;
-}) {
+};
+
+export function useDraw({
+  ref,
+  enabled,
+  color,
+  backgroundColor,
+  brushSize,
+  brushType,
+}: UseDrawProps) {
   const drawing = useRef(false);
   const lastPos = useRef<{ x: number; y: number } | null>(null);
   const savedImage = useRef<ImageData | null>(null);
 
   useEffect(() => {
-    if (!canvasRef.current || !enabled) return;
-    const canvas = canvasRef.current;
+    if (!ref?.current || !enabled) return;
+    const canvas = ref.current;
     const ctx = canvas.getContext("2d", { willReadFrequently: true });
     if (!ctx) return;
 
@@ -56,8 +61,10 @@ export function usePaint({
           ctx.putImageData(savedImage.current, 0, 0);
         } else {
           ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.fillStyle = backgroundColor;
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
         }
-        drawBrushType(ctx, pos.x, pos.y, brushSize, brushType);
+        drawBrush({ ctx, x: pos.x, y: pos.y, size: brushSize, brushType });
       }
     }
 
@@ -69,6 +76,8 @@ export function usePaint({
           ctx.putImageData(savedImage.current, 0, 0);
         } else {
           ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.fillStyle = backgroundColor;
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
         }
       }
     }
@@ -87,5 +96,5 @@ export function usePaint({
       canvas.removeEventListener("mousedown", handlePointerDown);
       window.removeEventListener("mouseup", handlePointerUp);
     };
-  }, [canvasRef, enabled, brushType, color, brushSize]);
+  }, [ref, enabled, brushType, color, brushSize, backgroundColor]);
 }

@@ -1,0 +1,10 @@
+.container {
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+
+  .canvas {
+    display: block;
+    box-shadow: var(--shadow-md);
+  }
+}

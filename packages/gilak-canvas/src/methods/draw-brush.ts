@@ -1,12 +1,14 @@
 import type { BrushSize, BrushType } from "../types/brush";
 
-export function drawBrushType(
-  ctx: CanvasRenderingContext2D,
-  x: number,
-  y: number,
-  size: BrushSize,
-  brushType: BrushType,
-) {
+export type DrawBrushProps = {
+  ctx: CanvasRenderingContext2D;
+  x: number;
+  y: number;
+  size: BrushSize;
+  brushType: BrushType;
+};
+
+export const drawBrush = ({ ctx, x, y, size, brushType }: DrawBrushProps) => {
   ctx.save();
   ctx.strokeStyle = "rgba(0,0,0,0.3)";
   ctx.lineWidth = size;
@@ -67,4 +69,4 @@ export function drawBrushType(
   }
   ctx.stroke();
   ctx.restore();
-}
+};

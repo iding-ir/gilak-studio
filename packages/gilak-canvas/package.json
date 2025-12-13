@@ -33,6 +33,9 @@
       "import": "./dist/gilak-canvas.es.js",
       "require": "./dist/gilak-canvas.umd.js"
     },
+    "./methods": {
+      "import": "./src/methods/index.ts"
+    },
     "./dist/gilak-canvas.css": "./dist/gilak-canvas.css"
   },
   "files": [

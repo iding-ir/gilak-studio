@@ -29,6 +29,10 @@ export default defineConfig({
         "../../packages/gilak-color-swatch/src",
       ),
       "@gilak/utils": resolve(__dirname, "../../packages/gilak-utils/src"),
+      "@gilak/floating-window": resolve(
+        __dirname,
+        "../../packages/gilak-floating-window/src",
+      ),
     },
   },
   css: {

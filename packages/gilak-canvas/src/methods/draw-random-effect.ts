@@ -31,7 +31,8 @@ export const drawRandomEffect = (canvas: HTMLCanvasElement) => {
   const w = canvas.width;
   const h = canvas.height;
 
-  // Select random effect
+  ctx.clearRect(0, 0, w, h);
+
   const effectTypes: EffectType[] = [
     "quadrants",
     "gradient",

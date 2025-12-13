@@ -25,10 +25,7 @@ export const ResizableScreen: React.FC<ResizableScreenProps> = ({
   return (
     <div className={styles.root}>
       <div className={styles.screen}>
-        <div
-          className={styles.content}
-          style={{ transform: `scale(${currentZoomLevel / 100})` }}
-        >
+        <div style={{ transform: `scale(${currentZoomLevel / 100})` }}>
           {children}
         </div>
       </div>
