@@ -6,26 +6,28 @@ import {
   type TshirtSize,
 } from "@gilak/components";
 import { getContrastColor } from "@gilak/utils";
-import React from "react";
+import { useMemo } from "react";
 
-import IconEmpty from "../assets/icon-empty.svg";
+import IconEmpty from "../assets/icon-empty.svg?url";
 import styles from "./ColorSwatch.module.scss";
 
-export interface ColorSwatchProps {
+export type ColorSwatchProps = {
   icon: string;
   size?: TshirtSize;
   color: string;
   colors: string[];
   onChange: (color: string) => void;
-}
+};
 
-export const ColorSwatch: React.FC<ColorSwatchProps> = ({
+export const ColorSwatch = ({
   icon,
   size = "md",
   color,
   colors,
   onChange,
-}) => {
+}: ColorSwatchProps) => {
+  const contrastColor = useMemo(() => getContrastColor(color), [color]);
+
   return (
     <div className={styles.root} style={{ backgroundColor: color }}>
       <Dropdown
@@ -34,8 +36,8 @@ export const ColorSwatch: React.FC<ColorSwatchProps> = ({
           <Icon
             icon={icon}
             size={size}
-            color={getContrastColor(color)}
-            backgroundColor="transparent"
+            color={contrastColor}
+            backgroundColor={color}
             frameless
           />
         }
@@ -62,8 +64,8 @@ export const ColorSwatch: React.FC<ColorSwatchProps> = ({
         type="text"
         name="color-swatch"
         style={{
+          color: contrastColor,
           backgroundColor: color,
-          color: getContrastColor(color),
           width: "6rem",
         }}
       />
