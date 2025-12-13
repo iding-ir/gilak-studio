@@ -1,4 +1,8 @@
 export const getContrastColor = (color: string): string => {
+  if (color === "transparent") {
+    return "#000000";
+  }
+
   // Remove the hash if present
   let hexColor = color.startsWith("#") ? color.slice(1) : color;
 

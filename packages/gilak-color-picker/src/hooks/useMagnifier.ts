@@ -1,25 +1,33 @@
 import { getCanvasColor } from "@gilak/utils";
+import type { RefObject } from "react";
 import { useEffect, useRef } from "react";
 
-import { useColorPicker } from "../context";
 import { renderMagnifierCanvas } from "../methods";
+import { useColorPicker } from "./useColorPicker";
 
 export const useMagnifier = ({
   onSelect,
   canvasRef,
 }: {
   onSelect?: (color: string) => void;
-  canvasRef?: React.RefObject<HTMLCanvasElement | null>;
+  canvasRef?: RefObject<HTMLCanvasElement | null>;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const magnifierRef = useRef<HTMLCanvasElement>(null);
   const rafRef = useRef<number | null>(null);
-  const { radius, size, isActive, isHovered, setCurrentColor, setIsActive } =
-    useColorPicker();
+  const {
+    magnifierRadius,
+    gridSize,
+    enabled,
+    isHovered,
+    setHoverColor,
+    setEnabled,
+  } = useColorPicker();
 
   useEffect(() => {
     const canvas = canvasRef?.current;
-    if (!canvas || !isActive || !isHovered) {
+
+    if (!canvas || !enabled || !isHovered) {
       return;
     }
 
@@ -31,11 +39,10 @@ export const useMagnifier = ({
         onSelect?.(color);
       }
 
-      setIsActive(false);
+      setEnabled(false);
     };
 
     const onPointerMove = (event: PointerEvent) => {
-      // Skip if already processing
       if (rafRef.current !== null) return;
 
       rafRef.current = requestAnimationFrame(() => {
@@ -53,16 +60,16 @@ export const useMagnifier = ({
         const color = getCanvasColor({ canvas, x, y });
 
         if (color) {
-          setCurrentColor(color);
+          setHoverColor(color);
         }
 
         renderMagnifierCanvas({
           canvas,
-          magnifier: magnifierRef.current,
+          magnifierCanvas: magnifierRef.current,
           x,
           y,
-          radius,
-          size,
+          magnifierRadius,
+          gridSize,
         });
       });
     };
@@ -74,7 +81,6 @@ export const useMagnifier = ({
       canvas.removeEventListener("pointerdown", onPointerDown);
       canvas.removeEventListener("pointermove", onPointerMove);
 
-      // Cancel pending animation frame
       if (rafRef.current !== null) {
         cancelAnimationFrame(rafRef.current);
         rafRef.current = null;
@@ -82,13 +88,13 @@ export const useMagnifier = ({
     };
   }, [
     canvasRef,
-    isActive,
+    enabled,
     isHovered,
     onSelect,
-    radius,
-    setCurrentColor,
-    setIsActive,
-    size,
+    magnifierRadius,
+    setHoverColor,
+    setEnabled,
+    gridSize,
   ]);
 
   return { containerRef, magnifierRef };

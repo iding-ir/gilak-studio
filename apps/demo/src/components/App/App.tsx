@@ -4,7 +4,12 @@ import { Editor } from "../Editor";
 
 export const App: React.FC = () => {
   return (
-    <ColorPickerProvider radius={5} size={15} width={20}>
+    <ColorPickerProvider
+      enabled={false}
+      magnifierRadius={5}
+      gridSize={15}
+      borderWidth={20}
+    >
       <Editor />
     </ColorPickerProvider>
   );

@@ -15,5 +15,12 @@ export const getCanvasColor = ({
     return;
   }
 
-  return convertArrayToHex(context.getImageData(x, y, 1, 1).data);
+  const data = context.getImageData(x, y, 1, 1).data;
+
+  // If alpha is 0, return 'transparent'
+  if (data[3] === 0) {
+    return "transparent";
+  }
+
+  return convertArrayToHex(data);
 };

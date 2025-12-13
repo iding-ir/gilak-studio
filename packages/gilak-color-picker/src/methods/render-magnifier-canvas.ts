@@ -1,24 +1,24 @@
 export const renderMagnifierCanvas = ({
   canvas,
-  magnifier,
+  magnifierCanvas,
   x,
   y,
-  radius,
-  size,
+  magnifierRadius,
+  gridSize,
 }: {
   canvas: HTMLCanvasElement;
-  magnifier: HTMLCanvasElement | null;
+  magnifierCanvas: HTMLCanvasElement | null;
   x: number;
   y: number;
-  radius: number;
-  size: number;
+  magnifierRadius: number;
+  gridSize: number;
 }) => {
-  if (!magnifier) {
+  if (!magnifierCanvas) {
     return;
   }
 
   const canvasCtx = canvas.getContext("2d", { willReadFrequently: true });
-  const magnifierCtx = magnifier.getContext("2d", {
+  const magnifierCtx = magnifierCanvas.getContext("2d", {
     alpha: true,
     desynchronized: true, // Better performance for animations
   });
@@ -27,12 +27,12 @@ export const renderMagnifierCanvas = ({
     return;
   }
 
-  const diameter = radius * 2 + 1;
-  magnifier.width = diameter * size;
-  magnifier.height = diameter * size;
+  const diameter = magnifierRadius * 2 + 1;
+  magnifierCanvas.width = diameter * gridSize;
+  magnifierCanvas.height = diameter * gridSize;
 
   // Draw magnified image with optimized rendering
-  magnifierCtx.clearRect(0, 0, magnifier.width, magnifier.height);
+  magnifierCtx.clearRect(0, 0, magnifierCanvas.width, magnifierCanvas.height);
 
   // Disable image smoothing for pixel-perfect magnification
   magnifierCtx.imageSmoothingEnabled = false;
@@ -46,8 +46,8 @@ export const renderMagnifierCanvas = ({
     diameter,
     0,
     0,
-    diameter * size,
-    diameter * size,
+    diameter * gridSize,
+    diameter * gridSize,
   );
 
   // Draw grids
@@ -55,20 +55,20 @@ export const renderMagnifierCanvas = ({
 
   for (let i = 0; i <= diameter; i++) {
     magnifierCtx.beginPath();
-    magnifierCtx.moveTo(i * size, 0);
-    magnifierCtx.lineTo(i * size, magnifier.height);
+    magnifierCtx.moveTo(i * gridSize, 0);
+    magnifierCtx.lineTo(i * gridSize, magnifierCanvas.height);
     magnifierCtx.stroke();
 
     magnifierCtx.beginPath();
-    magnifierCtx.moveTo(0, i * size);
-    magnifierCtx.lineTo(magnifier.width, i * size);
+    magnifierCtx.moveTo(0, i * gridSize);
+    magnifierCtx.lineTo(magnifierCanvas.width, i * gridSize);
     magnifierCtx.stroke();
   }
 
   // Draw white square in the center
-  const squareSize = size;
-  const centerX = magnifier.width / 2 - squareSize / 2;
-  const centerY = magnifier.height / 2 - squareSize / 2;
+  const squareSize = gridSize;
+  const centerX = magnifierCanvas.width / 2 - squareSize / 2;
+  const centerY = magnifierCanvas.height / 2 - squareSize / 2;
 
   magnifierCtx.strokeStyle = "white";
   magnifierCtx.lineWidth = 2;

@@ -72,7 +72,10 @@ export function useResize({
       const last = lastDispatchedSize.current;
       const changed = ns.w !== last.w || ns.h !== last.h;
       if (changed) {
-        ctx.dispatch({ type: "SET_SIZE", payload: { id, size: ns } });
+        ctx.dispatch({
+          type: "SET_GRID_SIZE",
+          payload: { id, size: ns },
+        });
         lastDispatchedSize.current = ns;
       }
       onResize?.(ns);

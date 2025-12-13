@@ -50,7 +50,7 @@ export function reducer(state: State, action: Action): State {
         windows: { ...state.windows, [id]: { ...win, position } },
       };
     }
-    case "SET_SIZE": {
+    case "SET_GRID_SIZE": {
       const { id, size } = action.payload as { id: string; size: Size };
       const win = state.windows[id] || { id };
       setItemSync(storageKey(id), { ...win, size });

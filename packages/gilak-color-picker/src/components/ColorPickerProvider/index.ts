@@ -1,0 +1,1 @@
+export { ColorPickerProvider } from "./ColorPickerProvider";

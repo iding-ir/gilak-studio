@@ -27,12 +27,11 @@ export const Editor: React.FC = () => {
   const [brushType, setBrushType] = useState<BrushType>("CIRCLE");
   const [brushSize, setBrushSize] = useState<BrushSize>(2);
   const {
-    selectedColor,
-    isActive,
-    isHovered,
-    setIsActive,
-    toggleActive,
-    setIsHovered,
+    selectedColor: selectedColorPickerColor,
+    enabled: isColorPickerEnabled,
+    isHovered: isColorPickerHovered,
+    toggleEnabled: toggleColorPickerEnabled,
+    setIsHovered: setIsColorPickerHovered,
     setSelectedColor,
   } = useColorPicker();
 
@@ -54,7 +53,7 @@ export const Editor: React.FC = () => {
             <ColorSwatch
               size="md"
               icon={IconBucketUrl}
-              color={selectedColor}
+              color={selectedColorPickerColor}
               colors={[
                 "#ffffff",
                 "#000000",
@@ -90,8 +89,8 @@ export const Editor: React.FC = () => {
                 <Icon
                   icon={IconColorPickerUrl}
                   size="md"
-                  selected={isActive}
-                  onClick={toggleActive}
+                  selected={isColorPickerEnabled}
+                  onClick={toggleColorPickerEnabled}
                 />
                 <div className={styles.ellipsis}>
                   Pick a color from a randomized canvas
@@ -108,11 +107,10 @@ export const Editor: React.FC = () => {
                 refresh={randomCounter}
                 width={400}
                 height={300}
-                onClick={() => setIsActive(false)}
-                onPointerEnter={() => setIsHovered(true)}
-                onPointerLeave={() => setIsHovered(false)}
+                onPointerEnter={() => setIsColorPickerHovered(true)}
+                onPointerLeave={() => setIsColorPickerHovered(false)}
               >
-                {isActive && isHovered && (
+                {isColorPickerEnabled && isColorPickerHovered && (
                   <Magnifier
                     canvasRef={canvasRef}
                     onSelect={setSelectedColor}
@@ -159,7 +157,7 @@ export const Editor: React.FC = () => {
                 enabled={paintMode}
                 width={400}
                 height={300}
-                color={selectedColor}
+                color={selectedColorPickerColor}
                 brushType={brushType}
                 brushSize={brushSize}
               />

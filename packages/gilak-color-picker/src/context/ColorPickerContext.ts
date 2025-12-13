@@ -1,5 +1,7 @@
 import { createContext } from "react";
 
-import type { ColorPickerState } from "./useColorPickerState";
+import type { ColorPickerContextType } from "../types";
 
-export const ColorPickerContext = createContext<ColorPickerState | null>(null);
+export const ColorPickerContext = createContext<ColorPickerContextType | null>(
+  null,
+);

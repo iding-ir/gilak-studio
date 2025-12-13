@@ -1,28 +1,38 @@
-import { useColorPicker } from "../../context";
-import { useMagnifier } from "../../hooks/use-magnifier";
-import { Text } from "../Text";
+import { getContrastColor } from "@gilak/utils";
+import { type RefObject } from "react";
+
+import { useColorPicker } from "../../hooks/useColorPicker";
+import { useMagnifier } from "../../hooks/useMagnifier";
 import styles from "./Magnifier.module.scss";
 
-export const Magnifier = ({
-  canvasRef,
-  onSelect,
-}: {
-  canvasRef: React.RefObject<HTMLCanvasElement | null>;
-  onSelect?: (color: string) => void;
-}) => {
-  const { currentColor, width } = useColorPicker();
+export type MagnifierProps = {
+  canvasRef: RefObject<HTMLCanvasElement | null>;
+  onSelect: (color: string) => void;
+};
+
+export const Magnifier = ({ canvasRef, onSelect }: MagnifierProps) => {
+  const { hoverColor, borderWidth } = useColorPicker();
   const { containerRef, magnifierRef } = useMagnifier({ onSelect, canvasRef });
 
   return (
     <div className={styles.container} ref={containerRef}>
       <canvas
         ref={magnifierRef}
-        style={{ borderColor: currentColor, borderWidth: width }}
+        style={{ borderColor: hoverColor, borderWidth }}
         width={0}
         height={0}
       />
 
-      <Text />
+      <div
+        className={styles.text}
+        style={{
+          color: getContrastColor(hoverColor),
+          backgroundColor: hoverColor,
+          borderColor: getContrastColor(hoverColor),
+        }}
+      >
+        {hoverColor}
+      </div>
     </div>
   );
 };
