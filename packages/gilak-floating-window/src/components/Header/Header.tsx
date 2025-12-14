@@ -1,35 +1,35 @@
 import { Icon } from "@gilak/components";
 import clsx from "clsx";
-import React from "react";
+import type { PointerEvent } from "react";
 
 import IconMaximize from "../../assets/icon-maximize.svg?url";
 import IconMaximized from "../../assets/icon-maximized.svg?url";
 import IconMinimize from "../../assets/icon-minimize.svg?url";
 import IconMinimized from "../../assets/icon-minimized.svg?url";
-import useWindow from "../../hooks/useWindow";
+import { useWindow } from "../../hooks/useWindow";
 import styles from "./Header.module.scss";
 
-export interface HeaderProps {
+export type HeaderProps = {
   id: string;
-  title?: React.ReactNode;
-  draggable?: boolean;
-  maximizable?: boolean;
-  minimizable?: boolean;
-  onDragPointerDown?: (event: React.PointerEvent<HTMLElement>) => void;
-}
+  title: React.ReactNode;
+  draggable: boolean;
+  maximizable: boolean;
+  minimizable: boolean;
+  onDragPointerDown?: (event: PointerEvent<HTMLElement>) => void;
+};
 
-export const Header: React.FC<HeaderProps> = ({
+export const Header = ({
   id,
   title,
   draggable,
   maximizable,
   minimizable,
   onDragPointerDown,
-}) => {
+}: HeaderProps) => {
   const { status, dragging, maximize, minimize, open, bringToFront } =
     useWindow(id);
 
-  const handlePointerDown = (event: React.PointerEvent<HTMLElement>) => {
+  const handlePointerDown = (event: PointerEvent<HTMLElement>) => {
     bringToFront();
     if (draggable && onDragPointerDown) onDragPointerDown(event);
   };

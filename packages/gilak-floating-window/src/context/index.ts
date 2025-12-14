@@ -1,18 +1,16 @@
 import { useContext } from "react";
 
-import FloatingWindowContext from "./provider";
+import { FloatingWindowContext } from "./context";
 
 export { FloatingWindowProvider } from "./provider";
 export { initialState, reducer } from "./reducer";
 export * from "./types";
 
-export function useFloatingWindowContext() {
+export const useFloatingWindowContext = () => {
   const ctx = useContext(FloatingWindowContext);
   if (!ctx)
     throw new Error(
       "useFloatingWindowContext must be used within FloatingWindowProvider",
     );
   return ctx;
-}
-
-export { default as FloatingWindowContext } from "./provider";
+};

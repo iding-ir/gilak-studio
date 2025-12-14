@@ -1,13 +1,27 @@
 import clsx from "clsx";
-import React, { type RefObject, useRef } from "react";
+import React, { memo, useRef } from "react";
 
+import {
+  IMITIAL_STATUS,
+  INITIAL_DRAGGABLE,
+  INITIAL_MAXIMIZABLE,
+  INITIAL_MINIMIZABLE,
+  INITIAL_POSITION,
+  INITIAL_RESIZABLE,
+  INITIAL_RESTRICT_TO_PARENT,
+  INITIAL_SIZE,
+  INITIAL_Z_INDEX,
+  MAX_SIZE,
+  MIN_SIZE,
+} from "../../constants";
 import type { Status } from "../../context";
 import { useDrag, useRegister, useResize, useWindow } from "../../hooks";
 import type { Position, Size } from "../../types";
 import { Footer } from "../Footer/Footer";
 import { Header } from "../Header";
 import styles from "./FloatingWindow.module.scss";
-export interface FloatingWindowProps {
+
+export type FloatingWindowProps = {
   id: string;
   children?: React.ReactNode;
   className?: string;
@@ -18,89 +32,97 @@ export interface FloatingWindowProps {
   initialSize?: Size;
   minSize?: Size;
   maxSize?: Size;
-  zIndex?: number;
+  initialZIndex?: number;
   draggable?: boolean;
   resizable?: boolean;
   maximizable?: boolean;
   minimizable?: boolean;
   restrictToParent?: boolean;
   onDragStart?: (position?: Position) => void;
+  onDrag?: (position?: Position) => void;
   onDragEnd?: (position?: Position) => void;
   onResizeStart?: (size?: Size) => void;
   onResize?: (size?: Size) => void;
   onResizeEnd?: (size?: Size) => void;
-}
+};
 
-export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
+export const FloatingWindow = memo(
   ({
     id,
     children,
     className,
     title = "",
-    initialStatus = "open",
+    initialStatus = IMITIAL_STATUS,
     footer,
-    initialPosition = { x: 0, y: 0 },
-    initialSize = { w: 400, h: 300 },
-    minSize = { w: 300, h: 200 },
-    maxSize,
-    zIndex = 1000,
-    draggable = true,
-    resizable = true,
-    maximizable = true,
-    minimizable = true,
-    restrictToParent = true,
+    initialPosition = INITIAL_POSITION,
+    initialSize = INITIAL_SIZE,
+    minSize = MIN_SIZE,
+    maxSize = MAX_SIZE,
+    initialZIndex = INITIAL_Z_INDEX,
+    draggable = INITIAL_DRAGGABLE,
+    resizable = INITIAL_RESIZABLE,
+    maximizable = INITIAL_MAXIMIZABLE,
+    minimizable = INITIAL_MINIMIZABLE,
+    restrictToParent = INITIAL_RESTRICT_TO_PARENT,
     onDragStart,
+    onDrag,
     onDragEnd,
     onResizeStart,
     onResize,
     onResizeEnd,
-  }) => {
-    const targetRef = useRef<HTMLDivElement | null>(null);
+  }: FloatingWindowProps) => {
+    const ref = useRef<HTMLDivElement | null>(null);
 
     useRegister({
       id,
       title,
       status: initialStatus,
+      minimizable,
+      maximizable,
       draggable,
       resizable,
-      maximizable,
-      minimizable,
-      position: initialPosition,
-      size: initialSize,
-      z: zIndex,
       dragging: false,
       resizing: false,
+      position: initialPosition,
+      size: initialSize,
+      zIndex: initialZIndex,
     });
 
-    const { status, position, size, z: ctxZ, resizing } = useWindow(id);
+    const { size, position, status, zIndex, resizing, dragging } =
+      useWindow(id);
 
-    const { dragging, onPointerDown: onDragPointerDown } = useDrag({
+    const { onPointerDown: onDragPointerDown } = useDrag({
       id,
-      targetRef,
+      position: initialPosition,
+      status,
       draggable,
       restrictToParent,
-      initialPosition,
+      ref,
       onDragStart,
+      onDrag,
       onDragEnd,
     });
 
     const { onPointerDown: onResizePointerDown } = useResize({
       id,
-      targetRef,
+      size: initialSize,
       resizable,
-      initialSize,
+      status,
       minSize,
       maxSize,
+      ref,
       onResizeStart,
       onResize,
       onResizeEnd,
     });
 
-    if (status === "minimized") return null;
+    if (status === "minimized") {
+      return null;
+    }
 
     return (
       <div
-        ref={targetRef as RefObject<HTMLDivElement>}
+        ref={ref}
         className={clsx(styles.window, className, {
           [styles.maximized]: status === "maximized",
           [styles.draggable]: draggable && status !== "maximized",
@@ -108,10 +130,10 @@ export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
           [styles.resizing]: resizing,
         })}
         style={{
-          transform: `translate3d(${position?.x}px, ${position?.y}px, 0)`,
-          zIndex: ctxZ ?? zIndex,
-          width: resizable ? (size?.w ?? initialSize.w) : initialSize.w,
-          height: resizable ? (size?.h ?? initialSize.h) : initialSize.h,
+          transform: `translate3d(${(position || initialPosition).x}px, ${(position || initialPosition).y}px, 0)`,
+          zIndex,
+          width: (size || initialSize).w,
+          height: (size || initialSize).h,
         }}
       >
         <Header
@@ -119,14 +141,14 @@ export const FloatingWindow: React.FC<FloatingWindowProps> = React.memo(
           title={title}
           draggable={draggable && status !== "maximized"}
           maximizable={maximizable}
-          minimizable={true}
+          minimizable={minimizable}
           onDragPointerDown={draggable ? onDragPointerDown : undefined}
         />
         <div className={styles.body}>{children}</div>
         <Footer
+          id={id}
+          resizable={resizable && status !== "maximized"}
           footer={footer}
-          resizable={resizable}
-          status={status}
           onResizePointerDown={onResizePointerDown}
         />
       </div>

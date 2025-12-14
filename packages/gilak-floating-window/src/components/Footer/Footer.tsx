@@ -2,22 +2,24 @@ import { Icon } from "@gilak/components";
 import type { PointerEvent, ReactNode } from "react";
 
 import IconResize from "../../assets/icon-resize.svg?url";
-import type { Status } from "../../context";
+import { useWindow } from "../../hooks/useWindow";
 import styles from "./Footer.module.scss";
 
-interface FooterProps {
+export type FooterProps = {
+  id: string;
   footer: ReactNode;
   resizable: boolean;
-  status: Status;
   onResizePointerDown?: (event: PointerEvent<HTMLDivElement>) => void;
-}
+};
 
-export const Footer: React.FC<FooterProps> = ({
+export const Footer = ({
+  id,
   footer,
   resizable,
-  status,
   onResizePointerDown,
 }: FooterProps) => {
+  const { status } = useWindow(id);
+
   return (
     <footer className={styles.root}>
       {footer}

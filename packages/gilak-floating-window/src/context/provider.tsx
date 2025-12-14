@@ -1,22 +1,20 @@
-import React, { createContext, type ReactNode, useReducer } from "react";
+import type { ReactNode } from "react";
+import { useMemo, useReducer } from "react";
 
 import { Header } from "../components/Header";
+import { FloatingWindowContext } from "./context";
 import styles from "./provider.module.scss";
 import { initialState, reducer } from "./reducer";
-import type { Action, State } from "./types";
+import { hasMinimizedWindows } from "./selectors";
+import type { ContextValue } from "./types";
 
-export type ContextValue = {
-  state: State;
-  dispatch: React.Dispatch<Action>;
+export type FloatingWindowProviderProps = {
+  children: ReactNode;
 };
 
-const FloatingWindowContext = createContext<ContextValue | undefined>(
-  undefined,
-);
-
-export const FloatingWindowProvider: React.FC<{ children?: ReactNode }> = ({
+export const FloatingWindowProvider = ({
   children,
-}) => {
+}: FloatingWindowProviderProps) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const value: ContextValue = {
@@ -24,26 +22,24 @@ export const FloatingWindowProvider: React.FC<{ children?: ReactNode }> = ({
     dispatch,
   };
 
-  const minimizedWindows = Object.values(state.windows).filter(
-    (w) => w.status === "minimized",
-  );
+  const showTaskbar = useMemo(() => hasMinimizedWindows(state), [state]);
 
   return (
     <FloatingWindowContext.Provider value={value}>
       <div className={styles.container}>
         <div className={styles.windows}>{children}</div>
-        {minimizedWindows.length > 0 && (
+        {showTaskbar && (
           <div className={styles.taskbar}>
             {Object.values(state.windows)
-              .filter((w) => w.status === "minimized")
-              .map((w) => (
+              .filter(({ status }) => status === "minimized")
+              .map(({ id, title, maximizable, minimizable }) => (
                 <Header
-                  key={w.id}
-                  id={w.id}
-                  title={w.title}
+                  key={id}
+                  id={id}
+                  title={title}
                   draggable={false}
-                  maximizable={w.maximizable}
-                  minimizable={w.minimizable}
+                  maximizable={maximizable}
+                  minimizable={minimizable}
                   onDragPointerDown={() => null}
                 />
               ))}
@@ -53,5 +49,3 @@ export const FloatingWindowProvider: React.FC<{ children?: ReactNode }> = ({
     </FloatingWindowContext.Provider>
   );
 };
-
-export default FloatingWindowContext;

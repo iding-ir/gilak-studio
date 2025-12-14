@@ -1,147 +1,139 @@
 import { type RefObject, useCallback, useRef } from "react";
 
-import { useFloatingWindowContext } from "../context";
+import type { Status } from "../context";
 import type { Position } from "../types";
-import useWindow from "./useWindow";
+import { useWindow } from "./useWindow";
 
-type Params = {
+const clampPosition = ({
+  pos,
+  rect,
+  parentRect,
+  restrictToParent,
+}: {
+  pos: Position;
+  rect: DOMRect | null;
+  parentRect: DOMRect | null;
+  restrictToParent: boolean;
+}): Position => {
+  if (!parentRect || !restrictToParent || !rect) return pos;
+
+  const x = Math.max(0, Math.min(pos.x, parentRect.width - rect.width));
+  const y = Math.max(0, Math.min(pos.y, parentRect.height - rect.height));
+
+  return { x, y };
+};
+
+export type useDragParams = {
+  ref: RefObject<HTMLElement | null>;
   id: string;
-  targetRef: RefObject<HTMLElement | null>;
-  draggable?: boolean;
-  restrictToParent?: boolean;
-  initialPosition?: Position;
+  position: Position;
+  status: Status;
+  draggable: boolean;
+  restrictToParent: boolean;
   onDragStart?: (pos?: Position) => void;
+  onDrag?: (pos?: Position) => void;
   onDragEnd?: (pos?: Position) => void;
 };
 
-export function useDrag({
+export const useDrag = ({
+  ref,
   id,
-  targetRef,
-  draggable = true,
-  restrictToParent = true,
-  initialPosition = { x: 0, y: 0 },
+  position,
+  status,
+  draggable,
+  restrictToParent,
   onDragStart,
+  onDrag,
   onDragEnd,
-}: Params) {
-  const ctx = useFloatingWindowContext();
-  const { status, dragging, bringToFront } = useWindow(id);
+}: useDragParams) => {
+  const { drag, setDragging, bringToFront } = useWindow(id);
 
-  const dragStartPos = useRef<Position>({ x: 0, y: 0 });
-  const elementStartPos = useRef<Position>(initialPosition);
-  const nextPosition = useRef<Position>(initialPosition);
-  const lastDispatchedPosition = useRef<Position>(initialPosition);
-  const frameRequested = useRef(false);
-  const parentRectRef = useRef<DOMRect | null>(null);
+  const state = useRef({
+    startPosition: position,
+    nextPosition: position,
+    lastDispatched: position,
+    frameRequested: false,
+    rect: null as DOMRect | null,
+    parentRect: null as DOMRect | null,
+  });
 
-  const clampPosition = useCallback(
-    (pos: Position) => {
-      if (!restrictToParent || !targetRef.current || !parentRectRef.current)
-        return pos;
-      const parentRect = parentRectRef.current;
-      const el = targetRef.current;
-      const width = el.offsetWidth;
-      const height = el.offsetHeight;
-      let x = pos.x;
-      let y = pos.y;
-      x = Math.max(0, Math.min(x, parentRect.width - width));
-      y = Math.max(0, Math.min(y, parentRect.height - height));
-      return { x, y };
-    },
-    [restrictToParent, targetRef],
-  );
-
-  const dragDisabled = !draggable || status === "maximized";
-
-  const handlePointerMove = useCallback(
-    (event: PointerEvent) => {
-      if (dragDisabled) return;
-
-      const deltaX = event.clientX - dragStartPos.current.x;
-      const deltaY = event.clientY - dragStartPos.current.y;
-
-      let newPos = {
-        x: elementStartPos.current.x + deltaX,
-        y: elementStartPos.current.y + deltaY,
-      };
-      newPos = clampPosition(newPos);
-      nextPosition.current = newPos;
-
-      if (!frameRequested.current) {
-        frameRequested.current = true;
-        window.requestAnimationFrame(() => {
-          const np = nextPosition.current;
-          const last = lastDispatchedPosition.current;
-          if (np.x !== last.x || np.y !== last.y) {
-            ctx.dispatch({
-              type: "SET_POSITION",
-              payload: { id, position: np },
-            });
-            lastDispatchedPosition.current = np;
-          }
-          frameRequested.current = false;
-        });
-      }
-    },
-    [dragDisabled, clampPosition, ctx, id],
-  );
-
-  const handlePointerDown = useCallback(
+  const onPointerDown = useCallback(
     (event: React.PointerEvent<HTMLElement>) => {
-      if (!draggable || event.button !== 0) return;
-      if (status === "maximized") return;
-
       event.preventDefault();
 
-      bringToFront?.();
-      ctx.dispatch({ type: "SET_DRAGGING", payload: { id, dragging: true } });
-      onDragStart?.(elementStartPos.current);
+      if (!draggable || status !== "open") return;
 
-      dragStartPos.current = { x: event.clientX, y: event.clientY };
+      bringToFront();
+      setDragging(true);
+      onDragStart?.(state.current.startPosition);
 
-      const currentX = ctx.state.windows[id]?.position.x ?? initialPosition.x;
-      const currentY = ctx.state.windows[id]?.position.y ?? initialPosition.y;
-      elementStartPos.current = { x: currentX, y: currentY };
-      lastDispatchedPosition.current = { x: currentX, y: currentY };
+      const element = ref.current;
+      if (!element) return;
 
-      if (
-        restrictToParent &&
-        targetRef.current &&
-        targetRef.current.parentElement
-      ) {
-        parentRectRef.current =
-          targetRef.current.parentElement.getBoundingClientRect();
-      }
+      state.current.rect = element.getBoundingClientRect();
+      state.current.startPosition = state.current.lastDispatched;
+      state.current.parentRect =
+        element.parentElement?.getBoundingClientRect() || null;
 
-      const handlePointerUp = () => {
-        ctx.dispatch({
-          type: "SET_DRAGGING",
-          payload: { id, dragging: false },
+      const onPointerMove = (ev: PointerEvent) => {
+        const pos = {
+          x: state.current.startPosition.x + (ev.clientX - event.clientX),
+          y: state.current.startPosition.y + (ev.clientY - event.clientY),
+        };
+
+        state.current.nextPosition = clampPosition({
+          pos,
+          rect: state.current.rect,
+          parentRect: state.current.parentRect,
+          restrictToParent,
         });
-        onDragEnd?.(lastDispatchedPosition.current);
-        document.removeEventListener("pointermove", handlePointerMove);
-        document.removeEventListener("pointerup", handlePointerUp);
+
+        if (!state.current.frameRequested) {
+          state.current.frameRequested = true;
+          requestAnimationFrame(() => {
+            const { nextPosition, lastDispatched } = state.current;
+
+            if (
+              nextPosition.x !== lastDispatched.x ||
+              nextPosition.y !== lastDispatched.y
+            ) {
+              element.style.transform = `translate3d(${Math.round(nextPosition.x)}px, ${Math.round(
+                nextPosition.y,
+              )}px, 0)`;
+
+              state.current.lastDispatched = nextPosition;
+              onDrag?.(nextPosition);
+            }
+            state.current.frameRequested = false;
+          });
+        }
       };
 
-      document.addEventListener("pointermove", handlePointerMove);
-      document.addEventListener("pointerup", handlePointerUp);
+      const onPointerUp = () => {
+        drag(state.current.lastDispatched);
+        setDragging(false);
+        onDragEnd?.(state.current.lastDispatched);
+
+        document.removeEventListener("pointermove", onPointerMove);
+        document.removeEventListener("pointerup", onPointerUp);
+      };
+
+      document.addEventListener("pointermove", onPointerMove);
+      document.addEventListener("pointerup", onPointerUp);
     },
     [
+      ref,
       draggable,
-      handlePointerMove,
-      onDragStart,
-      onDragEnd,
-      restrictToParent,
       status,
-      ctx,
-      id,
-      initialPosition.x,
-      initialPosition.y,
-      targetRef,
+      restrictToParent,
+      onDragStart,
+      onDrag,
+      onDragEnd,
       bringToFront,
+      setDragging,
+      drag,
     ],
   );
 
-  return { onPointerDown: handlePointerDown, dragging };
-}
-
-export default useDrag;
+  return { onPointerDown };
+};

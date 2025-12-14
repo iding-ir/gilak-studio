@@ -1,99 +1,78 @@
-import { setItemSync } from "@gilak/utils";
+import type { Action, State } from "./types";
 
-import { storageKey } from "../methods/storage-key";
-import type { Position, Size } from "../types";
-import type { Action, FloatingWindowMeta, State, Status } from "./types";
+export const initialState: State = { windows: {} };
 
-export const initialState: State = { windows: {}, topZIndex: 1000 };
-
-export function reducer(state: State, action: Action): State {
-  switch (action.type) {
+export function reducer(state: State, { type, payload }: Action): State {
+  switch (type) {
     case "REGISTER": {
-      const win = action.payload as FloatingWindowMeta;
-      const incomingZ = win.z ?? state.topZIndex;
-      const nextTop = Math.max(state.topZIndex, incomingZ);
+      const { id } = payload;
+
       return {
         ...state,
-        topZIndex: nextTop,
         windows: {
           ...state.windows,
-          [win.id]: { ...state.windows[win.id], ...win },
+          [id]: { ...state.windows[id], ...payload },
         },
       };
     }
     case "UNREGISTER": {
-      const id = action.payload.id;
+      const { id } = payload;
       const rest = { ...state.windows };
       delete rest[id];
+
       return { ...state, windows: rest };
     }
     case "SET_STATUS": {
-      const { id, status } = action.payload as { id: string; status: Status };
-      const win = state.windows[id] || { id };
-      setItemSync(storageKey(id), { ...win, status });
+      const { id, status } = payload;
 
       return {
         ...state,
-        windows: { ...state.windows, [id]: { ...win, status } },
+        windows: { ...state.windows, [id]: { ...state.windows[id], status } },
       };
     }
     case "SET_POSITION": {
-      const { id, position } = action.payload as {
-        id: string;
-        position: Position;
-      };
-      const win = state.windows[id] || { id };
-      setItemSync(storageKey(id), { ...win, position });
+      const { id, position } = payload;
 
       return {
         ...state,
-        windows: { ...state.windows, [id]: { ...win, position } },
+        windows: { ...state.windows, [id]: { ...state.windows[id], position } },
       };
     }
-    case "SET_GRID_SIZE": {
-      const { id, size } = action.payload as { id: string; size: Size };
-      const win = state.windows[id] || { id };
-      setItemSync(storageKey(id), { ...win, size });
+    case "SET_SIZE": {
+      const { id, size } = payload;
 
       return {
         ...state,
-        windows: { ...state.windows, [id]: { ...win, size } },
+        windows: { ...state.windows, [id]: { ...state.windows[id], size } },
       };
     }
     case "SET_DRAGGING": {
-      const { id, dragging } = action.payload as {
-        id: string;
-        dragging: boolean;
-      };
-      const win = state.windows[id] || { id };
+      const { id, dragging } = payload;
 
       return {
         ...state,
-        windows: { ...state.windows, [id]: { ...win, dragging } },
+        windows: { ...state.windows, [id]: { ...state.windows[id], dragging } },
       };
     }
     case "SET_RESIZING": {
-      const { id, resizing } = action.payload as {
-        id: string;
-        resizing: boolean;
-      };
-      const win = state.windows[id] || { id };
+      const { id, resizing } = payload;
 
       return {
         ...state,
-        windows: { ...state.windows, [id]: { ...win, resizing } },
+        windows: { ...state.windows, [id]: { ...state.windows[id], resizing } },
       };
     }
     case "BRING_TO_FRONT": {
-      const { id } = action.payload as { id: string };
-      const next = state.topZIndex + 1;
-      const win = state.windows[id] || { id };
-      setItemSync(storageKey(id), { ...win, z: next });
+      const { id } = payload;
+      const zIndexes = Object.values(state.windows).map((w) => w.zIndex);
+      const zIndexNew = Math.max(...zIndexes) + 1;
 
       return {
         ...state,
-        topZIndex: next,
-        windows: { ...state.windows, [id]: { ...win, z: next } },
+        windows: {
+          ...state.windows,
+          [id]: { ...state.windows[id], zIndex: zIndexNew },
+        },
       };
     }
     default:

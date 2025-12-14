@@ -99,7 +99,7 @@ export const Editor: React.FC = () => {
             }
             initialPosition={{ x: 0, y: 0 }}
             initialSize={{ w: 600, h: 500 }}
-            zIndex={1100}
+            initialZIndex={1100}
           >
             <ResizableScreen zoomLevel={100} hideOverflow={true}>
               <RandomCanvas
@@ -150,7 +150,7 @@ export const Editor: React.FC = () => {
             }
             initialPosition={{ x: 640, y: 0 }}
             initialSize={{ w: 600, h: 500 }}
-            zIndex={1100}
+            initialZIndex={1100}
           >
             <ResizableScreen zoomLevel={100}>
               <DrawingCanvas
