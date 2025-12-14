@@ -110,6 +110,7 @@ export const FloatingWindow = memo(
       status,
       minSize,
       maxSize,
+      restrictToParent,
       ref,
       onResizeStart,
       onResize,

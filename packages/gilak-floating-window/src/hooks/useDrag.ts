@@ -76,13 +76,11 @@ export const useDrag = ({
         element.parentElement?.getBoundingClientRect() || null;
 
       const onPointerMove = (ev: PointerEvent) => {
-        const pos = {
-          x: state.current.startPosition.x + (ev.clientX - event.clientX),
-          y: state.current.startPosition.y + (ev.clientY - event.clientY),
-        };
-
         state.current.nextPosition = clampPosition({
-          pos,
+          pos: {
+            x: state.current.startPosition.x + (ev.clientX - event.clientX),
+            y: state.current.startPosition.y + (ev.clientY - event.clientY),
+          },
           rect: state.current.rect,
           parentRect: state.current.parentRect,
           restrictToParent,

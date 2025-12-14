@@ -8,10 +8,16 @@ const clampSize = ({
   size,
   minSize,
   maxSize,
+  restrictToParent,
+  rect,
+  parentRect,
 }: {
   size: Size;
   minSize: Size;
   maxSize: Size;
+  restrictToParent?: boolean;
+  rect?: DOMRect | null;
+  parentRect?: DOMRect | null;
 }): Size => {
   let w = Math.max(minSize.w, size.w);
   let h = Math.max(minSize.h, size.h);
@@ -19,6 +25,16 @@ const clampSize = ({
   if (maxSize) {
     w = Math.min(maxSize.w, w);
     h = Math.min(maxSize.h, h);
+  }
+
+  if (restrictToParent && parentRect && rect) {
+    const currentLeft = rect.left - parentRect.left;
+    const currentTop = rect.top - parentRect.top;
+
+    if (currentLeft + w > parentRect.width) w = parentRect.width - currentLeft;
+    if (currentTop + h > parentRect.height) h = parentRect.height - currentTop;
+    if (currentLeft < 0) w = Math.min(w, parentRect.width);
+    if (currentTop < 0) h = Math.min(h, parentRect.height);
   }
 
   return { w, h };
@@ -32,6 +48,7 @@ export type useResizeParams = {
   resizable: boolean;
   minSize: Size;
   maxSize: Size;
+  restrictToParent: boolean;
   onResizeStart?: (size?: Size) => void;
   onResize?: (size?: Size) => void;
   onResizeEnd?: (size?: Size) => void;
@@ -45,6 +62,7 @@ export const useResize = ({
   resizable,
   minSize,
   maxSize,
+  restrictToParent,
   onResizeStart,
   onResize,
   onResizeEnd,
@@ -56,6 +74,7 @@ export const useResize = ({
     nextSize: size,
     lastDispatched: size,
     frameRequested: false,
+    rect: null as DOMRect | null,
     parentRect: null as DOMRect | null,
   });
 
@@ -72,6 +91,7 @@ export const useResize = ({
       const element = ref.current;
       if (!element) return;
 
+      state.current.rect = element.getBoundingClientRect();
       state.current.startSize = state.current.lastDispatched;
       state.current.parentRect =
         element.parentElement?.getBoundingClientRect() || null;
@@ -84,6 +104,9 @@ export const useResize = ({
           },
           minSize,
           maxSize,
+          rect: state.current.rect,
+          parentRect: state.current.parentRect,
+          restrictToParent,
         });
 
         if (!state.current.frameRequested) {
@@ -124,6 +147,7 @@ export const useResize = ({
       resizable,
       minSize,
       maxSize,
+      restrictToParent,
       onResizeStart,
       onResizeEnd,
       onResize,
