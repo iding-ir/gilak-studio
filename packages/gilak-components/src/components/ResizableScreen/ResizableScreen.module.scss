@@ -1,9 +1,11 @@
+@use "@gilak/stylist/mixins" as mixins;
+
 .root {
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
-  gap: var(--spacing-xs);
+  gap: var(--spacing-sm);
 
   .screen {
     flex: 1;
@@ -11,7 +13,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    overflow: auto;
+    @include mixins.scrollbar;
+
+    &.hideOverflow {
+      overflow: hidden;
+    }
   }
 
   .footer {

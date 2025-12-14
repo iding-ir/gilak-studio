@@ -1,16 +1,15 @@
 import clsx from "clsx";
 import type { ReactNode } from "react";
-import React from "react";
 
 import styles from "./List.module.scss";
 
-export interface ListProps {
+export type ListProps = {
   items: ReactNode[];
   direction?: "row" | "column";
   count?: 1 | 2 | 3 | 4;
   frameless?: boolean;
   theme?: "primary" | "light";
-}
+};
 
 export const List = ({
   items,
@@ -18,7 +17,7 @@ export const List = ({
   count = 1,
   frameless = false,
   theme = "light",
-}: ListProps): React.ReactElement => {
+}: ListProps) => {
   return (
     <ul
       className={clsx(styles.list, styles[theme], styles[direction], {

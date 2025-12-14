@@ -8,13 +8,13 @@
     cursor: pointer;
   }
 
-  .dropdownMenu {
+  .menu {
     position: absolute;
-    z-index: 10000;
+    z-index: 9999;
   }
 
   &.top {
-    .dropdownMenu {
+    .menu {
       bottom: 100%;
       left: 50%;
       transform: translateX(-50%);
@@ -23,7 +23,7 @@
   }
 
   &.top-right {
-    .dropdownMenu {
+    .menu {
       bottom: 100%;
       left: 0;
       margin-bottom: var(--spacing-xs);
@@ -31,7 +31,7 @@
   }
 
   &.right {
-    .dropdownMenu {
+    .menu {
       top: 50%;
       left: 100%;
       transform: translateY(-50%);
@@ -40,7 +40,7 @@
   }
 
   &.bottom-right {
-    .dropdownMenu {
+    .menu {
       top: 100%;
       left: 0;
       margin-top: var(--spacing-xs);
@@ -48,7 +48,7 @@
   }
 
   &.bottom {
-    .dropdownMenu {
+    .menu {
       top: 100%;
       left: 50%;
       transform: translateX(-50%);
@@ -57,7 +57,7 @@
   }
 
   &.bottom-left {
-    .dropdownMenu {
+    .menu {
       top: 100%;
       right: 0;
       margin-top: var(--spacing-xs);
@@ -65,7 +65,7 @@
   }
 
   &.left {
-    .dropdownMenu {
+    .menu {
       top: 50%;
       right: 100%;
       transform: translateY(-50%);
@@ -74,7 +74,7 @@
   }
 
   &.top-left {
-    .dropdownMenu {
+    .menu {
       bottom: 100%;
       right: 0;
       margin-bottom: var(--spacing-xs);

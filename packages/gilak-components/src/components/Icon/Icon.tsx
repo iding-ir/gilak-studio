@@ -1,11 +1,12 @@
 import clsx from "clsx";
+import type { HTMLAttributes } from "react";
 import React from "react";
 
 import type { TshirtSize } from "../../types";
 import styles from "./Icon.module.scss";
 
 export interface IconProps extends Omit<
-  React.HTMLAttributes<HTMLDivElement>,
+  HTMLAttributes<HTMLDivElement>,
   "color"
 > {
   icon: string;
@@ -19,7 +20,7 @@ export interface IconProps extends Omit<
   frameless?: boolean;
 }
 
-export const Icon: React.FC<IconProps> = ({
+export const Icon = ({
   icon,
   size = "md",
   color = "var(--color-dark-xxl)",
@@ -30,7 +31,7 @@ export const Icon: React.FC<IconProps> = ({
   interactive = false,
   frameless = false,
   ...props
-}) => {
+}: IconProps) => {
   const rootStyles = {
     "--icon-color": color,
     "--icon-bg-color": backgroundColor,
@@ -45,8 +46,8 @@ export const Icon: React.FC<IconProps> = ({
         [styles.frameless]: frameless,
         [styles.interactive]: interactive || !!props.onClick,
       })}
-      style={rootStyles}
       {...props}
+      style={{ ...props.style, ...rootStyles }}
     >
       <span className={clsx(styles.image)} />
     </i>

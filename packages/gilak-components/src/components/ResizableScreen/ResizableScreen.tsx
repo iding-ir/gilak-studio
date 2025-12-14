@@ -1,30 +1,33 @@
-import React, { type ReactNode, useState } from "react";
+import clsx from "clsx";
+import { type ReactNode, useState } from "react";
 
 import { Dropdown } from "../DropDown";
 import { Icon } from "../Icon";
 import { List } from "../List";
 import { Text } from "../Text";
-import IconZoom from "./icon-zoom.svg?url";
+import IconZoom from "./assets/icon-zoom.svg?url";
 import styles from "./ResizableScreen.module.scss";
+import type { Zoom } from "./types";
+import { zoomLevels } from "./types";
 
-const zoomLevels = [10, 25, 50, 75, 100, 125, 150, 175, 200] as const;
-
-export type Zoom = (typeof zoomLevels)[number];
-
-export interface ResizableScreenProps {
+export type ResizableScreenProps = {
   children: ReactNode;
   zoomLevel?: Zoom;
-}
+  hideOverflow?: boolean;
+};
 
-export const ResizableScreen: React.FC<ResizableScreenProps> = ({
+export const ResizableScreen = ({
   children,
   zoomLevel = 100,
-}) => {
+  hideOverflow = false,
+}: ResizableScreenProps) => {
   const [currentZoomLevel, setCurrentZoomLevel] = useState(zoomLevel);
 
   return (
     <div className={styles.root}>
-      <div className={styles.screen}>
+      <div
+        className={clsx(styles.screen, { [styles.hideOverflow]: hideOverflow })}
+      >
         <div style={{ transform: `scale(${currentZoomLevel / 100})` }}>
           {children}
         </div>

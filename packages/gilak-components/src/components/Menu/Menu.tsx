@@ -1,32 +1,32 @@
 import clsx from "clsx";
-import React, { type PointerEvent, type ReactNode } from "react";
+import type { PointerEvent, ReactNode } from "react";
 
 import { Dropdown } from "../DropDown";
-import { List } from "../List";
-import { Text } from "../Text";
+import { Child } from "./Child";
+import { Label } from "./Label";
 import styles from "./Menu.module.scss";
 
 export type MenuDirection = "row" | "column";
 
-export interface MenuProps {
+export type MenuProps = {
+  children?: ReactNode;
   root?: boolean;
   label: string;
   direction?: MenuDirection;
   open?: boolean;
   href?: string;
-  children?: ReactNode;
   onClick?: () => void;
-}
+};
 
-export const Menu: React.FC<MenuProps> = ({
+export const Menu = ({
+  children,
   root = false,
-  direction = "row",
   label,
+  direction = "row",
   open = false,
   href,
-  children,
   onClick,
-}) => {
+}: MenuProps) => {
   const handleClick = (event: PointerEvent<HTMLAnchorElement>) => {
     event.preventDefault();
     onClick?.();
@@ -65,41 +65,5 @@ export const Menu: React.FC<MenuProps> = ({
         </Child>
       </Dropdown>
     </div>
-  );
-};
-
-const Child = ({
-  direction,
-  root,
-  children,
-}: {
-  direction: MenuDirection;
-  root: boolean;
-  children?: ReactNode;
-}) => {
-  return (
-    <List
-      direction={direction}
-      count={1}
-      frameless={root}
-      theme={root ? "primary" : "light"}
-      items={React.Children.toArray(children)}
-    />
-  );
-};
-
-const Label = ({
-  label,
-  href,
-  onClick,
-}: {
-  label: string;
-  href?: string;
-  onClick?: (event: PointerEvent<HTMLAnchorElement>) => void;
-}) => {
-  return (
-    <a href={href} onClick={onClick}>
-      <Text size="md" text={label} frameless />
-    </a>
   );
 };

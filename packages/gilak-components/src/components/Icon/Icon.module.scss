@@ -6,18 +6,24 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  background-color: var(--icon-bg-color);
+  box-shadow: var(--shadow-sm);
 
-  &:not(.frameless) {
-    background-color: var(--icon-bg-color);
-    box-shadow: var(--shadow-sm);
+  &.frameless {
+    background-color: transparent;
+    box-shadow: none;
   }
 
   &.interactive {
     cursor: pointer;
 
-    &:hover .image::before {
-      background-color: var(--color-primary-md);
-      transition: all var(--transition-lg);
+    &:hover {
+      .image {
+        &::before {
+          background-color: var(--color-primary-md);
+          transition: all var(--transition-lg);
+        }
+      }
     }
   }
 

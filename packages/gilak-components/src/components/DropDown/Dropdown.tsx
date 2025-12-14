@@ -1,5 +1,6 @@
 import clsx from "clsx";
-import React, { type ReactNode, useEffect, useRef, useState } from "react";
+import type { ReactNode } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import styles from "./Dropdown.module.scss";
 
@@ -13,29 +14,30 @@ export type Position =
   | "left"
   | "top-left";
 
-export interface DropdownProps {
-  trigger: ReactNode;
-  openDefault?: boolean;
+export type DropdownProps = {
   children: ReactNode;
-  openOnHover?: boolean;
+  trigger: ReactNode;
   className?: string;
+  openDefault?: boolean;
   position?: Position;
-}
+};
 
-export const Dropdown: React.FC<DropdownProps> = ({
-  trigger,
-  openDefault = false,
+export const Dropdown = ({
   children,
-  openOnHover = false,
+  trigger,
   className,
+  openDefault = false,
   position = "bottom-right",
-}) => {
+}: DropdownProps) => {
   const [open, setOpen] = useState(openDefault);
   const triggerRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!open) return;
+    if (!open) {
+      return;
+    }
+
     const handlePointerDown = (event: PointerEvent) => {
       if (
         !triggerRef.current?.contains(event.target as Node) &&
@@ -44,26 +46,22 @@ export const Dropdown: React.FC<DropdownProps> = ({
         setOpen(false);
       }
     };
+
     document.addEventListener("pointerdown", handlePointerDown);
     return () => document.removeEventListener("pointerdown", handlePointerDown);
   }, [open]);
 
-  const triggerProps = openOnHover
-    ? {
-        onPointerEnter: () => setOpen(true),
-        onPointerLeave: () => setOpen(false),
-      }
-    : {
-        onPointerDown: () => setOpen((state) => !state),
-      };
-
   return (
     <div className={clsx(styles.root, styles[position], className)}>
-      <div ref={triggerRef} {...triggerProps} className={styles.trigger}>
+      <div
+        ref={triggerRef}
+        className={styles.trigger}
+        onPointerDown={() => setOpen((state) => !state)}
+      >
         {trigger}
       </div>
       {open && (
-        <div ref={menuRef} className={styles.dropdownMenu}>
+        <div ref={menuRef} className={styles.menu}>
           {children}
         </div>
       )}

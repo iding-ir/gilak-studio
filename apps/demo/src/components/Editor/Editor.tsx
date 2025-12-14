@@ -101,7 +101,7 @@ export const Editor: React.FC = () => {
             initialSize={{ w: 600, h: 500 }}
             zIndex={1100}
           >
-            <ResizableScreen zoomLevel={100}>
+            <ResizableScreen zoomLevel={100} hideOverflow={true}>
               <RandomCanvas
                 ref={canvasRef}
                 refresh={randomCounter}
