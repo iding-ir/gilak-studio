@@ -61,28 +61,19 @@ export const Editor = () => {
 
   return (
     <div className={styles.root}>
-      <header className={styles.header}>
-        <nav className={styles.nav}>
-          <Menu label="" root direction="row" open>
-            <Menu label="File" direction="column">
-              <Menu label="New" onClick={handleAddWindow} />
-              <Menu label="Open" />
-            </Menu>
-            <Menu label="View" />
-            <Menu label="Help" />
+      <nav className={styles.nav}>
+        <Menu label="" root direction="row" open>
+          <Menu label="File" direction="column">
+            <Menu label="New" onClick={handleAddWindow} />
+            <Menu label="Open" />
           </Menu>
-        </nav>
+          <Menu label="View" />
+          <Menu label="Help" />
+        </Menu>
+      </nav>
 
+      <header className={styles.header}>
         <ul className={styles.tools}>
-          <li>
-            <ColorSwatch
-              size="md"
-              icon={IconBucketUrl}
-              color={selectedColor}
-              colors={COLOR_PALETTE}
-              onChange={setSelectedColor}
-            />
-          </li>
           <li>
             <Icon
               icon={IconColorPickerUrl}
@@ -114,6 +105,17 @@ export const Editor = () => {
             >
               <BrushSizes brush={brushSize} onChange={handleBrushSizeChange} />
             </Dropdown>
+          </li>
+        </ul>
+        <ul className={styles.colors}>
+          <li>
+            <ColorSwatch
+              size="md"
+              icon={IconBucketUrl}
+              color={selectedColor}
+              colors={COLOR_PALETTE}
+              onChange={setSelectedColor}
+            />
           </li>
         </ul>
       </header>

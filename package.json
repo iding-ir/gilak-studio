@@ -15,7 +15,8 @@
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "turbo run build && changeset publish",
-    "prepare": "husky"
+    "prepare": "husky",
+    "lint:fix": "eslint --fix ."
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
