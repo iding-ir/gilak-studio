@@ -14,26 +14,35 @@ export const DEFAULT_BRUSH: Brush = {
 };
 
 export interface BrushState {
-  selected?: Brush;
+  type: BrushType;
+  size: BrushSize;
 }
 
 const initialState: BrushState = {
-  selected: DEFAULT_BRUSH,
+  type: DEFAULT_BRUSH.type,
+  size: DEFAULT_BRUSH.size,
 };
 
 export const brushSlice = createAppSlice({
   name: "brush",
   initialState,
   reducers: (create) => ({
-    setBrush: create.reducer((state, { payload }: PayloadAction<Brush>) => {
-      state.selected = payload;
-    }),
+    setBrushType: create.reducer(
+      (state, { payload }: PayloadAction<BrushType>) => {
+        state.type = payload;
+      },
+    ),
+    setBrushSize: create.reducer(
+      (state, { payload }: PayloadAction<BrushSize>) => {
+        state.size = payload;
+      },
+    ),
   }),
   selectors: {
-    selectBrush: ({ selected }) => selected,
+    selectBrushType: ({ type }) => type,
+    selectBrushSize: ({ size }) => size,
   },
 });
 
-export const { setBrush } = brushSlice.actions;
-
-export const { selectBrush } = brushSlice.selectors;
+export const { setBrushType, setBrushSize } = brushSlice.actions;
+export const { selectBrushType, selectBrushSize } = brushSlice.selectors;
