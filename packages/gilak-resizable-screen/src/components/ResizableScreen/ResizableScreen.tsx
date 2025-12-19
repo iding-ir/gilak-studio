@@ -1,14 +1,10 @@
+import { Dropdown, Icon, List, Text } from "@gilak/components";
 import { type ReactNode, useRef, useState } from "react";
 
-import { Dropdown } from "../DropDown";
-import { Icon } from "../Icon";
-import { List } from "../List";
-import { Text } from "../Text";
-import IconZoom from "./assets/icon-zoom.svg?url";
+import IconZoom from "../../assets/icon-zoom.svg?url";
+import { useResizableScreen } from "../../hooks/useResizableScreen";
+import { type Zoom, zoomLevels } from "../../types";
 import styles from "./ResizableScreen.module.scss";
-import type { Zoom } from "./types";
-import { zoomLevels } from "./types";
-import { useResizableScreen } from "./useResizableScreen";
 
 export type ResizableScreenProps = {
   children: ReactNode;

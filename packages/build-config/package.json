@@ -1,5 +1,5 @@
 {
-  "name": "@gilak-studio/build-config",
+  "name": "@gilak/build-config",
   "version": "0.0.1",
   "description": "Shared build configuration for Gilak Studio packages",
   "private": true,

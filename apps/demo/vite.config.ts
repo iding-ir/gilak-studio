@@ -33,6 +33,14 @@ export default defineConfig({
         __dirname,
         "../../packages/gilak-floating-window/src",
       ),
+      "@gilak/components": resolve(
+        __dirname,
+        "../../packages/gilak-components/src",
+      ),
+      "@gilak/resizable-screen": resolve(
+        __dirname,
+        "../../packages/gilak-resizable-screen/src",
+      ),
     },
   },
   css: {

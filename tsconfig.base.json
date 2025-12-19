@@ -17,6 +17,8 @@
     /* Path Mapping */
     "baseUrl": ".",
     "paths": {
+      "@gilak/stylist": ["./packages/gilak-stylist/src"],
+      "@gilak/stylist/*": ["./packages/gilak-stylist/src/*"],
       "@gilak/canvas": ["./packages/gilak-canvas/src"],
       "@gilak/canvas/*": ["./packages/gilak-canvas/src/*"],
       "@gilak/color-picker": ["./packages/gilak-color-picker/src"],
@@ -28,7 +30,9 @@
       "@gilak/utils": ["./packages/gilak-utils/src"],
       "@gilak/utils/*": ["./packages/gilak-utils/src/*"],
       "@gilak/floating-window": ["./packages/gilak-floating-window/src"],
-      "@gilak/floating-window/*": ["./packages/gilak-floating-window/src/*"]
+      "@gilak/floating-window/*": ["./packages/gilak-floating-window/src/*"],
+      "@gilak/resizable-screen": ["./packages/gilak-resizable-screen/src"],
+      "@gilak/resizable-screen/*": ["./packages/gilak-resizable-screen/src/*"]
     },
 
     /* Linting */

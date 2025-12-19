@@ -8,8 +8,6 @@ export type { ListProps } from "./components/List";
 export { List } from "./components/List";
 export type { MenuProps } from "./components/Menu";
 export { Menu } from "./components/Menu";
-export type { ResizableScreenProps } from "./components/ResizableScreen";
-export { ResizableScreen } from "./components/ResizableScreen";
 export type { TextProps } from "./components/Text";
 export { Text } from "./components/Text";
 export type { TshirtSize } from "./types";

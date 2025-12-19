@@ -40,6 +40,6 @@
     "prepublishOnly": "pnpm build"
   },
   "devDependencies": {
-    "@gilak-studio/build-config": "workspace:*"
+    "@gilak/build-config": "workspace:*"
   }
 }

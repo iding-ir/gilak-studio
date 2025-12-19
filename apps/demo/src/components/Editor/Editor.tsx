@@ -1,9 +1,9 @@
 import { type BrushSize, type BrushType } from "@gilak/canvas";
 import { ColorSwatch } from "@gilak/color-swatch";
 import { Dropdown, Icon, Menu } from "@gilak/components";
-import { ResizableScreen } from "@gilak/components";
 import { FloatingWindowProvider } from "@gilak/floating-window";
 import { FloatingWindow } from "@gilak/floating-window";
+import { ResizableScreen } from "@gilak/resizable-screen";
 import { useState } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";

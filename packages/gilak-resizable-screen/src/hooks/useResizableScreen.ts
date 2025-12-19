@@ -2,7 +2,7 @@ import { throttle } from "@gilak/utils";
 import type { CSSProperties, RefObject } from "react";
 import { useEffect } from "react";
 
-import type { Zoom } from "./types";
+import type { Zoom } from "../types";
 
 export const useResizableScreen = ({
   zoomLevel,
