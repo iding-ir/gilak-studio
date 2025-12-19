@@ -116,9 +116,8 @@ export const Editor = () => {
       <main className={styles.main}>
         <FloatingWindowProvider>
           {windows.map(({ id, title }) => (
-            <ResizableScreenProvider>
+            <ResizableScreenProvider key={id}>
               <FloatingWindow
-                key={id}
                 id={id}
                 title={title}
                 initialPosition={{ x: 50, y: 50 }}
