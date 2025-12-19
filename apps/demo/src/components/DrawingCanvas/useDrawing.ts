@@ -1,9 +1,15 @@
+import type { BrushSize, BrushType } from "@gilak/canvas";
 import type { ColorSource, FederatedPointerEvent } from "pixi.js";
 import type { Graphics as PixiGraphicsType } from "pixi.js";
 import { useCallback, useRef, useState } from "react";
 
 export type Point = { x: number; y: number };
-export type Path = Point[];
+export type Path = {
+  points: Point[];
+  brushSize: BrushSize;
+  color: ColorSource;
+  brushType: BrushType;
+};
 
 export function useDrawing({
   brushSize,
@@ -11,8 +17,8 @@ export function useDrawing({
   color,
   enabled,
 }: {
-  brushSize: number;
-  brushType: string;
+  brushSize: BrushSize;
+  brushType: BrushType;
   color: ColorSource;
   enabled: boolean;
 }) {
@@ -24,11 +30,16 @@ export function useDrawing({
       if (!enabled) return;
 
       const { x, y } = event.global;
-      const newPath: Path = [{ x, y }];
+      const newPath: Path = {
+        points: [{ x, y }],
+        brushSize,
+        color,
+        brushType,
+      };
       currentPathRef.current = newPath;
       setPaths((prev) => [...prev, newPath]);
     },
-    [enabled],
+    [enabled, brushSize, color, brushType],
   );
 
   const handlePointerMove = useCallback(
@@ -36,7 +47,7 @@ export function useDrawing({
       if (!enabled || !currentPathRef.current) return;
 
       const { x, y } = event.global;
-      currentPathRef.current.push({ x, y });
+      currentPathRef.current.points.push({ x, y });
 
       // trigger re-render
       setPaths((prev) => [...prev]);
@@ -53,23 +64,25 @@ export function useDrawing({
     (g: PixiGraphicsType) => {
       g.clear();
 
-      g.setStrokeStyle({
-        width: brushSize,
-        color,
-        cap: brushType === "CIRCLE" ? "round" : "butt",
-        join: "round",
-      });
-
       for (const path of paths) {
-        if (path.length < 2) continue;
-        g.moveTo(path[0].x, path[0].y);
-        for (let i = 1; i < path.length; i++) {
-          g.lineTo(path[i].x, path[i].y);
+        const { points, brushSize, color, brushType } = path;
+        if (points.length < 2) continue;
+
+        g.setStrokeStyle({
+          width: brushSize,
+          color,
+          cap: brushType === "CIRCLE" ? "round" : "butt",
+          join: "round",
+        });
+
+        g.moveTo(points[0].x, points[0].y);
+        for (let i = 1; i < points.length; i++) {
+          g.lineTo(points[i].x, points[i].y);
         }
         g.stroke();
       }
     },
-    [paths, brushSize, color, brushType],
+    [paths],
   );
 
   return {
