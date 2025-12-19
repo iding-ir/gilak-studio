@@ -3,7 +3,11 @@ import { ColorSwatch } from "@gilak/color-swatch";
 import { Dropdown, Icon, Menu } from "@gilak/components";
 import { FloatingWindowProvider } from "@gilak/floating-window";
 import { FloatingWindow } from "@gilak/floating-window";
-import { ResizableScreen } from "@gilak/resizable-screen";
+import {
+  ResizableScreen,
+  ResizableScreenProvider,
+  ZoomSelector,
+} from "@gilak/resizable-screen";
 import { useState } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
@@ -123,22 +127,25 @@ export const Editor = () => {
       <main className={styles.main}>
         <FloatingWindowProvider>
           {windows.map(({ id, title }) => (
-            <FloatingWindow
-              key={id}
-              id={id}
-              title={title}
-              initialPosition={{ x: 50, y: 50 }}
-              initialSize={{ w: 800, h: 600 }}
-            >
-              <ResizableScreen initialZoomLevel={100}>
-                <DrawingCanvas
-                  brushSize={brushSize}
-                  brushType={brushType}
-                  color={selectedColor}
-                  enabled={selectedTool === "BRUSH"}
-                />
-              </ResizableScreen>
-            </FloatingWindow>
+            <ResizableScreenProvider>
+              <FloatingWindow
+                key={id}
+                id={id}
+                title={title}
+                initialPosition={{ x: 50, y: 50 }}
+                initialSize={{ w: 800, h: 600 }}
+                footer={<ZoomSelector />}
+              >
+                <ResizableScreen>
+                  <DrawingCanvas
+                    brushSize={brushSize}
+                    brushType={brushType}
+                    color={selectedColor}
+                    enabled={selectedTool === "BRUSH"}
+                  />
+                </ResizableScreen>
+              </FloatingWindow>
+            </ResizableScreenProvider>
           ))}
         </FloatingWindowProvider>
       </main>

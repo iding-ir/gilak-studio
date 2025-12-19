@@ -2,15 +2,15 @@ import { throttle } from "@gilak/utils";
 import type { CSSProperties, RefObject } from "react";
 import { useEffect } from "react";
 
-import type { Zoom } from "../types";
+import type { ZoomLevel } from "../context/types";
 
-export const useResizableScreen = ({
+export const useZoomLevel = ({
   zoomLevel,
   padding = "1rem",
   parentRef,
   childRef,
 }: {
-  zoomLevel: Zoom;
+  zoomLevel: ZoomLevel;
   padding?: CSSProperties["padding"];
   parentRef: RefObject<HTMLDivElement | null>;
   childRef: RefObject<HTMLDivElement | null>;

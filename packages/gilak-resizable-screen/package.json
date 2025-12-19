@@ -34,7 +34,10 @@
       "import": "./dist/gilak-resizable-screen.es.js",
       "require": "./dist/gilak-resizable-screen.umd.js"
     },
-    "./dist/gilak-resizable-screen.css": "./dist/gilak-resizable-screen.css"
+    "./context": {
+      "import": "./src/context/index.js",
+      "require": "./src/context/index.js"
+    }
   },
   "files": [
     "dist"
