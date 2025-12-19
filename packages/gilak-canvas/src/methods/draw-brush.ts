@@ -1,4 +1,4 @@
-import type { BrushShape, BrushSize } from "../types/brush";
+import type { BrushShape, BrushSize } from "../types";
 
 export type DrawBrushProps = {
   ctx: CanvasRenderingContext2D;

@@ -1,4 +1,5 @@
-import { type BrushShape, type BrushSize } from "@gilak/canvas";
+import type { BrushSize } from "@gilak/canvas";
+import IconBrushSizes from "@gilak/canvas/assets/brush-circle-empty.svg?url";
 import { ColorSwatch } from "@gilak/color-swatch";
 import { Dropdown, Icon, Menu } from "@gilak/components";
 import { FloatingWindowProvider } from "@gilak/floating-window";
@@ -11,8 +12,6 @@ import {
 import { useState } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import IconBrushShapes from "../../assets/brush-circle.svg?url";
-import IconBrushSizes from "../../assets/brush-circle-empty.svg?url";
 import IconBrush from "../../assets/icon-brush.svg?url";
 import IconBucketUrl from "../../assets/icon-bucket.svg?url";
 import IconColorPickerUrl from "../../assets/icon-eyedropper.svg?url";
@@ -20,7 +19,6 @@ import { COLOR_PALETTE } from "../../constants";
 import {
   selectBrushShape,
   selectBrushSize,
-  setBrushShape,
   setBrushSize,
 } from "../../features/brush/brush-slice";
 import { selectTool, toggleTool } from "../../features/tools/tools.slice";
@@ -29,7 +27,7 @@ import {
   addWindow,
   selectAllWindows,
 } from "../../features/windows/windows-slice";
-import { BrushShapes } from "../BrushShapes";
+import { BrushShapeDropdown } from "../BrushShapeDropdown/BrushShapeDropdown";
 import { BrushSizes } from "../BrushSizes";
 import { DrawingCanvas } from "../DrawingCanvas";
 import styles from "./Editor.module.scss";
@@ -53,10 +51,6 @@ export const Editor = () => {
 
   const handleToggleTool = (tool: ToolType) => {
     dispatch(toggleTool(tool));
-  };
-
-  const handleBrushShapeChange = (shape: BrushShape) => {
-    dispatch(setBrushShape(shape));
   };
 
   const handleBrushSizeChange = (size: BrushSize) => {
@@ -95,15 +89,7 @@ export const Editor = () => {
             />
           </li>
           <li>
-            <Dropdown
-              position="bottom"
-              trigger={<Icon icon={IconBrushShapes} size="md" interactive />}
-            >
-              <BrushShapes
-                brush={brushShape}
-                onChange={handleBrushShapeChange}
-              />
-            </Dropdown>
+            <BrushShapeDropdown />
           </li>
           <li>
             <Dropdown

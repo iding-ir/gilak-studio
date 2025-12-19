@@ -2,7 +2,7 @@ import type { RefObject } from "react";
 import { useRef } from "react";
 
 import { useDraw } from "../../hooks/useDraw";
-import type { BrushShape, BrushSize } from "../../types/brush";
+import type { BrushShape, BrushSize } from "../../types";
 import type { CanvasProps } from "../Canvas";
 import { Canvas } from "../Canvas";
 

@@ -1,15 +1,14 @@
 import type { BrushShape } from "@gilak/canvas";
+import IconBackslash from "@gilak/canvas/assets/brush-backslash.svg?url";
+import IconCircle from "@gilak/canvas/assets/brush-circle.svg?url";
+import IconDisamond from "@gilak/canvas/assets/brush-diamond.svg?url";
+import IconHorizontal from "@gilak/canvas/assets/brush-horizontal.svg?url";
+import IconSlash from "@gilak/canvas/assets/brush-slash.svg?url";
+import IconSquare from "@gilak/canvas/assets/brush-square.svg?url";
+import IconStar from "@gilak/canvas/assets/brush-star.svg?url";
+import IconTriangle from "@gilak/canvas/assets/brush-triangle.svg?url";
+import IconVerical from "@gilak/canvas/assets/brush-vertical.svg?url";
 import { Icon, List } from "@gilak/components";
-
-import IconBackslash from "../../assets/brush-backslash.svg?url";
-import IconCircle from "../../assets/brush-circle.svg?url";
-import IconDisamond from "../../assets/brush-diamond.svg?url";
-import IconHorizontal from "../../assets/brush-horizontal.svg?url";
-import IconSlash from "../../assets/brush-slash.svg?url";
-import IconSquare from "../../assets/brush-square.svg?url";
-import IconStar from "../../assets/brush-star.svg?url";
-import IconTriangle from "../../assets/brush-triangle.svg?url";
-import IconVerical from "../../assets/brush-vertical.svg?url";
 
 export const BrushShapes = ({
   brush,

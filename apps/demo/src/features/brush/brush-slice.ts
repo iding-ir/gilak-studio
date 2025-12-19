@@ -1,4 +1,5 @@
-import type { BrushShape, BrushSize } from "@gilak/canvas/types/brush";
+import type { BrushShape } from "@gilak/canvas";
+import type { BrushSize } from "@gilak/canvas/types";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 import { createAppSlice } from "../../app/createAppSlice";
