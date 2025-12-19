@@ -4,14 +4,50 @@ export type DrawBrushProps = {
   ctx: CanvasRenderingContext2D;
   x: number;
   y: number;
-  size: BrushSize;
+  brushSize: BrushSize;
   brushType: BrushType;
+  prevPoint?: { x: number; y: number };
 };
 
-export const drawBrush = ({ ctx, x, y, size, brushType }: DrawBrushProps) => {
+export const drawBrush = ({
+  ctx,
+  x,
+  y,
+  brushSize,
+  brushType,
+  prevPoint,
+}: DrawBrushProps) => {
   ctx.save();
   ctx.strokeStyle = "rgba(0,0,0,0.3)";
-  ctx.lineWidth = size;
+  ctx.lineWidth = brushSize;
+
+  if (prevPoint) {
+    const dx = x - prevPoint.x;
+    const dy = y - prevPoint.y;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    const step = brushSize / 2;
+    const steps = Math.max(1, Math.floor(distance / step));
+
+    for (let i = 0; i <= steps; i++) {
+      const t = i / steps;
+      const interpolatedX = prevPoint.x + t * dx;
+      const interpolatedY = prevPoint.y + t * dy;
+      drawSingleBrush(ctx, interpolatedX, interpolatedY, brushSize, brushType);
+    }
+  } else {
+    drawSingleBrush(ctx, x, y, brushSize, brushType);
+  }
+
+  ctx.restore();
+};
+
+const drawSingleBrush = (
+  ctx: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+  size: BrushSize,
+  brushType: BrushType,
+) => {
   ctx.beginPath();
   const r = size * 2;
   switch (brushType) {
@@ -68,5 +104,4 @@ export const drawBrush = ({ ctx, x, y, size, brushType }: DrawBrushProps) => {
       ctx.arc(x, y, r, 0, 2 * Math.PI);
   }
   ctx.stroke();
-  ctx.restore();
 };

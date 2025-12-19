@@ -1,4 +1,4 @@
-import type { BrushSize, BrushType } from "@gilak/canvas";
+import { type BrushSize, type BrushType, drawBrush } from "@gilak/canvas";
 import type { ColorSource, FederatedPointerEvent } from "pixi.js";
 import type { Graphics as PixiGraphicsType } from "pixi.js";
 import { useCallback, useRef, useState } from "react";
@@ -64,22 +64,28 @@ export function useDrawing({
     (g: PixiGraphicsType) => {
       g.clear();
 
+      const ctx = g.context as unknown as CanvasRenderingContext2D;
+
       for (const path of paths) {
         const { points, brushSize, color, brushType } = path;
         if (points.length < 2) continue;
 
-        g.setStrokeStyle({
-          width: brushSize,
-          color,
-          cap: brushType === "CIRCLE" ? "round" : "butt",
-          join: "round",
-        });
+        ctx.strokeStyle = color as string;
+        ctx.lineWidth = brushSize;
 
-        g.moveTo(points[0].x, points[0].y);
         for (let i = 1; i < points.length; i++) {
-          g.lineTo(points[i].x, points[i].y);
+          const prev = points[i - 1];
+          const curr = points[i];
+
+          drawBrush({
+            ctx,
+            x: curr.x,
+            y: curr.y,
+            brushSize,
+            brushType,
+            prevPoint: prev,
+          });
         }
-        g.stroke();
       }
     },
     [paths],
