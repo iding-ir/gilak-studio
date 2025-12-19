@@ -130,7 +130,7 @@ export const Editor = () => {
               initialPosition={{ x: 50, y: 50 }}
               initialSize={{ w: 800, h: 600 }}
             >
-              <ResizableScreen zoomLevel={100}>
+              <ResizableScreen initialZoomLevel={100}>
                 <DrawingCanvas
                   brushSize={brushSize}
                   brushType={brushType}

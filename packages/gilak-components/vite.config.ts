@@ -1,3 +1,4 @@
+import path from "path";
 import { defineConfig, mergeConfig } from "vite";
 
 import { createLibraryConfig } from "../build-config/vite.config.base";
@@ -11,6 +12,11 @@ const baseConfig = createLibraryConfig({
 export default mergeConfig(
   baseConfig,
   defineConfig({
+    resolve: {
+      alias: {
+        "@gilak/utils": path.resolve(__dirname, "../gilak-utils/src"),
+      },
+    },
     build: {
       rollupOptions: {
         external: ["react", "react-dom"],

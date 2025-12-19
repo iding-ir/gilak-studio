@@ -20,6 +20,8 @@ export const Footer = ({
 }: FooterProps) => {
   const { status } = useWindow(id);
 
+  if (!footer && !resizable) return null;
+
   return (
     <footer className={styles.root}>
       {footer}

@@ -1,14 +1,13 @@
 @use "@gilak/stylist/mixins" as mixins;
 
 .header {
-  grid-area: header;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-md);
-  padding: var(--spacing-xs) var(--spacing-sm);
-  gap: var(--spacing-xs);
+  padding: var(--spacing-sm);
+  gap: var(--spacing-sm);
   background-color: var(--color-primary-md);
   box-shadow: var(--shadow-lg);
 
@@ -38,12 +37,11 @@
     color: var(--color-light-md);
     font-size: var(--font-size-md);
     font-weight: var(--font-weight-lg);
-    padding: var(--spacing-sm);
+    padding: 0 var(--spacing-sm);
     @include mixins.ellipsis();
   }
 
   .toolbar {
-    grid-area: toolbar;
     display: flex;
     flex-direction: row;
     align-items: center;

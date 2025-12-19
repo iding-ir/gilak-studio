@@ -1,5 +1,4 @@
-import clsx from "clsx";
-import { type ReactNode, useState } from "react";
+import { type ReactNode, useRef, useState } from "react";
 
 import { Dropdown } from "../DropDown";
 import { Icon } from "../Icon";
@@ -9,26 +8,44 @@ import IconZoom from "./assets/icon-zoom.svg?url";
 import styles from "./ResizableScreen.module.scss";
 import type { Zoom } from "./types";
 import { zoomLevels } from "./types";
+import { useResizableScreen } from "./useResizableScreen";
 
 export type ResizableScreenProps = {
   children: ReactNode;
-  zoomLevel?: Zoom;
-  hideOverflow?: boolean;
+  initialZoomLevel?: Zoom;
 };
 
 export const ResizableScreen = ({
   children,
-  zoomLevel = 100,
-  hideOverflow = false,
+  initialZoomLevel = 100,
 }: ResizableScreenProps) => {
-  const [currentZoomLevel, setCurrentZoomLevel] = useState(zoomLevel);
+  const parentRef = useRef<HTMLDivElement>(null);
+  const childRef = useRef<HTMLDivElement>(null);
+  const [zoomLevel, setZoomLevel] = useState(initialZoomLevel);
+
+  useResizableScreen({
+    zoomLevel,
+    padding: "var(--spacing-xl)",
+    parentRef,
+    childRef,
+  });
 
   return (
     <div className={styles.root}>
       <div
-        className={clsx(styles.screen, { [styles.hideOverflow]: hideOverflow })}
+        ref={parentRef}
+        className={styles.screen}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
       >
-        <div style={{ transform: `scale(${currentZoomLevel / 100})` }}>
+        <div
+          ref={childRef}
+          className={styles.content}
+          style={{ transform: `scale(${zoomLevel / 100})` }}
+        >
           {children}
         </div>
       </div>
@@ -38,7 +55,7 @@ export const ResizableScreen = ({
           trigger={
             <div className={styles.zoomTrigger}>
               <Icon icon={IconZoom} size="sm" interactive frameless />
-              <Text size="xs" frameless text={`${currentZoomLevel}%`} />
+              <Text size="xs" frameless text={`${zoomLevel}%`} />
             </div>
           }
         >
@@ -48,10 +65,10 @@ export const ResizableScreen = ({
             theme="light"
             items={zoomLevels.map((z) => (
               <Text
-                selected={currentZoomLevel === z}
+                selected={zoomLevel === z}
                 size="xs"
                 frameless
-                onClick={() => setCurrentZoomLevel(z)}
+                onClick={() => setZoomLevel(z)}
                 text={`${z.toString()}%`}
               />
             ))}

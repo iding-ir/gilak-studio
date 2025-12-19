@@ -21,7 +21,6 @@
   }
 
   .toolbar {
-    grid-area: toolbar;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -39,11 +38,9 @@
 
   .body {
     flex-grow: 1;
-    grid-area: body;
-    padding: var(--spacing-sm) var(--spacing-md);
+    padding: var(--spacing-sm);
     color: var(--color-dark-sm);
     background-color: var(--color-light-xxxs);
-
     overflow: auto;
     @include mixins.scrollbar();
   }
