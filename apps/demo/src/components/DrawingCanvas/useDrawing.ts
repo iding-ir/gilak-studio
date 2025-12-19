@@ -23,6 +23,7 @@ export function useDrawing({
   enabled: boolean;
 }) {
   const [paths, setPaths] = useState<Path[]>([]);
+  const [cursorPosition, setCursorPosition] = useState<Point | null>(null);
   const currentPathRef = useRef<Path | null>(null);
 
   const handlePointerDown = useCallback(
@@ -44,13 +45,17 @@ export function useDrawing({
 
   const handlePointerMove = useCallback(
     (event: FederatedPointerEvent) => {
-      if (!enabled || !currentPathRef.current) return;
+      if (!enabled) return;
 
       const { x, y } = event.global;
-      currentPathRef.current.points.push({ x, y });
+      setCursorPosition({ x, y });
 
-      // trigger re-render
-      setPaths((prev) => [...prev]);
+      if (currentPathRef.current) {
+        currentPathRef.current.points.push({ x, y });
+
+        // trigger re-render
+        setPaths((prev) => [...prev]);
+      }
     },
     [enabled],
   );
@@ -66,6 +71,7 @@ export function useDrawing({
 
       const ctx = g.context as unknown as CanvasRenderingContext2D;
 
+      // Draw paths
       for (const path of paths) {
         const { points, brushSize, color, brushShape } = path;
         if (points.length < 2) continue;
@@ -87,8 +93,20 @@ export function useDrawing({
           });
         }
       }
+
+      // Draw cursor shape
+      if (cursorPosition) {
+        const { x, y } = cursorPosition;
+        drawBrush({
+          ctx,
+          x,
+          y,
+          brushSize,
+          brushShape,
+        });
+      }
     },
-    [paths],
+    [paths, cursorPosition, brushSize, brushShape],
   );
 
   return {

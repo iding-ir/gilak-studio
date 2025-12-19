@@ -1,4 +1,8 @@
 .root {
   display: flex;
   box-shadow: var(--shadow-sm);
+
+  &.enabled {
+    cursor: none !important;
+  }
 }

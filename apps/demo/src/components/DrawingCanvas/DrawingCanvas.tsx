@@ -1,5 +1,6 @@
 import type { BrushShape, BrushSize } from "@gilak/canvas";
 import { Application, extend } from "@pixi/react";
+import clsx from "clsx";
 import { type ColorSource, Graphics, Rectangle } from "pixi.js";
 
 import styles from "./DrawingCanvas.module.scss";
@@ -34,7 +35,7 @@ export const DrawingCanvas = ({
       width={width}
       height={height}
       backgroundColor={backgroundColor}
-      className={styles.root}
+      className={clsx(styles.root, { [styles.enabled]: enabled })}
     >
       <pixiGraphics
         draw={drawShapes}
