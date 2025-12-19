@@ -1,11 +1,11 @@
-import type { BrushSize, BrushType } from "../types/brush";
+import type { BrushShape, BrushSize } from "../types/brush";
 
 export type DrawBrushProps = {
   ctx: CanvasRenderingContext2D;
   x: number;
   y: number;
   brushSize: BrushSize;
-  brushType: BrushType;
+  brushShape: BrushShape;
   prevPoint?: { x: number; y: number };
 };
 
@@ -14,7 +14,7 @@ export const drawBrush = ({
   x,
   y,
   brushSize,
-  brushType,
+  brushShape,
   prevPoint,
 }: DrawBrushProps) => {
   ctx.save();
@@ -32,10 +32,10 @@ export const drawBrush = ({
       const t = i / steps;
       const interpolatedX = prevPoint.x + t * dx;
       const interpolatedY = prevPoint.y + t * dy;
-      drawSingleBrush(ctx, interpolatedX, interpolatedY, brushSize, brushType);
+      drawSingleBrush(ctx, interpolatedX, interpolatedY, brushSize, brushShape);
     }
   } else {
-    drawSingleBrush(ctx, x, y, brushSize, brushType);
+    drawSingleBrush(ctx, x, y, brushSize, brushShape);
   }
 
   ctx.restore();
@@ -46,11 +46,11 @@ const drawSingleBrush = (
   x: number,
   y: number,
   size: BrushSize,
-  brushType: BrushType,
+  brushShape: BrushShape,
 ) => {
   ctx.beginPath();
   const r = size * 2;
-  switch (brushType) {
+  switch (brushShape) {
     case "CIRCLE":
       ctx.arc(x, y, r, 0, 2 * Math.PI);
       break;

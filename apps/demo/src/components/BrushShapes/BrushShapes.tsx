@@ -1,4 +1,4 @@
-import type { BrushType } from "@gilak/canvas";
+import type { BrushShape } from "@gilak/canvas";
 import { Icon, List } from "@gilak/components";
 
 import IconBackslash from "../../assets/brush-backslash.svg?url";
@@ -11,12 +11,12 @@ import IconStar from "../../assets/brush-star.svg?url";
 import IconTriangle from "../../assets/brush-triangle.svg?url";
 import IconVerical from "../../assets/brush-vertical.svg?url";
 
-export const BrushTypes = ({
+export const BrushShapes = ({
   brush,
   onChange,
 }: {
-  brush: BrushType;
-  onChange: (brush: BrushType) => void;
+  brush: BrushShape;
+  onChange: (brush: BrushShape) => void;
 }) => {
   return (
     <List

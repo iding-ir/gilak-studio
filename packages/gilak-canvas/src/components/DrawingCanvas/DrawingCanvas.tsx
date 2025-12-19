@@ -2,7 +2,7 @@ import type { RefObject } from "react";
 import { useRef } from "react";
 
 import { useDraw } from "../../hooks/useDraw";
-import type { BrushSize, BrushType } from "../../types/brush";
+import type { BrushShape, BrushSize } from "../../types/brush";
 import type { CanvasProps } from "../Canvas";
 import { Canvas } from "../Canvas";
 
@@ -11,7 +11,7 @@ export type DrawingCanvasProps = CanvasProps & {
   color?: string;
   backgroundColor?: string;
   brushSize?: BrushSize;
-  brushType?: BrushType;
+  brushShape?: BrushShape;
 };
 
 export const DrawingCanvas = ({
@@ -19,7 +19,7 @@ export const DrawingCanvas = ({
   color = "#000000",
   backgroundColor = "#ffffff",
   brushSize = 2,
-  brushType = "CIRCLE",
+  brushShape = "CIRCLE",
   ...props
 }: DrawingCanvasProps) => {
   const internalRef = useRef<HTMLCanvasElement>(null);
@@ -30,7 +30,7 @@ export const DrawingCanvas = ({
     enabled,
     color,
     brushSize,
-    brushType,
+    brushShape,
     backgroundColor,
   });
 

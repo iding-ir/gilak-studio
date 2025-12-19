@@ -1,4 +1,4 @@
-import { type BrushSize, type BrushType } from "@gilak/canvas";
+import { type BrushShape, type BrushSize } from "@gilak/canvas";
 import { ColorSwatch } from "@gilak/color-swatch";
 import { Dropdown, Icon, Menu } from "@gilak/components";
 import { FloatingWindowProvider } from "@gilak/floating-window";
@@ -11,17 +11,17 @@ import {
 import { useState } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import IconBrushTypes from "../../assets/brush-circle.svg?url";
+import IconBrushShapes from "../../assets/brush-circle.svg?url";
 import IconBrushSizes from "../../assets/brush-circle-empty.svg?url";
 import IconBrush from "../../assets/icon-brush.svg?url";
 import IconBucketUrl from "../../assets/icon-bucket.svg?url";
 import IconColorPickerUrl from "../../assets/icon-eyedropper.svg?url";
 import { COLOR_PALETTE } from "../../constants";
 import {
+  selectBrushShape,
   selectBrushSize,
-  selectBrushType,
+  setBrushShape,
   setBrushSize,
-  setBrushType,
 } from "../../features/brush/brush-slice";
 import { selectTool, toggleTool } from "../../features/tools/tools.slice";
 import type { ToolType } from "../../features/tools/types";
@@ -29,15 +29,15 @@ import {
   addWindow,
   selectAllWindows,
 } from "../../features/windows/windows-slice";
+import { BrushShapes } from "../BrushShapes";
 import { BrushSizes } from "../BrushSizes";
-import { BrushTypes } from "../BrushTypes";
 import { DrawingCanvas } from "../DrawingCanvas";
 import styles from "./Editor.module.scss";
 
 export const Editor = () => {
   const dispatch = useAppDispatch();
   const windows = useAppSelector(selectAllWindows);
-  const brushType = useAppSelector(selectBrushType);
+  const brushShape = useAppSelector(selectBrushShape);
   const brushSize = useAppSelector(selectBrushSize);
   const selectedTool = useAppSelector(selectTool);
   const [selectedColor, setSelectedColor] = useState<string>("#000000");
@@ -55,8 +55,8 @@ export const Editor = () => {
     dispatch(toggleTool(tool));
   };
 
-  const handleBrushTypeChange = (type: BrushType) => {
-    dispatch(setBrushType(type));
+  const handleBrushShapeChange = (shape: BrushShape) => {
+    dispatch(setBrushShape(shape));
   };
 
   const handleBrushSizeChange = (size: BrushSize) => {
@@ -97,9 +97,12 @@ export const Editor = () => {
           <li>
             <Dropdown
               position="bottom"
-              trigger={<Icon icon={IconBrushTypes} size="md" interactive />}
+              trigger={<Icon icon={IconBrushShapes} size="md" interactive />}
             >
-              <BrushTypes brush={brushType} onChange={handleBrushTypeChange} />
+              <BrushShapes
+                brush={brushShape}
+                onChange={handleBrushShapeChange}
+              />
             </Dropdown>
           </li>
           <li>
@@ -139,7 +142,7 @@ export const Editor = () => {
                 <ResizableScreen>
                   <DrawingCanvas
                     brushSize={brushSize}
-                    brushType={brushType}
+                    brushShape={brushShape}
                     color={selectedColor}
                     enabled={selectedTool === "BRUSH"}
                   />

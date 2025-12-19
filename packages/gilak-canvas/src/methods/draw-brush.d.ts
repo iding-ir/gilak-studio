@@ -1,11 +1,11 @@
-import type { BrushSize, BrushType } from "../types/brush";
+import type { BrushShape, BrushSize } from "../types/brush";
 
 export type DrawBrushProps = {
   ctx: CanvasRenderingContext2D;
   x: number;
   y: number;
   size: BrushSize;
-  brushType: BrushType;
+  brushShape: BrushShape;
 };
 
 export declare const drawBrush: ({
@@ -13,5 +13,5 @@ export declare const drawBrush: ({
   x,
   y,
   size,
-  brushType,
+  brushShape,
 }: DrawBrushProps) => void;

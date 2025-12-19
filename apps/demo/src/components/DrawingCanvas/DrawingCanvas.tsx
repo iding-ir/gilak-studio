@@ -1,4 +1,4 @@
-import type { BrushSize, BrushType } from "@gilak/canvas";
+import type { BrushShape, BrushSize } from "@gilak/canvas";
 import { Application, extend } from "@pixi/react";
 import { type ColorSource, Graphics, Rectangle } from "pixi.js";
 
@@ -9,7 +9,7 @@ extend({ Graphics });
 
 export type DrawingCanvasProps = {
   brushSize?: BrushSize;
-  brushType?: BrushType;
+  brushShape?: BrushShape;
   enabled?: boolean;
   width?: number;
   height?: number;
@@ -19,7 +19,7 @@ export type DrawingCanvasProps = {
 
 export const DrawingCanvas = ({
   brushSize = 4,
-  brushType = "CIRCLE",
+  brushShape = "CIRCLE",
   enabled = true,
   width = 600,
   height = 400,
@@ -27,7 +27,7 @@ export const DrawingCanvas = ({
   backgroundColor = "#ffffff",
 }: DrawingCanvasProps) => {
   const { drawShapes, handlePointerDown, handlePointerMove, handlePointerUp } =
-    useDrawing({ brushSize, brushType, color, enabled });
+    useDrawing({ brushSize, brushShape, color, enabled });
 
   return (
     <Application

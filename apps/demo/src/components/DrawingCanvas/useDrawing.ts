@@ -1,4 +1,4 @@
-import { type BrushSize, type BrushType, drawBrush } from "@gilak/canvas";
+import { type BrushShape, type BrushSize, drawBrush } from "@gilak/canvas";
 import type { ColorSource, FederatedPointerEvent } from "pixi.js";
 import type { Graphics as PixiGraphicsType } from "pixi.js";
 import { useCallback, useRef, useState } from "react";
@@ -8,17 +8,17 @@ export type Path = {
   points: Point[];
   brushSize: BrushSize;
   color: ColorSource;
-  brushType: BrushType;
+  brushShape: BrushShape;
 };
 
 export function useDrawing({
   brushSize,
-  brushType,
+  brushShape,
   color,
   enabled,
 }: {
   brushSize: BrushSize;
-  brushType: BrushType;
+  brushShape: BrushShape;
   color: ColorSource;
   enabled: boolean;
 }) {
@@ -34,12 +34,12 @@ export function useDrawing({
         points: [{ x, y }],
         brushSize,
         color,
-        brushType,
+        brushShape,
       };
       currentPathRef.current = newPath;
       setPaths((prev) => [...prev, newPath]);
     },
-    [enabled, brushSize, color, brushType],
+    [enabled, brushSize, color, brushShape],
   );
 
   const handlePointerMove = useCallback(
@@ -67,7 +67,7 @@ export function useDrawing({
       const ctx = g.context as unknown as CanvasRenderingContext2D;
 
       for (const path of paths) {
-        const { points, brushSize, color, brushType } = path;
+        const { points, brushSize, color, brushShape } = path;
         if (points.length < 2) continue;
 
         ctx.strokeStyle = color as string;
@@ -82,7 +82,7 @@ export function useDrawing({
             x: curr.x,
             y: curr.y,
             brushSize,
-            brushType,
+            brushShape,
             prevPoint: prev,
           });
         }

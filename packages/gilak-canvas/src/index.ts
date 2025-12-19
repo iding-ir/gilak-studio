@@ -17,5 +17,5 @@ export type { EffectType } from "./methods/draw-random-effect";
 export { drawRandomEffect } from "./methods/draw-random-effect";
 
 // Types
-export type { BrushSize, BrushType } from "./types/brush";
-export { BRUSH_SIZES, BRUSH_TYPES } from "./types/brush";
+export type { BrushShape, BrushSize } from "./types/brush";
+export { BRUSH_SHAPES, BRUSH_SIZES } from "./types/brush";

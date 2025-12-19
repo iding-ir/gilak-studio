@@ -1,10 +1,10 @@
-import type { BrushSize, BrushType } from "@gilak/canvas/types/brush";
+import type { BrushShape, BrushSize } from "@gilak/canvas/types/brush";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 import { createAppSlice } from "../../app/createAppSlice";
 
 export interface Brush {
-  type: BrushType;
+  type: BrushShape;
   size: BrushSize;
 }
 
@@ -14,7 +14,7 @@ export const DEFAULT_BRUSH: Brush = {
 };
 
 export interface BrushState {
-  type: BrushType;
+  type: BrushShape;
   size: BrushSize;
 }
 
@@ -27,8 +27,8 @@ export const brushSlice = createAppSlice({
   name: "brush",
   initialState,
   reducers: (create) => ({
-    setBrushType: create.reducer(
-      (state, { payload }: PayloadAction<BrushType>) => {
+    setBrushShape: create.reducer(
+      (state, { payload }: PayloadAction<BrushShape>) => {
         state.type = payload;
       },
     ),
@@ -39,10 +39,10 @@ export const brushSlice = createAppSlice({
     ),
   }),
   selectors: {
-    selectBrushType: ({ type }) => type,
+    selectBrushShape: ({ type }) => type,
     selectBrushSize: ({ size }) => size,
   },
 });
 
-export const { setBrushType, setBrushSize } = brushSlice.actions;
-export const { selectBrushType, selectBrushSize } = brushSlice.selectors;
+export const { setBrushShape, setBrushSize } = brushSlice.actions;
+export const { selectBrushShape, selectBrushSize } = brushSlice.selectors;

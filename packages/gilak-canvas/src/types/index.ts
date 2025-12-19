@@ -1,6 +1,6 @@
 export {
+  BRUSH_SHAPES,
   BRUSH_SIZES,
-  BRUSH_TYPES,
+  type BrushShape,
   type BrushSize,
-  type BrushType,
 } from "./brush";

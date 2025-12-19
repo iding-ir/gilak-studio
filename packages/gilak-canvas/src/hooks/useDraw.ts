@@ -2,7 +2,7 @@ import type { RefObject } from "react";
 import { useEffect, useRef } from "react";
 
 import { drawBrush } from "../methods/draw-brush";
-import type { BrushSize, BrushType } from "../types";
+import type { BrushShape, BrushSize } from "../types";
 
 export type UseDrawProps = {
   ref?: RefObject<HTMLCanvasElement | null>;
@@ -10,7 +10,7 @@ export type UseDrawProps = {
   color: string;
   backgroundColor: string;
   brushSize: BrushSize;
-  brushType: BrushType;
+  brushShape: BrushShape;
 };
 
 export function useDraw({
@@ -19,7 +19,7 @@ export function useDraw({
   color,
   backgroundColor,
   brushSize,
-  brushType,
+  brushShape,
 }: UseDrawProps) {
   const drawing = useRef(false);
   const lastPos = useRef<{ x: number; y: number } | null>(null);
@@ -64,7 +64,7 @@ export function useDraw({
           ctx.fillStyle = backgroundColor;
           ctx.fillRect(0, 0, canvas.width, canvas.height);
         }
-        drawBrush({ ctx, x: pos.x, y: pos.y, size: brushSize, brushType });
+        drawBrush({ ctx, x: pos.x, y: pos.y, brushSize, brushShape });
       }
     }
 
@@ -96,5 +96,5 @@ export function useDraw({
       canvas.removeEventListener("mousedown", handlePointerDown);
       window.removeEventListener("mouseup", handlePointerUp);
     };
-  }, [ref, enabled, brushType, color, brushSize, backgroundColor]);
+  }, [ref, enabled, brushShape, color, brushSize, backgroundColor]);
 }
