@@ -1,6 +1,7 @@
 // Components
 export { ColorPickerProvider } from "./components/ColorPickerProvider";
 export { Magnifier } from "./components/Magnifier";
+export { MagnifierProvider } from "./components/MagnifierProvider";
 
 // Hooks
 export { useColorPicker } from "./hooks/useColorPicker";
