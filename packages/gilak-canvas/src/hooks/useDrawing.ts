@@ -73,12 +73,10 @@ export const useDrawing = ({
   );
 
   const onPointerUp = useCallback(() => {
-    if (!enabled) return;
-
     drawing.current = false;
     previousPointRef.current = null;
     currentPointRef.current = null;
-  }, [enabled]);
+  }, []);
 
   return {
     initializeCanvas,

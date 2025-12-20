@@ -11,10 +11,10 @@ export type MagnifierProps = {
 };
 
 export const Magnifier = ({ canvasRef, onSelect }: MagnifierProps) => {
-  const { isHovered, hoverColor, borderWidth } = useColorPicker();
+  const { enabled, isHovered, hoverColor, borderWidth } = useColorPicker();
   const { containerRef, magnifierRef } = useMagnifier({ onSelect, canvasRef });
 
-  if (!isHovered) return null;
+  if (!isHovered || !enabled) return null;
 
   return (
     <div className={styles.container} ref={containerRef}>

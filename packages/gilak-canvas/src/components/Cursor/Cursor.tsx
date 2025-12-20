@@ -30,20 +30,20 @@ export const Cursor = ({
 
   const onPointerEnter = useCallback(() => {
     const canvas = ref.current;
-    if (!canvas) return;
+    if (!enabled || !canvas) return;
     canvas.style.display = "block";
-  }, []);
+  }, [enabled]);
 
   const onPointerLeave = useCallback(() => {
     const canvas = ref.current;
-    if (!canvas) return;
+    if (!enabled || !canvas) return;
     canvas.style.display = "none";
-  }, []);
+  }, [enabled]);
 
   useEffect(() => {
     const canvas = ref.current;
     const parent = parentRef.current;
-    if (!enabled || !parent || !canvas) return;
+    if (!enabled || !canvas || !parent) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
@@ -56,7 +56,7 @@ export const Cursor = ({
     (event: React.PointerEvent<HTMLDivElement>) => {
       const canvas = ref.current;
       const parent = parentRef.current;
-      if (!enabled || !parent || !canvas) return;
+      if (!enabled || !canvas || !parent) return;
 
       const rect = parent.getBoundingClientRect();
       const x = event.clientX - rect.left;

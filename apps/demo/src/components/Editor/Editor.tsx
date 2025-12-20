@@ -1,5 +1,6 @@
 import { type BrushSize, DrawingCanvas } from "@gilak/canvas";
 import IconBrushSizes from "@gilak/canvas/assets/brush-circle-empty.svg?url";
+import { MagnifierProvider, useColorPicker } from "@gilak/color-picker";
 import { ColorSwatch } from "@gilak/color-swatch";
 import { Dropdown, Icon, Menu } from "@gilak/components";
 import { FloatingWindowProvider } from "@gilak/floating-window";
@@ -9,7 +10,7 @@ import {
   ResizableScreenProvider,
   ZoomSelector,
 } from "@gilak/resizable-screen";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import IconBrush from "../../assets/icon-brush.svg?url";
@@ -32,12 +33,14 @@ import { BrushSizes } from "../BrushSizes";
 import styles from "./Editor.module.scss";
 
 export const Editor = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const dispatch = useAppDispatch();
   const windows = useAppSelector(selectAllWindows);
   const brushShape = useAppSelector(selectBrushShape);
   const brushSize = useAppSelector(selectBrushSize);
   const selectedTool = useAppSelector(selectTool);
   const [selectedColor, setSelectedColor] = useState<string>("#000000");
+  const { setEnabled: switchColorPicker } = useColorPicker();
 
   const handleAddWindow = () => {
     dispatch(
@@ -50,10 +53,15 @@ export const Editor = () => {
 
   const handleToggleTool = (tool: ToolType) => {
     dispatch(toggleTool(tool));
+    switchColorPicker(tool === "COLOR_PICKER");
   };
 
   const handleBrushSizeChange = (size: BrushSize) => {
     dispatch(setBrushSize(size));
+  };
+
+  const handleSelectColor = (color: string) => {
+    setSelectedColor(color);
   };
 
   return (
@@ -124,12 +132,18 @@ export const Editor = () => {
                 footer={<ZoomSelector />}
               >
                 <ResizableScreen>
-                  <DrawingCanvas
-                    enabled={selectedTool === "BRUSH"}
-                    color={selectedColor}
-                    brushSize={brushSize}
-                    brushShape={brushShape}
-                  />
+                  <MagnifierProvider
+                    canvasRef={canvasRef}
+                    onSelect={handleSelectColor}
+                  >
+                    <DrawingCanvas
+                      ref={canvasRef}
+                      enabled={selectedTool === "BRUSH"}
+                      color={selectedColor}
+                      brushSize={brushSize}
+                      brushShape={brushShape}
+                    />
+                  </MagnifierProvider>
                 </ResizableScreen>
               </FloatingWindow>
             </ResizableScreenProvider>
