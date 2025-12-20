@@ -1,4 +1,4 @@
-import type { BrushSize } from "@gilak/canvas";
+import { type BrushSize, DrawingCanvas } from "@gilak/canvas";
 import IconBrushSizes from "@gilak/canvas/assets/brush-circle-empty.svg?url";
 import { ColorSwatch } from "@gilak/color-swatch";
 import { Dropdown, Icon, Menu } from "@gilak/components";
@@ -29,7 +29,6 @@ import {
 } from "../../features/windows/windows-slice";
 import { BrushShapeDropdown } from "../BrushShapeDropdown/BrushShapeDropdown";
 import { BrushSizes } from "../BrushSizes";
-import { DrawingCanvas } from "../DrawingCanvas";
 import styles from "./Editor.module.scss";
 
 export const Editor = () => {
@@ -126,10 +125,10 @@ export const Editor = () => {
               >
                 <ResizableScreen>
                   <DrawingCanvas
+                    enabled={selectedTool === "BRUSH"}
+                    color={selectedColor}
                     brushSize={brushSize}
                     brushShape={brushShape}
-                    color={selectedColor}
-                    enabled={selectedTool === "BRUSH"}
                   />
                 </ResizableScreen>
               </FloatingWindow>

@@ -1,47 +1,49 @@
-import type { RefObject } from "react";
 import { useRef } from "react";
 
-import { useDraw } from "../../hooks/useDraw";
+import { useDrawing } from "../../hooks";
 import type { BrushShape, BrushSize } from "../../types";
 import type { CanvasProps } from "../Canvas";
 import { Canvas } from "../Canvas";
+import { Cursor } from "../Cursor";
 
 export type DrawingCanvasProps = CanvasProps & {
   enabled: boolean;
-  color?: string;
-  backgroundColor?: string;
-  brushSize?: BrushSize;
-  brushShape?: BrushShape;
+  color: string;
+  brushSize: BrushSize;
+  brushShape: BrushShape;
 };
 
 export const DrawingCanvas = ({
   enabled,
-  color = "#000000",
-  backgroundColor = "#ffffff",
-  brushSize = 2,
-  brushShape = "CIRCLE",
+  color,
+  brushSize,
+  brushShape,
   ...props
 }: DrawingCanvasProps) => {
-  const internalRef = useRef<HTMLCanvasElement>(null);
-  const ref = (props.ref ?? internalRef) as RefObject<HTMLCanvasElement>;
+  const ref = useRef<HTMLCanvasElement>(null);
 
-  useDraw({
+  const { onPointerDown, onPointerMove, onPointerUp } = useDrawing({
     ref,
     enabled,
     color,
     brushSize,
     brushShape,
-    backgroundColor,
   });
 
   return (
-    <Canvas
-      {...props}
-      style={{
-        cursor: enabled ? "none" : "default",
-        ...(props.style || {}),
-      }}
-      ref={ref}
-    />
+    <Cursor
+      enabled={enabled}
+      color={color}
+      brushSize={brushSize}
+      brushShape={brushShape}
+    >
+      <Canvas
+        ref={ref}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        {...props}
+      />
+    </Cursor>
   );
 };

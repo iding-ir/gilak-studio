@@ -1,24 +1,25 @@
 import type { BrushShape, BrushSize } from "../types";
+import type { Point } from "../types/point";
 
 export type DrawBrushProps = {
   ctx: CanvasRenderingContext2D;
-  x: number;
-  y: number;
+  color: string;
   brushSize: BrushSize;
   brushShape: BrushShape;
-  prevPoint?: { x: number; y: number };
+  point: Point;
+  prevPoint?: Point | null;
 };
 
 export const drawBrush = ({
   ctx,
-  x,
-  y,
+  color,
   brushSize,
   brushShape,
+  point: { x, y },
   prevPoint,
 }: DrawBrushProps) => {
   ctx.save();
-  ctx.strokeStyle = "rgba(0,0,0,0.3)";
+  ctx.strokeStyle = color;
   ctx.lineWidth = brushSize;
 
   if (prevPoint) {

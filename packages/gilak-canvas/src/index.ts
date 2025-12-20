@@ -7,8 +7,8 @@ export type { RandomCanvasProps } from "./components/RandomCanvas";
 export { RandomCanvas } from "./components/RandomCanvas";
 
 // Hooks
-export type { UseDrawProps } from "./hooks/useDraw";
-export { useDraw } from "./hooks/useDraw";
+export type { UseDrawingProps } from "./hooks/useDrawing";
+export { useDrawing } from "./hooks/useDrawing";
 
 // Methods
 export type { DrawBrushProps } from "./methods/draw-brush";
@@ -18,4 +18,5 @@ export { drawRandomEffect } from "./methods/draw-random-effect";
 
 // Types
 export type { BrushShape, BrushSize } from "./types";
+export type { Point } from "./types";
 export { BRUSH_SHAPES, BRUSH_SIZES } from "./types";

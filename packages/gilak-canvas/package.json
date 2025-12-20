@@ -36,6 +36,9 @@
     "./methods": {
       "import": "./src/methods/index.ts"
     },
+    "./hooks": {
+      "import": "./src/hooks/index.ts"
+    },
     "./dist/gilak-canvas.css": "./dist/gilak-canvas.css"
   },
   "files": [
@@ -60,6 +63,7 @@
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
     "@gilak/stylist": "workspace:*",
-    "clsx": "^2.1.1"
+    "clsx": "^2.1.1",
+    "fabric": "^6.9.1"
   }
 }

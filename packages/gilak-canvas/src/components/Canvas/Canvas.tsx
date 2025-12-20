@@ -17,15 +17,15 @@ export const Canvas = ({
   ...props
 }: CanvasProps) => {
   return (
-    <div className={styles.container}>
+    <>
       <canvas
         ref={ref}
-        className={styles.canvas}
+        className={styles.root}
         width={width}
         height={height}
         {...props}
       />
       {children}
-    </div>
+    </>
   );
 };
