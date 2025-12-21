@@ -31,7 +31,7 @@ export const ColorSwatch = ({
   return (
     <div className={styles.root} style={{ backgroundColor: color }}>
       <Dropdown
-        position="bottom"
+        position="bottom-right"
         trigger={
           <Icon
             icon={icon}

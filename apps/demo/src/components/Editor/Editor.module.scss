@@ -1,5 +1,3 @@
-@use "@gilak/stylist/mixins" as mixins;
-
 .root {
   display: grid;
   grid-template-areas:
@@ -26,28 +24,6 @@
     flex-direction: row;
     justify-content: space-between;
     background-color: var(--color-light-xxl);
-
-    .tools {
-      display: flex;
-      flex-direction: row;
-      gap: var(--spacing-sm);
-      padding: var(--spacing-sm);
-
-      & > li {
-        display: grid;
-      }
-    }
-
-    .colors {
-      display: flex;
-      flex-direction: row;
-      gap: var(--spacing-sm);
-      padding: var(--spacing-sm);
-
-      & > li {
-        display: grid;
-      }
-    }
   }
 
   .main {
@@ -58,11 +34,5 @@
     height: 100%;
     padding: var(--spacing-sm);
     overflow: hidden;
-  }
-
-  .ellipsis {
-    display: block;
-    width: 100%;
-    @include mixins.ellipsis();
   }
 }

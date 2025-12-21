@@ -23,7 +23,6 @@ export type WindowProps = {
 
 export const Window = ({ id, title }: WindowProps) => {
   const dispatch = useAppDispatch();
-
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const brushSize = useAppSelector(selectBrushSize);
   const brushShape = useAppSelector(selectBrushShape);

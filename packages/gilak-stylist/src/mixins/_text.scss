@@ -1,6 +1,3 @@
-// Text utility mixins
-
-// Truncate text with ellipsis
 @mixin ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;
