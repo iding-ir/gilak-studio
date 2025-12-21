@@ -3,3 +3,7 @@
 
 // Generate color token palettes from primitives
 $colors: fns.generate-color-palettes(primitives.$color-primitives);
+$colors-dark: fns.generate-color-palettes(
+  primitives.$color-primitives-dark,
+  "dark"
+);

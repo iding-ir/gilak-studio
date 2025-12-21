@@ -1,24 +1,55 @@
 @use "sass:map";
 @use "sass:color";
 
-// Color variant adjustments
+// Per-theme color variant adjustments (each theme may override keys from `default`).
 $color-variant-adjustments: (
-  xxxs: 30%,
-  xxs: 16%,
-  xs: 8%,
-  sm: 4%,
-  md: 0%,
-  lg: -4%,
-  xl: -8%,
-  xxl: -16%,
-  xxxl: -30%,
+  default: (
+    xxxs: 30%,
+    xxs: 16%,
+    xs: 8%,
+    sm: 4%,
+    md: 0%,
+    lg: -4%,
+    xl: -8%,
+    xxl: -16%,
+    xxxl: -30%,
+  ),
+  dark: (
+    xxxs: 10%,
+    xxs: -4%,
+    xs: -12%,
+    sm: -6%,
+    md: -20%,
+    lg: -24%,
+    xl: -28%,
+    xxl: -36%,
+    xxxl: -50%,
+  ),
 ) !default;
 
-// Generate color variants from a base color
-@function generate-color-variants($base-color) {
-  $variants: ();
+// Return a merged adjustments map for a theme (theme overrides default)
+@function get-adjustments-for-theme($theme: default) {
+  $default-adjustments: map.get($color-variant-adjustments, default);
 
-  @each $size, $adjustment in $color-variant-adjustments {
+  @if $default-adjustments == null {
+    @error "No 'default' adjustments found in $color-variant-adjustments.";
+  }
+
+  @if $theme == default or not map.has-key($color-variant-adjustments, $theme) {
+    @return $default-adjustments;
+  }
+
+  $theme-adjustments: map.get($color-variant-adjustments, $theme);
+
+  @return map.merge($default-adjustments, $theme-adjustments);
+}
+
+// Generate color variants from a base color, optionally for a given theme
+@function generate-color-variants($base-color, $theme: default) {
+  $variants: ();
+  $adjustments: get-adjustments-for-theme($theme);
+
+  @each $size, $adjustment in $adjustments {
     $variant: color.scale($base-color, $lightness: $adjustment);
 
     $variants: map.merge(
@@ -32,15 +63,15 @@ $color-variant-adjustments: (
   @return $variants;
 }
 
-// Generate all color palettes from primitives
-@function generate-color-palettes($primitives) {
+// Generate all color palettes from primitives, optionally for a given theme
+@function generate-color-palettes($primitives, $theme: default) {
   $palettes: ();
 
   @each $name, $base in $primitives {
     $palettes: map.merge(
       $palettes,
       (
-        $name: generate-color-variants($base),
+        $name: generate-color-variants($base, $theme),
       )
     );
   }

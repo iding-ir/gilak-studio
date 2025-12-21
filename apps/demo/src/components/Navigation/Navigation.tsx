@@ -16,11 +16,19 @@ export const Navigation = () => {
     dispatch(addWindow({ id, title }));
   };
 
+  const handleChangeTheme = (theme: "light" | "dark") => {
+    document.documentElement.setAttribute("data-theme", theme);
+  };
+
   return (
     <Menu label="" root direction="row" open>
-      <Menu label="File" direction="column">
+      <Menu label="File">
         <Menu label="New" onClick={handleAddWindow} />
         <Menu label="Open" />
+      </Menu>
+      <Menu label="Theme">
+        <Menu label="Light" onClick={() => handleChangeTheme("light")} />
+        <Menu label="Dark" onClick={() => handleChangeTheme("dark")} />
       </Menu>
       <Menu label="View" />
       <Menu label="Help" />

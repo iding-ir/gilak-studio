@@ -22,7 +22,7 @@ export const Menu = ({
   children,
   root = false,
   label,
-  direction = "row",
+  direction = "column",
   open = false,
   href,
   onClick,
