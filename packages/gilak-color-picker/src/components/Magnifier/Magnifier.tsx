@@ -1,20 +1,22 @@
 import { getContrastColor } from "@gilak/utils";
 import { type RefObject } from "react";
 
-import { useColorPicker } from "../../hooks/useColorPicker";
-import { useMagnifier } from "../../hooks/useMagnifier";
+import { useColorPicker, useMagnifier } from "../../hooks";
 import styles from "./Magnifier.module.scss";
 
 export type MagnifierProps = {
   canvasRef: RefObject<HTMLCanvasElement | null>;
+  enabled: boolean;
   onSelect: (color: string) => void;
 };
 
-export const Magnifier = ({ canvasRef, onSelect }: MagnifierProps) => {
-  const { enabled, isHovered, hoverColor, borderWidth } = useColorPicker();
-  const { containerRef, magnifierRef } = useMagnifier({ onSelect, canvasRef });
-
-  if (!isHovered || !enabled) return null;
+export const Magnifier = ({ canvasRef, enabled, onSelect }: MagnifierProps) => {
+  const { hoverColor, borderWidth } = useColorPicker();
+  const { containerRef, magnifierRef } = useMagnifier({
+    canvasRef,
+    enabled,
+    onSelect,
+  });
 
   return (
     <div className={styles.container} ref={containerRef}>

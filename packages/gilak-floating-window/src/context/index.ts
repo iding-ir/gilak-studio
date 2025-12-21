@@ -1,16 +1,31 @@
-import { useContext } from "react";
+// actions:
+export type { Action } from "./actions";
+export { actions } from "./actions";
 
-import { FloatingWindowContext } from "./context";
+// context:
+export type { ContextType } from "./context";
+export { FloatingWindowContext } from "./context";
 
+// hook:
+export { useFloatingWindowContext } from "./hook";
+
+// provider:
+export type { FloatingWindowProviderProps } from "./provider";
 export { FloatingWindowProvider } from "./provider";
-export { initialState, reducer } from "./reducer";
-export * from "./types";
 
-export const useFloatingWindowContext = () => {
-  const ctx = useContext(FloatingWindowContext);
-  if (!ctx)
-    throw new Error(
-      "useFloatingWindowContext must be used within FloatingWindowProvider",
-    );
-  return ctx;
-};
+// reducer
+export { reducer } from "./reducer";
+
+// selectors:
+export {
+  hasMinimizedWindows,
+  selectFloatingWindow,
+  selectMinimizedWindows,
+} from "./selectors";
+
+// state:
+export type { State } from "./state";
+export { initialState } from "./state";
+
+// types:
+export type { FloatingWindowType, Status } from "./types";

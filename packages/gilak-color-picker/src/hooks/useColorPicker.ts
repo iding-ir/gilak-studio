@@ -1,13 +1,47 @@
-import { use } from "react";
+import { useCallback } from "react";
 
-import { ColorPickerContext } from "../context/ColorPickerContext";
+import { actions, useColorPickerContext } from "../context";
 
 export const useColorPicker = () => {
-  const context = use(ColorPickerContext);
+  const { state, dispatch } = useColorPickerContext();
+  const { radiusCount, gridSize, borderWidth, hoverColor, selectedColor } =
+    state;
 
-  if (!context) {
-    throw new Error("useColorPicker must be used within a ColorPickerProvider");
-  }
+  const setMagmifierRadius = useCallback(
+    (radiusCount: number) => dispatch(actions.setRadiusCount(radiusCount)),
+    [dispatch],
+  );
 
-  return context;
+  const setGridSize = useCallback(
+    (size: number) => dispatch(actions.setGridSize(size)),
+    [dispatch],
+  );
+
+  const setBorderWidth = useCallback(
+    (width: number) => dispatch(actions.setBorderWidth(width)),
+    [dispatch],
+  );
+
+  const setHoverColor = useCallback(
+    (color: string) => dispatch(actions.setHoverColor(color)),
+    [dispatch],
+  );
+
+  const setSelectedColor = useCallback(
+    (color: string) => dispatch(actions.setSelectedColor(color)),
+    [dispatch],
+  );
+
+  return {
+    radiusCount,
+    gridSize,
+    borderWidth,
+    hoverColor,
+    selectedColor,
+    setMagmifierRadius,
+    setGridSize,
+    setBorderWidth,
+    setHoverColor,
+    setSelectedColor,
+  };
 };

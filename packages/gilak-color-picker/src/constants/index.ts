@@ -1,4 +1,3 @@
-export const DEFAULT_ENABLED = false;
 export const DEFAULT_GRID_SIZE = 20;
 export const DEFAULT_MAGNIFIER_RADIUS = 4;
 export const DEFAULT_BORDER_WIDTH = 5;

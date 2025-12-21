@@ -1,6 +1,6 @@
-import type { State } from "./types";
+import type { State } from "./state";
 
-export const selectFloatingWindows = (state: State) => {
+export const selectFloatingWindow = (state: State) => {
   return Object.values(state.windows);
 };
 

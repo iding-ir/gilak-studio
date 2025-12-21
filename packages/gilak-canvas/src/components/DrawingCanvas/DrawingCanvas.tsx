@@ -22,7 +22,7 @@ export const DrawingCanvas = ({
   brushShape,
   ...props
 }: DrawingCanvasProps) => {
-  const { onPointerDown, onPointerMove, onPointerUp } = useDrawing({
+  useDrawing({
     ref,
     enabled,
     color,
@@ -37,15 +37,7 @@ export const DrawingCanvas = ({
       brushSize={brushSize}
       brushShape={brushShape}
     >
-      <Canvas
-        ref={ref}
-        onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
-        onPointerUp={onPointerUp}
-        onPointerLeave={onPointerUp}
-        onPointerEnter={onPointerUp}
-        {...props}
-      />
+      <Canvas ref={ref} {...props} />
     </Cursor>
   );
 };

@@ -10,7 +10,7 @@ export type ContextType = {
   dispatch: Dispatch<Action>;
 };
 
-export const FloatingWindowContext = createContext<ContextType>({
+export const ColorPickerContext = createContext<ContextType>({
   state: initialState,
   dispatch: () => null,
 });

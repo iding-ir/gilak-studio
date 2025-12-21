@@ -3,14 +3,14 @@ export const renderMagnifierCanvas = ({
   magnifierCanvas,
   x,
   y,
-  magnifierRadius,
+  radiusCount,
   gridSize,
 }: {
   canvas: HTMLCanvasElement;
   magnifierCanvas: HTMLCanvasElement | null;
   x: number;
   y: number;
-  magnifierRadius: number;
+  radiusCount: number;
   gridSize: number;
 }) => {
   if (!magnifierCanvas) {
@@ -27,7 +27,7 @@ export const renderMagnifierCanvas = ({
     return;
   }
 
-  const diameter = magnifierRadius * 2 + 1;
+  const diameter = radiusCount * 2 + 1;
   magnifierCanvas.width = diameter * gridSize;
   magnifierCanvas.height = diameter * gridSize;
 

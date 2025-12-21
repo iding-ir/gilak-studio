@@ -1,11 +1,10 @@
-import type { ColorType } from "@gilak/color-picker";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 import { createAppSlice } from "../../app/createAppSlice";
 
 export interface Color {
-  color: ColorType;
-  background: ColorType;
+  color: string;
+  background: string;
 }
 
 export const DEFAULT_COLOR: Color = {

@@ -2,7 +2,7 @@ import { type RefObject, useCallback, useRef } from "react";
 
 import type { Status } from "../context";
 import type { Position } from "../types";
-import { useWindow } from "./useWindow";
+import { useFloatingWindow } from "./useFloatingWindows";
 
 const clampPosition = ({
   pos,
@@ -46,7 +46,11 @@ export const useDrag = ({
   onDrag,
   onDragEnd,
 }: useDragParams) => {
-  const { drag, setDragging, bringToFront } = useWindow(id);
+  const {
+    setFloatingWindowPosition,
+    setFloatingWindowDragging,
+    bringFloatingWindowToFront,
+  } = useFloatingWindow(id);
 
   const state = useRef({
     startPosition: position,
@@ -63,8 +67,8 @@ export const useDrag = ({
 
       if (!draggable || status !== "open") return;
 
-      bringToFront();
-      setDragging(true);
+      bringFloatingWindowToFront();
+      setFloatingWindowDragging(true);
       onDragStart?.(state.current.startPosition);
 
       const element = ref.current;
@@ -108,8 +112,8 @@ export const useDrag = ({
       };
 
       const onPointerUp = () => {
-        drag(state.current.lastDispatched);
-        setDragging(false);
+        setFloatingWindowPosition(state.current.lastDispatched);
+        setFloatingWindowDragging(false);
         onDragEnd?.(state.current.lastDispatched);
 
         document.removeEventListener("pointermove", onPointerMove);
@@ -127,9 +131,9 @@ export const useDrag = ({
       onDragStart,
       onDrag,
       onDragEnd,
-      bringToFront,
-      setDragging,
-      drag,
+      bringFloatingWindowToFront,
+      setFloatingWindowDragging,
+      setFloatingWindowPosition,
     ],
   );
 

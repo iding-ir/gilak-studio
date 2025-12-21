@@ -1,16 +1,17 @@
 import { useEffect } from "react";
 
-import type { FloatingWindowMeta } from "../context/types";
-import { useWindow } from "./useWindow";
+import type { FloatingWindowType } from "../context";
+import { useFloatingWindow } from "./useFloatingWindows";
 
-export const useRegister = (win: FloatingWindowMeta) => {
-  const { register, unregister } = useWindow(win.id);
+export const useRegister = (win: FloatingWindowType) => {
+  const { registerFloatingWindow, unregisterFloatingWindow } =
+    useFloatingWindow(win.id);
 
   useEffect(() => {
-    register(win);
+    registerFloatingWindow(win);
 
     return () => {
-      unregister();
+      unregisterFloatingWindow();
     };
     // intentionally only depend on id
     // eslint-disable-next-line react-hooks/exhaustive-deps

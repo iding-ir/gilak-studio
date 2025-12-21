@@ -1,8 +1,7 @@
-import type { Action, State } from "./types";
+import type { Action } from "./actions";
+import type { State } from "./state";
 
-export const initialState: State = { windows: {} };
-
-export function reducer(state: State, { type, payload }: Action): State {
+export const reducer = (state: State, { type, payload }: Action): State => {
   switch (type) {
     case "REGISTER": {
       const { id } = payload;
@@ -75,7 +74,8 @@ export function reducer(state: State, { type, payload }: Action): State {
         },
       };
     }
-    default:
+    default: {
       return state;
+    }
   }
-}
+};

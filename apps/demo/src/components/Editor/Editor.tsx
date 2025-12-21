@@ -1,6 +1,6 @@
 import { type BrushSize, DrawingCanvas } from "@gilak/canvas";
 import IconBrushSizes from "@gilak/canvas/assets/brush-circle-empty.svg?url";
-import { MagnifierProvider, useColorPicker } from "@gilak/color-picker";
+import { MagnifierProvider } from "@gilak/color-picker";
 import { ColorSwatch } from "@gilak/color-swatch";
 import { Dropdown, Icon, Menu } from "@gilak/components";
 import { FloatingWindowProvider } from "@gilak/floating-window";
@@ -22,7 +22,11 @@ import {
   selectBrushSize,
   setBrushSize,
 } from "../../features/brush/brush-slice";
-import { selectTool, toggleTool } from "../../features/tools/tools.slice";
+import {
+  selectTool,
+  toggleTool,
+  unsetTool,
+} from "../../features/tools/tools.slice";
 import type { ToolType } from "../../features/tools/types";
 import {
   addWindow,
@@ -40,7 +44,6 @@ export const Editor = () => {
   const brushSize = useAppSelector(selectBrushSize);
   const selectedTool = useAppSelector(selectTool);
   const [selectedColor, setSelectedColor] = useState<string>("#000000");
-  const { setEnabled: switchColorPicker } = useColorPicker();
 
   const handleAddWindow = () => {
     dispatch(
@@ -53,7 +56,6 @@ export const Editor = () => {
 
   const handleToggleTool = (tool: ToolType) => {
     dispatch(toggleTool(tool));
-    switchColorPicker(tool === "COLOR_PICKER");
   };
 
   const handleBrushSizeChange = (size: BrushSize) => {
@@ -61,6 +63,7 @@ export const Editor = () => {
   };
 
   const handleSelectColor = (color: string) => {
+    dispatch(unsetTool());
     setSelectedColor(color);
   };
 
@@ -134,6 +137,7 @@ export const Editor = () => {
                 <ResizableScreen>
                   <MagnifierProvider
                     canvasRef={canvasRef}
+                    enabled={selectedTool === "COLOR_PICKER"}
                     onSelect={handleSelectColor}
                   >
                     <DrawingCanvas

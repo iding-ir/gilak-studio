@@ -1,4 +1,4 @@
-import { type PointerEvent, type RefObject, useCallback, useRef } from "react";
+import { type RefObject, useCallback, useEffect, useRef } from "react";
 
 import { drawBrush } from "../methods";
 import type { BrushShape, BrushSize } from "../types";
@@ -32,15 +32,15 @@ export const useDrawing = ({
     [ref],
   );
 
-  const draw = useCallback(
-    (event: PointerEvent<HTMLCanvasElement>) => {
-      if (!enabled || !ref.current || !drawing.current) return;
-      const ctx = ref.current.getContext("2d");
+  useEffect(() => {
+    const draw = (event: PointerEvent) => {
+      const canvas = ref.current;
+      if (!enabled || !canvas || !drawing.current) return;
+      const ctx = canvas.getContext("2d");
       if (!ctx) return;
 
-      const rect = ref.current.getBoundingClientRect();
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
+      const x = event.offsetX;
+      const y = event.offsetY;
 
       previousPointRef.current = currentPointRef.current;
       currentPointRef.current = { x, y };
@@ -53,35 +53,39 @@ export const useDrawing = ({
         point: currentPointRef.current,
         prevPoint: previousPointRef.current,
       });
-    },
-    [enabled, ref, brushSize, brushShape, color],
-  );
+    };
 
-  const onPointerDown = useCallback(
-    (event: PointerEvent<HTMLCanvasElement>) => {
+    const onPointerDown = (event: PointerEvent) => {
       drawing.current = true;
       draw(event);
-    },
-    [draw],
-  );
+    };
 
-  const onPointerMove = useCallback(
-    (event: PointerEvent<HTMLCanvasElement>) => {
+    const onPointerMove = (event: PointerEvent) => {
       draw(event);
-    },
-    [draw],
-  );
+    };
 
-  const onPointerUp = useCallback(() => {
-    drawing.current = false;
-    previousPointRef.current = null;
-    currentPointRef.current = null;
-  }, []);
+    const onPointerUp = () => {
+      drawing.current = false;
+      previousPointRef.current = null;
+      currentPointRef.current = null;
+    };
+    const canvas = ref.current;
+    if (!canvas) return;
+
+    canvas.addEventListener("pointerdown", onPointerDown);
+    canvas.addEventListener("pointermove", onPointerMove);
+    canvas.addEventListener("pointerup", onPointerUp);
+    canvas.addEventListener("pointerleave", onPointerUp);
+
+    return () => {
+      canvas.removeEventListener("pointerdown", onPointerDown);
+      canvas.removeEventListener("pointermove", onPointerMove);
+      canvas.removeEventListener("pointerup", onPointerUp);
+      canvas.removeEventListener("pointerleave", onPointerUp);
+    };
+  }, [enabled, color, brushSize, brushShape, ref]);
 
   return {
     initializeCanvas,
-    onPointerDown,
-    onPointerMove,
-    onPointerUp,
   };
 };

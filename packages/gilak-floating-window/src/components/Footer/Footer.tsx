@@ -2,7 +2,7 @@ import { Icon } from "@gilak/components";
 import type { PointerEvent, ReactNode } from "react";
 
 import IconResize from "../../assets/icon-resize.svg?url";
-import { useWindow } from "../../hooks/useWindow";
+import { useFloatingWindow } from "../../hooks/useFloatingWindows";
 import styles from "./Footer.module.scss";
 
 export type FooterProps = {
@@ -18,7 +18,7 @@ export const Footer = ({
   resizable,
   onResizePointerDown,
 }: FooterProps) => {
-  const { status } = useWindow(id);
+  const { status } = useFloatingWindow(id);
 
   if (!footer && !resizable) return null;
 

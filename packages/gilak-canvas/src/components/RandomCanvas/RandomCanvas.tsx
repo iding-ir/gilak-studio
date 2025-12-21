@@ -10,11 +10,7 @@ export type RandomCanvasProps = CanvasProps & {
   refresh?: number;
 };
 
-export const RandomCanvas: React.FC<RandomCanvasProps> = ({
-  refresh,
-  ref,
-  ...props
-}) => {
+export const RandomCanvas = ({ refresh, ref, ...props }: RandomCanvasProps) => {
   useEffect(() => {
     if (ref?.current) {
       drawRandomEffect(ref.current);

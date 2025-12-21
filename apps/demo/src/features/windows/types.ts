@@ -1,3 +1,3 @@
-import type { FloatingWindowMeta } from "@gilak/floating-window";
+import type { FloatingWindowType } from "@gilak/floating-window";
 
-export type WindowType = Pick<FloatingWindowMeta, "id" | "title">;
+export type WindowType = Pick<FloatingWindowType, "id" | "title">;

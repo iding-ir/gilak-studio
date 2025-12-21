@@ -15,7 +15,8 @@ import {
   MIN_SIZE,
 } from "../../constants";
 import type { Status } from "../../context";
-import { useDrag, useRegister, useResize, useWindow } from "../../hooks";
+import { useDrag, useRegister, useResize } from "../../hooks";
+import { useFloatingWindow } from "../../hooks/useFloatingWindows";
 import type { Position, Size } from "../../types";
 import { Footer } from "../Footer/Footer";
 import { Header } from "../Header";
@@ -89,7 +90,7 @@ export const FloatingWindow = memo(
     });
 
     const { size, position, status, zIndex, resizing, dragging } =
-      useWindow(id);
+      useFloatingWindow(id);
 
     const { onPointerDown: onDragPointerDown } = useDrag({
       id,

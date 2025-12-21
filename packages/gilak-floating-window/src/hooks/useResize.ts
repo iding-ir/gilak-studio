@@ -2,7 +2,7 @@ import { type RefObject, useCallback, useRef } from "react";
 
 import type { Status } from "../context";
 import type { Size } from "../types";
-import { useWindow } from "./useWindow";
+import { useFloatingWindow } from "./useFloatingWindows";
 
 const clampSize = ({
   size,
@@ -67,7 +67,11 @@ export const useResize = ({
   onResize,
   onResizeEnd,
 }: useResizeParams) => {
-  const { resize, setResizing, bringToFront } = useWindow(id);
+  const {
+    setFloatingWindowSize,
+    setFloatingWindowResizing,
+    bringFloatingWindowToFront,
+  } = useFloatingWindow(id);
 
   const state = useRef({
     startSize: size,
@@ -84,8 +88,8 @@ export const useResize = ({
 
       if (!resizable || status !== "open") return;
 
-      bringToFront();
-      setResizing(true);
+      bringFloatingWindowToFront();
+      setFloatingWindowResizing(true);
       onResizeStart?.(state.current.startSize);
 
       const element = ref.current;
@@ -130,8 +134,8 @@ export const useResize = ({
       };
 
       const onPointerUp = () => {
-        resize(state.current.lastDispatched);
-        setResizing(false);
+        setFloatingWindowSize(state.current.lastDispatched);
+        setFloatingWindowResizing(false);
         onResizeEnd?.(state.current.lastDispatched);
 
         document.removeEventListener("pointermove", onPointerMove);
@@ -151,9 +155,9 @@ export const useResize = ({
       onResizeStart,
       onResizeEnd,
       onResize,
-      setResizing,
-      bringToFront,
-      resize,
+      setFloatingWindowResizing,
+      bringFloatingWindowToFront,
+      setFloatingWindowSize,
     ],
   );
 

@@ -6,7 +6,7 @@ import IconMaximize from "../../assets/icon-maximize.svg?url";
 import IconMaximized from "../../assets/icon-maximized.svg?url";
 import IconMinimize from "../../assets/icon-minimize.svg?url";
 import IconMinimized from "../../assets/icon-minimized.svg?url";
-import { useWindow } from "../../hooks/useWindow";
+import { useFloatingWindow } from "../../hooks/useFloatingWindows";
 import styles from "./Header.module.scss";
 
 export type HeaderProps = {
@@ -26,11 +26,17 @@ export const Header = ({
   minimizable,
   onDragPointerDown,
 }: HeaderProps) => {
-  const { status, dragging, maximize, minimize, open, bringToFront } =
-    useWindow(id);
+  const {
+    status,
+    dragging,
+    maximizeFloatingWindow,
+    minimizeFloatingWindow,
+    openFloatingWindow,
+    bringFloatingWindowToFront,
+  } = useFloatingWindow(id);
 
   const handlePointerDown = (event: PointerEvent<HTMLElement>) => {
-    bringToFront();
+    bringFloatingWindowToFront();
     if (draggable && onDragPointerDown) onDragPointerDown(event);
   };
 
@@ -47,16 +53,24 @@ export const Header = ({
       <h3 className={styles.title}>{title}</h3>
       <div className={styles.toolbar}>
         {maximizable && status !== "maximized" && (
-          <Icon icon={IconMaximize} size="sm" onClick={maximize} />
+          <Icon
+            icon={IconMaximize}
+            size="sm"
+            onClick={maximizeFloatingWindow}
+          />
         )}
         {maximizable && status === "maximized" && (
-          <Icon icon={IconMaximized} size="sm" onClick={open} />
+          <Icon icon={IconMaximized} size="sm" onClick={openFloatingWindow} />
         )}
         {minimizable && status !== "minimized" && (
-          <Icon icon={IconMinimize} size="sm" onClick={minimize} />
+          <Icon
+            icon={IconMinimize}
+            size="sm"
+            onClick={minimizeFloatingWindow}
+          />
         )}
         {minimizable && status === "minimized" && (
-          <Icon icon={IconMinimized} size="sm" onClick={open} />
+          <Icon icon={IconMinimized} size="sm" onClick={openFloatingWindow} />
         )}
       </div>
     </header>
