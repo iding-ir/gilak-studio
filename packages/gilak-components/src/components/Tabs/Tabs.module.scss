@@ -1,0 +1,18 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  font-size: var(--prop-font-size);
+  background: var(--color-light-md);
+
+  .headers {
+    display: flex;
+    gap: var(--spacing-sm);
+    align-items: center;
+  }
+
+  .bodies {
+    flex-grow: 1;
+  }
+}

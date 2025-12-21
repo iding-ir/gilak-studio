@@ -1,0 +1,25 @@
+.header {
+  all: unset;
+  padding: calc(var(--prop-spacing-size) / 2) var(--prop-spacing-size);
+  color: var(--color-dark-md);
+  height: var(--prop-control-size);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  background: var(--color-light-md);
+  transition: all var(--transition-sm);
+  cursor: pointer;
+
+  &:hover {
+    color: var(--color-primary-md);
+    background: var(--color-light-xl);
+  }
+
+  &.active,
+  &.active:focus {
+    background: var(--color-primary-md);
+    color: var(--color-light-lg);
+    box-shadow: var(--shadow-xs);
+  }
+}

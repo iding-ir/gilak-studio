@@ -74,7 +74,7 @@
     .input {
       font-size: var(--font-size-xxs);
       line-height: var(--icon-xxs);
-      padding: 0 calc(var(--spacing-xxs) / 4);
+      padding: 0 calc(var(--spacing-xxs));
     }
   }
 
@@ -95,7 +95,7 @@
     .input {
       font-size: var(--font-size-xs);
       line-height: var(--icon-xs);
-      padding: 0 calc(var(--spacing-xs) / 4);
+      padding: 0 calc(var(--spacing-xs));
     }
   }
 
@@ -116,7 +116,7 @@
     .input {
       font-size: var(--font-size-sm);
       line-height: var(--icon-sm);
-      padding: 0 calc(var(--spacing-sm) / 4);
+      padding: 0 calc(var(--spacing-sm));
     }
   }
 
@@ -137,7 +137,7 @@
     .input {
       font-size: var(--font-size-md);
       line-height: var(--icon-md);
-      padding: 0 calc(var(--spacing-md) / 4);
+      padding: 0 calc(var(--spacing-md));
     }
   }
 
@@ -158,7 +158,7 @@
     .input {
       font-size: var(--font-size-lg);
       line-height: var(--icon-lg);
-      padding: 0 calc(var(--spacing-lg) / 4);
+      padding: 0 calc(var(--spacing-lg));
     }
   }
 
@@ -179,7 +179,7 @@
     .input {
       font-size: var(--font-size-xl);
       line-height: var(--icon-xl);
-      padding: 0 calc(var(--spacing-xl) / 4);
+      padding: 0 calc(var(--spacing-xl));
     }
   }
 
@@ -200,7 +200,7 @@
     .input {
       font-size: var(--font-size-xxl);
       line-height: var(--icon-xxl);
-      padding: 0 calc(var(--spacing-xxl) / 4);
+      padding: 0 calc(var(--spacing-xxl));
     }
   }
 }

@@ -1,6 +1,7 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 import { createAppSlice } from "../../app/createAppSlice";
+import { COLOR_PALETTE } from "../../constants";
 
 export interface ColorState {
   color: string;
@@ -8,8 +9,8 @@ export interface ColorState {
 }
 
 const initialState: ColorState = {
-  color: "#000000",
-  backgroundColor: "#ffffff",
+  color: COLOR_PALETTE[1],
+  backgroundColor: COLOR_PALETTE[0],
 };
 
 export const colorSlice = createAppSlice({
@@ -19,7 +20,7 @@ export const colorSlice = createAppSlice({
     setColor: create.reducer((state, { payload }: PayloadAction<string>) => {
       state.color = payload;
     }),
-    setBackground: create.reducer(
+    setBackgroundColor: create.reducer(
       (state, { payload }: PayloadAction<string>) => {
         state.backgroundColor = payload;
       },
@@ -31,6 +32,6 @@ export const colorSlice = createAppSlice({
   },
 });
 
-export const { setColor, setBackground } = colorSlice.actions;
+export const { setColor, setBackgroundColor } = colorSlice.actions;
 
 export const { selectColor, selectBackgroundColor } = colorSlice.selectors;

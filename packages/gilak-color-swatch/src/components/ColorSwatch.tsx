@@ -3,10 +3,11 @@ import {
   Icon,
   Input,
   List,
+  Tab,
+  Tabs,
   type TshirtSize,
 } from "@gilak/components";
 import { getContrastColor } from "@gilak/utils";
-import { useMemo } from "react";
 
 import IconEmpty from "../assets/icon-empty.svg?url";
 import styles from "./ColorSwatch.module.scss";
@@ -15,19 +16,21 @@ export type ColorSwatchProps = {
   icon: string;
   size?: TshirtSize;
   color: string;
+  backgroundColor: string;
   colors: string[];
-  onChange: (color: string) => void;
+  onChangeColor: (color: string) => void;
+  onChangeBackgroundColor: (color: string) => void;
 };
 
 export const ColorSwatch = ({
   icon,
   size = "md",
   color,
+  backgroundColor,
   colors,
-  onChange,
+  onChangeColor,
+  onChangeBackgroundColor,
 }: ColorSwatchProps) => {
-  const contrastColor = useMemo(() => getContrastColor(color), [color]);
-
   return (
     <div className={styles.root} style={{ backgroundColor: color }}>
       <Dropdown
@@ -36,39 +39,70 @@ export const ColorSwatch = ({
           <Icon
             icon={icon}
             size={size}
-            color={contrastColor}
-            backgroundColor={color}
-            frameless
+            color={color}
+            backgroundColor={backgroundColor}
           />
         }
       >
-        <List
-          direction="column"
-          count={3}
-          theme="light"
-          items={colors.map((c) => (
-            <Icon
-              icon={IconEmpty}
-              size={size}
-              color={c}
-              backgroundColor={c}
-              selected={color === c}
-              onClick={() => onChange(c)}
+        <Tabs>
+          <Tab header="Color" className={styles.tab}>
+            <Input
+              value={color}
+              readOnly
+              type="text"
+              name="color-swatch"
+              style={{
+                color: getContrastColor(color),
+                backgroundColor: color,
+              }}
             />
-          ))}
-        />
+            <List
+              direction="column"
+              count={4}
+              theme="light"
+              frameless
+              items={colors.map((c) => (
+                <Icon
+                  icon={IconEmpty}
+                  size={size}
+                  color={c}
+                  backgroundColor={c}
+                  selected={color === c}
+                  onClick={() => onChangeColor(c)}
+                />
+              ))}
+            />
+          </Tab>
+          <Tab header="Background" className={styles.tab}>
+            <Input
+              value={backgroundColor}
+              readOnly
+              type="text"
+              name="color-swatch"
+              style={{
+                color: getContrastColor(backgroundColor),
+                backgroundColor: backgroundColor,
+              }}
+            />
+            <List
+              direction="column"
+              count={4}
+              theme="light"
+              frameless
+              items={colors.map((c) => (
+                <Icon
+                  icon={IconEmpty}
+                  size={size}
+                  color={c}
+                  backgroundColor={c}
+                  selected={backgroundColor === c}
+                  onClick={() => onChangeBackgroundColor(c)}
+                />
+              ))}
+            />
+          </Tab>
+        </Tabs>
       </Dropdown>
-      <Input
-        value={color}
-        readOnly
-        type="text"
-        name="color-swatch"
-        style={{
-          color: contrastColor,
-          backgroundColor: color,
-          width: "6rem",
-        }}
-      />
     </div>
   );
 };

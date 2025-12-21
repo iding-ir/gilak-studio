@@ -1,0 +1,8 @@
+.body {
+  display: none;
+  background-color: var(--color-light-md);
+
+  &.active {
+    display: flex;
+  }
+}

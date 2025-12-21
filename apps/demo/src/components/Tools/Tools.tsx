@@ -11,7 +11,12 @@ import {
   selectBrushSize,
   setBrushSize,
 } from "../../features/brush/brush-slice";
-import { selectColor, setColor } from "../../features/color/color-slice";
+import {
+  selectBackgroundColor,
+  selectColor,
+  setBackgroundColor,
+  setColor,
+} from "../../features/color/color-slice";
 import { selectTool, toggleTool } from "../../features/tools/tools.slice";
 import type { ToolType } from "../../features/tools/types";
 import { BrushShapeDropdown } from "../BrushShapeDropdown/BrushShapeDropdown";
@@ -22,6 +27,7 @@ export const Tools = () => {
   const brushSize = useAppSelector(selectBrushSize);
   const selectedTool = useAppSelector(selectTool);
   const selectedColor = useAppSelector(selectColor);
+  const selectedBackgroundColor = useAppSelector(selectBackgroundColor);
 
   const handleToggleTool = (tool: ToolType) => {
     dispatch(toggleTool(tool));
@@ -34,6 +40,11 @@ export const Tools = () => {
   const handleChangeColor = (color: string) => {
     dispatch(setColor(color));
   };
+
+  const handleChangeBackgroundColor = (color: string) => {
+    dispatch(setBackgroundColor(color));
+  };
+
   return (
     <ul className={styles.root}>
       <li>
@@ -41,8 +52,10 @@ export const Tools = () => {
           size="md"
           icon={IconBucketUrl}
           color={selectedColor}
+          backgroundColor={selectedBackgroundColor}
           colors={COLOR_PALETTE}
-          onChange={handleChangeColor}
+          onChangeColor={handleChangeColor}
+          onChangeBackgroundColor={handleChangeBackgroundColor}
         />
       </li>
       <li>
