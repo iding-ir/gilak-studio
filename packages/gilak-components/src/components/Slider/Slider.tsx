@@ -13,24 +13,24 @@ export type SliderProps = {
   initial: number;
   size?: TshirtSize;
   sliderSize?: string;
-  onChange: (value: number) => void;
   label?: string;
   icon?: string;
   color?: string;
   className?: string;
+  onChange: (value: number) => void;
 };
 
 export const Slider = ({
   range,
   step,
   initial,
-  size = "md",
+  size = "sm",
   sliderSize = "100px",
-  onChange,
   label,
   icon,
   color = "var(--color-dark-xxl)",
   className,
+  onChange,
 }: SliderProps) => {
   const {
     trackRef,

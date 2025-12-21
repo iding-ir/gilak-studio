@@ -1,5 +1,7 @@
 .header {
   all: unset;
+  flex-grow: 1;
+  font-size: 0.8em;
   padding: calc(var(--prop-spacing-size) / 2) var(--prop-spacing-size);
   color: var(--color-dark-md);
   height: var(--prop-control-size);

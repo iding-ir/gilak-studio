@@ -23,7 +23,7 @@ export interface IconProps extends Omit<
 export const Icon = ({
   icon,
   size = "md",
-  color = "var(--color-dark-xxl)",
+  color = "var(--color-dark-xxxl)",
   backgroundColor = "var(--color-light-xxxs)",
   className,
   rounded = true,

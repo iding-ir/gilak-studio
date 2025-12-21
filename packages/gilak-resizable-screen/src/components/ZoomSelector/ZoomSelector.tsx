@@ -20,7 +20,6 @@ export const ZoomSelector = () => {
       step={25}
       initial={zoomLevel}
       icon={IconZoom}
-      size="md"
       onChange={(v) => handleClick(v as ZoomLevel)}
     />
   );

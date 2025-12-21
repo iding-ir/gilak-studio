@@ -4,9 +4,9 @@ import { Icon, Slider } from "@gilak/components";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import IconBrush from "../../assets/icon-brush.svg?url";
-import IconBucketUrl from "../../assets/icon-bucket.svg?url";
-import IconColorPickerUrl from "../../assets/icon-eyedropper.svg?url";
-import IconPaint from "../../assets/icon-paint.svg?url";
+import IconColorPicker from "../../assets/icon-eyedropper.svg?url";
+import IconFillTool from "../../assets/icon-paint.svg?url";
+import IconSwatch from "../../assets/icon-palette.svg?url";
 import { COLOR_PALETTE } from "../../constants";
 import {
   selectBrushSize,
@@ -32,8 +32,8 @@ export const Tools = () => {
   const dispatch = useAppDispatch();
   const brushSize = useAppSelector(selectBrushSize);
   const selectedTool = useAppSelector(selectTool);
-  const selectedColor = useAppSelector(selectColor);
-  const selectedBackgroundColor = useAppSelector(selectBackgroundColor);
+  const color = useAppSelector(selectColor);
+  const backgroundColor = useAppSelector(selectBackgroundColor);
   const tolerance = useAppSelector(selectTolerance);
 
   const handleToggleTool = (tool: ToolType) => {
@@ -61,9 +61,9 @@ export const Tools = () => {
       <li>
         <ColorSwatch
           size="md"
-          icon={IconBucketUrl}
-          color={selectedColor}
-          backgroundColor={selectedBackgroundColor}
+          icon={IconSwatch}
+          color={color}
+          backgroundColor={backgroundColor}
           colors={COLOR_PALETTE}
           onChangeColor={handleChangeColor}
           onChangeBackgroundColor={handleChangeBackgroundColor}
@@ -71,7 +71,7 @@ export const Tools = () => {
       </li>
       <li>
         <Icon
-          icon={IconColorPickerUrl}
+          icon={IconColorPicker}
           size="md"
           selected={selectedTool === "COLOR_PICKER"}
           onClick={() => handleToggleTool("COLOR_PICKER")}
@@ -79,7 +79,7 @@ export const Tools = () => {
       </li>
       <li>
         <Icon
-          icon={IconPaint}
+          icon={IconFillTool}
           size="md"
           selected={selectedTool === "FILL"}
           onClick={() => handleToggleTool("FILL")}
@@ -87,7 +87,7 @@ export const Tools = () => {
       </li>
       <li>
         <Slider
-          range={[0, 255]}
+          range={[0, 100]}
           step={5}
           initial={tolerance}
           label="Tolerance:"

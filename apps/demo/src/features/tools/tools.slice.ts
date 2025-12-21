@@ -10,7 +10,7 @@ export interface ToolsState {
 
 const initialState: ToolsState = {
   selected: undefined,
-  tolerance: 50,
+  tolerance: 10,
 };
 
 export const toolsSlice = createAppSlice({
