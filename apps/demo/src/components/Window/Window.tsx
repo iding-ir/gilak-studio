@@ -13,8 +13,16 @@ import {
   selectBrushShape,
   selectBrushSize,
 } from "../../features/brush/brush-slice";
-import { selectColor, setColor } from "../../features/color/color-slice";
-import { selectTool, unsetTool } from "../../features/tools/tools.slice";
+import {
+  selectBackgroundColor,
+  selectColor,
+  setColor,
+} from "../../features/color/color-slice";
+import {
+  selectTolerance,
+  selectTool,
+  unsetTool,
+} from "../../features/tools/tools.slice";
 
 export type WindowProps = {
   id: string;
@@ -28,6 +36,8 @@ export const Window = ({ id, title }: WindowProps) => {
   const brushShape = useAppSelector(selectBrushShape);
   const selectedTool = useAppSelector(selectTool);
   const color = useAppSelector(selectColor);
+  const backgroundColor = useAppSelector(selectBackgroundColor);
+  const tolerance = useAppSelector(selectTolerance);
 
   const handleSelectColor = (color: string) => {
     dispatch(unsetTool());
@@ -51,10 +61,13 @@ export const Window = ({ id, title }: WindowProps) => {
           >
             <DrawingCanvas
               ref={canvasRef}
-              enabled={selectedTool === "BRUSH"}
+              enabledDrawing={selectedTool === "BRUSH"}
+              enabledFill={selectedTool === "FILL"}
               color={color}
+              backgroundColor={backgroundColor}
               brushSize={brushSize}
               brushShape={brushShape}
+              tolerance={tolerance}
             />
           </MagnifierProvider>
         </ResizableScreen>

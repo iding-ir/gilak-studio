@@ -1,43 +1,49 @@
 import type { RefObject } from "react";
 
-import { useDrawing } from "../../hooks";
-import type { BrushShape, BrushSize } from "../../types";
+import { type BrushShape, type BrushSize } from "../../types";
 import type { CanvasProps } from "../Canvas";
 import { Canvas } from "../Canvas";
-import { Cursor } from "../Cursor";
+import { DrawingTool } from "../DrawingTool";
+import { FillTool } from "../FillTool";
 
 export type DrawingCanvasProps = CanvasProps & {
   ref: RefObject<HTMLCanvasElement | null>;
-  enabled: boolean;
+  enabledDrawing: boolean;
+  enabledFill: boolean;
   color: string;
+  backgroundColor: string;
   brushSize: BrushSize;
   brushShape: BrushShape;
+  tolerance: number;
 };
 
 export const DrawingCanvas = ({
   ref,
-  enabled,
+  enabledDrawing,
+  enabledFill,
   color,
+  backgroundColor,
   brushSize,
   brushShape,
+  tolerance,
   ...props
 }: DrawingCanvasProps) => {
-  useDrawing({
-    ref,
-    enabled,
-    color,
-    brushSize,
-    brushShape,
-  });
-
   return (
-    <Cursor
-      enabled={enabled}
+    <DrawingTool
+      ref={ref}
+      enabled={enabledDrawing}
       color={color}
       brushSize={brushSize}
       brushShape={brushShape}
     >
-      <Canvas ref={ref} {...props} />
-    </Cursor>
+      <FillTool
+        ref={ref}
+        enabled={enabledFill}
+        color={backgroundColor}
+        tolerance={tolerance}
+      >
+        <Canvas ref={ref} {...props} />
+      </FillTool>
+    </DrawingTool>
   );
 };

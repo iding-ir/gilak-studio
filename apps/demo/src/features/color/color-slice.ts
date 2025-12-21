@@ -9,8 +9,8 @@ export interface ColorState {
 }
 
 const initialState: ColorState = {
-  color: COLOR_PALETTE[1],
-  backgroundColor: COLOR_PALETTE[0],
+  color: COLOR_PALETTE[2],
+  backgroundColor: COLOR_PALETTE[4],
 };
 
 export const colorSlice = createAppSlice({

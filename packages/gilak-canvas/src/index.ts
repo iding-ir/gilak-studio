@@ -9,12 +9,16 @@ export { RandomCanvas } from "./components/RandomCanvas";
 // Hooks
 export type { UseDrawingProps } from "./hooks/useDrawing";
 export { useDrawing } from "./hooks/useDrawing";
+export type { UseFillArgs } from "./hooks/useFill";
+export { useFill } from "./hooks/useFill";
 
 // Methods
 export type { DrawBrushProps } from "./methods/draw-brush";
 export { drawBrush } from "./methods/draw-brush";
 export type { EffectType } from "./methods/draw-random-effect";
 export { drawRandomEffect } from "./methods/draw-random-effect";
+export type { FillAreaArgs } from "./methods/fill-area";
+export { fillArea } from "./methods/fill-area";
 
 // Types
 export type { BrushShape, BrushSize } from "./types";

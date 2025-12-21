@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import IconBrush from "../../assets/icon-brush.svg?url";
 import IconBucketUrl from "../../assets/icon-bucket.svg?url";
 import IconColorPickerUrl from "../../assets/icon-eyedropper.svg?url";
+import IconPaint from "../../assets/icon-paint.svg?url";
 import { COLOR_PALETTE } from "../../constants";
 import {
   selectBrushSize,
@@ -17,7 +18,12 @@ import {
   setBackgroundColor,
   setColor,
 } from "../../features/color/color-slice";
-import { selectTool, toggleTool } from "../../features/tools/tools.slice";
+import {
+  selectTolerance,
+  selectTool,
+  setTolerance,
+  toggleTool,
+} from "../../features/tools/tools.slice";
 import type { ToolType } from "../../features/tools/types";
 import { BrushShapeDropdown } from "../BrushShapeDropdown/BrushShapeDropdown";
 import styles from "./Tools.module.scss";
@@ -28,6 +34,7 @@ export const Tools = () => {
   const selectedTool = useAppSelector(selectTool);
   const selectedColor = useAppSelector(selectColor);
   const selectedBackgroundColor = useAppSelector(selectBackgroundColor);
+  const tolerance = useAppSelector(selectTolerance);
 
   const handleToggleTool = (tool: ToolType) => {
     dispatch(toggleTool(tool));
@@ -43,6 +50,10 @@ export const Tools = () => {
 
   const handleChangeBackgroundColor = (color: string) => {
     dispatch(setBackgroundColor(color));
+  };
+
+  const handleToleranceChange = (value: number) => {
+    dispatch(setTolerance(value));
   };
 
   return (
@@ -64,6 +75,23 @@ export const Tools = () => {
           size="md"
           selected={selectedTool === "COLOR_PICKER"}
           onClick={() => handleToggleTool("COLOR_PICKER")}
+        />
+      </li>
+      <li>
+        <Icon
+          icon={IconPaint}
+          size="md"
+          selected={selectedTool === "FILL"}
+          onClick={() => handleToggleTool("FILL")}
+        />
+      </li>
+      <li>
+        <Slider
+          range={[0, 255]}
+          step={5}
+          initial={tolerance}
+          label="Tolerance:"
+          onChange={(v) => handleToleranceChange(v as number)}
         />
       </li>
       <li>

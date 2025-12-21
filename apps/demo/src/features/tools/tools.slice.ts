@@ -5,10 +5,12 @@ import type { ToolType } from "./types";
 
 export interface ToolsState {
   selected?: ToolType;
+  tolerance: number;
 }
 
 const initialState: ToolsState = {
   selected: undefined,
+  tolerance: 50,
 };
 
 export const toolsSlice = createAppSlice({
@@ -26,12 +28,19 @@ export const toolsSlice = createAppSlice({
     unsetTool: create.reducer((state) => {
       state.selected = undefined;
     }),
+    setTolerance: create.reducer(
+      (state, { payload }: PayloadAction<number>) => {
+        state.tolerance = payload;
+      },
+    ),
   }),
   selectors: {
     selectTool: ({ selected }) => selected,
+    selectTolerance: ({ tolerance }) => tolerance,
   },
 });
 
-export const { setTool, toggleTool, unsetTool } = toolsSlice.actions;
+export const { setTool, toggleTool, unsetTool, setTolerance } =
+  toolsSlice.actions;
 
-export const { selectTool } = toolsSlice.selectors;
+export const { selectTool, selectTolerance } = toolsSlice.selectors;
