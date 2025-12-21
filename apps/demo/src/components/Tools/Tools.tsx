@@ -1,7 +1,6 @@
 import type { BrushSize } from "@gilak/canvas";
-import IconBrushSizes from "@gilak/canvas/assets/brush-circle-empty.svg?url";
 import { ColorSwatch } from "@gilak/color-swatch";
-import { Dropdown, Icon } from "@gilak/components";
+import { Icon, Slider } from "@gilak/components";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import IconBrush from "../../assets/icon-brush.svg?url";
@@ -16,7 +15,6 @@ import { selectColor, setColor } from "../../features/color/color-slice";
 import { selectTool, toggleTool } from "../../features/tools/tools.slice";
 import type { ToolType } from "../../features/tools/types";
 import { BrushShapeDropdown } from "../BrushShapeDropdown/BrushShapeDropdown";
-import { BrushSizes } from "../BrushSizes";
 import styles from "./Tools.module.scss";
 
 export const Tools = () => {
@@ -67,12 +65,13 @@ export const Tools = () => {
         <BrushShapeDropdown />
       </li>
       <li>
-        <Dropdown
-          position="bottom"
-          trigger={<Icon icon={IconBrushSizes} size="md" interactive />}
-        >
-          <BrushSizes brush={brushSize} onChange={handleBrushSizeChange} />
-        </Dropdown>
+        <Slider
+          range={[1, 10]}
+          step={1}
+          initial={brushSize}
+          label="Brush Size:"
+          onChange={(v) => handleBrushSizeChange(v as BrushSize)}
+        />
       </li>
     </ul>
   );
