@@ -1,14 +1,13 @@
 .header {
   all: unset;
   flex-grow: 1;
-  font-size: 0.8em;
-  padding: calc(var(--prop-spacing-size) / 2) var(--prop-spacing-size);
+  font-size: var(--font-size-sm);
   color: var(--color-dark-md);
-  height: var(--prop-control-size);
+  height: var(--icon-sm);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   background: var(--color-light-md);
   transition: all var(--transition-sm);
   cursor: pointer;

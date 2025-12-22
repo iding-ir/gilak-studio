@@ -1,11 +1,9 @@
 import clsx from "clsx";
 import type { ButtonHTMLAttributes } from "react";
 
-import type { TshirtSize } from "../../types";
 import styles from "./Button.module.scss";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  size?: TshirtSize;
   variant?: "primary" | "secondary" | "ghost";
   rounded?: boolean;
   fullWidth?: boolean;
@@ -14,7 +12,6 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export const Button = ({
   children,
-  size = "md",
   variant = "primary",
   rounded = true,
   fullWidth = false,
@@ -24,7 +21,7 @@ export const Button = ({
   return (
     <button
       {...props}
-      className={clsx(styles.root, styles[size], styles[variant], className, {
+      className={clsx(styles.root, styles[variant], className, {
         [styles.rounded]: rounded,
         [styles.fullWidth]: fullWidth,
       })}

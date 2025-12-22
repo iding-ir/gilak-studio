@@ -38,12 +38,7 @@ export const Dialog = ({
         <header className={styles.header}>
           <div className={styles.title}>{title}</div>
           <div className={styles.toolbar}>
-            <Icon
-              icon={IconClose}
-              size="md"
-              className={styles.icon}
-              onClick={onClose}
-            />
+            <Icon icon={IconClose} className={styles.icon} onClick={onClose} />
           </div>
         </header>
 

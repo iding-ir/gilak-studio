@@ -1,20 +1,18 @@
+import type { Direction } from "@gilak/components/types";
 import clsx from "clsx";
-import { type PointerEvent, type ReactNode } from "react";
+import type { ReactNode } from "react";
 
 import { Dropdown } from "../DropDown";
+import { Text } from "../Text";
 import { Child } from "./Child";
-import { Label } from "./Label";
 import styles from "./Menu.module.scss";
-
-export type MenuDirection = "row" | "column";
 
 export type MenuProps = {
   children?: ReactNode;
   root?: boolean;
   label: string;
-  direction?: MenuDirection;
+  direction?: Direction;
   open?: boolean;
-  href?: string;
   closeOnClickInside?: boolean;
   onClick?: () => void;
 };
@@ -25,15 +23,9 @@ export const Menu = ({
   label,
   direction = "column",
   open = false,
-  href,
   closeOnClickInside,
   onClick,
 }: MenuProps) => {
-  const handleClick = (event: PointerEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
-    onClick?.();
-  };
-
   const className = clsx(styles.root, {
     [styles.firstLevel]: root,
   });
@@ -51,7 +43,7 @@ export const Menu = ({
   if (!children) {
     return (
       <div className={className}>
-        <Label label={label} href={href} onClick={handleClick} />
+        <Text text={label} frameless onClick={onClick} />
       </div>
     );
   }
@@ -60,7 +52,7 @@ export const Menu = ({
     <div className={className}>
       <Dropdown
         openDefault={open}
-        trigger={<Label label={label} href={href} onClick={handleClick} />}
+        trigger={<Text text={label} frameless onClick={onClick} />}
         closeOnClickInside={closeOnClickInside}
       >
         <Child direction={direction} root={root}>

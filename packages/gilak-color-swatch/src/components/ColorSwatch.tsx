@@ -1,12 +1,4 @@
-import {
-  Dropdown,
-  Icon,
-  Input,
-  List,
-  Tab,
-  Tabs,
-  type TshirtSize,
-} from "@gilak/components";
+import { Dropdown, Icon, Input, List, Tab, Tabs } from "@gilak/components";
 import { getContrastColor } from "@gilak/utils";
 
 import IconEmpty from "../assets/icon-empty.svg?url";
@@ -14,7 +6,6 @@ import styles from "./ColorSwatch.module.scss";
 
 export type ColorSwatchProps = {
   icon: string;
-  size?: TshirtSize;
   color: string;
   backgroundColor: string;
   colors: string[];
@@ -24,7 +15,6 @@ export type ColorSwatchProps = {
 
 export const ColorSwatch = ({
   icon,
-  size = "md",
   color,
   backgroundColor,
   colors,
@@ -36,12 +26,7 @@ export const ColorSwatch = ({
       <Dropdown
         position="bottom-right"
         trigger={
-          <Icon
-            icon={icon}
-            size={size}
-            color={color}
-            backgroundColor={backgroundColor}
-          />
+          <Icon icon={icon} color={color} backgroundColor={backgroundColor} />
         }
       >
         <Tabs>
@@ -64,7 +49,6 @@ export const ColorSwatch = ({
               items={colors.map((c) => (
                 <Icon
                   icon={IconEmpty}
-                  size={size}
                   color={c}
                   backgroundColor={c}
                   selected={color === c}
@@ -92,7 +76,6 @@ export const ColorSwatch = ({
               items={colors.map((c) => (
                 <Icon
                   icon={IconEmpty}
-                  size={size}
                   color={c}
                   backgroundColor={c}
                   selected={backgroundColor === c}

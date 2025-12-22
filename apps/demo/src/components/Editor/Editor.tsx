@@ -1,5 +1,3 @@
-import { DialogPortal } from "@gilak/components";
-
 import { Navigation } from "../Navigation";
 import { Settings } from "../Settings";
 import { Tools } from "../Tools";
@@ -22,7 +20,6 @@ export const Editor = () => {
       </div>
 
       <Settings />
-      <DialogPortal />
     </>
   );
 };

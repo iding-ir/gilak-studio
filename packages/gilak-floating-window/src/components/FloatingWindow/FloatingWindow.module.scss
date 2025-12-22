@@ -40,7 +40,7 @@
     flex-grow: 1;
     padding: var(--spacing-sm);
     color: var(--color-dark-sm);
-    background-color: var(--color-light-xxxs);
+    background-color: var(--color-light-xl);
     overflow: auto;
     @include mixins.scrollbar();
   }

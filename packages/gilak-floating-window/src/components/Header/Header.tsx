@@ -53,24 +53,16 @@ export const Header = ({
       <h3 className={styles.title}>{title}</h3>
       <div className={styles.toolbar}>
         {maximizable && status !== "maximized" && (
-          <Icon
-            icon={IconMaximize}
-            size="sm"
-            onClick={maximizeFloatingWindow}
-          />
+          <Icon icon={IconMaximize} onClick={maximizeFloatingWindow} />
         )}
         {maximizable && status === "maximized" && (
-          <Icon icon={IconMaximized} size="sm" onClick={openFloatingWindow} />
+          <Icon icon={IconMaximized} onClick={openFloatingWindow} />
         )}
         {minimizable && status !== "minimized" && (
-          <Icon
-            icon={IconMinimize}
-            size="sm"
-            onClick={minimizeFloatingWindow}
-          />
+          <Icon icon={IconMinimize} onClick={minimizeFloatingWindow} />
         )}
         {minimizable && status === "minimized" && (
-          <Icon icon={IconMinimized} size="sm" onClick={openFloatingWindow} />
+          <Icon icon={IconMinimized} onClick={openFloatingWindow} />
         )}
       </div>
     </header>

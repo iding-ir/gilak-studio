@@ -1,6 +1,7 @@
-import type { BrushSize } from "@gilak/canvas";
+import type { BrushShape, BrushSize } from "@gilak/canvas";
+import { brushShapeIcons } from "@gilak/canvas/types/brushShape";
 import { ColorSwatch } from "@gilak/color-swatch";
-import { Icon, Slider } from "@gilak/components";
+import { Dropdown, Icon, Slider } from "@gilak/components";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import IconBrush from "../../assets/icon-brush.svg?url";
@@ -9,7 +10,9 @@ import IconFillTool from "../../assets/icon-paint.svg?url";
 import IconSwatch from "../../assets/icon-palette.svg?url";
 import { COLOR_PALETTE } from "../../constants";
 import {
+  selectBrushShape,
   selectBrushSize,
+  setBrushShape,
   setBrushSize,
 } from "../../features/brush/brush-slice";
 import {
@@ -25,7 +28,7 @@ import {
   toggleTool,
 } from "../../features/tools/tools.slice";
 import type { ToolType } from "../../features/tools/types";
-import { BrushShapeDropdown } from "../BrushShapeDropdown/BrushShapeDropdown";
+import { BrushShapes } from "../BrushShapes";
 import styles from "./Tools.module.scss";
 
 export const Tools = () => {
@@ -35,6 +38,11 @@ export const Tools = () => {
   const color = useAppSelector(selectColor);
   const backgroundColor = useAppSelector(selectBackgroundColor);
   const tolerance = useAppSelector(selectTolerance);
+  const brushShape = useAppSelector(selectBrushShape);
+
+  const handleBrushShapeChange = (shape: BrushShape) => {
+    dispatch(setBrushShape(shape));
+  };
 
   const handleToggleTool = (tool: ToolType) => {
     dispatch(toggleTool(tool));
@@ -60,7 +68,6 @@ export const Tools = () => {
     <ul className={styles.root}>
       <li>
         <ColorSwatch
-          size="md"
           icon={IconSwatch}
           color={color}
           backgroundColor={backgroundColor}
@@ -72,15 +79,37 @@ export const Tools = () => {
       <li>
         <Icon
           icon={IconColorPicker}
-          size="md"
           selected={selectedTool === "COLOR_PICKER"}
           onClick={() => handleToggleTool("COLOR_PICKER")}
         />
       </li>
       <li>
         <Icon
+          icon={IconBrush}
+          selected={selectedTool === "BRUSH"}
+          onClick={() => handleToggleTool("BRUSH")}
+        />
+      </li>
+      <li>
+        <Dropdown
+          position="bottom"
+          trigger={<Icon icon={brushShapeIcons[brushShape]} interactive />}
+        >
+          <BrushShapes brush={brushShape} onChange={handleBrushShapeChange} />
+        </Dropdown>
+      </li>
+      <li>
+        <Slider
+          range={[1, 10]}
+          step={1}
+          initial={brushSize}
+          label="Brush Size"
+          onChange={(value) => handleBrushSizeChange(value as BrushSize)}
+        />
+      </li>
+      <li>
+        <Icon
           icon={IconFillTool}
-          size="md"
           selected={selectedTool === "FILL"}
           onClick={() => handleToggleTool("FILL")}
         />
@@ -90,28 +119,8 @@ export const Tools = () => {
           range={[0, 100]}
           step={5}
           initial={tolerance}
-          label="Tolerance:"
-          onChange={(v) => handleToleranceChange(v as number)}
-        />
-      </li>
-      <li>
-        <Icon
-          icon={IconBrush}
-          size="md"
-          selected={selectedTool === "BRUSH"}
-          onClick={() => handleToggleTool("BRUSH")}
-        />
-      </li>
-      <li>
-        <BrushShapeDropdown />
-      </li>
-      <li>
-        <Slider
-          range={[1, 10]}
-          step={1}
-          initial={brushSize}
-          label="Brush Size:"
-          onChange={(v) => handleBrushSizeChange(v as BrushSize)}
+          label="Tolerance"
+          onChange={(value) => handleToleranceChange(value as number)}
         />
       </li>
     </ul>

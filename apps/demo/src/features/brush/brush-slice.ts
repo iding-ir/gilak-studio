@@ -11,7 +11,7 @@ export interface Brush {
 
 export const DEFAULT_BRUSH: Brush = {
   type: "CIRCLE",
-  size: 2,
+  size: 4,
 };
 
 export interface BrushState {

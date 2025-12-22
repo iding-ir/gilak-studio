@@ -1,6 +1,5 @@
-import type { TshirtSize } from "@gilak/components/types";
 import clsx from "clsx";
-import type { CSSProperties } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
 import { Icon } from "../Icon";
 import { Text } from "../Text";
@@ -11,26 +10,22 @@ export type SliderProps = {
   range: [number, number];
   step: number;
   initial: number;
-  size?: TshirtSize;
-  sliderSize?: string;
   label?: string;
   icon?: string;
-  color?: string;
   className?: string;
   onChange: (value: number) => void;
+  valueRenderer?: (value: number) => ReactNode;
 };
 
 export const Slider = ({
   range,
   step,
   initial,
-  size = "sm",
-  sliderSize = "100px",
   label,
   icon,
-  color = "var(--color-dark-xxl)",
   className,
   onChange,
+  valueRenderer = (value) => value,
 }: SliderProps) => {
   const {
     trackRef,
@@ -41,23 +36,11 @@ export const Slider = ({
   } = useSlider({ range, step, initial, onChange });
 
   return (
-    <div
-      className={clsx(styles.root, className)}
-      style={
-        {
-          "--prop-slider-size": sliderSize,
-          "--prop-icon-size": `var(--icon-${size})`,
-          "--prop-font-size": `var(--font-${size})`,
-          "--prop-spacing-size": `var(--spacing-${size})`,
-        } as CSSProperties
-      }
-    >
+    <div className={clsx(styles.root, className)}>
       {icon && (
         <Icon
-          color={color}
           backgroundColor="transparent"
           icon={icon}
-          size={size}
           frameless={true}
           interactive={false}
         />
@@ -65,9 +48,7 @@ export const Slider = ({
 
       {label && (
         <Text
-          color={color}
           backgroundColor="transparent"
-          size={size}
           text={label}
           frameless={true}
         ></Text>
@@ -81,7 +62,7 @@ export const Slider = ({
         <div
           className={styles.fill}
           style={{
-            width: `${((value - (range?.[0] ?? 0)) / ((range?.[1] ?? 100) - (range?.[0] ?? 0) || 1)) * 100}%`,
+            width: `${((value - range[0]) / (range[1] - range[0] || 1)) * 100}%`,
           }}
         />
         <div
@@ -89,7 +70,7 @@ export const Slider = ({
           onPointerDown={handleThumbPointerDown}
           style={thumbStyle as CSSProperties}
         >
-          {value}
+          {valueRenderer(value)}
         </div>
       </div>
     </div>

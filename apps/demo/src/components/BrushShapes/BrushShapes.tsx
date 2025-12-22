@@ -8,7 +8,7 @@ import IconSquare from "@gilak/canvas/assets/brush-square.svg?url";
 import IconStar from "@gilak/canvas/assets/brush-star.svg?url";
 import IconTriangle from "@gilak/canvas/assets/brush-triangle.svg?url";
 import IconVerical from "@gilak/canvas/assets/brush-vertical.svg?url";
-import { Icon, List } from "@gilak/components";
+import { Icon, type IconProps, List } from "@gilak/components";
 
 export const BrushShapes = ({
   brush,
@@ -17,6 +17,7 @@ export const BrushShapes = ({
   brush: BrushShape;
   onChange: (brush: BrushShape) => void;
 }) => {
+  const iconProps: Partial<IconProps> = { frameless: true };
   return (
     <List
       direction="column"
@@ -24,57 +25,57 @@ export const BrushShapes = ({
       theme="light"
       items={[
         <Icon
+          {...iconProps}
           selected={brush === "CIRCLE"}
           icon={IconCircle}
-          size="sm"
           onClick={() => onChange("CIRCLE")}
         />,
         <Icon
+          {...iconProps}
           selected={brush === "SQUARE"}
           icon={IconSquare}
-          size="sm"
           onClick={() => onChange("SQUARE")}
         />,
         <Icon
+          {...iconProps}
           selected={brush === "DIAMOND"}
           icon={IconDisamond}
-          size="sm"
           onClick={() => onChange("DIAMOND")}
         />,
         <Icon
+          {...iconProps}
           selected={brush === "TRIANGLE"}
           icon={IconTriangle}
-          size="sm"
           onClick={() => onChange("TRIANGLE")}
         />,
         <Icon
+          {...iconProps}
           selected={brush === "STAR"}
           icon={IconStar}
-          size="sm"
           onClick={() => onChange("STAR")}
         />,
         <Icon
+          {...iconProps}
           selected={brush === "HORIZONTAL"}
           icon={IconHorizontal}
-          size="sm"
           onClick={() => onChange("HORIZONTAL")}
         />,
         <Icon
+          {...iconProps}
           selected={brush === "VERTICAL"}
           icon={IconVerical}
-          size="sm"
           onClick={() => onChange("VERTICAL")}
         />,
         <Icon
+          {...iconProps}
           selected={brush === "BACKSLASH"}
           icon={IconBackslash}
-          size="sm"
           onClick={() => onChange("BACKSLASH")}
         />,
         <Icon
+          {...iconProps}
           selected={brush === "SLASH"}
           icon={IconSlash}
-          size="sm"
           onClick={() => onChange("SLASH")}
         />,
       ]}

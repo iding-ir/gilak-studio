@@ -1,5 +1,4 @@
-import type { TshirtSize } from "@gilak/components/types";
-import type { CSSProperties, ReactElement, ReactNode } from "react";
+import type { ReactElement, ReactNode } from "react";
 import { Children } from "react";
 
 import { Body } from "./components/Body";
@@ -10,16 +9,10 @@ import { useTabs } from "./useTabs";
 export type TabsProps = {
   children: ReactNode;
   defaultIndex?: number;
-  size?: TshirtSize;
   onChange?: (index: number) => void;
 };
 
-export const Tabs = ({
-  children,
-  defaultIndex,
-  size = "md",
-  onChange,
-}: TabsProps) => {
+export const Tabs = ({ children, defaultIndex, onChange }: TabsProps) => {
   const { active, setIndex } = useTabs({ defaultIndex, onChange });
 
   const tabs = Children.toArray(children).filter(Boolean) as ReactElement<{
@@ -29,16 +22,7 @@ export const Tabs = ({
   }>[];
 
   return (
-    <div
-      className={styles.root}
-      style={
-        {
-          "--prop-control-size": `var(--icon-size-${size})`,
-          "--prop-font-size": `var(--font-size-${size})`,
-          "--prop-spacing-size": `var(--spacing-${size})`,
-        } as CSSProperties
-      }
-    >
+    <div className={styles.root}>
       <div className={styles.headers}>
         {tabs.map(({ props }, id) => (
           <Header

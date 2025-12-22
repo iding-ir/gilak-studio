@@ -4,10 +4,10 @@
     "navigation"
     "header"
     "main";
+  grid-template-columns: 1fr;
   grid-template-rows: auto auto 1fr;
   width: 100%;
   height: 100%;
-  background-color: var(--color-dark-xxxs);
 
   .nav {
     grid-area: navigation;
@@ -15,7 +15,7 @@
     flex-direction: row;
     justify-content: space-between;
     padding: var(--spacing-sm);
-    background-color: var(--color-primary-md);
+    background-color: var(--color-primary-xxl);
   }
 
   .header {
@@ -30,9 +30,8 @@
     grid-area: main;
     display: flex;
     position: relative;
-    width: 100%;
-    height: 100%;
     padding: var(--spacing-sm);
+    background-color: var(--color-dark-xxl);
     overflow: hidden;
   }
 }

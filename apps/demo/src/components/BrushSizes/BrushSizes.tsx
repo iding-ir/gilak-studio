@@ -16,7 +16,6 @@ export const BrushSizes = ({
       items={BRUSH_SIZES.map((size) => (
         <Text
           selected={brush === size}
-          size="xs"
           frameless
           onClick={() => onChange(size)}
           text={size.toString()}

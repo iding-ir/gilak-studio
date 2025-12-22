@@ -2,7 +2,6 @@ import clsx from "clsx";
 import type { HTMLAttributes } from "react";
 import React from "react";
 
-import type { TshirtSize } from "../../types";
 import styles from "./Icon.module.scss";
 
 export interface IconProps extends Omit<
@@ -10,7 +9,6 @@ export interface IconProps extends Omit<
   "color"
 > {
   icon: string;
-  size?: TshirtSize;
   color?: string;
   backgroundColor?: string;
   className?: string;
@@ -22,7 +20,6 @@ export interface IconProps extends Omit<
 
 export const Icon = ({
   icon,
-  size = "md",
   color = "var(--color-dark-xxxl)",
   backgroundColor = "var(--color-light-xxxs)",
   className,
@@ -40,7 +37,7 @@ export const Icon = ({
 
   return (
     <i
-      className={clsx(styles.root, styles[size], className, {
+      className={clsx(styles.root, className, {
         [styles.rounded]: rounded,
         [styles.selected]: selected,
         [styles.frameless]: frameless,

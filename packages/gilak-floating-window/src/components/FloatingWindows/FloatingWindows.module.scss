@@ -14,10 +14,8 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: var(--spacing-xs);
-    padding: var(--spacing-xs);
+    gap: var(--spacing-sm);
     align-items: center;
     border-radius: var(--radius-md);
-    background-color: var(--color-light-xxl);
   }
 }

@@ -1,14 +1,11 @@
-@use "@gilak/stylist/scss" as *;
-
 .root {
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   position: relative;
-  color: var(--fg-color);
+  font-size: var(--font-size-sm);
   padding: var(--spacing-xs) var(--spacing-sm);
-  background-color: var(--bg-color);
   box-shadow: var(--shadow-sm);
 
   &.frameless {
@@ -19,61 +16,5 @@
   &.selected {
     outline: 2px solid var(--color-primary-lg);
     outline-offset: 2px;
-  }
-
-  &.xxs {
-    height: var(--icon-xxs);
-
-    &.rounded {
-      border-radius: var(--radius-xxs);
-    }
-  }
-
-  &.xs {
-    height: var(--icon-xs);
-
-    &.rounded {
-      border-radius: var(--radius-xs);
-    }
-  }
-
-  &.sm {
-    height: var(--icon-sm);
-
-    &.rounded {
-      border-radius: var(--radius-sm);
-    }
-  }
-
-  &.md {
-    height: var(--icon-md);
-
-    &.rounded {
-      border-radius: var(--radius-md);
-    }
-  }
-
-  &.lg {
-    height: var(--icon-lg);
-
-    &.rounded {
-      border-radius: var(--radius-lg);
-    }
-  }
-
-  &.xl {
-    height: var(--icon-xl);
-
-    &.rounded {
-      border-radius: var(--radius-xl);
-    }
-  }
-
-  &.xxl {
-    height: var(--icon-xxl);
-
-    &.rounded {
-      border-radius: var(--radius-xxl);
-    }
   }
 }

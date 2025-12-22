@@ -26,7 +26,7 @@ export const Navigation = () => {
   };
 
   return (
-    <Menu label="" root direction="row" open>
+    <Menu root open direction="row" label="">
       <Menu label="File" closeOnClickInside>
         <Menu label="New" onClick={handleAddWindow} />
         <Menu label="Open" />

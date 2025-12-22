@@ -1,3 +1,4 @@
+import type { Direction, Variant } from "@gilak/components/types";
 import clsx from "clsx";
 import type { ReactNode } from "react";
 
@@ -5,10 +6,10 @@ import styles from "./List.module.scss";
 
 export type ListProps = {
   items: ReactNode[];
-  direction?: "row" | "column";
-  count?: 1 | 2 | 3 | 4;
+  direction?: Direction;
+  count?: number;
   frameless?: boolean;
-  theme?: "primary" | "light";
+  theme?: Variant;
 };
 
 export const List = ({
@@ -22,10 +23,13 @@ export const List = ({
     <ul
       className={clsx(styles.list, styles[theme], styles[direction], {
         [styles.frameless]: frameless,
-        [styles.count_2]: count === 2,
-        [styles.count_3]: count === 3,
-        [styles.count_4]: count === 4,
       })}
+      style={{
+        gridTemplateColumns:
+          direction === "column" ? `repeat(${count}, max-content)` : undefined,
+        gridTemplateRows:
+          direction === "row" ? `repeat(${count}, max-content)` : undefined,
+      }}
     >
       {items.map((item, idx) => (
         <li key={idx} className={styles.item}>

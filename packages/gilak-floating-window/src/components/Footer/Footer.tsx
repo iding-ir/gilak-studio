@@ -27,7 +27,12 @@ export const Footer = ({
       {footer}
       {resizable && status !== "maximized" && (
         <div className={styles.resize} onPointerDown={onResizePointerDown}>
-          <Icon icon={IconResize} size="md" className={styles.icon} frameless />
+          <Icon
+            icon={IconResize}
+            className={styles.icon}
+            frameless
+            interactive
+          />
         </div>
       )}
     </footer>

@@ -21,6 +21,7 @@ export const ZoomSelector = () => {
       initial={zoomLevel}
       icon={IconZoom}
       onChange={(v) => handleClick(v as ZoomLevel)}
+      valueRenderer={(value) => `${value}%`}
     />
   );
 };

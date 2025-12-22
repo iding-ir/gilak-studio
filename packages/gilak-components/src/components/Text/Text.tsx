@@ -1,47 +1,37 @@
 import clsx from "clsx";
-import type { CSSProperties, HTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 
-import type { TshirtSize } from "../../types";
 import styles from "./Text.module.scss";
 
 export type TextProps = HTMLAttributes<HTMLDivElement> & {
   text: string;
   className?: string;
-  size?: TshirtSize;
   color?: string;
   backgroundColor?: string;
-  rounded?: boolean;
   selected?: boolean;
   frameless?: boolean;
+  onClick?: () => void;
 };
 
 export const Text = ({
   text,
   className,
-  size = "md",
   color = "inherit",
   backgroundColor = "inherit",
-  rounded = true,
   selected = false,
   frameless = false,
-  ...props
+  onClick,
 }: TextProps) => {
-  const rootStyles = {
-    "--fg-color": color,
-    "--bg-color": backgroundColor,
-  } as CSSProperties;
-
   return (
-    <i
-      className={clsx(styles.root, styles[size], className, {
-        [styles.rounded]: rounded,
+    <span
+      className={clsx(styles.root, className, {
         [styles.selected]: selected,
         [styles.frameless]: frameless,
       })}
-      {...props}
-      style={{ ...props.style, ...rootStyles }}
+      style={{ color, backgroundColor }}
+      onClick={onClick}
     >
       {text}
-    </i>
+    </span>
   );
 };
