@@ -16,7 +16,7 @@ export const Input = ({
   ref,
   className,
   error,
-  fullWidth,
+  fullWidth = true,
   label,
   rounded = true,
   ...props

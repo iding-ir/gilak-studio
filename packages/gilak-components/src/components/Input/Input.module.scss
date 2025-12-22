@@ -5,7 +5,6 @@
   grid-template-areas:
     "label"
     "input";
-  overflow: hidden;
 
   .text {
     grid-area: label;
@@ -18,13 +17,13 @@
 
   .input {
     grid-area: input;
-    all: unset;
     color: inherit;
     font-size: var(--font-size-md);
     width: 100%;
     line-height: var(--icon-md);
     padding: 0 calc(var(--spacing-md));
     box-shadow: var(--shadow-sm);
+    border: none;
     background-color: var(--color-light-xxs);
     outline: none;
 

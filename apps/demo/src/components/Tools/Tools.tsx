@@ -5,9 +5,9 @@ import { Dropdown, Icon, Slider } from "@gilak/components";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import IconBrush from "../../assets/icon-brush.svg?url";
-import IconColorPicker from "../../assets/icon-eyedropper.svg?url";
-import IconFillTool from "../../assets/icon-paint.svg?url";
-import IconSwatch from "../../assets/icon-palette.svg?url";
+import IconColorPicker from "../../assets/icon-color-picker.svg?url";
+import IconSwatch from "../../assets/icon-color-swatch.svg?url";
+import IconFillTool from "../../assets/icon-fill-tool.svg?url";
 import { COLOR_PALETTE } from "../../constants";
 import {
   selectBrushShape,
