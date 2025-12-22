@@ -1,0 +1,54 @@
+@use "@gilak/stylist/scss" as *;
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--info-bg, var(--color-primary-md));
+  color: var(--info-color, var(--color-light-xxxl));
+  border-radius: 50%;
+  box-shadow: var(--shadow-sm);
+  font-weight: var(--font-weight-md);
+  user-select: none;
+
+  .inner {
+    display: inline-block;
+    line-height: 1;
+  }
+
+  &.xxs {
+    width: var(--icon-xxs);
+    height: var(--icon-xxs);
+    font-size: var(--font-size-xxs);
+  }
+  &.xs {
+    width: var(--icon-xs);
+    height: var(--icon-xs);
+    font-size: var(--font-size-xs);
+  }
+  &.sm {
+    width: var(--icon-sm);
+    height: var(--icon-sm);
+    font-size: var(--font-size-sm);
+  }
+  &.md {
+    width: var(--icon-md);
+    height: var(--icon-md);
+    font-size: var(--font-size-md);
+  }
+  &.lg {
+    width: var(--icon-lg);
+    height: var(--icon-lg);
+    font-size: var(--font-size-lg);
+  }
+  &.xl {
+    width: var(--icon-xl);
+    height: var(--icon-xl);
+    font-size: var(--font-size-xl);
+  }
+  &.xxl {
+    width: var(--icon-xxl);
+    height: var(--icon-xxl);
+    font-size: var(--font-size-xxl);
+  }
+}

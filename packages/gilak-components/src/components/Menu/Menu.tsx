@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import type { PointerEvent, ReactNode } from "react";
+import { type PointerEvent, type ReactNode } from "react";
 
 import { Dropdown } from "../DropDown";
 import { Child } from "./Child";
@@ -15,6 +15,7 @@ export type MenuProps = {
   direction?: MenuDirection;
   open?: boolean;
   href?: string;
+  closeOnClickInside?: boolean;
   onClick?: () => void;
 };
 
@@ -25,6 +26,7 @@ export const Menu = ({
   direction = "column",
   open = false,
   href,
+  closeOnClickInside,
   onClick,
 }: MenuProps) => {
   const handleClick = (event: PointerEvent<HTMLAnchorElement>) => {
@@ -59,6 +61,7 @@ export const Menu = ({
       <Dropdown
         openDefault={open}
         trigger={<Label label={label} href={href} onClick={handleClick} />}
+        closeOnClickInside={closeOnClickInside}
       >
         <Child direction={direction} root={root}>
           {children}

@@ -1,6 +1,7 @@
 import { Menu } from "@gilak/components";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { openSettings } from "../../features/settings/settings-slice";
 import {
   addWindow,
   selectAllWindows,
@@ -20,13 +21,18 @@ export const Navigation = () => {
     document.documentElement.setAttribute("data-theme", theme);
   };
 
+  const handleClickSettings = () => {
+    dispatch(openSettings());
+  };
+
   return (
     <Menu label="" root direction="row" open>
-      <Menu label="File">
+      <Menu label="File" closeOnClickInside>
         <Menu label="New" onClick={handleAddWindow} />
         <Menu label="Open" />
+        <Menu label="Settings" onClick={handleClickSettings} />
       </Menu>
-      <Menu label="Theme">
+      <Menu label="Theme" closeOnClickInside>
         <Menu label="Light" onClick={() => handleChangeTheme("light")} />
         <Menu label="Dark" onClick={() => handleChangeTheme("dark")} />
       </Menu>

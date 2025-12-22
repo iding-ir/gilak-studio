@@ -1,16 +1,26 @@
 .label {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-rows: auto auto;
+  display: inline-grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
   grid-template-areas:
-    "label label"
-    "icon input";
+    "label"
+    "input";
+  gap: var(--spacing-xs);
   overflow: hidden;
+
+  &.withIcon {
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "icon label"
+      "icon input";
+  }
 
   .text {
     grid-area: label;
     font-weight: var(--font-weight-md);
-    color: inherit;
+    color: var(--color-dark-lg);
+    cursor: pointer;
   }
 
   .icon {
@@ -21,20 +31,12 @@
     grid-area: input;
     color: inherit;
     width: 100%;
-    border: none;
+    border: 1px solid var(--color-light-xxl);
     background-color: var(--color-light-xxs);
     outline: none;
 
     &::placeholder {
-      color: var(--color-light-lg);
-    }
-
-    &:hover {
-      background-color: var(--color-light-md);
-    }
-
-    &:focus {
-      background-color: var(--color-light-sm);
+      color: var(--color-light-xxxl);
     }
 
     &:disabled {
@@ -59,7 +61,9 @@
 
   &.xxs {
     &.rounded {
-      border-radius: var(--radius-xxs);
+      .input {
+        border-radius: var(--radius-xxs);
+      }
     }
 
     .text {
@@ -80,7 +84,9 @@
 
   &.xs {
     &.rounded {
-      border-radius: var(--radius-xs);
+      .input {
+        border-radius: var(--radius-xs);
+      }
     }
 
     .text {
@@ -101,7 +107,9 @@
 
   &.sm {
     &.rounded {
-      border-radius: var(--radius-sm);
+      .input {
+        border-radius: var(--radius-sm);
+      }
     }
 
     .text {
@@ -122,7 +130,9 @@
 
   &.md {
     &.rounded {
-      border-radius: var(--radius-md);
+      .input {
+        border-radius: var(--radius-md);
+      }
     }
 
     .text {
@@ -143,7 +153,9 @@
 
   &.lg {
     &.rounded {
-      border-radius: var(--radius-lg);
+      .input {
+        border-radius: var(--radius-lg);
+      }
     }
 
     .text {
@@ -164,7 +176,9 @@
 
   &.xl {
     &.rounded {
-      border-radius: var(--radius-xl);
+      .input {
+        border-radius: var(--radius-xl);
+      }
     }
 
     .text {
@@ -185,7 +199,9 @@
 
   &.xxl {
     &.rounded {
-      border-radius: var(--radius-xxl);
+      .input {
+        border-radius: var(--radius-xxl);
+      }
     }
 
     .text {

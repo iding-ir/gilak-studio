@@ -24,7 +24,7 @@ export interface InputProps extends Omit<
 export const Input = ({
   ref,
   className,
-  size = "md",
+  size = "sm",
   error,
   fullWidth,
   label,
@@ -40,6 +40,7 @@ export const Input = ({
         [styles.error]: error,
         [styles.fullWidth]: fullWidth,
         [styles.rounded]: rounded,
+        [styles.withIcon]: !!icon,
       })}
       style={{ color }}
     >

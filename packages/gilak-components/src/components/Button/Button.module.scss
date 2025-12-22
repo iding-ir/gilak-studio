@@ -1,0 +1,111 @@
+@use "@gilak/stylist/scss" as *;
+
+.root {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  padding: 0 var(--spacing-md);
+  color: var(--color-light-xxxl);
+  background-color: var(--color-primary-md);
+  box-shadow: var(--shadow-sm);
+  transition: background-color var(--transition-md);
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.6;
+    background-color: var(--color-light-md);
+    cursor: not-allowed;
+  }
+
+  &.fullWidth {
+    width: 100%;
+  }
+
+  &.rounded {
+    border-radius: var(--radius-md);
+  }
+
+  &.primary {
+    color: var(--color-light-xxxs);
+    background-color: var(--color-primary-md);
+
+    &:hover:not(:disabled) {
+      background-color: var(--color-primary-xl);
+    }
+  }
+
+  &.secondary {
+    color: var(--color-dark-xxxl);
+    background-color: var(--color-light-sm);
+
+    &:hover:not(:disabled) {
+      background-color: var(--color-light-md);
+    }
+  }
+
+  &.ghost {
+    color: var(--color-dark-xxxl);
+    background-color: transparent;
+    box-shadow: none;
+
+    &:hover:not(:disabled) {
+      background-color: var(--color-light-xxs);
+    }
+  }
+
+  &.xxxs {
+    font-size: var(--font-size-xxxs);
+    height: var(--icon-xxxs);
+    padding: 0 calc(var(--spacing-xxxs));
+  }
+
+  &.xxs {
+    font-size: var(--font-size-xxs);
+    height: var(--icon-xxs);
+    padding: 0 calc(var(--spacing-xxs));
+  }
+
+  &.xs {
+    font-size: var(--font-size-xs);
+    height: var(--icon-xs);
+    padding: 0 calc(var(--spacing-xs));
+  }
+
+  &.sm {
+    font-size: var(--font-size-sm);
+    height: var(--icon-sm);
+    padding: 0 calc(var(--spacing-sm));
+  }
+
+  &.md {
+    font-size: var(--font-size-md);
+    height: var(--icon-md);
+    padding: 0 calc(var(--spacing-md));
+  }
+
+  &.lg {
+    font-size: var(--font-size-lg);
+    height: var(--icon-lg);
+    padding: 0 calc(var(--spacing-lg));
+  }
+
+  &.xl {
+    font-size: var(--font-size-xl);
+    height: var(--icon-xl);
+    padding: 0 calc(var(--spacing-xl));
+  }
+
+  &.xxl {
+    font-size: var(--font-size-xxl);
+    height: var(--icon-xxl);
+    padding: 0 calc(var(--spacing-xxl));
+  }
+
+  &.xxxl {
+    font-size: var(--font-size-xxxl);
+    height: var(--icon-xxxl);
+    padding: 0 calc(var(--spacing-xxxl));
+  }
+}

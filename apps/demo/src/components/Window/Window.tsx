@@ -18,6 +18,7 @@ import {
   selectColor,
   setColor,
 } from "../../features/color/color-slice";
+import { selectDoc, selectWin } from "../../features/settings/settings-slice";
 import {
   selectTolerance,
   selectTool,
@@ -38,6 +39,8 @@ export const Window = ({ id, title }: WindowProps) => {
   const color = useAppSelector(selectColor);
   const backgroundColor = useAppSelector(selectBackgroundColor);
   const tolerance = useAppSelector(selectTolerance);
+  const doc = useAppSelector(selectDoc);
+  const win = useAppSelector(selectWin);
 
   const handleSelectColor = (color: string) => {
     dispatch(unsetTool());
@@ -50,7 +53,7 @@ export const Window = ({ id, title }: WindowProps) => {
         id={id}
         title={title}
         initialPosition={{ x: 50, y: 50 }}
-        initialSize={{ w: 800, h: 600 }}
+        initialSize={{ w: win.w, h: win.h }}
         footer={<ZoomSelector />}
       >
         <ResizableScreen>
@@ -68,6 +71,8 @@ export const Window = ({ id, title }: WindowProps) => {
               brushSize={brushSize}
               brushShape={brushShape}
               tolerance={tolerance}
+              width={doc.w}
+              height={doc.h}
             />
           </MagnifierProvider>
         </ResizableScreen>

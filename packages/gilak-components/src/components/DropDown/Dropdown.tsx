@@ -20,6 +20,7 @@ export type DropdownProps = {
   className?: string;
   openDefault?: boolean;
   position?: Position;
+  closeOnClickInside?: boolean;
 };
 
 export const Dropdown = ({
@@ -28,21 +29,20 @@ export const Dropdown = ({
   className,
   openDefault = false,
   position = "bottom-right",
+  closeOnClickInside = false,
 }: DropdownProps) => {
-  const [open, setOpen] = useState(openDefault);
   const triggerRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
+  const [open, setOpen] = useState(openDefault);
 
   useEffect(() => {
-    if (!open) {
-      return;
-    }
+    if (!open) return;
 
-    const handlePointerDown = (event: PointerEvent) => {
-      if (
-        !triggerRef.current?.contains(event.target as Node) &&
-        !menuRef.current?.contains(event.target as Node)
-      ) {
+    const handlePointerDown = ({ target }: PointerEvent) => {
+      const trigger = triggerRef.current;
+      const menu = menuRef.current;
+      if (!trigger || !menu) return;
+      if (!trigger.contains(target as Node) && !menu.contains(target as Node)) {
         setOpen(false);
       }
     };
@@ -51,17 +51,31 @@ export const Dropdown = ({
     return () => document.removeEventListener("pointerdown", handlePointerDown);
   }, [open]);
 
+  const handleClickTrigger = () => {
+    setOpen((prev) => !prev);
+  };
+
+  const handleClickMenu = () => {
+    setTimeout(() => {
+      if (closeOnClickInside) setOpen(false);
+    }, 100);
+  };
+
   return (
     <div className={clsx(styles.root, styles[position], className)}>
       <div
         ref={triggerRef}
         className={styles.trigger}
-        onPointerDown={() => setOpen((state) => !state)}
+        onPointerDown={handleClickTrigger}
       >
         {trigger}
       </div>
       {open && (
-        <div ref={menuRef} className={styles.menu}>
+        <div
+          ref={menuRef}
+          className={styles.menu}
+          onPointerDown={handleClickMenu}
+        >
           {children}
         </div>
       )}
