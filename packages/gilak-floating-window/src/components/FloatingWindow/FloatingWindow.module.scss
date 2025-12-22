@@ -54,4 +54,8 @@
     left: 0;
     transform: none !important;
   }
+
+  &.minimized {
+    display: none;
+  }
 }

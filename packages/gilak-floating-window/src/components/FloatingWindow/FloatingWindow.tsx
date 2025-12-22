@@ -118,15 +118,12 @@ export const FloatingWindow = memo(
       onResizeEnd,
     });
 
-    if (status === "minimized") {
-      return null;
-    }
-
     return (
       <div
         ref={ref}
         className={clsx(styles.window, className, {
           [styles.maximized]: status === "maximized",
+          [styles.minimized]: status === "minimized",
           [styles.draggable]: draggable && status !== "maximized",
           [styles.dragging]: dragging,
           [styles.resizing]: resizing,
