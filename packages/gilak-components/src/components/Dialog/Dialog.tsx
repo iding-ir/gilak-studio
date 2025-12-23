@@ -40,9 +40,16 @@ export const Dialog = ({
       >
         <Header
           heading={heading}
-          actions={[
-            <Icon icon={IconClose} className={styles.icon} onClick={onClose} />,
-          ]}
+          actions={
+            <>
+              <Icon
+                icon={IconClose}
+                className={styles.icon}
+                onClick={onClose}
+              />
+              ,
+            </>
+          }
         />
         <Body>{children}</Body>
         <Footer actions={actions} />

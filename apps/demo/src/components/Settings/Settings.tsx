@@ -102,6 +102,7 @@ export const Settings = () => {
             <List
               items={Object.values(languages).map(({ code }) => (
                 <Text
+                  key={code}
                   text={t(`languages.${code}`)}
                   selected={lang === code}
                   frameless
@@ -118,6 +119,7 @@ export const Settings = () => {
             <List
               items={Object.values(themes).map(({ code }) => (
                 <Text
+                  key={code}
                   text={t(`themes.${code}`)}
                   selected={thm === code}
                   frameless
