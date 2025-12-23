@@ -1,10 +1,11 @@
-import type { CanvasHTMLAttributes, ReactNode } from "react";
+import type { CanvasHTMLAttributes, ReactNode, RefObject } from "react";
 
 import { useCursor } from "../../hooks/useCursor";
 import type { BrushShape, BrushSize } from "../../types";
 import styles from "./Cursor.module.scss";
 
 export type CursorProps = CanvasHTMLAttributes<HTMLCanvasElement> & {
+  canvasRef: RefObject<HTMLCanvasElement | null>;
   children: ReactNode;
   enabled: boolean;
   color: string;
@@ -15,6 +16,7 @@ export type CursorProps = CanvasHTMLAttributes<HTMLCanvasElement> & {
 };
 
 export const Cursor = ({
+  canvasRef,
   children,
   enabled,
   color,
@@ -24,7 +26,8 @@ export const Cursor = ({
   height = 50,
   ...props
 }: CursorProps) => {
-  const { containerRef, canvasRef } = useCursor({
+  const { cursorRef } = useCursor({
+    canvasRef,
     enabled,
     color,
     brushSize,
@@ -34,15 +37,15 @@ export const Cursor = ({
   });
 
   return (
-    <div ref={containerRef} className={styles.container}>
+    <>
       {children}
       <canvas
-        ref={canvasRef}
+        ref={cursorRef}
         className={styles.cursor}
         width={width}
         height={height}
         {...props}
       />
-    </div>
+    </>
   );
 };

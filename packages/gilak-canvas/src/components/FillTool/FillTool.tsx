@@ -4,7 +4,7 @@ import { useFill } from "../../hooks/useFill";
 import { Cursor } from "../Cursor";
 
 export type FillToolProps = {
-  ref: RefObject<HTMLCanvasElement | null>;
+  canvasRef: RefObject<HTMLCanvasElement | null>;
   enabled: boolean;
   color: string;
   tolerance: number;
@@ -12,16 +12,22 @@ export type FillToolProps = {
 };
 
 export const FillTool = ({
-  ref,
+  canvasRef,
   enabled,
   color,
   tolerance,
   children,
 }: FillToolProps) => {
-  useFill({ ref, enabled, color, tolerance });
+  useFill({ canvasRef, enabled, color, tolerance });
 
   return (
-    <Cursor enabled={enabled} color={color} brushSize={2} brushShape="CIRCLE">
+    <Cursor
+      canvasRef={canvasRef}
+      enabled={enabled}
+      color={color}
+      brushSize={2}
+      brushShape="CIRCLE"
+    >
       {children}
     </Cursor>
   );

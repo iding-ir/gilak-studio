@@ -4,14 +4,14 @@ import styles from "./Canvas.module.scss";
 
 export type CanvasProps = {
   children?: ReactNode;
-  ref?: RefObject<HTMLCanvasElement | null>;
+  canvasRef?: RefObject<HTMLCanvasElement | null>;
   width?: string | number;
   height?: string | number;
 } & React.CanvasHTMLAttributes<HTMLCanvasElement>;
 
 export const Canvas = ({
   children,
-  ref,
+  canvasRef,
   width = "400px",
   height = "300px",
   ...props
@@ -19,7 +19,7 @@ export const Canvas = ({
   return (
     <>
       <canvas
-        ref={ref}
+        ref={canvasRef}
         className={styles.root}
         width={width}
         height={height}

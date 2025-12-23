@@ -3,15 +3,20 @@ import { type RefObject, useEffect } from "react";
 import { fillArea } from "../methods/fill-area";
 
 export type UseFillArgs = {
-  ref: RefObject<HTMLCanvasElement | null>;
+  canvasRef: RefObject<HTMLCanvasElement | null>;
   enabled: boolean;
   color: string;
   tolerance: number;
 };
 
-export const useFill = ({ ref, enabled, color, tolerance }: UseFillArgs) => {
+export const useFill = ({
+  canvasRef,
+  enabled,
+  color,
+  tolerance,
+}: UseFillArgs) => {
   useEffect(() => {
-    const canvas = ref.current;
+    const canvas = canvasRef.current;
     if (!canvas || !enabled) return;
 
     const onPointerDown = (ev: PointerEvent) => {
@@ -27,7 +32,7 @@ export const useFill = ({ ref, enabled, color, tolerance }: UseFillArgs) => {
     canvas.addEventListener("pointerdown", onPointerDown);
 
     return () => canvas.removeEventListener("pointerdown", onPointerDown);
-  }, [ref, enabled, color, tolerance]);
+  }, [canvasRef, enabled, color, tolerance]);
 };
 
 export default useFill;

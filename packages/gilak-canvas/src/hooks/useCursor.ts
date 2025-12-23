@@ -1,9 +1,11 @@
+import type { RefObject } from "react";
 import { useEffect, useRef } from "react";
 
 import { drawBrush } from "../methods";
 import type { BrushShape, BrushSize } from "../types";
 
 export const useCursor = ({
+  canvasRef,
   enabled,
   color,
   brushSize,
@@ -11,6 +13,7 @@ export const useCursor = ({
   width = 50,
   height = 50,
 }: {
+  canvasRef: RefObject<HTMLCanvasElement | null>;
   enabled: boolean;
   color: string;
   brushSize: BrushSize;
@@ -18,16 +21,15 @@ export const useCursor = ({
   width?: number;
   height?: number;
 }) => {
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const cursorRef = useRef<HTMLCanvasElement | null>(null);
   const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
-    const container = containerRef.current;
     const canvas = canvasRef.current;
-    if (!container || !canvas || !enabled) return;
+    const cursor = cursorRef.current;
+    if (!canvas || !cursor || !enabled) return;
 
-    const ctx = canvas.getContext("2d");
+    const ctx = cursor.getContext("2d");
     if (!ctx) return;
 
     const renderCursor = () => {
@@ -39,11 +41,11 @@ export const useCursor = ({
     renderCursor();
 
     const onPointerEnter = () => {
-      canvas.style.display = "block";
+      cursor.style.display = "block";
     };
 
     const onPointerLeave = () => {
-      canvas.style.display = "none";
+      cursor.style.display = "none";
     };
 
     const onPointerMove = (event: PointerEvent) => {
@@ -55,25 +57,25 @@ export const useCursor = ({
         const x = event.offsetX;
         const y = event.offsetY;
         const transform = `translate3d(calc(${x}px - 50%), calc(${y}px - 50%), 0)`;
-        canvas.style.setProperty("transform", transform);
+        cursor.style.setProperty("transform", transform);
       });
     };
 
-    container.addEventListener("pointerenter", onPointerEnter);
-    container.addEventListener("pointermove", onPointerMove);
-    container.addEventListener("pointerleave", onPointerLeave);
+    canvas.addEventListener("pointerenter", onPointerEnter);
+    canvas.addEventListener("pointermove", onPointerMove);
+    canvas.addEventListener("pointerleave", onPointerLeave);
 
     return () => {
-      container.removeEventListener("pointerenter", onPointerEnter);
-      container.removeEventListener("pointermove", onPointerMove);
-      container.removeEventListener("pointerleave", onPointerLeave);
+      canvas.removeEventListener("pointerenter", onPointerEnter);
+      canvas.removeEventListener("pointermove", onPointerMove);
+      canvas.removeEventListener("pointerleave", onPointerLeave);
 
       if (rafRef.current !== null) {
         cancelAnimationFrame(rafRef.current);
         rafRef.current = null;
       }
     };
-  }, [enabled, color, brushSize, brushShape, width, height]);
+  }, [enabled, color, brushSize, brushShape, width, height, canvasRef]);
 
-  return { containerRef, canvasRef };
+  return { cursorRef };
 };

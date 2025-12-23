@@ -5,7 +5,7 @@ import type { BrushShape, BrushSize } from "../../types";
 import { Cursor } from "../Cursor";
 
 export type DrawingToolProps = {
-  ref: RefObject<HTMLCanvasElement | null>;
+  canvasRef: RefObject<HTMLCanvasElement | null>;
   enabled: boolean;
   color: string;
   brushSize: BrushSize;
@@ -14,17 +14,18 @@ export type DrawingToolProps = {
 };
 
 export const DrawingTool = ({
-  ref,
+  canvasRef,
   enabled,
   color,
   brushSize,
   brushShape,
   children,
 }: DrawingToolProps) => {
-  useDrawing({ ref, enabled, color, brushSize, brushShape });
+  useDrawing({ canvasRef, enabled, color, brushSize, brushShape });
 
   return (
     <Cursor
+      canvasRef={canvasRef}
       enabled={enabled}
       color={color}
       brushSize={brushSize}

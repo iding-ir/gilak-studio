@@ -5,7 +5,7 @@ import type { BrushShape, BrushSize } from "../types";
 import type { Point } from "../types/point";
 
 export type UseDrawingProps = {
-  ref: RefObject<HTMLCanvasElement | null>;
+  canvasRef: RefObject<HTMLCanvasElement | null>;
   enabled: boolean;
   color: string;
   brushSize: BrushSize;
@@ -13,7 +13,7 @@ export type UseDrawingProps = {
 };
 
 export const useDrawing = ({
-  ref,
+  canvasRef,
   enabled,
   color,
   brushSize,
@@ -25,16 +25,16 @@ export const useDrawing = ({
 
   const initializeCanvas = useCallback(
     (canvas: HTMLCanvasElement) => {
-      ref.current = canvas;
+      canvasRef.current = canvas;
       const ctx = canvas.getContext("2d");
       ctx?.clearRect(0, 0, canvas.width, canvas.height);
     },
-    [ref],
+    [canvasRef],
   );
 
   useEffect(() => {
     const draw = (event: PointerEvent) => {
-      const canvas = ref.current;
+      const canvas = canvasRef.current;
       if (!enabled || !canvas || !drawing.current) return;
       const ctx = canvas.getContext("2d");
       if (!ctx) return;
@@ -69,7 +69,7 @@ export const useDrawing = ({
       previousPointRef.current = null;
       currentPointRef.current = null;
     };
-    const canvas = ref.current;
+    const canvas = canvasRef.current;
     if (!canvas) return;
 
     canvas.addEventListener("pointerdown", onPointerDown);
@@ -83,7 +83,7 @@ export const useDrawing = ({
       canvas.removeEventListener("pointerup", onPointerUp);
       canvas.removeEventListener("pointerleave", onPointerUp);
     };
-  }, [enabled, color, brushSize, brushShape, ref]);
+  }, [enabled, color, brushSize, brushShape, canvasRef]);
 
   return {
     initializeCanvas,

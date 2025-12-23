@@ -7,7 +7,7 @@ import { DrawingTool } from "../DrawingTool";
 import { FillTool } from "../FillTool";
 
 export type DrawingCanvasProps = CanvasProps & {
-  ref: RefObject<HTMLCanvasElement | null>;
+  canvasRef: RefObject<HTMLCanvasElement | null>;
   enabledDrawing: boolean;
   enabledFill: boolean;
   color: string;
@@ -20,7 +20,7 @@ export type DrawingCanvasProps = CanvasProps & {
 };
 
 export const DrawingCanvas = ({
-  ref,
+  canvasRef,
   enabledDrawing,
   enabledFill,
   color,
@@ -34,19 +34,24 @@ export const DrawingCanvas = ({
 }: DrawingCanvasProps) => {
   return (
     <DrawingTool
-      ref={ref}
+      canvasRef={canvasRef}
       enabled={enabledDrawing}
       color={color}
       brushSize={brushSize}
       brushShape={brushShape}
     >
       <FillTool
-        ref={ref}
+        canvasRef={canvasRef}
         enabled={enabledFill}
         color={backgroundColor}
         tolerance={tolerance}
       >
-        <Canvas ref={ref} {...props} width={width} height={height} />
+        <Canvas
+          canvasRef={canvasRef}
+          {...props}
+          width={width}
+          height={height}
+        />
       </FillTool>
     </DrawingTool>
   );

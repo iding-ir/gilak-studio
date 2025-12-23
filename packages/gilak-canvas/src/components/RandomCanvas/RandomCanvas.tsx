@@ -6,16 +6,20 @@ import type { CanvasProps } from "../Canvas";
 import { Canvas } from "../Canvas";
 
 export type RandomCanvasProps = CanvasProps & {
-  ref?: RefObject<HTMLCanvasElement | null>;
+  canvasRef?: RefObject<HTMLCanvasElement | null>;
   refresh?: number;
 };
 
-export const RandomCanvas = ({ refresh, ref, ...props }: RandomCanvasProps) => {
+export const RandomCanvas = ({
+  refresh,
+  canvasRef,
+  ...props
+}: RandomCanvasProps) => {
   useEffect(() => {
-    if (ref?.current) {
-      drawRandomEffect(ref.current);
+    if (canvasRef?.current) {
+      drawRandomEffect(canvasRef.current);
     }
-  }, [refresh, ref]);
+  }, [refresh, canvasRef]);
 
-  return <Canvas ref={ref} {...props} />;
+  return <Canvas canvasRef={canvasRef} {...props} />;
 };

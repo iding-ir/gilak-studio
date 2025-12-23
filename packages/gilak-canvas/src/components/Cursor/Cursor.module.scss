@@ -1,13 +1,8 @@
-.container {
-  position: relative;
-  cursor: none;
-
-  .cursor {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    touch-action: none;
-  }
+.cursor {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  touch-action: none;
 }

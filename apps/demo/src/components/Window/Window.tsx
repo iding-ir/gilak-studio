@@ -65,7 +65,7 @@ export const Window = ({ id, title }: WindowProps) => {
             onSelect={handleSelectColor}
           >
             <DrawingCanvas
-              ref={canvasRef}
+              canvasRef={canvasRef}
               enabledDrawing={selectedTool === "BRUSH"}
               enabledFill={selectedTool === "FILL"}
               color={color}
