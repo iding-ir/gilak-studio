@@ -59,7 +59,7 @@ export const Settings = () => {
       }
     >
       <Group direction="column">
-        <Group direction="row">
+        <Group direction="column">
           <Group direction="row" title={t("settings.document")}>
             <Input
               name="documentWidth"
@@ -97,7 +97,7 @@ export const Settings = () => {
             />
           </Group>
         </Group>
-        <Group direction="row">
+        <Group direction="column">
           <Group direction="row" title={t("settings.language")}>
             <List
               items={Object.values(languages).map(({ code }) => (

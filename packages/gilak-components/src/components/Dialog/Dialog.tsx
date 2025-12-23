@@ -47,7 +47,6 @@ export const Dialog = ({
                 className={styles.icon}
                 onClick={onClose}
               />
-              ,
             </>
           }
         />
