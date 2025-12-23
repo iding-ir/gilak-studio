@@ -5,6 +5,10 @@
     "nl": "Niederländisch",
     "de": "Deutsch"
   },
+  "themes": {
+    "light": "Hell",
+    "dark": "Dunkel"
+  },
   "settings": {
     "title": "Einstellungen",
     "language": "Sprache",

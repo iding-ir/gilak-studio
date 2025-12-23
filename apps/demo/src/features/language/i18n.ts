@@ -1,21 +1,19 @@
+import { de, en, nl } from "@gilak/localization";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
-import { DEFAULT_LANGUAGE, FALLBACK_LANGUAGE } from "./constants";
-import de from "./files/de.json";
-import en from "./files/en.json";
-import nl from "./files/nl.json";
-import { LANGUAGES } from "./languages";
+import { languages } from "./languages";
+import { DEFAULT_LANGUAGE, FALLBACK_LANGUAGE } from "./types";
 
 i18n.use(initReactI18next).init({
   resources: {
-    [LANGUAGES.en.code]: {
+    [languages.en.code]: {
       translation: en,
     },
-    [LANGUAGES.nl.code]: {
+    [languages.nl.code]: {
       translation: nl,
     },
-    [LANGUAGES.de.code]: {
+    [languages.de.code]: {
       translation: de,
     },
   },

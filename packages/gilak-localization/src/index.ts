@@ -1,11 +1,3 @@
-// Language constants
-export { DEFAULT_LANGUAGE, FALLBACK_LANGUAGE } from "./constants";
-
-// Language types
-export type { LanguageCode, LanguageDirection } from "./types";
-
-// i18n instance
-export { default as i18n } from "./i18n";
-
-// Language data
-export { LANGUAGES } from "./languages";
+export { default as de } from "./files/de.json";
+export { default as en } from "./files/en.json";
+export { default as nl } from "./files/nl.json";

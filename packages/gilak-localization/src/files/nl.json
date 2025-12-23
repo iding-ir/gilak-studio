@@ -5,6 +5,10 @@
     "nl": "Nederlands",
     "de": "Duits"
   },
+  "themes": {
+    "light": "Licht",
+    "dark": "Donker"
+  },
   "settings": {
     "title": "Instellingen",
     "language": "Taal",

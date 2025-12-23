@@ -1,27 +1,35 @@
-import { Button, Dialog, Group, Input } from "@gilak/components";
+import { Button, Dialog, Group, Input, List, Text } from "@gilak/components";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { Language } from "../../features/language/components/Language";
+import {
+  selectLanguage,
+  setLanguage,
+} from "../../features/language/language-slice";
+import { languages } from "../../features/language/languages";
 import {
   closeSettings,
   selectDoc,
-  selectSettingsOpen,
   selectWin,
   setSettings,
 } from "../../features/settings/settings-slice";
+import { selectTheme, setTheme } from "../../features/theme/theme-slice";
+import { themes } from "../../features/theme/themes";
 
 export const Settings = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
-  const isOpen = useAppSelector(selectSettingsOpen);
   const doc = useAppSelector(selectDoc);
   const win = useAppSelector(selectWin);
+  const language = useAppSelector(selectLanguage);
+  const theme = useAppSelector(selectTheme);
   const [docW, setDocW] = useState(doc.w);
   const [docH, setDocH] = useState(doc.h);
   const [winW, setWinW] = useState(win.w);
   const [winH, setWinH] = useState(win.h);
+  const [lang, setLang] = useState(language);
+  const [thm, setThm] = useState(theme);
 
   const handleClose = () => {
     dispatch(closeSettings());
@@ -35,10 +43,12 @@ export const Settings = () => {
         win: { ...win, w: winW, h: winH },
       }),
     );
+    dispatch(setLanguage(lang));
+    dispatch(setTheme(thm));
   };
 
   return (
-    <Dialog open={isOpen} onClose={handleClose} title={t("settings.title")}>
+    <Dialog open={true} onClose={handleClose} title={t("settings.title")}>
       <Group direction="column">
         <Group direction="row">
           <Group direction="row" title={t("settings.document")}>
@@ -80,9 +90,37 @@ export const Settings = () => {
         </Group>
         <Group direction="row">
           <Group direction="row" title={t("settings.language")}>
-            <Language />
+            <List
+              items={Object.values(languages).map(({ code }) => (
+                <Text
+                  text={t(`languages.${code}`)}
+                  selected={lang === code}
+                  frameless
+                  onClick={() => setLang(code)}
+                />
+              ))}
+              count={1}
+              frameless
+              direction="row"
+              variant="light"
+            />
           </Group>
-          <Group direction="row" title={t("settings.theme")}></Group>
+          <Group direction="row" title={t("settings.theme")}>
+            <List
+              items={Object.values(themes).map(({ code }) => (
+                <Text
+                  text={t(`themes.${code}`)}
+                  selected={thm === code}
+                  frameless
+                  onClick={() => setThm(code)}
+                />
+              ))}
+              count={1}
+              frameless
+              direction="row"
+              variant="light"
+            />
+          </Group>
         </Group>
         <Group direction="rowReverse">
           <Button variant="primary" onClick={handleSave}>

@@ -10,6 +10,8 @@ import { colorSlice } from "../features/color/color-slice";
 import { languageListenerMiddleware } from "../features/language/language-middleware";
 import { languageSlice } from "../features/language/language-slice";
 import { settingsSlice } from "../features/settings/settings-slice";
+import { themeListenerMiddleware } from "../features/theme/theme-middleware";
+import { themeSlice } from "../features/theme/theme-slice";
 import { toolsSlice } from "../features/tools/tools.slice";
 import { windowsSlice } from "../features/windows/windows-slice";
 
@@ -20,12 +22,15 @@ const rootReducer = combineSlices(
   windowsSlice,
   settingsSlice,
   languageSlice,
+  themeSlice,
 );
 
 export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().prepend(languageListenerMiddleware.middleware),
+    getDefaultMiddleware()
+      .prepend(languageListenerMiddleware.middleware)
+      .prepend(themeListenerMiddleware.middleware),
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

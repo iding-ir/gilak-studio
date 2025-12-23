@@ -1,10 +1,10 @@
-import { DEFAULT_LANGUAGE, type LanguageCode } from "@gilak/localization";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 import { createAppSlice } from "../../app/createAppSlice";
+import { DEFAULT_LANGUAGE, type LanguageType } from "./types";
 
 export interface LanguageState {
-  current: LanguageCode;
+  current: LanguageType;
 }
 
 const initialState: LanguageState = {
@@ -16,7 +16,7 @@ export const languageSlice = createAppSlice({
   initialState,
   reducers: (create) => ({
     setLanguage: create.reducer(
-      (state, { payload }: PayloadAction<LanguageCode>) => {
+      (state, { payload }: PayloadAction<LanguageType>) => {
         state.current = payload;
       },
     ),
