@@ -1,26 +1,26 @@
 .header {
   all: unset;
   flex-grow: 1;
-  font-size: var(--font-size-sm);
-  color: var(--color-dark-md);
-  height: var(--icon-sm);
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  font-size: var(--font-size-sm);
+  color: var(--color-dark-xxl);
+  height: var(--icon-sm);
   border-radius: var(--radius-md);
-  background: var(--color-light-md);
+  background-color: var(--color-light-md);
   transition: all var(--transition-sm);
   cursor: pointer;
 
   &:hover {
     color: var(--color-primary-md);
-    background: var(--color-light-xl);
+    background-color: var(--color-light-xl);
   }
 
   &.active,
   &.active:focus {
-    background: var(--color-primary-md);
     color: var(--color-light-lg);
     box-shadow: var(--shadow-xs);
+    background-color: var(--color-primary-md);
   }
 }

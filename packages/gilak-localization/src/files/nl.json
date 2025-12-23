@@ -10,7 +10,7 @@
     "dark": "Donker"
   },
   "settings": {
-    "title": "Instellingen",
+    "heading": "Instellingen",
     "language": "Taal",
     "theme": "Thema",
     "document": "Document",

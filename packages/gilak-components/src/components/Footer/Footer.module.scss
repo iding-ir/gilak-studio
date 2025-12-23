@@ -1,0 +1,29 @@
+@use "@gilak/stylist/mixins" as mixins;
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-sm);
+  gap: var(--spacing-sm);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  background-color: var(--color-light-md);
+  box-shadow: var(--shadow-lg);
+
+  .caption {
+    display: block;
+    width: 100%;
+    color: var(--color-dark-lg);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-md);
+    padding: 0 var(--spacing-sm);
+    @include mixins.ellipsis();
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+}

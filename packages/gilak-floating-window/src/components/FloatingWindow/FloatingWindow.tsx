@@ -1,3 +1,4 @@
+import { Body } from "@gilak/components";
 import clsx from "clsx";
 import React, { memo, useRef } from "react";
 
@@ -18,8 +19,8 @@ import type { Status } from "../../context";
 import { useDrag, useRegister, useResize } from "../../hooks";
 import { useFloatingWindow } from "../../hooks/useFloatingWindows";
 import type { Position, Size } from "../../types";
-import { Footer } from "../Footer/Footer";
-import { Header } from "../Header";
+import { FloatingWindowFooter } from "../FloatingWindowFooter";
+import { FloatingWindowHeader } from "../FloatingWindowHeader";
 import styles from "./FloatingWindow.module.scss";
 
 export type FloatingWindowProps = {
@@ -135,7 +136,7 @@ export const FloatingWindow = memo(
           height: (size || initialSize).h,
         }}
       >
-        <Header
+        <FloatingWindowHeader
           id={id}
           title={title}
           draggable={draggable && status !== "maximized"}
@@ -143,8 +144,8 @@ export const FloatingWindow = memo(
           minimizable={minimizable}
           onDragPointerDown={draggable ? onDragPointerDown : undefined}
         />
-        <div className={styles.body}>{children}</div>
-        <Footer
+        <Body>{children}</Body>
+        <FloatingWindowFooter
           id={id}
           resizable={resizable && status !== "maximized"}
           footer={footer}

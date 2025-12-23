@@ -1,49 +1,52 @@
 import clsx from "clsx";
-import React, { useRef } from "react";
+import type { ReactNode } from "react";
+import { useRef } from "react";
 import { createPortal } from "react-dom";
 
 import IconClose from "../../assets/icon-close.svg?url";
+import { Body } from "../Body";
+import { Footer } from "../Footer";
+import { Header } from "../Header";
 import { Icon } from "../Icon";
 import styles from "./Dialog.module.scss";
 
 export interface DialogProps {
   open: boolean;
-  onClose: () => void;
-  title?: React.ReactNode;
+  heading?: ReactNode;
+  actions?: ReactNode;
   className?: string;
-  children?: React.ReactNode;
-  size?: "sm" | "md" | "lg";
-  closeLabel?: string;
+  children: ReactNode;
+  onClose: () => void;
 }
 
 export const Dialog = ({
   open,
-  onClose,
-  title,
+  heading,
+  actions,
   className,
   children,
-  size = "md",
+  onClose,
 }: DialogProps) => {
-  const panelRef = useRef<HTMLDivElement>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
   if (!open) return null;
 
   return createPortal(
     <div className={styles.overlay} onPointerDown={onClose}>
-      <div
-        ref={panelRef}
-        className={clsx(styles.panel, styles[size], className)}
+      <dialog
+        ref={dialogRef}
+        className={clsx(styles.dialog, className)}
         onPointerDown={(e) => e.stopPropagation()}
       >
-        <header className={styles.header}>
-          <div className={styles.title}>{title}</div>
-          <div className={styles.toolbar}>
-            <Icon icon={IconClose} className={styles.icon} onClick={onClose} />
-          </div>
-        </header>
-
-        <div className={styles.body}>{children}</div>
-      </div>
+        <Header
+          heading={heading}
+          actions={[
+            <Icon icon={IconClose} className={styles.icon} onClick={onClose} />,
+          ]}
+        />
+        <Body>{children}</Body>
+        <Footer actions={actions} />
+      </dialog>
     </div>,
     document.getElementById("dialog-root") as HTMLElement,
   );

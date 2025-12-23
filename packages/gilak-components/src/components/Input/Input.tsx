@@ -5,20 +5,20 @@ import styles from "./Input.module.scss";
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   ref?: RefObject<HTMLInputElement>;
-  className?: string;
   error?: boolean;
   fullWidth?: boolean;
   label?: string;
   rounded?: boolean;
+  className?: string;
 }
 
 export const Input = ({
   ref,
-  className,
   error,
   fullWidth = true,
   label,
   rounded = true,
+  className,
   ...props
 }: InputProps) => {
   return (
@@ -30,7 +30,7 @@ export const Input = ({
       })}
     >
       {label && <span className={styles.text}>{label}</span>}
-      <input ref={ref} className={clsx(styles.input, className)} {...props} />
+      <input ref={ref} {...props} className={clsx(styles.input, className)} />
     </label>
   );
 };

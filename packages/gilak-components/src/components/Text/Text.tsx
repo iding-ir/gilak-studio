@@ -5,31 +5,36 @@ import styles from "./Text.module.scss";
 
 export type TextProps = HTMLAttributes<HTMLDivElement> & {
   text: string;
-  className?: string;
   color?: string;
   backgroundColor?: string;
+  rounded?: boolean;
   selected?: boolean;
+  interactive?: boolean;
   frameless?: boolean;
-  onClick?: () => void;
+  className?: string;
 };
 
 export const Text = ({
   text,
-  className,
   color = "inherit",
   backgroundColor = "inherit",
+  rounded = true,
   selected = false,
+  interactive = false,
   frameless = false,
-  onClick,
+  className,
+  ...props
 }: TextProps) => {
   return (
     <span
+      {...props}
       className={clsx(styles.root, className, {
+        [styles.rounded]: rounded,
         [styles.selected]: selected,
         [styles.frameless]: frameless,
+        [styles.interactive]: interactive || !!props.onClick,
       })}
       style={{ color, backgroundColor }}
-      onClick={onClick}
     >
       {text}
     </span>

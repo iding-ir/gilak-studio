@@ -10,7 +10,7 @@
     "dark": "Dark"
   },
   "settings": {
-    "title": "Settings",
+    "heading": "Settings",
     "language": "Language",
     "theme": "Theme",
     "document": "Document",

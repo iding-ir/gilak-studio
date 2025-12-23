@@ -19,10 +19,6 @@ export const Navigation = () => {
     dispatch(addWindow({ id, title }));
   };
 
-  const handleChangeTheme = (theme: "light" | "dark") => {
-    document.documentElement.setAttribute("data-theme", theme);
-  };
-
   const handleClickSettings = () => {
     dispatch(openSettings());
   };
@@ -32,18 +28,8 @@ export const Navigation = () => {
       <Menu label={t("navigation.file")} closeOnClickInside>
         <Menu label={t("navigation.new")} onClick={handleAddWindow} />
         <Menu label={t("navigation.open")} />
-        <Menu label={t("navigation.settings")} onClick={handleClickSettings} />
       </Menu>
-      <Menu label={t("navigation.theme")} closeOnClickInside>
-        <Menu
-          label={t("navigation.light")}
-          onClick={() => handleChangeTheme("light")}
-        />
-        <Menu
-          label={t("navigation.dark")}
-          onClick={() => handleChangeTheme("dark")}
-        />
-      </Menu>
+      <Menu label={t("navigation.settings")} onClick={handleClickSettings} />
       <Menu label={t("navigation.view")} />
       <Menu label={t("navigation.help")} />
     </Menu>

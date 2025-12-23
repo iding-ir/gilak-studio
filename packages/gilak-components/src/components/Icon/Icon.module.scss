@@ -18,30 +18,30 @@
     background-color: transparent;
   }
 
+  &.selected {
+    outline: 2px solid var(--color-primary-lg);
+    outline-offset: 0px;
+  }
+
   &.interactive {
     cursor: pointer;
 
     &:hover {
-      .image {
+      .icon {
         &::before {
           background-color: var(--color-primary-md);
-          transition: all var(--transition-lg);
+          transition: background-color var(--transition-lg);
         }
       }
     }
   }
 
-  &.selected {
-    outline: 2px solid var(--color-primary-lg);
-    outline-offset: 1px;
-  }
-
-  .image {
+  .icon {
     display: inline-block;
     position: relative;
     width: 100%;
     height: 100%;
-    mask-size: 70%;
+    mask-size: 75%;
     mask-repeat: no-repeat;
     mask-position: center;
     mask-image: var(--icon-url);

@@ -1,20 +1,33 @@
 .root {
   flex-shrink: 0;
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: start;
-  position: relative;
   font-size: var(--font-size-sm);
   padding: var(--spacing-xs) var(--spacing-sm);
   box-shadow: var(--shadow-sm);
 
+  &.rounded {
+    border-radius: var(--radius-md);
+  }
+
   &.frameless {
-    background-color: transparent;
     box-shadow: none;
+    background-color: transparent;
   }
 
   &.selected {
     outline: 2px solid var(--color-primary-lg);
-    outline-offset: 2px;
+    outline-offset: 0px;
+  }
+
+  &.interactive {
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--color-primary-md);
+      transition: background-color var(--transition-lg);
+    }
   }
 }

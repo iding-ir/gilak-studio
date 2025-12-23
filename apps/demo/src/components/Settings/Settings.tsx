@@ -48,7 +48,16 @@ export const Settings = () => {
   };
 
   return (
-    <Dialog open={true} onClose={handleClose} title={t("settings.title")}>
+    <Dialog
+      open={true}
+      onClose={handleClose}
+      heading={t("settings.heading")}
+      actions={
+        <Button variant="primary" onClick={handleSave}>
+          {t("settings.save")}
+        </Button>
+      }
+    >
       <Group direction="column">
         <Group direction="row">
           <Group direction="row" title={t("settings.document")}>
@@ -102,7 +111,7 @@ export const Settings = () => {
               count={1}
               frameless
               direction="row"
-              variant="light"
+              variant="ghost"
             />
           </Group>
           <Group direction="row" title={t("settings.theme")}>
@@ -118,14 +127,9 @@ export const Settings = () => {
               count={1}
               frameless
               direction="row"
-              variant="light"
+              variant="ghost"
             />
           </Group>
-        </Group>
-        <Group direction="rowReverse">
-          <Button variant="primary" onClick={handleSave}>
-            {t("settings.save")}
-          </Button>
         </Group>
       </Group>
     </Dialog>

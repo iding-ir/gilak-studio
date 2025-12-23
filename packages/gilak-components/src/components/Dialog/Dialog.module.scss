@@ -10,58 +10,12 @@
   padding: var(--spacing-lg);
   z-index: var(--z-index-modal);
 
-  .panel {
+  .dialog {
+    all: unset;
     display: flex;
     flex-direction: column;
-    width: 100%;
-    max-width: 90dvw;
+    width: 50%;
     max-height: 90dvh;
-    border-radius: var(--radius-md);
-    background-color: var(--color-light-lg);
     box-shadow: var(--shadow-md);
-    overflow: hidden;
-
-    &.sm {
-      max-width: 360px;
-    }
-    &.md {
-      max-width: 720px;
-    }
-    &.lg {
-      max-width: 980px;
-    }
-
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: var(--font-size-lg);
-      font-weight: var(--font-weight-md);
-      padding: var(--spacing-sm);
-      gap: var(--spacing-sm);
-      background-color: var(--color-primary-md);
-      box-shadow: var(--shadow-md);
-
-      .title {
-        display: block;
-        width: 100%;
-        color: var(--color-light-md);
-        font-size: var(--font-size-lg);
-        font-weight: var(--font-weight-lg);
-        padding: 0 var(--spacing-sm);
-        @include mixins.ellipsis();
-      }
-
-      .toolbar {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: var(--spacing-sm);
-      }
-    }
-
-    .body {
-      padding: var(--spacing-md);
-    }
   }
 }

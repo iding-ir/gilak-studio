@@ -29,13 +29,19 @@
 
   .item {
     display: grid;
+  }
 
-    @include interactive(
-      $color: var(--color-light-md),
-      $bg-color: transparent,
-      $hover-color: var(--color-light-xl),
-      $hover-bg-color: var(--color-primary-xl)
-    );
+  &.ghost {
+    background-color: transparent;
+
+    .item {
+      @include interactive(
+        $color: inherit,
+        $bg-color: transparent,
+        $hover-color: var(--color-light-xl),
+        $hover-bg-color: var(--color-primary-xl)
+      );
+    }
   }
 
   &.primary {

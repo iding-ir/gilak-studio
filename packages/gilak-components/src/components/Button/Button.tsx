@@ -1,27 +1,29 @@
+import type { Variant } from "@gilak/components/types";
 import clsx from "clsx";
-import type { ButtonHTMLAttributes } from "react";
+import type { ButtonHTMLAttributes, ReactNode } from "react";
 
 import styles from "./Button.module.scss";
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary" | "ghost";
+export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  variant?: Variant;
   rounded?: boolean;
   fullWidth?: boolean;
+  children: ReactNode;
   className?: string;
-}
+};
 
 export const Button = ({
-  children,
   variant = "primary",
   rounded = true,
   fullWidth = false,
   className,
+  children,
   ...props
 }: ButtonProps) => {
   return (
     <button
       {...props}
-      className={clsx(styles.root, styles[variant], className, {
+      className={clsx(styles.button, styles[variant], className, {
         [styles.rounded]: rounded,
         [styles.fullWidth]: fullWidth,
       })}

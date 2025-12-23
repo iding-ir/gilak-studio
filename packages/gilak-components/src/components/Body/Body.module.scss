@@ -1,0 +1,10 @@
+@use "@gilak/stylist/mixins" as mixins;
+
+.body {
+  flex-grow: 1;
+  padding: var(--spacing-sm);
+  color: var(--color-dark-xxl);
+  background-color: var(--color-light-xl);
+  overflow: auto;
+  @include mixins.scrollbar();
+}

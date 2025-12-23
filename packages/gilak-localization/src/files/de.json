@@ -10,7 +10,7 @@
     "dark": "Dunkel"
   },
   "settings": {
-    "title": "Einstellungen",
+    "heading": "Einstellungen",
     "language": "Sprache",
     "theme": "Thema",
     "document": "Dokument",

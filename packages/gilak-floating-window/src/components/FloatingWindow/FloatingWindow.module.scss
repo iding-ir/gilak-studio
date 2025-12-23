@@ -1,5 +1,3 @@
-@use "@gilak/stylist/mixins" as mixins;
-
 .window {
   position: absolute;
   top: 0;
@@ -36,15 +34,6 @@
     }
   }
 
-  .body {
-    flex-grow: 1;
-    padding: var(--spacing-sm);
-    color: var(--color-dark-sm);
-    background-color: var(--color-light-xl);
-    overflow: auto;
-    @include mixins.scrollbar();
-  }
-
   &.maximized {
     min-width: 100%;
     min-height: 100%;
@@ -57,5 +46,16 @@
 
   &.minimized {
     display: none;
+  }
+
+  .resize {
+    display: flex;
+    flex-direction: column-reverse;
+    margin-left: auto;
+    touch-action: none;
+
+    .icon {
+      cursor: nwse-resize;
+    }
   }
 }

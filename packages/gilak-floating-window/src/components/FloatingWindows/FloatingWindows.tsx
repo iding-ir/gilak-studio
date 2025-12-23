@@ -5,7 +5,7 @@ import {
   selectMinimizedWindows,
   useFloatingWindowContext,
 } from "../../context";
-import { Header } from "../Header";
+import { FloatingWindowHeader } from "../FloatingWindowHeader";
 import styles from "./FloatingWindows.module.scss";
 
 export type FloatingWindowsProps = {
@@ -23,7 +23,7 @@ export const FloatingWindows = ({ children }: FloatingWindowsProps) => {
         <div className={styles.taskbar}>
           {selectMinimizedWindows(state).map(
             ({ id, title, maximizable, minimizable }) => (
-              <Header
+              <FloatingWindowHeader
                 key={id}
                 id={id}
                 title={title}

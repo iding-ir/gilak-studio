@@ -4,17 +4,24 @@ import type { ReactNode } from "react";
 import styles from "./Header.module.scss";
 
 export type HeaderProps = {
-  id: number;
-  active: number;
-  setIndex: (id: number) => void;
+  index: number;
   header: ReactNode;
+  activeIndex: number;
+  setIndex: (index: number) => void;
 };
 
-export const Header = ({ id, active, setIndex, header }: HeaderProps) => {
+export const Header = ({
+  index,
+  header,
+  activeIndex,
+  setIndex,
+}: HeaderProps) => {
   return (
     <button
-      className={clsx(styles.header, { [styles.active]: id === active })}
-      onClick={() => setIndex(id)}
+      className={clsx(styles.header, {
+        [styles.active]: index === activeIndex,
+      })}
+      onClick={() => setIndex(index)}
     >
       {header}
     </button>

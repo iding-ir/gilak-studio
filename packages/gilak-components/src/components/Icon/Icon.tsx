@@ -1,52 +1,46 @@
 import clsx from "clsx";
-import type { HTMLAttributes } from "react";
-import React from "react";
+import type { CSSProperties, HTMLAttributes } from "react";
 
 import styles from "./Icon.module.scss";
 
-export interface IconProps extends Omit<
-  HTMLAttributes<HTMLDivElement>,
-  "color"
-> {
+export type IconProps = Omit<HTMLAttributes<HTMLElement>, "color"> & {
   icon: string;
   color?: string;
   backgroundColor?: string;
-  className?: string;
   rounded?: boolean;
   selected?: boolean;
   interactive?: boolean;
   frameless?: boolean;
-}
+};
 
 export const Icon = ({
   icon,
   color = "var(--color-dark-xxxl)",
   backgroundColor = "var(--color-light-xxxs)",
-  className,
   rounded = true,
   selected = false,
   interactive = false,
   frameless = false,
   ...props
 }: IconProps) => {
-  const rootStyles = {
-    "--icon-color": color,
-    "--icon-bg-color": backgroundColor,
-    "--icon-url": `url("${icon}")`,
-  } as React.CSSProperties;
-
   return (
-    <i
-      className={clsx(styles.root, className, {
+    <span
+      {...props}
+      className={clsx(styles.root, props.className, {
         [styles.rounded]: rounded,
         [styles.selected]: selected,
         [styles.frameless]: frameless,
         [styles.interactive]: interactive || !!props.onClick,
       })}
-      {...props}
-      style={{ ...props.style, ...rootStyles }}
+      style={
+        {
+          "--icon-color": color,
+          "--icon-bg-color": backgroundColor,
+          "--icon-url": `url("${icon}")`,
+        } as CSSProperties
+      }
     >
-      <span className={clsx(styles.image)} />
-    </i>
+      <i className={clsx(styles.icon)} />
+    </span>
   );
 };

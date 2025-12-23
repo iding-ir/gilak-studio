@@ -1,40 +1,42 @@
-import { Icon } from "@gilak/components";
+import { Footer, Icon } from "@gilak/components";
 import type { PointerEvent, ReactNode } from "react";
 
 import IconResize from "../../assets/icon-resize.svg?url";
 import { useFloatingWindow } from "../../hooks/useFloatingWindows";
-import styles from "./Footer.module.scss";
+import styles from "./FloatingWindowFooter.module.scss";
 
-export type FooterProps = {
+export type FloatingWindowFooterProps = {
   id: string;
   footer: ReactNode;
   resizable: boolean;
   onResizePointerDown?: (event: PointerEvent<HTMLDivElement>) => void;
 };
 
-export const Footer = ({
+export const FloatingWindowFooter = ({
   id,
   footer,
   resizable,
   onResizePointerDown,
-}: FooterProps) => {
+}: FloatingWindowFooterProps) => {
   const { status } = useFloatingWindow(id);
 
   if (!footer && !resizable) return null;
 
   return (
-    <footer className={styles.root}>
-      {footer}
-      {resizable && status !== "maximized" && (
-        <div className={styles.resize} onPointerDown={onResizePointerDown}>
+    <Footer
+      caption={footer}
+      actions={
+        resizable &&
+        status !== "maximized" && (
           <Icon
             icon={IconResize}
-            className={styles.icon}
+            className={styles.resize}
             frameless
             interactive
+            onPointerDown={onResizePointerDown}
           />
-        </div>
-      )}
-    </footer>
+        )
+      }
+    />
   );
 };

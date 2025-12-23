@@ -22,9 +22,9 @@
     width: 100%;
     line-height: var(--icon-md);
     padding: 0 calc(var(--spacing-md));
+    background-color: var(--color-light-xxs);
     box-shadow: var(--shadow-sm);
     border: none;
-    background-color: var(--color-light-xxs);
     outline: none;
 
     &::placeholder {

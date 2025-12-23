@@ -46,7 +46,9 @@ export const Dropdown = ({
     setOpen((prev) => !prev);
   };
 
-  const handleClickMenu = () => {
+  const handleClickMenu = (event: React.PointerEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+
     setTimeout(() => {
       if (closeOnClickInside) setOpen(false);
     }, 100);

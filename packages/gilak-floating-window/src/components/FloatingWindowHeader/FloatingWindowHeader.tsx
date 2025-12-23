@@ -1,31 +1,31 @@
-import { Icon } from "@gilak/components";
+import { Header, Icon } from "@gilak/components";
 import clsx from "clsx";
-import type { PointerEvent } from "react";
+import type { PointerEvent, ReactNode } from "react";
 
 import IconMaximize from "../../assets/icon-maximize.svg?url";
 import IconMaximized from "../../assets/icon-maximized.svg?url";
 import IconMinimize from "../../assets/icon-minimize.svg?url";
 import IconMinimized from "../../assets/icon-minimized.svg?url";
 import { useFloatingWindow } from "../../hooks/useFloatingWindows";
-import styles from "./Header.module.scss";
+import styles from "./FloatingWindowHeader.module.scss";
 
-export type HeaderProps = {
+export type FloatingWindowHeaderProps = {
   id: string;
-  title: React.ReactNode;
+  title: ReactNode;
   draggable: boolean;
   maximizable: boolean;
   minimizable: boolean;
   onDragPointerDown?: (event: PointerEvent<HTMLElement>) => void;
 };
 
-export const Header = ({
+export const FloatingWindowHeader = ({
   id,
   title,
   draggable,
   maximizable,
   minimizable,
   onDragPointerDown,
-}: HeaderProps) => {
+}: FloatingWindowHeaderProps) => {
   const {
     status,
     dragging,
@@ -41,7 +41,24 @@ export const Header = ({
   };
 
   return (
-    <header
+    <Header
+      heading={title}
+      actions={
+        <>
+          {maximizable && status !== "maximized" && (
+            <Icon icon={IconMaximize} onClick={maximizeFloatingWindow} />
+          )}
+          {maximizable && status === "maximized" && (
+            <Icon icon={IconMaximized} onClick={openFloatingWindow} />
+          )}
+          {minimizable && status !== "minimized" && (
+            <Icon icon={IconMinimize} onClick={minimizeFloatingWindow} />
+          )}
+          {minimizable && status === "minimized" && (
+            <Icon icon={IconMinimized} onClick={openFloatingWindow} />
+          )}
+        </>
+      }
       className={clsx(styles.header, {
         [styles.draggable]: draggable,
         [styles.maximized]: status === "maximized",
@@ -49,22 +66,6 @@ export const Header = ({
         [styles.dragging]: dragging,
       })}
       onPointerDown={handlePointerDown}
-    >
-      <h3 className={styles.title}>{title}</h3>
-      <div className={styles.toolbar}>
-        {maximizable && status !== "maximized" && (
-          <Icon icon={IconMaximize} onClick={maximizeFloatingWindow} />
-        )}
-        {maximizable && status === "maximized" && (
-          <Icon icon={IconMaximized} onClick={openFloatingWindow} />
-        )}
-        {minimizable && status !== "minimized" && (
-          <Icon icon={IconMinimize} onClick={minimizeFloatingWindow} />
-        )}
-        {minimizable && status === "minimized" && (
-          <Icon icon={IconMinimized} onClick={openFloatingWindow} />
-        )}
-      </div>
-    </header>
+    />
   );
 };

@@ -27,8 +27,8 @@ export const Tabs = ({ children, defaultIndex, onChange }: TabsProps) => {
         {tabs.map(({ props }, id) => (
           <Header
             key={id}
-            id={id}
-            active={active}
+            index={id}
+            activeIndex={active}
             setIndex={setIndex}
             header={props.header}
           />
@@ -38,8 +38,8 @@ export const Tabs = ({ children, defaultIndex, onChange }: TabsProps) => {
         {tabs.map(({ props }, id) => (
           <Body
             key={id}
-            id={id}
-            active={active}
+            index={id}
+            activeIndex={active}
             body={props.children}
             className={props.className}
           />

@@ -1,3 +1,5 @@
+export type { BodyProps } from "./components/Body";
+export { Body } from "./components/Body";
 export type { ButtonProps } from "./components/Button";
 export { Button } from "./components/Button";
 export type { DialogProps } from "./components/Dialog";
@@ -5,8 +7,12 @@ export { Dialog } from "./components/Dialog";
 export { DialogPortal } from "./components/Dialog";
 export type { DropdownProps } from "./components/DropDown";
 export { Dropdown } from "./components/DropDown";
+export type { FooterProps } from "./components/Footer";
+export { Footer } from "./components/Footer";
 export type { GroupProps } from "./components/Group";
 export { Group } from "./components/Group";
+export type { HeaderProps } from "./components/Header";
+export { Header } from "./components/Header";
 export type { IconProps } from "./components/Icon";
 export { Icon } from "./components/Icon";
 export type { InfoProps } from "./components/Info";

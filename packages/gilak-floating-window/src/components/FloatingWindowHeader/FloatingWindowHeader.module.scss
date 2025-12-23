@@ -1,0 +1,19 @@
+.draggable {
+  cursor: move;
+  cursor: grab;
+  user-select: none;
+}
+
+.dragging {
+  cursor: grabbing;
+}
+
+.minimized {
+  width: 15rem;
+  border-radius: var(--radius-md);
+  cursor: default;
+}
+
+.maximized {
+  cursor: default;
+}
