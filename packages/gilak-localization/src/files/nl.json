@@ -1,3 +1,38 @@
 {
-  "title": "Nederlands"
+  "title": "Nederlands",
+  "languages": {
+    "en": "Engels",
+    "nl": "Nederlands",
+    "de": "Duits"
+  },
+  "settings": {
+    "title": "Instellingen",
+    "language": "Taal",
+    "theme": "Thema",
+    "document": "Document",
+    "window": "Venster",
+    "width": "Breedte",
+    "height": "Hoogte",
+    "number": "Nummer",
+    "save": "Opslaan"
+  },
+  "navigation": {
+    "file": "Bestand",
+    "new": "Nieuw",
+    "open": "Openen",
+    "settings": "Instellingen",
+    "theme": "Thema",
+    "light": "Licht",
+    "dark": "Donker",
+    "view": "Beeld",
+    "help": "Help"
+  },
+  "tools": {
+    "brushSize": "Penseeldikte",
+    "tolerance": "Tolerantie"
+  },
+  "colorSwatch": {
+    "color": "Kleur",
+    "background": "Achtergrond"
+  }
 }

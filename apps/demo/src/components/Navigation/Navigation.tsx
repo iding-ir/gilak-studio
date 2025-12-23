@@ -1,7 +1,7 @@
 import { Menu } from "@gilak/components";
+import { useTranslation } from "react-i18next";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { Language } from "../../features/language/components/Language";
 import { openSettings } from "../../features/settings/settings-slice";
 import {
   addWindow,
@@ -9,6 +9,7 @@ import {
 } from "../../features/windows/windows-slice";
 
 export const Navigation = () => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const windows = useAppSelector(selectAllWindows);
 
@@ -27,22 +28,24 @@ export const Navigation = () => {
   };
 
   return (
-    <>
-      <Menu root open direction="row" label="">
-        <Menu label="File" closeOnClickInside>
-          <Menu label="New" onClick={handleAddWindow} />
-          <Menu label="Open" />
-          <Menu label="Settings" onClick={handleClickSettings} />
-        </Menu>
-        <Menu label="Theme" closeOnClickInside>
-          <Menu label="Light" onClick={() => handleChangeTheme("light")} />
-          <Menu label="Dark" onClick={() => handleChangeTheme("dark")} />
-        </Menu>
-        <Menu label="View" />
-        <Menu label="Help" />
+    <Menu root open direction="row" label="">
+      <Menu label={t("navigation.file")} closeOnClickInside>
+        <Menu label={t("navigation.new")} onClick={handleAddWindow} />
+        <Menu label={t("navigation.open")} />
+        <Menu label={t("navigation.settings")} onClick={handleClickSettings} />
       </Menu>
-
-      <Language />
-    </>
+      <Menu label={t("navigation.theme")} closeOnClickInside>
+        <Menu
+          label={t("navigation.light")}
+          onClick={() => handleChangeTheme("light")}
+        />
+        <Menu
+          label={t("navigation.dark")}
+          onClick={() => handleChangeTheme("dark")}
+        />
+      </Menu>
+      <Menu label={t("navigation.view")} />
+      <Menu label={t("navigation.help")} />
+    </Menu>
   );
 };

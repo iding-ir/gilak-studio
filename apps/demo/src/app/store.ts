@@ -7,6 +7,7 @@ import {
 
 import { brushSlice } from "../features/brush/brush-slice";
 import { colorSlice } from "../features/color/color-slice";
+import { languageListenerMiddleware } from "../features/language/language-middleware";
 import { languageSlice } from "../features/language/language-slice";
 import { settingsSlice } from "../features/settings/settings-slice";
 import { toolsSlice } from "../features/tools/tools.slice";
@@ -23,7 +24,8 @@ const rootReducer = combineSlices(
 
 export const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().prepend(languageListenerMiddleware.middleware),
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

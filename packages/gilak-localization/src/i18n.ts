@@ -2,6 +2,7 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
 import { DEFAULT_LANGUAGE, FALLBACK_LANGUAGE } from "./constants";
+import de from "./files/de.json";
 import en from "./files/en.json";
 import nl from "./files/nl.json";
 import { LANGUAGES } from "./languages";
@@ -13,6 +14,9 @@ i18n.use(initReactI18next).init({
     },
     [LANGUAGES.nl.code]: {
       translation: nl,
+    },
+    [LANGUAGES.de.code]: {
+      translation: de,
     },
   },
   lng: DEFAULT_LANGUAGE,

@@ -1,3 +1,38 @@
 {
-  "title": "English"
+  "title": "English",
+  "languages": {
+    "en": "English",
+    "nl": "Dutch",
+    "de": "German"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "document": "Document",
+    "window": "Window",
+    "width": "Width",
+    "height": "Height",
+    "number": "Number",
+    "save": "Save"
+  },
+  "navigation": {
+    "file": "File",
+    "new": "New",
+    "open": "Open",
+    "settings": "Settings",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "view": "View",
+    "help": "Help"
+  },
+  "tools": {
+    "brushSize": "Brush Size",
+    "tolerance": "Tolerance"
+  },
+  "colorSwatch": {
+    "color": "Color",
+    "background": "Background"
+  }
 }

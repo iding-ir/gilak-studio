@@ -1,14 +1,15 @@
-import { Dropdown, Icon, List, Text } from "@gilak/components";
+import { List, Text } from "@gilak/components";
 import type { LanguageCode } from "@gilak/localization";
 import { LANGUAGES } from "@gilak/localization";
+import { useTranslation } from "react-i18next";
 
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
-import IconLanguage from "../../../assets/icon-language.svg?url";
 import { selectLanguage, setLanguage } from "../language-slice";
 
 export const Language = () => {
   const dispatch = useAppDispatch();
   const language = useAppSelector(selectLanguage);
+  const { t } = useTranslation();
 
   const handleLanguageSelect = (language: LanguageCode) => {
     dispatch(setLanguage(language));
@@ -16,7 +17,7 @@ export const Language = () => {
 
   const items = Object.values(LANGUAGES).map(({ code }) => (
     <Text
-      text={code.toUpperCase()}
+      text={t(`languages.${code}`)}
       selected={language === code}
       frameless
       onClick={() => handleLanguageSelect(code)}
@@ -24,8 +25,6 @@ export const Language = () => {
   ));
 
   return (
-    <Dropdown position="bottom" trigger={<Icon icon={IconLanguage} />}>
-      <List items={items} count={1} direction="column" variant="light" />
-    </Dropdown>
+    <List items={items} count={1} frameless direction="row" variant="light" />
   );
 };

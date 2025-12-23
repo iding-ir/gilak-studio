@@ -11,6 +11,10 @@ export type ColorSwatchProps = {
   colors: string[];
   onChangeColor: (color: string) => void;
   onChangeBackgroundColor: (color: string) => void;
+  labels?: {
+    color?: string;
+    background?: string;
+  };
 };
 
 export const ColorSwatch = ({
@@ -20,6 +24,7 @@ export const ColorSwatch = ({
   colors,
   onChangeColor,
   onChangeBackgroundColor,
+  labels,
 }: ColorSwatchProps) => {
   return (
     <div className={styles.root} style={{ backgroundColor: color }}>
@@ -30,7 +35,7 @@ export const ColorSwatch = ({
         }
       >
         <Tabs>
-          <Tab header="Color" className={styles.tab}>
+          <Tab header={labels?.color ?? "Color"} className={styles.tab}>
             <Input
               value={color}
               readOnly
@@ -57,7 +62,10 @@ export const ColorSwatch = ({
               ))}
             />
           </Tab>
-          <Tab header="Background" className={styles.tab}>
+          <Tab
+            header={labels?.background ?? "Background"}
+            className={styles.tab}
+          >
             <Input
               value={backgroundColor}
               readOnly

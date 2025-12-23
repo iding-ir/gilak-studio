@@ -2,6 +2,7 @@ import type { BrushShape, BrushSize } from "@gilak/canvas";
 import { brushShapeIcons } from "@gilak/canvas/types/brushShape";
 import { ColorSwatch } from "@gilak/color-swatch";
 import { Dropdown, Icon, Slider } from "@gilak/components";
+import { useTranslation } from "react-i18next";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import IconBrush from "../../assets/icon-brush.svg?url";
@@ -33,6 +34,7 @@ import styles from "./Tools.module.scss";
 
 export const Tools = () => {
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
   const brushSize = useAppSelector(selectBrushSize);
   const selectedTool = useAppSelector(selectTool);
   const color = useAppSelector(selectColor);
@@ -74,6 +76,10 @@ export const Tools = () => {
           colors={COLOR_PALETTE}
           onChangeColor={handleChangeColor}
           onChangeBackgroundColor={handleChangeBackgroundColor}
+          labels={{
+            color: t("colorSwatch.color"),
+            background: t("colorSwatch.background"),
+          }}
         />
       </li>
       <li>
@@ -103,7 +109,7 @@ export const Tools = () => {
           range={[1, 10]}
           step={1}
           initial={brushSize}
-          label="Brush Size"
+          label={t("tools.brushSize")}
           onChange={(value) => handleBrushSizeChange(value as BrushSize)}
         />
       </li>
@@ -119,7 +125,7 @@ export const Tools = () => {
           range={[0, 100]}
           step={5}
           initial={tolerance}
-          label="Tolerance"
+          label={t("tools.tolerance")}
           onChange={(value) => handleToleranceChange(value as number)}
         />
       </li>

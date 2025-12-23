@@ -1,0 +1,38 @@
+{
+  "title": "Deutsch",
+  "languages": {
+    "en": "Englisch",
+    "nl": "Niederländisch",
+    "de": "Deutsch"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "language": "Sprache",
+    "theme": "Thema",
+    "document": "Dokument",
+    "window": "Fenster",
+    "width": "Breite",
+    "height": "Höhe",
+    "number": "Zahl",
+    "save": "Speichern"
+  },
+  "navigation": {
+    "file": "Datei",
+    "new": "Neu",
+    "open": "Öffnen",
+    "settings": "Einstellungen",
+    "theme": "Thema",
+    "light": "Hell",
+    "dark": "Dunkel",
+    "view": "Ansicht",
+    "help": "Hilfe"
+  },
+  "tools": {
+    "brushSize": "Pinselgröße",
+    "tolerance": "Toleranz"
+  },
+  "colorSwatch": {
+    "color": "Farbe",
+    "background": "Hintergrund"
+  }
+}
