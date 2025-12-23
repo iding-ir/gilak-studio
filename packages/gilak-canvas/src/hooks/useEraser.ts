@@ -1,25 +1,23 @@
 import { type RefObject, useEffect, useRef } from "react";
 
-import { drawBrush } from "../methods";
+import { drawEraser } from "../methods/draw-eraser";
 import type { BrushShape, BrushSize, Scale } from "../types";
-import type { Point } from "../types/point";
+import type { Point } from "../types";
 
-export type UseDrawingProps = {
+export type UseEraserProps = {
   canvasRef: RefObject<HTMLCanvasElement | null>;
   enabled: boolean;
-  color: string;
   brushSize: BrushSize;
   brushShape: BrushShape;
 };
 
-export const useDrawing = ({
+export const useEraser = ({
   canvasRef,
   enabled,
-  color,
   brushSize,
   brushShape,
-}: UseDrawingProps) => {
-  const drawing = useRef<boolean>(false);
+}: UseEraserProps) => {
+  const erasing = useRef<boolean>(false);
   const currentPointRef = useRef<Point | null>(null);
   const previousPointRef = useRef<Point | null>(null);
   const rectRef = useRef<DOMRect | null>(null);
@@ -42,7 +40,7 @@ export const useDrawing = ({
 
     const draw = (event: PointerEvent) => {
       const canvas = canvasRef.current;
-      if (!enabled || !canvas || !drawing.current) return;
+      if (!enabled || !canvas || !erasing.current) return;
       const ctx = canvas.getContext("2d");
       if (!ctx) return;
 
@@ -52,12 +50,11 @@ export const useDrawing = ({
       previousPointRef.current = currentPointRef.current;
       currentPointRef.current = coords;
 
-      drawBrush({
+      drawEraser({
         ctx,
         brushSize,
         brushShape,
-        color,
-        point: currentPointRef.current,
+        point: currentPointRef.current!,
         prevPoint: previousPointRef.current,
       });
     };
@@ -71,7 +68,7 @@ export const useDrawing = ({
         sy: canvas.height / rectRef.current.height,
       };
 
-      drawing.current = true;
+      erasing.current = true;
       draw(event);
     };
 
@@ -80,7 +77,7 @@ export const useDrawing = ({
     };
 
     const onPointerUp = () => {
-      drawing.current = false;
+      erasing.current = false;
       previousPointRef.current = null;
       currentPointRef.current = null;
       rectRef.current = null;
@@ -101,5 +98,5 @@ export const useDrawing = ({
       canvas.removeEventListener("pointerup", onPointerUp);
       canvas.removeEventListener("pointerleave", onPointerUp);
     };
-  }, [enabled, color, brushSize, brushShape, canvasRef]);
+  }, [enabled, brushSize, brushShape, canvasRef]);
 };

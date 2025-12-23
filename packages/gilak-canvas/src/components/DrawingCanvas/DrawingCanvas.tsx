@@ -4,6 +4,7 @@ import { type BrushShape, type BrushSize } from "../../types";
 import type { CanvasProps } from "../Canvas";
 import { Canvas } from "../Canvas";
 import { DrawingTool } from "../DrawingTool";
+import { EraserTool } from "../EraserTool";
 import { FillTool } from "../FillTool";
 import styles from "./DrawingCanvas.module.scss";
 
@@ -11,6 +12,7 @@ export type DrawingCanvasProps = CanvasProps & {
   canvasRef: RefObject<HTMLCanvasElement | null>;
   enabledDrawing: boolean;
   enabledFill: boolean;
+  enabledEraser: boolean;
   color: string;
   backgroundColor: string;
   brushSize: BrushSize;
@@ -24,6 +26,7 @@ export const DrawingCanvas = ({
   canvasRef,
   enabledDrawing,
   enabledFill,
+  enabledEraser,
   color,
   backgroundColor,
   brushSize,
@@ -48,12 +51,19 @@ export const DrawingCanvas = ({
           color={backgroundColor}
           tolerance={tolerance}
         >
-          <Canvas
+          <EraserTool
             canvasRef={canvasRef}
-            {...props}
-            width={width}
-            height={height}
-          />
+            enabled={enabledEraser}
+            brushSize={brushSize}
+            brushShape={brushShape}
+          >
+            <Canvas
+              canvasRef={canvasRef}
+              {...props}
+              width={width}
+              height={height}
+            />
+          </EraserTool>
         </FillTool>
       </DrawingTool>
     </div>

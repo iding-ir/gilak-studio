@@ -68,6 +68,7 @@ export const Window = ({ id, title }: WindowProps) => {
               canvasRef={canvasRef}
               enabledDrawing={selectedTool === "BRUSH"}
               enabledFill={selectedTool === "FILL"}
+              enabledEraser={selectedTool === "ERASER"}
               color={color}
               backgroundColor={backgroundColor}
               brushSize={brushSize}

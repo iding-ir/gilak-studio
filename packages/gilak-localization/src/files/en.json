@@ -32,7 +32,7 @@
     "help": "Help"
   },
   "tools": {
-    "brushSize": "Brush Size",
+    "brushSize": "Size",
     "tolerance": "Tolerance"
   },
   "colorSwatch": {

@@ -5,9 +5,10 @@ import { Dropdown, Icon, Slider } from "@gilak/components";
 import { useTranslation } from "react-i18next";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import IconBrush from "../../assets/icon-brush.svg?url";
+import IconBrushTool from "../../assets/icon-brush.svg?url";
 import IconColorPicker from "../../assets/icon-color-picker.svg?url";
 import IconSwatch from "../../assets/icon-color-swatch.svg?url";
+import IconEraserTool from "../../assets/icon-eraser.svg?url";
 import IconFillTool from "../../assets/icon-fill-tool.svg?url";
 import { COLOR_PALETTE } from "../../constants";
 import {
@@ -84,16 +85,16 @@ export const Tools = () => {
       </li>
       <li>
         <Icon
-          icon={IconColorPicker}
-          selected={selectedTool === "COLOR_PICKER"}
-          onClick={() => handleToggleTool("COLOR_PICKER")}
+          icon={IconBrushTool}
+          selected={selectedTool === "BRUSH"}
+          onClick={() => handleToggleTool("BRUSH")}
         />
       </li>
       <li>
         <Icon
-          icon={IconBrush}
-          selected={selectedTool === "BRUSH"}
-          onClick={() => handleToggleTool("BRUSH")}
+          icon={IconEraserTool}
+          selected={selectedTool === "ERASER"}
+          onClick={() => handleToggleTool("ERASER")}
         />
       </li>
       <li>
@@ -111,6 +112,13 @@ export const Tools = () => {
           initial={brushSize}
           label={t("tools.brushSize")}
           onChange={(value) => handleBrushSizeChange(value as BrushSize)}
+        />
+      </li>
+      <li>
+        <Icon
+          icon={IconColorPicker}
+          selected={selectedTool === "COLOR_PICKER"}
+          onClick={() => handleToggleTool("COLOR_PICKER")}
         />
       </li>
       <li>

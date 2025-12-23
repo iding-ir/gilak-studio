@@ -1,26 +1,24 @@
 import type { BrushShape, BrushSize } from "../types";
-import type { Point } from "../types/point";
+import type { Point } from "../types";
 import { drawShape } from "./draw-shape";
 
-export type DrawBrushProps = {
+export type DrawEraserProps = {
   ctx: CanvasRenderingContext2D;
-  color: string;
   brushSize: BrushSize;
   brushShape: BrushShape;
   point: Point;
   prevPoint?: Point | null;
 };
 
-export const drawBrush = ({
+export const drawEraser = ({
   ctx,
-  color,
   brushSize,
   brushShape,
   point: { x, y },
   prevPoint,
-}: DrawBrushProps) => {
+}: DrawEraserProps) => {
   ctx.save();
-  ctx.strokeStyle = color;
+  ctx.globalCompositeOperation = "destination-out";
   ctx.lineWidth = brushSize;
   ctx.lineCap = "round";
   ctx.lineJoin = "round";
