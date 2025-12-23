@@ -8,9 +8,9 @@
 
   .text {
     grid-area: label;
+    font-size: var(--font-size-sm);
     font-weight: var(--font-weight-md);
     color: var(--color-dark-lg);
-    font-size: var(--font-size-md);
     margin: 0 0 var(--spacing-xs) 0;
     cursor: pointer;
   }

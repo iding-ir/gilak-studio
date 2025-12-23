@@ -1,5 +1,5 @@
 import { Slider } from "@gilak/components";
-import { useZoomLevelScreenContext } from "@gilak/resizable-screen/context";
+import { useZoomLevelScreenContext } from "@gilak/resizable-screen";
 
 import IconZoom from "../../assets/icon-zoom.svg?url";
 import type { ZoomLevel } from "../../context/types";
