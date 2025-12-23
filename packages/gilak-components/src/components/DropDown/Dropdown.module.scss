@@ -1,80 +1,59 @@
-.root {
+.trigger {
+  display: inline-flex;
   position: relative;
-  display: grid;
-
-  .trigger {
-    width: 100%;
-    display: inline-flex;
-    cursor: pointer;
-  }
+  cursor: pointer;
 
   .menu {
     position: absolute;
     z-index: 9999;
-  }
 
-  &.top {
-    .menu {
+    &.top {
       bottom: 100%;
       left: 50%;
       transform: translateX(-50%);
       margin-bottom: var(--spacing-xs);
     }
-  }
 
-  &.top-right {
-    .menu {
+    &.top-right {
       bottom: 100%;
       left: 0;
       margin-bottom: var(--spacing-xs);
     }
-  }
 
-  &.right {
-    .menu {
+    &.right {
       top: 50%;
       left: 100%;
       transform: translateY(-50%);
       margin-left: var(--spacing-xs);
     }
-  }
 
-  &.bottom-right {
-    .menu {
+    &.bottom-right {
       top: 100%;
       left: 0;
       margin-top: var(--spacing-xs);
     }
-  }
 
-  &.bottom {
-    .menu {
+    &.bottom {
       top: 100%;
       left: 50%;
       transform: translateX(-50%);
       margin-top: var(--spacing-xs);
     }
-  }
 
-  &.bottom-left {
-    .menu {
+    &.bottom-left {
       top: 100%;
       right: 0;
       margin-top: var(--spacing-xs);
     }
-  }
 
-  &.left {
-    .menu {
+    &.left {
       top: 50%;
       right: 100%;
       transform: translateY(-50%);
       margin-right: var(--spacing-xs);
     }
-  }
 
-  &.top-left {
-    .menu {
+    &.top-left {
       bottom: 100%;
       right: 0;
       margin-bottom: var(--spacing-xs);

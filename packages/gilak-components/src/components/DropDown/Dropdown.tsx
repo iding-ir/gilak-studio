@@ -1,18 +1,9 @@
+import type { Position } from "@gilak/components/types";
 import clsx from "clsx";
 import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 
 import styles from "./Dropdown.module.scss";
-
-export type Position =
-  | "top"
-  | "top-right"
-  | "right"
-  | "bottom-right"
-  | "bottom"
-  | "bottom-left"
-  | "left"
-  | "top-left";
 
 export type DropdownProps = {
   children: ReactNode;
@@ -62,18 +53,16 @@ export const Dropdown = ({
   };
 
   return (
-    <div className={clsx(styles.root, styles[position], className)}>
-      <div
-        ref={triggerRef}
-        className={styles.trigger}
-        onPointerDown={handleClickTrigger}
-      >
-        {trigger}
-      </div>
+    <div
+      ref={triggerRef}
+      className={clsx(styles.trigger, className)}
+      onPointerDown={handleClickTrigger}
+    >
+      {trigger}
       {open && (
         <div
           ref={menuRef}
-          className={styles.menu}
+          className={clsx(styles.menu, styles[position])}
           onPointerDown={handleClickMenu}
         >
           {children}
