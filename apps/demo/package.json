@@ -18,6 +18,7 @@
     "@gilak/color-swatch": "workspace:*",
     "@gilak/components": "workspace:*",
     "@gilak/floating-window": "workspace:*",
+    "@gilak/localization": "workspace:*",
     "@gilak/resizable-screen": "workspace:*",
     "@gilak/stylist": "workspace:*",
     "@pixi/react": "^8.0.5",

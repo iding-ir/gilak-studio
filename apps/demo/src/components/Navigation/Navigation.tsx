@@ -1,6 +1,7 @@
 import { Menu } from "@gilak/components";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { Language } from "../../features/language/components/Language";
 import { openSettings } from "../../features/settings/settings-slice";
 import {
   addWindow,
@@ -26,18 +27,22 @@ export const Navigation = () => {
   };
 
   return (
-    <Menu root open direction="row" label="">
-      <Menu label="File" closeOnClickInside>
-        <Menu label="New" onClick={handleAddWindow} />
-        <Menu label="Open" />
-        <Menu label="Settings" onClick={handleClickSettings} />
+    <>
+      <Menu root open direction="row" label="">
+        <Menu label="File" closeOnClickInside>
+          <Menu label="New" onClick={handleAddWindow} />
+          <Menu label="Open" />
+          <Menu label="Settings" onClick={handleClickSettings} />
+        </Menu>
+        <Menu label="Theme" closeOnClickInside>
+          <Menu label="Light" onClick={() => handleChangeTheme("light")} />
+          <Menu label="Dark" onClick={() => handleChangeTheme("dark")} />
+        </Menu>
+        <Menu label="View" />
+        <Menu label="Help" />
       </Menu>
-      <Menu label="Theme" closeOnClickInside>
-        <Menu label="Light" onClick={() => handleChangeTheme("light")} />
-        <Menu label="Dark" onClick={() => handleChangeTheme("dark")} />
-      </Menu>
-      <Menu label="View" />
-      <Menu label="Help" />
-    </Menu>
+
+      <Language />
+    </>
   );
 };

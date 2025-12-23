@@ -1,8 +1,0 @@
-{
-  "title": "Gilak Studio Demo",
-  "subtitle": "Demonstrating the gilak-color-picker and gilak-eyedropper packages",
-  "footer": "These are placeholder components from the workspace packages",
-  "colorSwatch": {
-    "placeholder": "Color Swatch"
-  }
-}

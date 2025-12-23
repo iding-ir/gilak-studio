@@ -7,6 +7,7 @@ import {
 
 import { brushSlice } from "../features/brush/brush-slice";
 import { colorSlice } from "../features/color/color-slice";
+import { languageSlice } from "../features/language/language-slice";
 import { settingsSlice } from "../features/settings/settings-slice";
 import { toolsSlice } from "../features/tools/tools.slice";
 import { windowsSlice } from "../features/windows/windows-slice";
@@ -17,6 +18,7 @@ const rootReducer = combineSlices(
   toolsSlice,
   windowsSlice,
   settingsSlice,
+  languageSlice,
 );
 
 export const store = configureStore({

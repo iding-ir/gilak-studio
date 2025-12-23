@@ -41,6 +41,10 @@ export default defineConfig({
         __dirname,
         "../../packages/gilak-resizable-screen/src",
       ),
+      "@gilak/localization": resolve(
+        __dirname,
+        "../../packages/gilak-localization/src",
+      ),
     },
   },
   css: {

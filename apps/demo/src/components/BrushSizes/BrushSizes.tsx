@@ -12,7 +12,7 @@ export const BrushSizes = ({
     <List
       direction="column"
       count={1}
-      theme="light"
+      variant="light"
       items={BRUSH_SIZES.map((size) => (
         <Text
           selected={brush === size}

@@ -9,7 +9,7 @@ export type ListProps = {
   direction?: Direction;
   count?: number;
   frameless?: boolean;
-  theme?: Variant;
+  variant?: Variant;
 };
 
 export const List = ({
@@ -17,11 +17,11 @@ export const List = ({
   direction = "column",
   count = 1,
   frameless = false,
-  theme = "light",
+  variant = "light",
 }: ListProps) => {
   return (
     <ul
-      className={clsx(styles.list, styles[theme], styles[direction], {
+      className={clsx(styles.list, styles[variant], styles[direction], {
         [styles.frameless]: frameless,
       })}
       style={{

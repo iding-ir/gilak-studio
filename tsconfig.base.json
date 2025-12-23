@@ -32,7 +32,9 @@
       "@gilak/floating-window": ["./packages/gilak-floating-window/src"],
       "@gilak/floating-window/*": ["./packages/gilak-floating-window/src/*"],
       "@gilak/resizable-screen": ["./packages/gilak-resizable-screen/src"],
-      "@gilak/resizable-screen/*": ["./packages/gilak-resizable-screen/src/*"]
+      "@gilak/resizable-screen/*": ["./packages/gilak-resizable-screen/src/*"],
+      "@gilak/localization": ["./packages/gilak-localization/src"],
+      "@gilak/localization/*": ["./packages/gilak-localization/src/*"]
     },
 
     /* Linting */

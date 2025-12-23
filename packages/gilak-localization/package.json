@@ -1,0 +1,50 @@
+{
+  "name": "@gilak/localization",
+  "version": "0.0.1",
+  "description": "Localization utilities for Gilak Studio packages",
+  "author": "Aydin Ghane Kh. <https://github.com/iding-ir>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iding-ir/gilak-studio.git",
+    "directory": "packages/gilak-localization"
+  },
+  "keywords": [
+    "localization",
+    "gilak"
+  ],
+  "homepage": "https://github.com/iding-ir/gilak-studio#readme",
+  "bugs": {
+    "url": "https://github.com/iding-ir/gilak-studio/issues"
+  },
+  "type": "module",
+  "main": "./dist/gilak-localization.umd.js",
+  "module": "./dist/gilak-localization.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/gilak-localization.es.js",
+      "require": "./dist/gilak-localization.umd.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "vite build",
+    "lint": "eslint .",
+    "prepublishOnly": "pnpm build"
+  },
+  "devDependencies": {
+    "@gilak/build-config": "workspace:*",
+    "@types/i18next": "^13.0.0",
+    "@types/react-i18next": "^8.1.0"
+  },
+  "dependencies": {
+    "i18next": "^25.7.1",
+    "react": "^19.2.0",
+    "react-i18next": "^16.3.5"
+  }
+}

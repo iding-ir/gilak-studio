@@ -44,7 +44,7 @@ export const ColorSwatch = ({
             <List
               direction="column"
               count={4}
-              theme="light"
+              variant="light"
               frameless
               items={colors.map((c) => (
                 <Icon
@@ -71,7 +71,7 @@ export const ColorSwatch = ({
             <List
               direction="column"
               count={4}
-              theme="light"
+              variant="light"
               frameless
               items={colors.map((c) => (
                 <Icon

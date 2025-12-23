@@ -22,7 +22,7 @@ export const BrushShapes = ({
     <List
       direction="column"
       count={3}
-      theme="light"
+      variant="light"
       items={[
         <Icon
           {...iconProps}

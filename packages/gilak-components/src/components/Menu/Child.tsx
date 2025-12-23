@@ -18,7 +18,7 @@ export const Child = ({
       direction={direction}
       count={1}
       frameless={root}
-      theme={root ? "ghost" : "dark"}
+      variant={root ? "ghost" : "dark"}
       items={Children.toArray(children)}
     />
   );
