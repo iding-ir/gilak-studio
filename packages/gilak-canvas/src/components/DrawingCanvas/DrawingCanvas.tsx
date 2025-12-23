@@ -5,6 +5,7 @@ import type { CanvasProps } from "../Canvas";
 import { Canvas } from "../Canvas";
 import { DrawingTool } from "../DrawingTool";
 import { FillTool } from "../FillTool";
+import styles from "./DrawingCanvas.module.scss";
 
 export type DrawingCanvasProps = CanvasProps & {
   canvasRef: RefObject<HTMLCanvasElement | null>;
@@ -33,26 +34,28 @@ export const DrawingCanvas = ({
   ...props
 }: DrawingCanvasProps) => {
   return (
-    <DrawingTool
-      canvasRef={canvasRef}
-      enabled={enabledDrawing}
-      color={color}
-      brushSize={brushSize}
-      brushShape={brushShape}
-    >
-      <FillTool
+    <div className={styles.canvas}>
+      <DrawingTool
         canvasRef={canvasRef}
-        enabled={enabledFill}
-        color={backgroundColor}
-        tolerance={tolerance}
+        enabled={enabledDrawing}
+        color={color}
+        brushSize={brushSize}
+        brushShape={brushShape}
       >
-        <Canvas
+        <FillTool
           canvasRef={canvasRef}
-          {...props}
-          width={width}
-          height={height}
-        />
-      </FillTool>
-    </DrawingTool>
+          enabled={enabledFill}
+          color={backgroundColor}
+          tolerance={tolerance}
+        >
+          <Canvas
+            canvasRef={canvasRef}
+            {...props}
+            width={width}
+            height={height}
+          />
+        </FillTool>
+      </DrawingTool>
+    </div>
   );
 };

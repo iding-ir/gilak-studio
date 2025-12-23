@@ -17,7 +17,6 @@ export const ResizableScreen = ({ children }: ResizableScreenProps) => {
 
   useZoomLevel({
     zoomLevel,
-    padding: "var(--spacing-xl)",
     parentRef,
     childRef,
   });
