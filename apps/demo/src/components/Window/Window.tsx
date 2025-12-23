@@ -6,7 +6,7 @@ import {
   ResizableScreenProvider,
   ZoomSelector,
 } from "@gilak/resizable-screen";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
@@ -41,6 +41,8 @@ export const Window = ({ id, title }: WindowProps) => {
   const tolerance = useAppSelector(selectTolerance);
   const doc = useAppSelector(selectDoc);
   const win = useAppSelector(selectWin);
+  const [width] = useState(doc.w);
+  const [height] = useState(doc.h);
 
   const handleSelectColor = (color: string) => {
     dispatch(unsetTool());
@@ -48,7 +50,7 @@ export const Window = ({ id, title }: WindowProps) => {
   };
 
   return (
-    <ResizableScreenProvider key={id}>
+    <ResizableScreenProvider>
       <FloatingWindow
         id={id}
         title={title}
@@ -71,8 +73,8 @@ export const Window = ({ id, title }: WindowProps) => {
               brushSize={brushSize}
               brushShape={brushShape}
               tolerance={tolerance}
-              width={doc.w}
-              height={doc.h}
+              width={width}
+              height={height}
             />
           </MagnifierProvider>
         </ResizableScreen>

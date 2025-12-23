@@ -1,4 +1,4 @@
-import { type RefObject, useState } from "react";
+import { type RefObject } from "react";
 
 import { type BrushShape, type BrushSize } from "../../types";
 import type { CanvasProps } from "../Canvas";
@@ -27,12 +27,11 @@ export const DrawingCanvas = ({
   backgroundColor,
   brushSize,
   brushShape,
+  width,
+  height,
   tolerance,
   ...props
 }: DrawingCanvasProps) => {
-  const [width] = useState(props.width);
-  const [height] = useState(props.height);
-
   return (
     <DrawingTool
       ref={ref}
