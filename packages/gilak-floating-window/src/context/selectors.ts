@@ -23,3 +23,9 @@ export const selectMinimizedWindows = (state: State) => {
 export const hasMinimizedWindows = (state: State) => {
   return Object.values(state.windows).some((w) => w.status === "minimized");
 };
+
+export const selectFocusedWindow = (state: State) => {
+  return Object.values(state.windows).reduce((prev, current) =>
+    prev.zIndex > current.zIndex ? prev : current,
+  );
+};

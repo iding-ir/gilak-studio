@@ -54,7 +54,7 @@ export const FloatingWindow = memo(
     id,
     children,
     className,
-    title = "",
+    title = "Untitled",
     editableTitle = false,
     initialStatus = IMITIAL_STATUS,
     footer,

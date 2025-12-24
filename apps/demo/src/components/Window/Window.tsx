@@ -2,7 +2,7 @@ import type { CanvasHistory } from "@gilak/canvas";
 import { DrawingCanvas } from "@gilak/canvas";
 import { MagnifierProvider } from "@gilak/color-picker";
 import { FloatingWindow } from "@gilak/floating-window";
-import { useFloatingWindow } from "@gilak/floating-window/hooks/useFloatingWindow";
+import { useFloatingWindow } from "@gilak/floating-window";
 import {
   ResizableScreen,
   ResizableScreenProvider,

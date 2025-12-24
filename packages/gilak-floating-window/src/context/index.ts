@@ -20,7 +20,11 @@ export { reducer } from "./reducer";
 export {
   hasMinimizedWindows,
   selectFloatingWindow,
+  selectFloatingWindowById,
+  selectFocusedWindow,
+  selectMaximizedWindows,
   selectMinimizedWindows,
+  selectOpenWindows,
 } from "./selectors";
 
 // state:

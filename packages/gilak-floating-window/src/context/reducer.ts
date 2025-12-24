@@ -78,7 +78,7 @@ export const reducer = (state: State, { type, payload }: Action): State => {
         ...state,
         windows: {
           ...state.windows,
-          [id]: { ...state.windows[id], zIndex: zIndexNew, focused: true },
+          [id]: { ...state.windows[id], zIndex: zIndexNew },
         },
       };
     }

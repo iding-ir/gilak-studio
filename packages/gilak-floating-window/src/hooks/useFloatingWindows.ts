@@ -6,7 +6,7 @@ import type { FloatingWindowType } from "../context/types";
 
 export const useFloatingWindows = () => {
   const { state, dispatch } = useFloatingWindowContext();
-  const window = state.windows;
+  const { windows } = state;
 
   const registerFloatingWindow = useCallback(
     (window: FloatingWindowType) =>
@@ -20,7 +20,7 @@ export const useFloatingWindows = () => {
   );
 
   return {
-    ...window,
+    windows,
     registerFloatingWindow,
     setFocusedFloatingWindow,
   };
