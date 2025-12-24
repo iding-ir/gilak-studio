@@ -19,11 +19,7 @@ import {
   setColor,
 } from "../../features/color/color-slice";
 import { selectDoc, selectWin } from "../../features/settings/settings-slice";
-import {
-  selectTolerance,
-  selectTool,
-  unsetTool,
-} from "../../features/tools/tools.slice";
+import { selectTolerance, selectTool } from "../../features/tools/tools.slice";
 import { WindowFooter } from "./WindowFooter";
 
 export type WindowProps = {
@@ -47,7 +43,6 @@ export const Window = ({ id, title }: WindowProps) => {
   const [height] = useState(doc.h);
 
   const handleSelectColor = (color: string) => {
-    dispatch(unsetTool());
     dispatch(setColor(color));
   };
 

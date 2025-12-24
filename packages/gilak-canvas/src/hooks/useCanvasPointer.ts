@@ -1,4 +1,4 @@
-import { type RefObject, useEffect } from "react";
+import { type RefObject, useEffect, useRef } from "react";
 
 import type { Point } from "../types/point";
 
@@ -12,8 +12,9 @@ export type CanvasHandlers = {
   onEnter?: (response: Response) => void;
   onLeave?: (response: Response) => void;
   onDown?: (response: Response) => void;
-  onMove?: (response: Response & { prevPoint: Point | null }) => void;
+  onDrag?: (response: Response & { prevPoint: Point | null }) => void;
   onUp?: (response: Response) => void;
+  onMove?: (response: Response) => void;
 };
 
 export type UseCanvasPointerArgs = {
@@ -32,9 +33,12 @@ export const useCanvasPointer = ({
   onEnter,
   onLeave,
   onDown,
-  onMove,
+  onDrag,
   onUp,
+  onMove,
 }: UseCanvasPointerArgs) => {
+  const rafRef = useRef<number | null>(null);
+
   useEffect(() => {
     if (!enabled) return;
     const canvas = canvasRef.current;
@@ -63,14 +67,13 @@ export const useCanvasPointer = ({
 
     const onPointerLeave = (event: PointerEvent) => {
       if (map!.has(event.pointerId)) map!.delete(event.pointerId);
+
       onLeave?.({ event, canvas, point: toCanvas(event) });
     };
 
     const onPointerDown = (event: PointerEvent) => {
-      // dedupe by pointer id
       if (map!.has(event.pointerId)) return;
 
-      // cache rect at start
       rectRef.current = canvas.getBoundingClientRect();
 
       const point = toCanvas(event);
@@ -79,15 +82,25 @@ export const useCanvasPointer = ({
     };
 
     const onPointerMove = (event: PointerEvent) => {
-      if (!map!.has(event.pointerId)) return;
-      const prevPoint = map!.get(event.pointerId) ?? null;
-      const point = toCanvas(event);
-      map!.set(event.pointerId, point);
-      onMove?.({ event, canvas, point, prevPoint });
+      if (rafRef.current !== null) return;
+
+      rafRef.current = requestAnimationFrame(() => {
+        rafRef.current = null;
+
+        const point = toCanvas(event);
+        onMove?.({ event, canvas, point });
+
+        if (!map!.has(event.pointerId)) return;
+
+        const prevPoint = map!.get(event.pointerId) ?? null;
+        map!.set(event.pointerId, point);
+        onDrag?.({ event, canvas, point, prevPoint });
+      });
     };
 
     const onPointerUp = (event: PointerEvent) => {
       if (map!.has(event.pointerId)) map!.delete(event.pointerId);
+
       onUp?.({ event, canvas, point: toCanvas(event) });
     };
 
@@ -104,5 +117,5 @@ export const useCanvasPointer = ({
       canvas.removeEventListener("pointerenter", onPointerEnter);
       canvas.removeEventListener("pointerleave", onPointerLeave);
     };
-  }, [canvasRef, enabled, onEnter, onLeave, onDown, onMove, onUp]);
+  }, [canvasRef, enabled, onEnter, onLeave, onDown, onDrag, onUp, onMove]);
 };

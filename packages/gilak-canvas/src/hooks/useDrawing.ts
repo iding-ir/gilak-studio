@@ -34,7 +34,7 @@ export const useDrawing = ({
 
       drawBrush({ ctx, brushSize, brushShape, color, point, prevPoint: null });
     },
-    onMove: ({ point, prevPoint }) => {
+    onDrag: ({ point, prevPoint }) => {
       const canvas = canvasRef.current;
       if (!canvas) return;
       const ctx = canvas.getContext("2d");

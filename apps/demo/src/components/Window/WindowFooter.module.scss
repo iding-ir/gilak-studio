@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: row;
   gap: var(--spacing-xl);
+  padding: 0 var(--spacing-md);
 
   .undoRedo {
     display: flex;

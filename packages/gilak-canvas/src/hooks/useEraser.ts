@@ -32,7 +32,7 @@ export const useEraser = ({
 
       drawEraser({ ctx, brushSize, brushShape, point, prevPoint: null });
     },
-    onMove: ({ point, prevPoint }) => {
+    onDrag: ({ point, prevPoint }) => {
       const canvas = canvasRef.current;
       if (!canvas) return;
       const ctx = canvas.getContext("2d");
