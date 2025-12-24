@@ -6,10 +6,12 @@ export type Action =
   | { type: "UNREGISTER"; payload: { id: string } }
   | { type: "SET_STATUS"; payload: { id: string; status: Status } }
   | { type: "SET_POSITION"; payload: { id: string; position: Position } }
+  | { type: "SET_TITLE"; payload: { id: string; title: string } }
   | { type: "SET_SIZE"; payload: { id: string; size: Size } }
   | { type: "SET_DRAGGING"; payload: { id: string; dragging: boolean } }
   | { type: "SET_RESIZING"; payload: { id: string; resizing: boolean } }
-  | { type: "BRING_TO_FRONT"; payload: { id: string } };
+  | { type: "BRING_TO_FRONT"; payload: { id: string } }
+  | { type: "SET_FOCUSED"; payload: { id: string } };
 
 const registerFloatingWindow = (payload: FloatingWindowType): Action => ({
   type: "REGISTER",
@@ -31,6 +33,11 @@ const setFloatingWindowPosition = (id: string, position: Position): Action => ({
   payload: { id, position },
 });
 
+const setFloatingWindowTitle = (id: string, title: string): Action => ({
+  type: "SET_TITLE",
+  payload: { id, title },
+});
+
 const setFloatingWindowSize = (id: string, size: Size): Action => ({
   type: "SET_SIZE",
   payload: { id, size },
@@ -46,8 +53,8 @@ const setFloatingWindowResizing = (id: string, resizing: boolean): Action => ({
   payload: { id, resizing },
 });
 
-const bringFloatingWindowToFront = (id: string): Action => ({
-  type: "BRING_TO_FRONT",
+const setFocusedFloatingWindow = (id: string): Action => ({
+  type: "SET_FOCUSED",
   payload: { id },
 });
 
@@ -59,7 +66,8 @@ const actions = {
   setFloatingWindowSize,
   setFloatingWindowDragging,
   setFloatingWindowResizing,
-  bringFloatingWindowToFront,
+  setFloatingWindowTitle,
+  setFocusedFloatingWindow,
 };
 
 export { actions };

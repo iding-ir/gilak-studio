@@ -65,9 +65,9 @@
 
   &.ghost {
     @include interactive(
-      $color: var(--color-dark-xxl),
+      $color: inherit,
       $bg-color: transparent,
-      $hover-color: var(--color-primary-xxl),
+      $hover-color: inherit,
       $hover-bg-color: transparent
     );
   }

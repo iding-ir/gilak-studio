@@ -2,7 +2,7 @@ import { type RefObject, useCallback, useRef } from "react";
 
 import type { Status } from "../context";
 import type { Position } from "../types";
-import { useFloatingWindow } from "./useFloatingWindows";
+import { useFloatingWindow } from "./useFloatingWindow";
 
 const clampPosition = ({
   pos,
@@ -49,7 +49,7 @@ export const useDrag = ({
   const {
     setFloatingWindowPosition,
     setFloatingWindowDragging,
-    bringFloatingWindowToFront,
+    focusFloatingWindow,
   } = useFloatingWindow(id);
 
   const state = useRef({
@@ -67,7 +67,7 @@ export const useDrag = ({
 
       if (!draggable || status !== "open") return;
 
-      bringFloatingWindowToFront();
+      focusFloatingWindow();
       setFloatingWindowDragging(true);
       onDragStart?.(state.current.startPosition);
 
@@ -131,7 +131,7 @@ export const useDrag = ({
       onDragStart,
       onDrag,
       onDragEnd,
-      bringFloatingWindowToFront,
+      focusFloatingWindow,
       setFloatingWindowDragging,
       setFloatingWindowPosition,
     ],

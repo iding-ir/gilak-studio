@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 
 import type { FloatingWindowType } from "../context";
-import { useFloatingWindow } from "./useFloatingWindows";
+import { useFloatingWindow } from "./useFloatingWindow";
+import { useFloatingWindows } from "./useFloatingWindows";
 
 export const useRegister = (win: FloatingWindowType) => {
-  const { registerFloatingWindow, unregisterFloatingWindow } =
-    useFloatingWindow(win.id);
+  const { registerFloatingWindow } = useFloatingWindows();
+  const { unregisterFloatingWindow } = useFloatingWindow(win.id);
 
   useEffect(() => {
     registerFloatingWindow(win);

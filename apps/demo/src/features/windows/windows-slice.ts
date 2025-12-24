@@ -9,7 +9,7 @@ export interface WindowsState {
 }
 
 const initialState: WindowsState = {
-  all: [{ id: "1", title: "Untitled" }],
+  all: [{ id: "1" }],
   bin: [],
 };
 
@@ -28,14 +28,6 @@ export const windowsSlice = createAppSlice({
         state.bin.push(payload);
       },
     ),
-    setWindowTitle: create.reducer(
-      (state, { payload }: PayloadAction<WindowType>) => {
-        const window = state.all.find((w) => w.id === payload.id);
-        if (window) {
-          window.title = payload.title;
-        }
-      },
-    ),
   }),
   selectors: {
     selectAllWindows: ({ all }) => all,
@@ -43,5 +35,5 @@ export const windowsSlice = createAppSlice({
   },
 });
 
-export const { addWindow, removeWindow, setWindowTitle } = windowsSlice.actions;
+export const { addWindow, removeWindow } = windowsSlice.actions;
 export const { selectAllWindows, selectBinWindows } = windowsSlice.selectors;

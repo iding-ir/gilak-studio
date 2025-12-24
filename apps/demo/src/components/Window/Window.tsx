@@ -2,6 +2,7 @@ import type { CanvasHistory } from "@gilak/canvas";
 import { DrawingCanvas } from "@gilak/canvas";
 import { MagnifierProvider } from "@gilak/color-picker";
 import { FloatingWindow } from "@gilak/floating-window";
+import { useFloatingWindow } from "@gilak/floating-window/hooks/useFloatingWindow";
 import {
   ResizableScreen,
   ResizableScreenProvider,
@@ -24,10 +25,9 @@ import { WindowFooter } from "./WindowFooter";
 
 export type WindowProps = {
   id: string;
-  title: string;
 };
 
-export const Window = ({ id, title }: WindowProps) => {
+export const Window = ({ id }: WindowProps) => {
   const dispatch = useAppDispatch();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const canvasHistoryRef = useRef<CanvasHistory | null>(null);
@@ -41,6 +41,7 @@ export const Window = ({ id, title }: WindowProps) => {
   const win = useAppSelector(selectWin);
   const [width] = useState(doc.w);
   const [height] = useState(doc.h);
+  const { title } = useFloatingWindow(id);
 
   const handleSelectColor = (color: string) => {
     dispatch(setColor(color));
@@ -53,6 +54,7 @@ export const Window = ({ id, title }: WindowProps) => {
         title={title}
         initialPosition={{ x: 50, y: 50 }}
         initialSize={{ w: win.w, h: win.h }}
+        editableTitle
         footer={<WindowFooter canvasHistoryRef={canvasHistoryRef} />}
       >
         <ResizableScreen>

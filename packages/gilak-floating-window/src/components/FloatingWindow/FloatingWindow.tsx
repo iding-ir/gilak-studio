@@ -17,7 +17,7 @@ import {
 } from "../../constants";
 import type { Status } from "../../context";
 import { useDrag, useRegister, useResize } from "../../hooks";
-import { useFloatingWindow } from "../../hooks/useFloatingWindows";
+import { useFloatingWindow } from "../../hooks/useFloatingWindow";
 import type { Position, Size } from "../../types";
 import { FloatingWindowFooter } from "../FloatingWindowFooter";
 import { FloatingWindowHeader } from "../FloatingWindowHeader";
@@ -28,6 +28,7 @@ export type FloatingWindowProps = {
   children?: React.ReactNode;
   className?: string;
   title?: string;
+  editableTitle?: boolean;
   initialStatus?: Status;
   footer?: React.ReactNode;
   initialPosition?: Position;
@@ -54,6 +55,7 @@ export const FloatingWindow = memo(
     children,
     className,
     title = "",
+    editableTitle = false,
     initialStatus = IMITIAL_STATUS,
     footer,
     initialPosition = INITIAL_POSITION,
@@ -139,6 +141,7 @@ export const FloatingWindow = memo(
         <FloatingWindowHeader
           id={id}
           title={title}
+          editableTitle={editableTitle}
           draggable={draggable && status !== "maximized"}
           maximizable={maximizable}
           minimizable={minimizable}

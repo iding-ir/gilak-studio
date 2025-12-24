@@ -15,4 +15,5 @@ export type FloatingWindowType = {
   position: Position;
   size: Size;
   zIndex: number;
+  focused?: boolean;
 };

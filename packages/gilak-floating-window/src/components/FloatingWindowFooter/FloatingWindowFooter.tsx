@@ -2,7 +2,7 @@ import { Footer, Icon } from "@gilak/components";
 import type { PointerEvent, ReactNode } from "react";
 
 import IconResize from "../../assets/icon-resize.svg?url";
-import { useFloatingWindow } from "../../hooks/useFloatingWindows";
+import { useFloatingWindow } from "../../hooks/useFloatingWindow";
 import styles from "./FloatingWindowFooter.module.scss";
 
 export type FloatingWindowFooterProps = {

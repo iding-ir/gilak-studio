@@ -9,8 +9,8 @@ export const Windows = () => {
 
   return (
     <FloatingWindowProvider>
-      {windows.map(({ id, title }) => (
-        <Window key={id} id={id} title={title} />
+      {windows.map(({ id }) => (
+        <Window key={id} id={id} />
       ))}
     </FloatingWindowProvider>
   );

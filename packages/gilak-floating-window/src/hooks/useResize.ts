@@ -2,7 +2,7 @@ import { type RefObject, useCallback, useRef } from "react";
 
 import type { Status } from "../context";
 import type { Size } from "../types";
-import { useFloatingWindow } from "./useFloatingWindows";
+import { useFloatingWindow } from "./useFloatingWindow";
 
 const clampSize = ({
   size,
@@ -70,7 +70,7 @@ export const useResize = ({
   const {
     setFloatingWindowSize,
     setFloatingWindowResizing,
-    bringFloatingWindowToFront,
+    focusFloatingWindow,
   } = useFloatingWindow(id);
 
   const state = useRef({
@@ -88,7 +88,7 @@ export const useResize = ({
 
       if (!resizable || status !== "open") return;
 
-      bringFloatingWindowToFront();
+      focusFloatingWindow();
       setFloatingWindowResizing(true);
       onResizeStart?.(state.current.startSize);
 
@@ -156,7 +156,7 @@ export const useResize = ({
       onResizeEnd,
       onResize,
       setFloatingWindowResizing,
-      bringFloatingWindowToFront,
+      focusFloatingWindow,
       setFloatingWindowSize,
     ],
   );

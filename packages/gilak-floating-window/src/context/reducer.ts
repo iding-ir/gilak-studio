@@ -37,6 +37,14 @@ export const reducer = (state: State, { type, payload }: Action): State => {
         windows: { ...state.windows, [id]: { ...state.windows[id], position } },
       };
     }
+    case "SET_TITLE": {
+      const { id, title } = payload;
+
+      return {
+        ...state,
+        windows: { ...state.windows, [id]: { ...state.windows[id], title } },
+      };
+    }
     case "SET_SIZE": {
       const { id, size } = payload;
 
@@ -61,7 +69,7 @@ export const reducer = (state: State, { type, payload }: Action): State => {
         windows: { ...state.windows, [id]: { ...state.windows[id], resizing } },
       };
     }
-    case "BRING_TO_FRONT": {
+    case "SET_FOCUSED": {
       const { id } = payload;
       const zIndexes = Object.values(state.windows).map((w) => w.zIndex);
       const zIndexNew = Math.max(...zIndexes) + 1;
@@ -70,7 +78,7 @@ export const reducer = (state: State, { type, payload }: Action): State => {
         ...state,
         windows: {
           ...state.windows,
-          [id]: { ...state.windows[id], zIndex: zIndexNew },
+          [id]: { ...state.windows[id], zIndex: zIndexNew, focused: true },
         },
       };
     }

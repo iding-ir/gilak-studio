@@ -1,17 +1,19 @@
-import { Header, Icon } from "@gilak/components";
+import { Header, Icon, Input } from "@gilak/components";
 import clsx from "clsx";
-import type { PointerEvent, ReactNode } from "react";
+import type { PointerEvent } from "react";
+import { useRef, useState } from "react";
 
 import IconMaximize from "../../assets/icon-maximize.svg?url";
 import IconMaximized from "../../assets/icon-maximized.svg?url";
 import IconMinimize from "../../assets/icon-minimize.svg?url";
 import IconMinimized from "../../assets/icon-minimized.svg?url";
-import { useFloatingWindow } from "../../hooks/useFloatingWindows";
+import { useFloatingWindow } from "../../hooks/useFloatingWindow";
 import styles from "./FloatingWindowHeader.module.scss";
 
 export type FloatingWindowHeaderProps = {
   id: string;
-  title: ReactNode;
+  title: string;
+  editableTitle?: boolean;
   draggable: boolean;
   maximizable: boolean;
   minimizable: boolean;
@@ -21,28 +23,63 @@ export type FloatingWindowHeaderProps = {
 export const FloatingWindowHeader = ({
   id,
   title,
+  editableTitle = false,
   draggable,
   maximizable,
   minimizable,
   onDragPointerDown,
 }: FloatingWindowHeaderProps) => {
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [value, setValue] = useState<string>(title);
   const {
     status,
     dragging,
     maximizeFloatingWindow,
     minimizeFloatingWindow,
     openFloatingWindow,
-    bringFloatingWindowToFront,
+    focusFloatingWindow,
+    setFloatingWindowTitle,
   } = useFloatingWindow(id);
 
   const handlePointerDown = (event: PointerEvent<HTMLElement>) => {
-    bringFloatingWindowToFront();
+    focusFloatingWindow();
     if (draggable && onDragPointerDown) onDragPointerDown(event);
   };
 
   return (
     <Header
-      heading={title}
+      heading={
+        <Input
+          name="floating-window-title"
+          ref={inputRef}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          readOnly={!editableTitle}
+          frameless={true}
+          fullWidth={false}
+          variant="primary"
+          onClick={() => {
+            if (editableTitle) {
+              inputRef.current?.focus();
+              inputRef.current?.select();
+            }
+          }}
+          onPointerDown={(event) => {
+            focusFloatingWindow();
+            event.stopPropagation();
+          }}
+          onKeyDown={({ key, currentTarget }) => {
+            if (key === "Enter") {
+              setFloatingWindowTitle(currentTarget.value);
+              currentTarget.blur();
+            }
+            if (key === "Escape") {
+              setValue(title);
+              currentTarget.blur();
+            }
+          }}
+        />
+      }
       actions={
         <>
           {maximizable && status !== "maximized" && (
