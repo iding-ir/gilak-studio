@@ -1,18 +1,24 @@
 import { type RefObject } from "react";
 
+import type { CanvasHistory } from "../../hooks";
+import {
+  useCanvasHistory,
+  useCursor,
+  useDrawing,
+  useEraser,
+  useFill,
+} from "../../hooks";
 import { type BrushShape, type BrushSize } from "../../types";
 import type { CanvasProps } from "../Canvas";
 import { Canvas } from "../Canvas";
-import { DrawingTool } from "../DrawingTool";
-import { EraserTool } from "../EraserTool";
-import { FillTool } from "../FillTool";
+import { Cursor } from "../Cursor";
 import styles from "./DrawingCanvas.module.scss";
 
 export type DrawingCanvasProps = CanvasProps & {
   canvasRef: RefObject<HTMLCanvasElement | null>;
   enabledDrawing: boolean;
   enabledFill: boolean;
-  enabledEraser: boolean;
+  enabledEraser?: boolean;
   color: string;
   backgroundColor: string;
   brushSize: BrushSize;
@@ -20,13 +26,14 @@ export type DrawingCanvasProps = CanvasProps & {
   width?: string | number;
   height?: string | number;
   tolerance: number;
+  onHistoryChange?: (api: CanvasHistory) => void;
 };
 
-export const DrawingCanvas = ({
+export function DrawingCanvas({
   canvasRef,
   enabledDrawing,
   enabledFill,
-  enabledEraser,
+  enabledEraser = false,
   color,
   backgroundColor,
   brushSize,
@@ -34,38 +41,50 @@ export const DrawingCanvas = ({
   width,
   height,
   tolerance,
+  onHistoryChange,
   ...props
-}: DrawingCanvasProps) => {
+}: DrawingCanvasProps) {
+  const history = useCanvasHistory({ canvasRef });
+  useDrawing({
+    canvasRef,
+    enabled: enabledDrawing,
+    color,
+    brushSize,
+    brushShape,
+    onChange: history.pushSnapshot,
+  });
+  useFill({
+    canvasRef,
+    enabled: enabledFill,
+    color: backgroundColor,
+    tolerance,
+    onChange: history.pushSnapshot,
+  });
+  useEraser({
+    canvasRef,
+    enabled: enabledEraser,
+    brushSize,
+    brushShape,
+    onChange: history.pushSnapshot,
+  });
+  const { cursorRef } = useCursor({
+    canvasRef,
+    enabled: enabledDrawing || enabledEraser,
+    color,
+    brushSize,
+    brushShape,
+  });
+
+  if (onHistoryChange) {
+    onHistoryChange(history);
+  }
+
   return (
     <div className={styles.canvas}>
-      <DrawingTool
-        canvasRef={canvasRef}
-        enabled={enabledDrawing}
-        color={color}
-        brushSize={brushSize}
-        brushShape={brushShape}
-      >
-        <FillTool
-          canvasRef={canvasRef}
-          enabled={enabledFill}
-          color={backgroundColor}
-          tolerance={tolerance}
-        >
-          <EraserTool
-            canvasRef={canvasRef}
-            enabled={enabledEraser}
-            brushSize={brushSize}
-            brushShape={brushShape}
-          >
-            <Canvas
-              canvasRef={canvasRef}
-              {...props}
-              width={width}
-              height={height}
-            />
-          </EraserTool>
-        </FillTool>
-      </DrawingTool>
+      <Canvas canvasRef={canvasRef} {...props} width={width} height={height} />
+      <Cursor cursorRef={cursorRef} />
     </div>
   );
-};
+}
+
+export default DrawingCanvas;

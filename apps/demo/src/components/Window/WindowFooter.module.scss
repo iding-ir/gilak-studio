@@ -1,0 +1,10 @@
+.root {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-xl);
+
+  .undoRedo {
+    display: flex;
+    flex-direction: row;
+  }
+}

@@ -4,6 +4,16 @@ import { useEffect, useRef } from "react";
 import { drawBrush } from "../methods";
 import type { BrushShape, BrushSize } from "../types";
 
+export type UseCursorArgs = {
+  canvasRef: RefObject<HTMLCanvasElement | null>;
+  enabled: boolean;
+  color: string;
+  brushSize: BrushSize;
+  brushShape: BrushShape;
+  width?: number;
+  height?: number;
+};
+
 export const useCursor = ({
   canvasRef,
   enabled,
@@ -12,15 +22,7 @@ export const useCursor = ({
   brushShape,
   width = 50,
   height = 50,
-}: {
-  canvasRef: RefObject<HTMLCanvasElement | null>;
-  enabled: boolean;
-  color: string;
-  brushSize: BrushSize;
-  brushShape: BrushShape;
-  width?: number;
-  height?: number;
-}) => {
+}: UseCursorArgs) => {
   const cursorRef = useRef<HTMLCanvasElement | null>(null);
   const rafRef = useRef<number | null>(null);
 

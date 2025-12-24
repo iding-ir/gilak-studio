@@ -1,4 +1,4 @@
-import type { ReactNode, RefObject } from "react";
+import { type ReactNode, type RefObject, useEffect } from "react";
 
 import styles from "./Canvas.module.scss";
 
@@ -16,6 +16,14 @@ export const Canvas = ({
   height = "300px",
   ...props
 }: CanvasProps) => {
+  useEffect(() => {
+    const canvas = canvasRef?.current;
+    if (!canvas) return;
+    // Create/obtain 2D context with willReadFrequently to optimize repeated
+    // getImageData calls (useful for undo/redo snapshots).
+    canvas.getContext("2d", { willReadFrequently: true });
+  }, [canvasRef]);
+
   return (
     <>
       <canvas

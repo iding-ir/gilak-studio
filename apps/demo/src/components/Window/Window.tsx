@@ -1,10 +1,10 @@
+import type { CanvasHistory } from "@gilak/canvas";
 import { DrawingCanvas } from "@gilak/canvas";
 import { MagnifierProvider } from "@gilak/color-picker";
 import { FloatingWindow } from "@gilak/floating-window";
 import {
   ResizableScreen,
   ResizableScreenProvider,
-  ZoomSelector,
 } from "@gilak/resizable-screen";
 import { useRef, useState } from "react";
 
@@ -24,6 +24,7 @@ import {
   selectTool,
   unsetTool,
 } from "../../features/tools/tools.slice";
+import { WindowFooter } from "./WindowFooter";
 
 export type WindowProps = {
   id: string;
@@ -33,6 +34,7 @@ export type WindowProps = {
 export const Window = ({ id, title }: WindowProps) => {
   const dispatch = useAppDispatch();
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasHistoryRef = useRef<CanvasHistory | null>(null);
   const brushSize = useAppSelector(selectBrushSize);
   const brushShape = useAppSelector(selectBrushShape);
   const selectedTool = useAppSelector(selectTool);
@@ -56,7 +58,7 @@ export const Window = ({ id, title }: WindowProps) => {
         title={title}
         initialPosition={{ x: 50, y: 50 }}
         initialSize={{ w: win.w, h: win.h }}
-        footer={<ZoomSelector />}
+        footer={<WindowFooter canvasHistoryRef={canvasHistoryRef} />}
       >
         <ResizableScreen>
           <MagnifierProvider
@@ -76,6 +78,9 @@ export const Window = ({ id, title }: WindowProps) => {
               tolerance={tolerance}
               width={width}
               height={height}
+              onHistoryChange={(api) => {
+                canvasHistoryRef.current = api;
+              }}
             />
           </MagnifierProvider>
         </ResizableScreen>

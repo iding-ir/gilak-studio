@@ -1,12 +1,14 @@
-import { type RefObject, useEffect } from "react";
+import { type RefObject } from "react";
 
 import { fillArea } from "../methods/fill-area";
+import { useCanvasPointer } from "./useCanvasPointer";
 
 export type UseFillArgs = {
   canvasRef: RefObject<HTMLCanvasElement | null>;
   enabled: boolean;
   color: string;
   tolerance: number;
+  onChange?: () => void;
 };
 
 export const useFill = ({
@@ -14,25 +16,20 @@ export const useFill = ({
   enabled,
   color,
   tolerance,
+  onChange,
 }: UseFillArgs) => {
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas || !enabled) return;
+  useCanvasPointer({
+    canvasRef,
+    enabled,
+    onDown: ({ point: { x, y } }) => {
+      onChange?.();
 
-    const onPointerDown = (ev: PointerEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      const x = Math.floor(ev.clientX - rect.left);
-      const y = Math.floor(ev.clientY - rect.top);
+      const canvas = canvasRef.current;
+      if (!canvas) return;
       const ctx = canvas.getContext("2d");
       if (!ctx) return;
 
       fillArea({ ctx, x, y, color, tolerance });
-    };
-
-    canvas.addEventListener("pointerdown", onPointerDown);
-
-    return () => canvas.removeEventListener("pointerdown", onPointerDown);
-  }, [canvasRef, enabled, color, tolerance]);
+    },
+  });
 };
-
-export default useFill;
