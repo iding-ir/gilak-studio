@@ -29,7 +29,9 @@
     "light": "Hell",
     "dark": "Dunkel",
     "view": "Ansicht",
-    "help": "Hilfe"
+    "help": "Hilfe",
+    "fullscreen": "Vollbild",
+    "github": "GitHub"
   },
   "export": {
     "export": "Exportieren",

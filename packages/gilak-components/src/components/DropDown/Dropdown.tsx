@@ -42,8 +42,7 @@ export const Dropdown = ({
     return () => document.removeEventListener("pointerdown", handlePointerDown);
   }, [open]);
 
-  const handleClickTrigger = (event: React.PointerEvent<HTMLDivElement>) => {
-    event.stopPropagation();
+  const handleClickTrigger = () => {
     setOpen((prev) => !prev);
   };
 

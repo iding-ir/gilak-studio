@@ -29,7 +29,9 @@
     "light": "Light",
     "dark": "Dark",
     "view": "View",
-    "help": "Help"
+    "help": "Help",
+    "fullscreen": "Fullscreen",
+    "github": "GitHub"
   },
   "export": {
     "export": "Export",

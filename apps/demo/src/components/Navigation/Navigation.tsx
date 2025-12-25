@@ -1,5 +1,6 @@
 import { Menu } from "@gilak/components";
 import { useFloatingWindows } from "@gilak/floating-window";
+import { toggleFullscreen } from "@gilak/utils";
 import { useTranslation } from "react-i18next";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
@@ -26,6 +27,10 @@ export const Navigation = () => {
     dispatch(openSettings());
   };
 
+  const handleToggleFullscreen = () => {
+    toggleFullscreen();
+  };
+
   return (
     <Menu root open direction="row" label="">
       <Menu label={t("navigation.file")} closeOnClickInside>
@@ -33,8 +38,18 @@ export const Navigation = () => {
         <Menu label={t("navigation.open")} />
       </Menu>
       <Menu label={t("navigation.settings")} onClick={handleClickSettings} />
-      <Menu label={t("navigation.view")} />
-      <Menu label={t("navigation.help")} />
+      <Menu label={t("navigation.view")} closeOnClickInside>
+        <Menu
+          label={t("navigation.fullscreen")}
+          onClick={handleToggleFullscreen}
+        />
+      </Menu>
+      <Menu label={t("navigation.help")} direction="column">
+        <Menu
+          label={t("navigation.github")}
+          href="https://github.com/iding-ir/gilak-studio"
+        />
+      </Menu>
     </Menu>
   );
 };

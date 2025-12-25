@@ -37,4 +37,4 @@ export {
 } from "./storage";
 
 // DOM utilities
-export { setAttribute } from "./dom";
+export { setAttribute, toggleFullscreen } from "./dom";

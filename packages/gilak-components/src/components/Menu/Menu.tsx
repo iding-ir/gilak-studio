@@ -1,4 +1,4 @@
-import type { Direction, Position } from "@gilak/components";
+import { type Direction, Link, type Position } from "@gilak/components";
 import type { Variant } from "@gilak/components/types";
 import clsx from "clsx";
 import type { ReactNode } from "react";
@@ -12,6 +12,7 @@ export type MenuProps = {
   children?: ReactNode;
   root?: boolean;
   label: string;
+  href?: string;
   direction?: Direction;
   position?: Position;
   variant?: Variant;
@@ -23,6 +24,7 @@ export type MenuProps = {
 export const Menu = ({
   children,
   root = false,
+  href,
   label,
   direction = "column",
   position = "bottom-right",
@@ -48,7 +50,11 @@ export const Menu = ({
   if (!children) {
     return (
       <div className={className}>
-        <Text text={label} frameless onClick={onClick} />
+        {href ? (
+          <Link text={label} frameless href={href} target="_blank" />
+        ) : (
+          <Text text={label} frameless onClick={onClick} />
+        )}
       </div>
     );
   }
