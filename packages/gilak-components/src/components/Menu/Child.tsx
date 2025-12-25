@@ -20,7 +20,8 @@ export const Child = ({
       direction={direction}
       count={1}
       frameless={root}
-      variant={root ? "ghost" : variant}
+      interactive={true}
+      variant={root ? "light-ghost" : variant}
       items={Children.toArray(children)}
     />
   );

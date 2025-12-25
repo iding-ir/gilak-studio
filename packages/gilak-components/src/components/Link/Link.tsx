@@ -1,3 +1,4 @@
+import type { Variant } from "@gilak/components/types";
 import clsx from "clsx";
 import type { ComponentProps } from "react";
 
@@ -5,8 +6,7 @@ import styles from "./Link.module.scss";
 
 export type LinkProps = ComponentProps<"a"> & {
   text: string;
-  color?: string;
-  backgroundColor?: string;
+  variant?: Variant;
   rounded?: boolean;
   selected?: boolean;
   interactive?: boolean;
@@ -16,8 +16,7 @@ export type LinkProps = ComponentProps<"a"> & {
 
 export const Link = ({
   text,
-  color = "inherit",
-  backgroundColor = "inherit",
+  variant = "light-ghost",
   rounded = true,
   selected = false,
   interactive = false,
@@ -28,13 +27,12 @@ export const Link = ({
   return (
     <a
       {...props}
-      className={clsx(styles.root, className, {
+      className={clsx(styles.root, styles[variant], className, {
         [styles.rounded]: rounded,
         [styles.selected]: selected,
         [styles.frameless]: frameless,
-        [styles.interactive]: interactive || !!props.onClick,
+        [styles.interactive]: interactive,
       })}
-      style={{ color, backgroundColor }}
     >
       {text}
     </a>

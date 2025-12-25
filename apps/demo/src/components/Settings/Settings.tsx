@@ -105,15 +105,17 @@ export const Settings = () => {
                 <Text
                   key={code}
                   text={t(`languages.${code}`)}
+                  variant="dark-ghost"
                   selected={lang === code}
                   frameless
+                  interactive
                   onClick={() => setLang(code)}
                 />
               ))}
               count={1}
               frameless
               direction="row"
-              variant="ghost"
+              variant="dark-ghost"
             />
           </Group>
           <Group direction="row" title={t("settings.theme")}>
@@ -122,15 +124,17 @@ export const Settings = () => {
                 <Text
                   key={code}
                   text={t(`themes.${code}`)}
+                  variant="dark-ghost"
                   selected={thm === code}
                   frameless
+                  interactive
                   onClick={() => setThm(code)}
                 />
               ))}
               count={1}
               frameless
               direction="row"
-              variant="ghost"
+              variant="dark-ghost"
             />
           </Group>
         </Group>

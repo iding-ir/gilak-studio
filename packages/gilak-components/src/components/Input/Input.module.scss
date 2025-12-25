@@ -19,15 +19,14 @@
 
   .input {
     grid-area: input;
-    color: inherit;
     font-size: var(--font-size-md);
     width: 100%;
     line-height: var(--icon-md);
     padding: 0 calc(var(--spacing-md));
-    background-color: var(--color-light-xxs);
     box-shadow: var(--shadow-sm);
     border: none;
     outline: none;
+    @include interactiveVariants;
 
     &::placeholder {
       color: var(--color-light-xxxl);
@@ -64,52 +63,5 @@
 
   &.error {
     border-color: var(--color-error-md);
-  }
-
-  &.primary {
-    input {
-      @include interactive(
-        $color: var(--color-light-md),
-        $bg-color: var(--color-primary-md),
-        $hover-color: var(--color-light-xl),
-        $hover-bg-color: var(--color-primary-xl)
-      );
-    }
-  }
-
-  &.secondary {
-    @include interactive(
-      $color: var(--color-light-md),
-      $bg-color: var(--color-secondary-md),
-      $hover-color: var(--color-light-xl),
-      $hover-bg-color: var(--color-secondary-xl)
-    );
-  }
-
-  &.light {
-    @include interactive(
-      $color: var(--color-dark-md),
-      $bg-color: var(--color-light-xs),
-      $hover-color: var(--color-primary-xl),
-      $hover-bg-color: var(--color-light-xl)
-    );
-  }
-
-  &.dark {
-    @include interactive(
-      $color: var(--color-light-md),
-      $bg-color: var(--color-dark-xl),
-      $hover-color: var(--color-light-md),
-      $hover-bg-color: var(--color-primary-md)
-    );
-  }
-
-  &.ghost {
-    @include interactive(
-      $color: inherit,
-      $bg-color: transparent,
-      $hover-color: inherit,
-      $hover-bg-color: transparent
-    );
   }
 }

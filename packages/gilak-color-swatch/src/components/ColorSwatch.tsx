@@ -32,12 +32,7 @@ export const ColorSwatch = ({
   onChangeBackgroundColor,
 }: ColorSwatchProps) => {
   return (
-    <Dropdown
-      position={position}
-      trigger={
-        <Icon icon={icon} color={color} backgroundColor={backgroundColor} />
-      }
-    >
+    <Dropdown position={position} trigger={<Icon icon={icon} />}>
       <Tabs>
         <Tab header={labels.color}>
           <Input
@@ -58,8 +53,7 @@ export const ColorSwatch = ({
             items={colors.map((c) => (
               <Icon
                 icon={IconEmpty}
-                color={c}
-                backgroundColor={c}
+                style={{ color: c, backgroundColor: c }}
                 selected={color === c}
                 onClick={() => onChangeColor(c)}
               />
@@ -85,8 +79,7 @@ export const ColorSwatch = ({
             items={colors.map((c) => (
               <Icon
                 icon={IconEmpty}
-                color={c}
-                backgroundColor={c}
+                style={{ color: c, backgroundColor: c }}
                 selected={backgroundColor === c}
                 onClick={() => onChangeBackgroundColor(c)}
               />

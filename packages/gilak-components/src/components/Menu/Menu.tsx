@@ -1,9 +1,10 @@
-import { type Direction, Link, type Position } from "@gilak/components";
-import type { Variant } from "@gilak/components/types";
 import clsx from "clsx";
 import type { ReactNode } from "react";
 
+import type { Direction, Position } from "../../types";
+import type { Variant } from "../../types";
 import { Dropdown } from "../DropDown";
+import { Link } from "../Link";
 import { Text } from "../Text";
 import { Child } from "./Child";
 import styles from "./Menu.module.scss";
@@ -53,7 +54,12 @@ export const Menu = ({
         {href ? (
           <Link text={label} frameless href={href} target="_blank" />
         ) : (
-          <Text text={label} frameless onClick={onClick} />
+          <Text
+            text={label}
+            variant="light-ghost"
+            frameless
+            onClick={onClick}
+          />
         )}
       </div>
     );
@@ -64,7 +70,14 @@ export const Menu = ({
       <Dropdown
         position={position}
         openDefault={open}
-        trigger={<Text text={label} frameless onClick={onClick} />}
+        trigger={
+          <Text
+            text={label}
+            variant="light-ghost"
+            frameless
+            onClick={onClick}
+          />
+        }
         closeOnClickInside={closeOnClickInside}
       >
         <Child direction={direction} variant={variant} root={root}>

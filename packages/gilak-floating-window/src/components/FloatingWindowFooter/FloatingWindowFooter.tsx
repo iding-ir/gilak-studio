@@ -32,7 +32,8 @@ export const FloatingWindowFooter = ({
             icon={IconResize}
             className={styles.resize}
             frameless
-            interactive
+            interactive={false}
+            variant="dark-ghost"
             onPointerDown={onResizePointerDown}
           />
         )

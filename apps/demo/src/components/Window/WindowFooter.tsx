@@ -21,12 +21,14 @@ export const WindowFooter = ({
           icon={IconUndo}
           interactive
           frameless
+          variant="dark-ghost"
           onClick={() => canvasHistoryRef.current?.undo()}
         />
         <Icon
           icon={IconRedo}
           interactive
           frameless
+          variant="dark-ghost"
           onClick={() => canvasHistoryRef.current?.redo()}
         />
       </div>

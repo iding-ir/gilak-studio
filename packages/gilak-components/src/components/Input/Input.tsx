@@ -1,10 +1,10 @@
 import type { Variant } from "@gilak/components/types";
 import clsx from "clsx";
-import type { InputHTMLAttributes, RefObject } from "react";
+import type { ComponentProps, RefObject } from "react";
 
 import styles from "./Input.module.scss";
 
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+export type InputProps = ComponentProps<"input"> & {
   ref?: RefObject<HTMLInputElement | null>;
   error?: boolean;
   fullWidth?: boolean;
@@ -13,7 +13,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   frameless?: boolean;
   variant?: Variant;
   className?: string;
-}
+};
 
 export const Input = ({
   ref,
@@ -22,13 +22,13 @@ export const Input = ({
   label,
   rounded = true,
   frameless = false,
-  variant = "primary",
+  variant = "light",
   className,
   ...props
 }: InputProps) => {
   return (
     <label
-      className={clsx(styles.label, styles[variant], {
+      className={clsx(styles.label, {
         [styles.error]: error,
         [styles.fullWidth]: fullWidth,
         [styles.rounded]: rounded,
@@ -36,7 +36,11 @@ export const Input = ({
       })}
     >
       {label && <span className={styles.text}>{label}</span>}
-      <input ref={ref} {...props} className={clsx(styles.input, className)} />
+      <input
+        ref={ref}
+        {...props}
+        className={clsx(styles.input, styles[variant], className)}
+      />
     </label>
   );
 };

@@ -1,0 +1,51 @@
+@use "./solid" as *;
+
+@mixin solidVariants($reverse: false) {
+  &.primary {
+    @include solid(
+      $color: var(--color-light-md),
+      $bg-color: var(--color-primary-md),
+      $reverse: $reverse
+    );
+  }
+
+  &.secondary {
+    @include solid(
+      $color: var(--color-light-md),
+      $bg-color: var(--color-secondary-md),
+      $reverse: $reverse
+    );
+  }
+
+  &.light {
+    @include solid(
+      $color: var(--color-dark-md),
+      $bg-color: var(--color-light-md),
+      $reverse: $reverse
+    );
+  }
+
+  &.dark {
+    @include solid(
+      $color: var(--color-light-xxs),
+      $bg-color: var(--color-dark-xxl),
+      $reverse: $reverse
+    );
+  }
+
+  &.light-ghost {
+    @include solid(
+      $color: var(--color-light-xxs),
+      $bg-color: transparent,
+      $reverse: $reverse
+    );
+  }
+
+  &.dark-ghost {
+    @include solid(
+      $color: var(--color-dark-xxl),
+      $bg-color: transparent,
+      $reverse: $reverse
+    );
+  }
+}

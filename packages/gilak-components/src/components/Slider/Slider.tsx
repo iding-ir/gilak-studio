@@ -37,21 +37,10 @@ export const Slider = ({
 
   return (
     <div className={clsx(styles.root, className)}>
-      {icon && (
-        <Icon
-          backgroundColor="transparent"
-          icon={icon}
-          frameless={true}
-          interactive={false}
-        />
-      )}
+      {icon && <Icon icon={icon} frameless={true} interactive={false} />}
 
       {label && (
-        <Text
-          backgroundColor="transparent"
-          text={label}
-          frameless={true}
-        ></Text>
+        <Text text={label} variant="dark-ghost" frameless={true}></Text>
       )}
 
       <div

@@ -1,3 +1,5 @@
+@use "@gilak/stylist/scss" as *;
+
 .root {
   flex-shrink: 0;
   position: relative;
@@ -8,6 +10,7 @@
   padding: var(--spacing-xs) var(--spacing-sm);
   box-shadow: var(--shadow-sm);
   text-decoration: none;
+  @include solidVariants;
 
   &.rounded {
     border-radius: var(--radius-md);
@@ -24,11 +27,6 @@
   }
 
   &.interactive {
-    cursor: pointer;
-
-    &:hover {
-      background-color: var(--color-primary-md);
-      transition: background-color var(--transition-lg);
-    }
+    @include interactiveVariants;
   }
 }

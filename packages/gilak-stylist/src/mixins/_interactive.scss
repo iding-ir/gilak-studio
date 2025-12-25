@@ -1,23 +1,12 @@
-@mixin interactive(
-  $color: var(--color-dark-lg),
-  $bg-color: transparent,
-  $hover-color: var(--color-light-sm),
-  $hover-bg-color: var(--color-primary-lg)
-) {
-  color: $color;
-  border-radius: var(--radius-md);
-  transition: all var(--transition-xs);
-  background-color: $bg-color;
-  user-select: none;
+@use "./solid" as *;
+
+@mixin interactive($hover-color, $hover-bg-color, $reverse: false) {
+  transition:
+    color var(--transition-xs),
+    background-color var(--transition-xs);
   cursor: pointer;
 
-  &:visited {
-    color: $color;
-    background-color: $bg-color;
-  }
-
   &:hover {
-    color: $hover-color;
-    background-color: $hover-bg-color;
+    @include solid($hover-color, $hover-bg-color, $reverse);
   }
 }

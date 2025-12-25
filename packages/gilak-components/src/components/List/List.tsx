@@ -9,6 +9,7 @@ export type ListProps = {
   direction?: Direction;
   count?: number;
   frameless?: boolean;
+  interactive?: boolean;
   variant?: Variant;
 };
 
@@ -17,6 +18,7 @@ export const List = ({
   direction = "column",
   count = 1,
   frameless = false,
+  interactive = false,
   variant = "light",
 }: ListProps) => {
   return (
@@ -32,7 +34,12 @@ export const List = ({
       }}
     >
       {items.map((item, idx) => (
-        <li key={idx} className={styles.item}>
+        <li
+          key={idx}
+          className={clsx(styles.item, styles[variant], {
+            [styles.interactive]: interactive,
+          })}
+        >
           {item}
         </li>
       ))}
