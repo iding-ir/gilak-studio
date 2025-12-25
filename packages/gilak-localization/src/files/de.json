@@ -31,6 +31,12 @@
     "view": "Ansicht",
     "help": "Hilfe"
   },
+  "export": {
+    "export": "Exportieren",
+    "png": "PNG",
+    "jpeg": "JPEG",
+    "webp": "WEBP"
+  },
   "tools": {
     "brushSize": "Größe",
     "tolerance": "Toleranz"

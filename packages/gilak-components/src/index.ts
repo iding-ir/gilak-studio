@@ -38,3 +38,5 @@ export { Text } from "./components/Text";
 export type { TooltipProps } from "./components/Tooltip";
 export { Tooltip } from "./components/Tooltip";
 export type { TshirtSize } from "./types";
+export type { Position } from "./types";
+export type { Direction } from "./types";

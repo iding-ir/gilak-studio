@@ -1,6 +1,7 @@
 import { Body } from "@gilak/components";
 import clsx from "clsx";
-import React, { memo, useRef } from "react";
+import type { ReactNode } from "react";
+import { memo, useRef } from "react";
 
 import {
   IMITIAL_STATUS,
@@ -25,12 +26,13 @@ import styles from "./FloatingWindow.module.scss";
 
 export type FloatingWindowProps = {
   id: string;
-  children?: React.ReactNode;
+  children?: ReactNode;
   className?: string;
   title?: string;
   editableTitle?: boolean;
   initialStatus?: Status;
-  footer?: React.ReactNode;
+  footer?: ReactNode;
+  actions?: ReactNode;
   initialPosition?: Position;
   initialSize?: Size;
   minSize?: Size;
@@ -58,6 +60,7 @@ export const FloatingWindow = memo(
     editableTitle = false,
     initialStatus = IMITIAL_STATUS,
     footer,
+    actions,
     initialPosition = INITIAL_POSITION,
     initialSize = INITIAL_SIZE,
     minSize = MIN_SIZE,
@@ -145,6 +148,7 @@ export const FloatingWindow = memo(
           draggable={draggable && status !== "maximized"}
           maximizable={maximizable}
           minimizable={minimizable}
+          actions={actions}
           onDragPointerDown={draggable ? onDragPointerDown : undefined}
         />
         <Body>{children}</Body>

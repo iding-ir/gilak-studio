@@ -15,9 +15,7 @@ export const Navigation = () => {
   const handleAddWindow = () => {
     const id = generateWindowId();
     dispatch(addWindow({ id }));
-    queueMicrotask(() => {
-      setFocusedFloatingWindow(id);
-    });
+    queueMicrotask(() => setFocusedFloatingWindow(id));
   };
 
   const handleClickSettings = () => {

@@ -17,22 +17,6 @@
     box-shadow: var(--shadow-lg);
   }
 
-  .toolbar {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: var(--spacing-xs);
-    padding: 0 var(--spacing-xs);
-
-    .button {
-      cursor: pointer;
-
-      &:hover {
-        background-color: var(--color-light-sm);
-      }
-    }
-  }
-
   &.maximized {
     min-width: 100%;
     min-height: 100%;

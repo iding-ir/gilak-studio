@@ -21,6 +21,7 @@ import {
 } from "../../features/color/color-slice";
 import { selectDoc, selectWin } from "../../features/settings/settings-slice";
 import { selectTolerance, selectTool } from "../../features/tools/tools.slice";
+import { WindowActions } from "./WindowActions";
 import { WindowFooter } from "./WindowFooter";
 
 export type WindowProps = {
@@ -55,7 +56,13 @@ export const Window = ({ id }: WindowProps) => {
         initialPosition={{ x: 50, y: 50 }}
         initialSize={{ w: win.w, h: win.h }}
         editableTitle
-        footer={<WindowFooter canvasHistoryRef={canvasHistoryRef} />}
+        footer={
+          <WindowFooter
+            canvasRef={canvasRef}
+            canvasHistoryRef={canvasHistoryRef}
+          />
+        }
+        actions={<WindowActions id={id} canvasRef={canvasRef} />}
       >
         <ResizableScreen>
           <MagnifierProvider

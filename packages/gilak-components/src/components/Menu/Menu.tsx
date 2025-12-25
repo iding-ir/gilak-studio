@@ -1,4 +1,5 @@
-import type { Direction } from "@gilak/components/types";
+import type { Direction, Position } from "@gilak/components";
+import type { Variant } from "@gilak/components/types";
 import clsx from "clsx";
 import type { ReactNode } from "react";
 
@@ -12,6 +13,8 @@ export type MenuProps = {
   root?: boolean;
   label: string;
   direction?: Direction;
+  position?: Position;
+  variant?: Variant;
   open?: boolean;
   closeOnClickInside?: boolean;
   onClick?: () => void;
@@ -22,6 +25,8 @@ export const Menu = ({
   root = false,
   label,
   direction = "column",
+  position = "bottom-right",
+  variant = "dark",
   open = false,
   closeOnClickInside,
   onClick,
@@ -33,7 +38,7 @@ export const Menu = ({
   if (root) {
     return (
       <div className={className}>
-        <Child direction={direction} root={root}>
+        <Child direction={direction} variant={variant} root={root}>
           {children}
         </Child>
       </div>
@@ -51,11 +56,12 @@ export const Menu = ({
   return (
     <div className={className}>
       <Dropdown
+        position={position}
         openDefault={open}
         trigger={<Text text={label} frameless onClick={onClick} />}
         closeOnClickInside={closeOnClickInside}
       >
-        <Child direction={direction} root={root}>
+        <Child direction={direction} variant={variant} root={root}>
           {children}
         </Child>
       </Dropdown>

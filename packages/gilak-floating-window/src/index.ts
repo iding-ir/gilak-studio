@@ -1,6 +1,8 @@
 // Components
-export type { FloatingWindowProps } from "./components";
-export { FloatingWindow } from "./components";
+export type { FloatingWindowProps } from "./components/FloatingWindow";
+export { FloatingWindow } from "./components/FloatingWindow";
+export type { FloatingWindowsProps } from "./components/FloatingWindows";
+export { FloatingWindows } from "./components/FloatingWindows";
 
 // Context
 export type { FloatingWindowType } from "./context";

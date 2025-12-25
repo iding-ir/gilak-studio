@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import { useReducer } from "react";
 
-import { FloatingWindows } from "../components/FloatingWindows";
 import { FloatingWindowContext } from "./context";
 import { reducer } from "./reducer";
 import { initialState } from "./state";
@@ -17,7 +16,7 @@ export const FloatingWindowProvider = ({
 
   return (
     <FloatingWindowContext.Provider value={{ state, dispatch }}>
-      <FloatingWindows>{children}</FloatingWindows>
+      {children}
     </FloatingWindowContext.Provider>
   );
 };

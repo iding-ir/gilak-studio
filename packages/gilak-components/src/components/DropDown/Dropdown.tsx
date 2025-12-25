@@ -1,4 +1,4 @@
-import type { Position } from "@gilak/components/types";
+import type { Position } from "@gilak/components";
 import clsx from "clsx";
 import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
@@ -42,7 +42,8 @@ export const Dropdown = ({
     return () => document.removeEventListener("pointerdown", handlePointerDown);
   }, [open]);
 
-  const handleClickTrigger = () => {
+  const handleClickTrigger = (event: React.PointerEvent<HTMLDivElement>) => {
+    event.stopPropagation();
     setOpen((prev) => !prev);
   };
 

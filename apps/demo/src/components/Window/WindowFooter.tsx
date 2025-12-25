@@ -1,4 +1,4 @@
-import type { CanvasHistory } from "@gilak/canvas";
+import { type CanvasHistory } from "@gilak/canvas";
 import { Icon } from "@gilak/components";
 import { ZoomSelector } from "@gilak/resizable-screen";
 import type { RefObject } from "react";
@@ -10,6 +10,7 @@ import styles from "./WindowFooter.module.scss";
 export const WindowFooter = ({
   canvasHistoryRef,
 }: {
+  canvasRef: RefObject<HTMLCanvasElement | null>;
   canvasHistoryRef: RefObject<CanvasHistory | null>;
 }) => {
   return (

@@ -1,3 +1,6 @@
+export type { ImageFormat } from "./canvas-to-blob";
+export { canvasToBlob } from "./canvas-to-blob";
+export { downloadCanvas } from "./download-canvas";
 export type { DrawBrushProps } from "./draw-brush";
 export { drawBrush } from "./draw-brush";
 export type { DrawEraserProps } from "./draw-eraser";

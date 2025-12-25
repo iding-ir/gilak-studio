@@ -1,6 +1,6 @@
 import { Header, Icon, Input } from "@gilak/components";
 import clsx from "clsx";
-import type { PointerEvent } from "react";
+import type { PointerEvent, ReactNode } from "react";
 import { useRef, useState } from "react";
 
 import IconMaximize from "../../assets/icon-maximize.svg?url";
@@ -17,6 +17,7 @@ export type FloatingWindowHeaderProps = {
   draggable: boolean;
   maximizable: boolean;
   minimizable: boolean;
+  actions?: ReactNode;
   onDragPointerDown?: (event: PointerEvent<HTMLElement>) => void;
 };
 
@@ -27,6 +28,7 @@ export const FloatingWindowHeader = ({
   draggable,
   maximizable,
   minimizable,
+  actions,
   onDragPointerDown,
 }: FloatingWindowHeaderProps) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -54,7 +56,7 @@ export const FloatingWindowHeader = ({
           ref={inputRef}
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          readOnly={!editableTitle}
+          readOnly={!editableTitle || status === "minimized"}
           frameless={true}
           fullWidth={false}
           variant="primary"
@@ -82,6 +84,7 @@ export const FloatingWindowHeader = ({
       }
       actions={
         <>
+          {status !== "minimized" && actions}
           {maximizable && status !== "maximized" && (
             <Icon icon={IconMaximize} onClick={maximizeFloatingWindow} />
           )}
