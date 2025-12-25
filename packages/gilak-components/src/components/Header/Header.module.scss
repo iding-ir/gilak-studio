@@ -17,7 +17,6 @@
     color: var(--color-light-md);
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-lg);
-    padding: 0 var(--spacing-sm);
     @include mixins.ellipsis();
   }
 

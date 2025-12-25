@@ -1,7 +1,7 @@
 import { Header, Icon, Input } from "@gilak/components";
 import clsx from "clsx";
 import type { PointerEvent, ReactNode } from "react";
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
 import IconMaximize from "../../assets/icon-maximize.svg?url";
 import IconMaximized from "../../assets/icon-maximized.svg?url";
@@ -48,6 +48,14 @@ export const FloatingWindowHeader = ({
     if (draggable && onDragPointerDown) onDragPointerDown(event);
   };
 
+  const handleChangeTitle = useCallback(() => {
+    if (value.trim().length) {
+      setFloatingWindowTitle(value);
+    } else {
+      setValue(title);
+    }
+  }, [value, title, setFloatingWindowTitle]);
+
   return (
     <Header
       heading={
@@ -55,31 +63,26 @@ export const FloatingWindowHeader = ({
           name="floating-window-title"
           ref={inputRef}
           value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={({ target }) => setValue(target.value)}
           readOnly={!editableTitle || status === "minimized"}
           frameless={true}
           fullWidth={false}
           variant="primary"
+          size={value.length || 5}
+          autoComplete="off"
           onClick={() => {
-            if (editableTitle) {
+            if (editableTitle && status !== "minimized") {
               inputRef.current?.focus();
               inputRef.current?.select();
             }
           }}
-          onPointerDown={(event) => {
+          onPointerDown={() => {
             focusFloatingWindow();
-            event.stopPropagation();
           }}
-          onKeyDown={({ key, currentTarget }) => {
-            if (key === "Enter") {
-              setFloatingWindowTitle(currentTarget.value);
-              currentTarget.blur();
-            }
-            if (key === "Escape") {
-              setValue(title);
-              currentTarget.blur();
-            }
+          onKeyDown={({ key }) => {
+            if (key === "Enter") handleChangeTitle();
           }}
+          onBlur={handleChangeTitle}
         />
       }
       actions={
