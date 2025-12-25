@@ -19,7 +19,7 @@ import {
   selectColor,
   setColor,
 } from "../../features/color/color-slice";
-import { selectDoc, selectWin } from "../../features/settings/settings-slice";
+import { selectSettingsDocument } from "../../features/settings/settings-slice";
 import { selectTolerance, selectTool } from "../../features/tools/tools.slice";
 import { WindowActions } from "./WindowActions";
 import { WindowFooter } from "./WindowFooter";
@@ -38,11 +38,10 @@ export const Window = ({ id }: WindowProps) => {
   const color = useAppSelector(selectColor);
   const backgroundColor = useAppSelector(selectBackgroundColor);
   const tolerance = useAppSelector(selectTolerance);
-  const doc = useAppSelector(selectDoc);
-  const win = useAppSelector(selectWin);
-  const [width] = useState(doc.w);
-  const [height] = useState(doc.h);
-  const { title } = useFloatingWindow(id);
+  const { size: defaultDocumentSize } = useAppSelector(selectSettingsDocument);
+  const [width] = useState(defaultDocumentSize.w);
+  const [height] = useState(defaultDocumentSize.h);
+  const { title, size, position } = useFloatingWindow(id);
 
   const handleSelectColor = (color: string) => {
     dispatch(setColor(color));
@@ -53,8 +52,8 @@ export const Window = ({ id }: WindowProps) => {
       <FloatingWindow
         id={id}
         title={title}
-        initialPosition={{ x: 50, y: 50 }}
-        initialSize={{ w: win.w, h: win.h }}
+        initialPosition={position}
+        initialSize={size}
         editableTitle
         footer={
           <WindowFooter

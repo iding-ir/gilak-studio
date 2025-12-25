@@ -2,19 +2,23 @@ import { Menu } from "@gilak/components";
 import { useFloatingWindows } from "@gilak/floating-window";
 import { useTranslation } from "react-i18next";
 
-import { useAppDispatch } from "../../app/hooks";
-import { openSettings } from "../../features/settings/settings-slice";
-import { addWindow } from "../../features/windows/windows-slice";
-import { generateWindowId } from "../../methods";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import {
+  openSettings,
+  selectSettingsWindow,
+} from "../../features/settings/settings-slice";
+import { generateDefaultWindow, generateWindowId } from "../../methods";
 
 export const Navigation = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const { setFocusedFloatingWindow } = useFloatingWindows();
+  const { size: settingWindowSize } = useAppSelector(selectSettingsWindow);
+  const { setFocusedFloatingWindow, registerFloatingWindow } =
+    useFloatingWindows();
 
   const handleAddWindow = () => {
     const id = generateWindowId();
-    dispatch(addWindow({ id }));
+    registerFloatingWindow(generateDefaultWindow(id, settingWindowSize));
     queueMicrotask(() => setFocusedFloatingWindow(id));
   };
 

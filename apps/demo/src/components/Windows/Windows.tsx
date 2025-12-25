@@ -1,15 +1,13 @@
-import { FloatingWindows } from "@gilak/floating-window";
+import { FloatingWindows, useFloatingWindows } from "@gilak/floating-window";
 
-import { useAppSelector } from "../../app/hooks";
-import { selectAllWindows } from "../../features/windows/windows-slice";
 import { Window } from "../Window";
 
 export const Windows = () => {
-  const windows = useAppSelector(selectAllWindows);
+  const { windows } = useFloatingWindows();
 
   return (
     <FloatingWindows>
-      {windows.map(({ id }) => (
+      {Object.values(windows).map(({ id }) => (
         <Window key={id} id={id} />
       ))}
     </FloatingWindows>

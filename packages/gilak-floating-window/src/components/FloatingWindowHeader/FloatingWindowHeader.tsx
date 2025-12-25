@@ -3,6 +3,7 @@ import clsx from "clsx";
 import type { PointerEvent, ReactNode } from "react";
 import { useCallback, useRef, useState } from "react";
 
+import IconClose from "../../assets/icon-close.svg?url";
 import IconMaximize from "../../assets/icon-maximize.svg?url";
 import IconMaximized from "../../assets/icon-maximized.svg?url";
 import IconMinimize from "../../assets/icon-minimize.svg?url";
@@ -39,6 +40,7 @@ export const FloatingWindowHeader = ({
     maximizeFloatingWindow,
     minimizeFloatingWindow,
     openFloatingWindow,
+    unregisterFloatingWindow,
     focusFloatingWindow,
     setFloatingWindowTitle,
   } = useFloatingWindow(id);
@@ -55,6 +57,10 @@ export const FloatingWindowHeader = ({
       setValue(title);
     }
   }, [value, title, setFloatingWindowTitle]);
+
+  const handleCloseFloatingWindow = useCallback(() => {
+    unregisterFloatingWindow();
+  }, [unregisterFloatingWindow]);
 
   return (
     <Header
@@ -100,6 +106,8 @@ export const FloatingWindowHeader = ({
           {minimizable && status === "minimized" && (
             <Icon icon={IconMinimized} onClick={openFloatingWindow} />
           )}
+
+          <Icon icon={IconClose} onClick={handleCloseFloatingWindow} />
         </>
       }
       className={clsx(styles.header, {

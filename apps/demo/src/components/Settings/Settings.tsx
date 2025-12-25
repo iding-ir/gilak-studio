@@ -10,9 +10,10 @@ import {
 import { languages } from "../../features/language/languages";
 import {
   closeSettings,
-  selectDoc,
-  selectWin,
-  setSettings,
+  selectSettingsDocument,
+  selectSettingsWindow,
+  setDocumentSettings,
+  setWindowSettings,
 } from "../../features/settings/settings-slice";
 import { selectTheme, setTheme } from "../../features/theme/theme-slice";
 import { themes } from "../../features/theme/themes";
@@ -20,14 +21,14 @@ import { themes } from "../../features/theme/themes";
 export const Settings = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
-  const doc = useAppSelector(selectDoc);
-  const win = useAppSelector(selectWin);
+  const documentSettings = useAppSelector(selectSettingsDocument);
+  const windowSettings = useAppSelector(selectSettingsWindow);
   const language = useAppSelector(selectLanguage);
   const theme = useAppSelector(selectTheme);
-  const [docW, setDocW] = useState(doc.w);
-  const [docH, setDocH] = useState(doc.h);
-  const [winW, setWinW] = useState(win.w);
-  const [winH, setWinH] = useState(win.h);
+  const [docW, setDocW] = useState(documentSettings.size.w);
+  const [docH, setDocH] = useState(documentSettings.size.h);
+  const [winW, setWinW] = useState(windowSettings.size.w);
+  const [winH, setWinH] = useState(windowSettings.size.h);
   const [lang, setLang] = useState(language);
   const [thm, setThm] = useState(theme);
 
@@ -37,12 +38,12 @@ export const Settings = () => {
 
   const handleSave = () => {
     dispatch(
-      setSettings({
-        open: false,
-        doc: { ...doc, w: docW, h: docH },
-        win: { ...win, w: winW, h: winH },
-      }),
+      setDocumentSettings({ ...documentSettings, size: { w: docW, h: docH } }),
     );
+    dispatch(
+      setWindowSettings({ ...windowSettings, size: { w: winW, h: winH } }),
+    );
+    dispatch(closeSettings());
     dispatch(setLanguage(lang));
     dispatch(setTheme(thm));
   };

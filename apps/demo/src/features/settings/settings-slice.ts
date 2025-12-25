@@ -1,33 +1,33 @@
+import type { Size } from "@gilak/floating-window";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 import { createAppSlice } from "../../app/createAppSlice";
 
+type DocumentSettings = {
+  size: Size;
+  color: string;
+  backgroundColor: string;
+};
+
+type WindowSettings = {
+  size: Size;
+  title: string;
+};
 export interface SettingsState {
   open: boolean;
-  doc: {
-    w: number;
-    h: number;
-    color: string;
-    backgroundColor: string;
-  };
-  win: {
-    w: number;
-    h: number;
-    title: string;
-  };
+  doc: DocumentSettings;
+  win: WindowSettings;
 }
 
 const initialState: SettingsState = {
   open: false,
   doc: {
-    w: 600,
-    h: 400,
+    size: { w: 600, h: 400 },
     color: "#000000",
     backgroundColor: "#FFFFFF",
   },
   win: {
-    w: 800,
-    h: 600,
+    size: { w: 800, h: 600 },
     title: "Untitled",
   },
 };
@@ -42,23 +42,33 @@ export const settingsSlice = createAppSlice({
     closeSettings: create.reducer((state) => {
       state.open = false;
     }),
-    setSettings: create.reducer(
-      (state, { payload }: PayloadAction<SettingsState>) => {
-        state.open = payload.open;
-        state.doc = payload.doc;
-        state.win = payload.win;
+    setDocumentSettings: create.reducer(
+      (state, { payload }: PayloadAction<DocumentSettings>) => {
+        state.doc = payload;
+      },
+    ),
+    setWindowSettings: create.reducer(
+      (state, { payload }: PayloadAction<WindowSettings>) => {
+        state.win = payload;
       },
     ),
   }),
   selectors: {
     selectSettingsOpen: ({ open }) => open,
-    selectDoc: ({ doc }) => doc,
-    selectWin: ({ win }) => win,
+    selectSettingsDocument: ({ doc }) => doc,
+    selectSettingsWindow: ({ win }) => win,
   },
 });
 
-export const { openSettings, closeSettings, setSettings } =
-  settingsSlice.actions;
+export const {
+  openSettings,
+  closeSettings,
+  setDocumentSettings,
+  setWindowSettings,
+} = settingsSlice.actions;
 
-export const { selectSettingsOpen, selectDoc, selectWin } =
-  settingsSlice.selectors;
+export const {
+  selectSettingsOpen,
+  selectSettingsDocument,
+  selectSettingsWindow,
+} = settingsSlice.selectors;

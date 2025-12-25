@@ -13,13 +13,11 @@ import { settingsSlice } from "../features/settings/settings-slice";
 import { themeListenerMiddleware } from "../features/theme/theme-middleware";
 import { themeSlice } from "../features/theme/theme-slice";
 import { toolsSlice } from "../features/tools/tools.slice";
-import { windowsSlice } from "../features/windows/windows-slice";
 
 const rootReducer = combineSlices(
   brushSlice,
   colorSlice,
   toolsSlice,
-  windowsSlice,
   settingsSlice,
   languageSlice,
   themeSlice,
