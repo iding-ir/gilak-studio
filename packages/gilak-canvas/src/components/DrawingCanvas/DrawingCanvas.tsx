@@ -22,7 +22,7 @@ export type DrawingCanvasProps = CanvasProps & {
   onChange?: () => void;
 };
 
-export function DrawingCanvas({
+export const DrawingCanvas = ({
   canvasRef,
   enabledDrawing,
   enabledFill,
@@ -36,7 +36,7 @@ export function DrawingCanvas({
   tolerance,
   onChange,
   ...props
-}: DrawingCanvasProps) {
+}: DrawingCanvasProps) => {
   useDrawing({
     canvasRef,
     enabled: enabledDrawing,
@@ -73,6 +73,4 @@ export function DrawingCanvas({
       <Cursor cursorRef={cursorRef} />
     </div>
   );
-}
-
-export default DrawingCanvas;
+};
