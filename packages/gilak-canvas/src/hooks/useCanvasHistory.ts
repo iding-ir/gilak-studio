@@ -1,11 +1,13 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export type CanvasHistory = {
-  pushSnapshot: () => void;
+  canUndo: boolean;
+  canRedo: boolean;
+  snapshot: () => void;
   undo: () => void;
   redo: () => void;
-  canUndo: () => boolean;
-  canRedo: () => boolean;
+  getCanUndo: () => boolean;
+  getCanRedo: () => boolean;
   clearHistory: () => void;
 };
 
@@ -20,6 +22,16 @@ export const useCanvasHistory = ({
 }: UseCanvasHistoryArgs): CanvasHistory => {
   const undoStack = useRef<ImageData[]>([]);
   const redoStack = useRef<ImageData[]>([]);
+  const [canUndo, setHasUndo] = useState(false);
+  const [canRedo, setHasRedo] = useState(false);
+
+  const updateFlags = () => {
+    setHasUndo(undoStack.current.length > 1);
+    setHasRedo(redoStack.current.length > 0);
+  };
+
+  const getCanUndo = useCallback(() => undoStack.current.length > 0, []);
+  const getCanRedo = useCallback(() => redoStack.current.length > 0, []);
 
   const getCtx = useCallback(() => {
     const canvas = canvasRef.current;
@@ -35,6 +47,7 @@ export const useCanvasHistory = ({
     undoStack.current.push(img);
     if (undoStack.current.length > maxHistory) undoStack.current.shift();
     redoStack.current.length = 0;
+    updateFlags();
   };
 
   const undo = useCallback(() => {
@@ -46,6 +59,7 @@ export const useCanvasHistory = ({
     const prev = undoStack.current.pop()!;
     redoStack.current.push(current);
     ctx.putImageData(prev, 0, 0);
+    updateFlags();
   }, [canvasRef, getCtx]);
 
   const redo = useCallback(() => {
@@ -57,15 +71,14 @@ export const useCanvasHistory = ({
     const next = redoStack.current.pop()!;
     undoStack.current.push(current);
     ctx.putImageData(next, 0, 0);
+    updateFlags();
   }, [canvasRef, getCtx]);
 
   const clearHistory = useCallback(() => {
     undoStack.current.length = 0;
     redoStack.current.length = 0;
+    updateFlags();
   }, []);
-
-  const canUndo = useCallback(() => undoStack.current.length > 0, []);
-  const canRedo = useCallback(() => redoStack.current.length > 0, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -75,12 +88,15 @@ export const useCanvasHistory = ({
     const img = ctx.getImageData(0, 0, canvas.width, canvas.height);
     undoStack.current = [img];
     redoStack.current = [];
+    updateFlags();
   }, [canvasRef, getCtx]);
 
   return {
-    pushSnapshot: snapshot,
+    snapshot,
     undo,
     redo,
+    getCanUndo,
+    getCanRedo,
     canUndo,
     canRedo,
     clearHistory,

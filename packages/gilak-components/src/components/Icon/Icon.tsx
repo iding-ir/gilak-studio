@@ -11,6 +11,7 @@ export type IconProps = Omit<ComponentProps<"span">, "color"> & {
   selected?: boolean;
   frameless?: boolean;
   interactive?: boolean;
+  disabled?: boolean;
   className?: string;
   color?: string;
   backgroundColor?: string;
@@ -23,6 +24,7 @@ export const Icon = ({
   selected = false,
   frameless = false,
   interactive = true,
+  disabled = false,
   className,
   color,
   backgroundColor,
@@ -36,6 +38,7 @@ export const Icon = ({
         [styles.selected]: selected,
         [styles.frameless]: frameless,
         [styles.interactive]: interactive,
+        [styles.disabled]: disabled,
       })}
       style={
         {

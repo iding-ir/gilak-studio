@@ -1,18 +1,14 @@
 import { type CanvasHistory } from "@gilak/canvas";
 import { Icon } from "@gilak/components";
 import { ZoomSelector } from "@gilak/resizable-screen";
-import type { RefObject } from "react";
 
 import IconRedo from "../../assets/icon-redo.svg?url";
 import IconUndo from "../../assets/icon-undo.svg?url";
 import styles from "./WindowFooter.module.scss";
 
-export const WindowFooter = ({
-  canvasHistoryRef,
-}: {
-  canvasRef: RefObject<HTMLCanvasElement | null>;
-  canvasHistoryRef: RefObject<CanvasHistory | null>;
-}) => {
+export const WindowFooter = ({ history }: { history: CanvasHistory }) => {
+  const { undo, redo, canUndo, canRedo } = history;
+
   return (
     <div className={styles.root}>
       <ZoomSelector />
@@ -22,14 +18,16 @@ export const WindowFooter = ({
           interactive
           frameless
           variant="dark-ghost"
-          onClick={() => canvasHistoryRef.current?.undo()}
+          disabled={!canUndo}
+          onClick={() => canUndo && undo()}
         />
         <Icon
           icon={IconRedo}
           interactive
           frameless
           variant="dark-ghost"
-          onClick={() => canvasHistoryRef.current?.redo()}
+          disabled={!canRedo}
+          onClick={() => canRedo && redo()}
         />
       </div>
     </div>

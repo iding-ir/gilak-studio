@@ -25,6 +25,11 @@
     outline-offset: 0px;
   }
 
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
   .icon {
     display: inline-block;
     position: relative;

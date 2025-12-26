@@ -1,13 +1,6 @@
 import { type RefObject } from "react";
 
-import type { CanvasHistory } from "../../hooks";
-import {
-  useCanvasHistory,
-  useCursor,
-  useDrawing,
-  useEraser,
-  useFill,
-} from "../../hooks";
+import { useCursor, useDrawing, useEraser, useFill } from "../../hooks";
 import { type BrushShape, type BrushSize } from "../../types";
 import type { CanvasProps } from "../Canvas";
 import { Canvas } from "../Canvas";
@@ -26,7 +19,7 @@ export type DrawingCanvasProps = CanvasProps & {
   width?: string | number;
   height?: string | number;
   tolerance: number;
-  onHistoryChange?: (api: CanvasHistory) => void;
+  onChange?: () => void;
 };
 
 export function DrawingCanvas({
@@ -41,31 +34,30 @@ export function DrawingCanvas({
   width,
   height,
   tolerance,
-  onHistoryChange,
+  onChange,
   ...props
 }: DrawingCanvasProps) {
-  const history = useCanvasHistory({ canvasRef });
   useDrawing({
     canvasRef,
     enabled: enabledDrawing,
     color,
     brushSize,
     brushShape,
-    onChange: history.pushSnapshot,
+    onChange,
   });
   useFill({
     canvasRef,
     enabled: enabledFill,
     color: backgroundColor,
     tolerance,
-    onChange: history.pushSnapshot,
+    onChange,
   });
   useEraser({
     canvasRef,
     enabled: enabledEraser,
     brushSize,
     brushShape,
-    onChange: history.pushSnapshot,
+    onChange,
   });
   const { cursorRef } = useCursor({
     canvasRef,
@@ -74,10 +66,6 @@ export function DrawingCanvas({
     brushSize,
     brushShape,
   });
-
-  if (onHistoryChange) {
-    onHistoryChange(history);
-  }
 
   return (
     <div className={styles.canvas}>

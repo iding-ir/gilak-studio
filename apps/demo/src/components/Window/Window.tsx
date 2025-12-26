@@ -1,5 +1,4 @@
-import type { CanvasHistory } from "@gilak/canvas";
-import { DrawingCanvas } from "@gilak/canvas";
+import { DrawingCanvas, useCanvasHistory } from "@gilak/canvas";
 import { MagnifierProvider } from "@gilak/color-picker";
 import { FloatingWindow } from "@gilak/floating-window";
 import { useFloatingWindow } from "@gilak/floating-window";
@@ -31,7 +30,6 @@ export type WindowProps = {
 export const Window = ({ id }: WindowProps) => {
   const dispatch = useAppDispatch();
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const canvasHistoryRef = useRef<CanvasHistory | null>(null);
   const brushSize = useAppSelector(selectBrushSize);
   const brushShape = useAppSelector(selectBrushShape);
   const selectedTool = useAppSelector(selectTool);
@@ -42,6 +40,7 @@ export const Window = ({ id }: WindowProps) => {
   const [width] = useState(defaultDocumentSize.w);
   const [height] = useState(defaultDocumentSize.h);
   const { title, size, position } = useFloatingWindow(id);
+  const history = useCanvasHistory({ canvasRef });
 
   const handleSelectColor = (color: string) => {
     dispatch(setColor(color));
@@ -55,12 +54,7 @@ export const Window = ({ id }: WindowProps) => {
         initialPosition={position}
         initialSize={size}
         editableTitle
-        footer={
-          <WindowFooter
-            canvasRef={canvasRef}
-            canvasHistoryRef={canvasHistoryRef}
-          />
-        }
+        footer={<WindowFooter history={history} />}
         actions={<WindowActions id={id} canvasRef={canvasRef} />}
       >
         <ResizableScreen>
@@ -81,9 +75,7 @@ export const Window = ({ id }: WindowProps) => {
               tolerance={tolerance}
               width={width}
               height={height}
-              onHistoryChange={(api) => {
-                canvasHistoryRef.current = api;
-              }}
+              onChange={history.snapshot}
             />
           </MagnifierProvider>
         </ResizableScreen>
