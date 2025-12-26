@@ -7,11 +7,10 @@ import {
 
 import { brushSlice } from "../features/brush/brush-slice";
 import { colorSlice } from "../features/color/color-slice";
-import { languageListenerMiddleware } from "../features/language/language-middleware";
-import { languageSlice } from "../features/language/language-slice";
+import { languageListenerMiddleware } from "../features/preferences/language/language-middleware";
+import { appearanceSlice } from "../features/preferences/preferences-slice";
+import { themeListenerMiddleware } from "../features/preferences/theme/theme-middleware";
 import { settingsSlice } from "../features/settings/settings-slice";
-import { themeListenerMiddleware } from "../features/theme/theme-middleware";
-import { themeSlice } from "../features/theme/theme-slice";
 import { toolsSlice } from "../features/tools/tools.slice";
 
 const rootReducer = combineSlices(
@@ -19,8 +18,7 @@ const rootReducer = combineSlices(
   colorSlice,
   toolsSlice,
   settingsSlice,
-  languageSlice,
-  themeSlice,
+  appearanceSlice,
 );
 
 export const store = configureStore({

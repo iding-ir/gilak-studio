@@ -11,8 +11,6 @@
   },
   "settings": {
     "heading": "Settings",
-    "language": "Language",
-    "theme": "Theme",
     "document": "New Documents",
     "window": "New Windows",
     "width": "Width",
@@ -20,18 +18,27 @@
     "number": "Number",
     "save": "Save"
   },
-  "navigation": {
-    "file": "File",
-    "new": "New",
-    "open": "Open",
-    "settings": "Settings",
+  "preferences": {
+    "heading": "Preferences",
+    "language": "Language",
     "theme": "Theme",
-    "light": "Light",
-    "dark": "Dark",
-    "view": "View",
-    "help": "Help",
-    "fullscreen": "Fullscreen",
-    "github": "GitHub"
+    "save": "Save"
+  },
+  "navigation": {
+    "file": {
+      "label": "File",
+      "new": "New",
+      "settings": "Settings"
+    },
+    "view": {
+      "label": "View",
+      "fullscreen": "Fullscreen"
+    },
+    "app": {
+      "label": "App",
+      "preferences": "Preferences",
+      "github": "GitHub"
+    }
   },
   "document": {
     "settings": "Settings",

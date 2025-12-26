@@ -11,27 +11,39 @@
   },
   "settings": {
     "heading": "Einstellungen",
-    "language": "Sprache",
-    "theme": "Thema",
     "document": "Neue Dokumente",
     "window": "Neue Fenster",
     "width": "Breite",
     "height": "Höhe",
-    "number": "Zahl",
+    "number": "Anzahl",
+    "save": "Speichern"
+  },
+  "preferences": {
+    "heading": "Voreinstellungen",
+    "language": "Sprache",
+    "theme": "Thema",
     "save": "Speichern"
   },
   "navigation": {
-    "file": "Datei",
-    "new": "Neu",
-    "open": "Öffnen",
+    "file": {
+      "label": "Datei",
+      "new": "Neu",
+      "settings": "Einstellungen"
+    },
+    "view": {
+      "label": "Ansicht",
+      "fullscreen": "Vollbild"
+    },
+    "app": {
+      "label": "App",
+      "preferences": "Voreinstellungen",
+      "github": "GitHub"
+    }
+  },
+  "document": {
     "settings": "Einstellungen",
-    "theme": "Thema",
-    "light": "Hell",
-    "dark": "Dunkel",
-    "view": "Ansicht",
-    "help": "Hilfe",
-    "fullscreen": "Vollbild",
-    "github": "GitHub"
+    "width": "Breite",
+    "height": "Höhe"
   },
   "export": {
     "export": "Exportieren",

@@ -1,7 +1,7 @@
 import { setAttribute } from "@gilak/utils";
 import { createListenerMiddleware } from "@reduxjs/toolkit";
 
-import { setTheme } from "./theme-slice";
+import { setTheme } from "../preferences-slice";
 import type { ThemeType } from "./types";
 
 export const themeListenerMiddleware = createListenerMiddleware();

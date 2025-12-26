@@ -42,16 +42,14 @@ export const settingsSlice = createAppSlice({
     closeSettings: create.reducer((state) => {
       state.open = false;
     }),
-    setDocumentSettings: create.reducer(
-      (state, { payload }: PayloadAction<DocumentSettings>) => {
-        state.doc = payload;
+    setDocumentSize: create.reducer(
+      (state, { payload }: PayloadAction<Size>) => {
+        state.doc.size = payload;
       },
     ),
-    setWindowSettings: create.reducer(
-      (state, { payload }: PayloadAction<WindowSettings>) => {
-        state.win = payload;
-      },
-    ),
+    setWindowSize: create.reducer((state, { payload }: PayloadAction<Size>) => {
+      state.win.size = payload;
+    }),
   }),
   selectors: {
     selectSettingsOpen: ({ open }) => open,
@@ -60,12 +58,8 @@ export const settingsSlice = createAppSlice({
   },
 });
 
-export const {
-  openSettings,
-  closeSettings,
-  setDocumentSettings,
-  setWindowSettings,
-} = settingsSlice.actions;
+export const { openSettings, closeSettings, setDocumentSize, setWindowSize } =
+  settingsSlice.actions;
 
 export const {
   selectSettingsOpen,
