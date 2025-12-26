@@ -7,15 +7,4 @@
     background-color: $bg-color;
   }
   border-radius: var(--radius-md);
-
-  &::before,
-  &::after {
-    @if $reverse {
-      color: $bg-color;
-      background-color: $color;
-    } @else {
-      color: $color;
-      background-color: $bg-color;
-    }
-  }
 }

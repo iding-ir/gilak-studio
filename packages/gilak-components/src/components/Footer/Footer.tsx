@@ -1,9 +1,9 @@
 import clsx from "clsx";
-import type { HTMLAttributes, ReactNode } from "react";
+import type { ComponentProps, ReactNode } from "react";
 
 import styles from "./Footer.module.scss";
 
-export type FooterProps = HTMLAttributes<HTMLElement> & {
+export type FooterProps = ComponentProps<"footer"> & {
   caption?: ReactNode;
   actions?: ReactNode;
   className?: string;

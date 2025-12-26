@@ -1,6 +1,6 @@
 @use "@gilak/stylist/scss" as *;
 
-.root {
+.background {
   flex-shrink: 0;
   position: relative;
   display: inline-flex;
@@ -33,20 +33,12 @@
     mask-size: 70%;
     mask-repeat: no-repeat;
     mask-position: center;
-    mask-image: var(--icon-url);
+    mask-image: var(--props-url);
     overflow: hidden;
     @include solidVariants($reverse: true);
-
-    &::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -2;
-    }
   }
 
   &.interactive {
-    cursor: pointer;
     @include interactiveVariants;
 
     .icon {

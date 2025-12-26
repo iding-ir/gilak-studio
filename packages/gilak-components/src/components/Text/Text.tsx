@@ -1,26 +1,26 @@
 import type { Variant } from "@gilak/components/types";
 import clsx from "clsx";
-import type { HTMLAttributes } from "react";
+import type { ComponentProps } from "react";
 
 import styles from "./Text.module.scss";
 
-export type TextProps = HTMLAttributes<HTMLDivElement> & {
+export type TextProps = ComponentProps<"span"> & {
   text: string;
-  variant?: Variant;
   rounded?: boolean;
+  variant?: Variant;
   selected?: boolean;
-  interactive?: boolean;
   frameless?: boolean;
+  interactive?: boolean;
   className?: string;
 };
 
 export const Text = ({
   text,
-  variant = "light-ghost",
   rounded = true,
+  variant = "light-ghost",
   selected = false,
-  interactive = false,
   frameless = false,
+  interactive = false,
   className,
   ...props
 }: TextProps) => {

@@ -1,20 +1,20 @@
 import type { Variant } from "@gilak/components/types";
 import clsx from "clsx";
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import type { ComponentProps, ReactNode } from "react";
 
 import styles from "./Button.module.scss";
 
-export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: Variant;
+export type ButtonProps = ComponentProps<"button"> & {
   rounded?: boolean;
+  variant?: Variant;
   fullWidth?: boolean;
   children: ReactNode;
   className?: string;
 };
 
 export const Button = ({
-  variant = "primary",
   rounded = true,
+  variant = "primary",
   fullWidth = false,
   className,
   children,

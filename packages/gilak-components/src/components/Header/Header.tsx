@@ -1,9 +1,9 @@
 import clsx from "clsx";
-import type { HTMLAttributes, ReactNode } from "react";
+import type { ComponentProps, ReactNode } from "react";
 
 import styles from "./Header.module.scss";
 
-export type HeaderProps = HTMLAttributes<HTMLElement> & {
+export type HeaderProps = ComponentProps<"header"> & {
   heading?: ReactNode;
   actions?: ReactNode;
   className?: string;

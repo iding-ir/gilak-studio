@@ -7,22 +7,22 @@ import styles from "./Input.module.scss";
 export type InputProps = ComponentProps<"input"> & {
   ref?: RefObject<HTMLInputElement | null>;
   error?: boolean;
+  rounded?: boolean;
+  variant?: Variant;
+  frameless?: boolean;
   fullWidth?: boolean;
   label?: string;
-  rounded?: boolean;
-  frameless?: boolean;
-  variant?: Variant;
   className?: string;
 };
 
 export const Input = ({
   ref,
   error,
+  rounded = true,
+  variant = "light",
+  frameless = false,
   fullWidth = true,
   label,
-  rounded = true,
-  frameless = false,
-  variant = "light",
   className,
   ...props
 }: InputProps) => {

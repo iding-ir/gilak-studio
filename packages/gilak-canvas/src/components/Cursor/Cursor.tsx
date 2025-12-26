@@ -1,8 +1,8 @@
-import type { CanvasHTMLAttributes, RefObject } from "react";
+import type { ComponentProps, RefObject } from "react";
 
 import styles from "./Cursor.module.scss";
 
-export type CursorProps = CanvasHTMLAttributes<HTMLCanvasElement> & {
+export type CursorProps = ComponentProps<"canvas"> & {
   cursorRef: RefObject<HTMLCanvasElement | null>;
   width?: number;
   height?: number;
