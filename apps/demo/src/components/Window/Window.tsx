@@ -20,7 +20,8 @@ import {
 } from "../../features/color/color-slice";
 import { selectSettingsDocument } from "../../features/settings/settings-slice";
 import { selectTolerance, selectTool } from "../../features/tools/tools.slice";
-import { WindowActions } from "./WindowActions";
+import { DocumentSettings } from "../DocumentSettings";
+import { WindowActions } from "./WindowActions.tsx";
 import { WindowFooter } from "./WindowFooter";
 
 export type WindowProps = {
@@ -37,8 +38,9 @@ export const Window = ({ id }: WindowProps) => {
   const backgroundColor = useAppSelector(selectBackgroundColor);
   const tolerance = useAppSelector(selectTolerance);
   const { size: defaultDocumentSize } = useAppSelector(selectSettingsDocument);
-  const [width] = useState(defaultDocumentSize.w);
-  const [height] = useState(defaultDocumentSize.h);
+  const [documentWidth, setDocumentWidth] = useState(defaultDocumentSize.w);
+  const [documentHeight, setDocumentHeight] = useState(defaultDocumentSize.h);
+  const [openSettings, setOpenSettings] = useState(false);
   const { title, size, position } = useFloatingWindow(id);
   const history = useCanvasHistory({ canvasRef });
 
@@ -55,7 +57,13 @@ export const Window = ({ id }: WindowProps) => {
         initialSize={size}
         editableTitle
         footer={<WindowFooter history={history} />}
-        actions={<WindowActions id={id} canvasRef={canvasRef} />}
+        actions={
+          <WindowActions
+            id={id}
+            canvasRef={canvasRef}
+            onClickDocumentSettings={() => setOpenSettings(true)}
+          />
+        }
       >
         <ResizableScreen>
           <MagnifierProvider
@@ -73,13 +81,22 @@ export const Window = ({ id }: WindowProps) => {
               brushSize={brushSize}
               brushShape={brushShape}
               tolerance={tolerance}
-              width={width}
-              height={height}
+              width={documentWidth}
+              height={documentHeight}
               onChange={history.snapshot}
             />
           </MagnifierProvider>
         </ResizableScreen>
       </FloatingWindow>
+      {openSettings && (
+        <DocumentSettings
+          documentWidth={documentWidth}
+          documentHeight={documentHeight}
+          setDocumentWidth={setDocumentWidth}
+          setDocumentHeight={setDocumentHeight}
+          setDocumentSettingsOpen={setOpenSettings}
+        />
+      )}
     </ResizableScreenProvider>
   );
 };

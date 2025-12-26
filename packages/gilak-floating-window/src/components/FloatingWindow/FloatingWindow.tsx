@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import { memo, useRef } from "react";
 
 import {
-  IMITIAL_STATUS,
+  INITIAL_CLOSABLE,
   INITIAL_DRAGGABLE,
   INITIAL_MAXIMIZABLE,
   INITIAL_MINIMIZABLE,
@@ -12,6 +12,7 @@ import {
   INITIAL_RESIZABLE,
   INITIAL_RESTRICT_TO_PARENT,
   INITIAL_SIZE,
+  INITIAL_STATUS,
   INITIAL_Z_INDEX,
   MAX_SIZE,
   MIN_SIZE,
@@ -42,6 +43,7 @@ export type FloatingWindowProps = {
   resizable?: boolean;
   maximizable?: boolean;
   minimizable?: boolean;
+  closable?: boolean;
   restrictToParent?: boolean;
   onDragStart?: (position?: Position) => void;
   onDrag?: (position?: Position) => void;
@@ -58,7 +60,7 @@ export const FloatingWindow = memo(
     className,
     title = "Untitled",
     editableTitle = false,
-    initialStatus = IMITIAL_STATUS,
+    initialStatus = INITIAL_STATUS,
     footer,
     actions,
     initialPosition = INITIAL_POSITION,
@@ -70,6 +72,7 @@ export const FloatingWindow = memo(
     resizable = INITIAL_RESIZABLE,
     maximizable = INITIAL_MAXIMIZABLE,
     minimizable = INITIAL_MINIMIZABLE,
+    closable = INITIAL_CLOSABLE,
     restrictToParent = INITIAL_RESTRICT_TO_PARENT,
     onDragStart,
     onDrag,
@@ -148,6 +151,7 @@ export const FloatingWindow = memo(
           draggable={draggable && status !== "maximized"}
           maximizable={maximizable}
           minimizable={minimizable}
+          closable={closable}
           actions={actions}
           onDragPointerDown={draggable ? onDragPointerDown : undefined}
         />

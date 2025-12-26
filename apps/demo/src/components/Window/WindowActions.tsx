@@ -6,9 +6,14 @@ import { useTranslation } from "react-i18next";
 export type WindowActionsProps = {
   id: string;
   canvasRef: React.RefObject<HTMLCanvasElement | null>;
+  onClickDocumentSettings: () => void;
 };
 
-export const WindowActions = ({ id, canvasRef }: WindowActionsProps) => {
+export const WindowActions = ({
+  id,
+  canvasRef,
+  onClickDocumentSettings,
+}: WindowActionsProps) => {
   const { t } = useTranslation();
   const { title } = useFloatingWindow(id);
 
@@ -25,11 +30,17 @@ export const WindowActions = ({ id, canvasRef }: WindowActionsProps) => {
   };
 
   return (
-    <Menu root open direction="row" label="">
+    <Menu root open direction="column" variant="dark" label="">
+      <Menu
+        label={t("document.settings")}
+        closeOnClickInside={true}
+        onClick={onClickDocumentSettings}
+      />
       <Menu
         label={t("export.export")}
         direction="column"
-        position="bottom"
+        position="right"
+        variant="dark"
         closeOnClickInside={false}
       >
         <Menu label={t("export.png")} onClick={() => handleExport("png")} />

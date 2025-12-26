@@ -30,6 +30,7 @@ export const FloatingWindows = ({ children }: FloatingWindowsProps) => {
                 draggable={false}
                 maximizable={maximizable}
                 minimizable={minimizable}
+                closable={false}
                 onDragPointerDown={() => null}
               />
             ),

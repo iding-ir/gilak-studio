@@ -33,6 +33,11 @@
     "fullscreen": "Fullscreen",
     "github": "GitHub"
   },
+  "document": {
+    "settings": "Settings",
+    "width": "Width",
+    "height": "Height"
+  },
   "export": {
     "export": "Export",
     "png": "PNG",

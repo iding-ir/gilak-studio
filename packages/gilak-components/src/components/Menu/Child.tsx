@@ -7,21 +7,21 @@ import { List } from "../List";
 export const Child = ({
   direction,
   variant,
-  root,
+  frameless,
   children,
 }: {
   direction: Direction;
   variant: Variant;
-  root: boolean;
+  frameless?: boolean;
   children?: ReactNode;
 }) => {
   return (
     <List
       direction={direction}
       count={1}
-      frameless={root}
+      frameless={frameless}
       interactive={true}
-      variant={root ? "light-ghost" : variant}
+      variant={variant}
       items={Children.toArray(children)}
     />
   );

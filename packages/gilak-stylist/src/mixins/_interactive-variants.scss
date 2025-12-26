@@ -38,7 +38,7 @@
 
   &.light-ghost {
     @include interactive(
-      $hover-color: var(--color-primary-xxl),
+      $hover-color: var(--color-light-md),
       $hover-bg-color: rgba(60, 60, 60, 0.2),
       $reverse: $reverse
     );
@@ -46,7 +46,7 @@
 
   &.dark-ghost {
     @include interactive(
-      $hover-color: var(--color-primary-xxl),
+      $hover-color: var(--color-dark-md),
       $hover-bg-color: rgba(60, 60, 60, 0.1),
       $reverse: $reverse
     );

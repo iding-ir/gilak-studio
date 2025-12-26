@@ -17,6 +17,7 @@ export type MenuProps = {
   direction?: Direction;
   position?: Position;
   variant?: Variant;
+  frameless?: boolean;
   open?: boolean;
   closeOnClickInside?: boolean;
   onClick?: () => void;
@@ -30,6 +31,7 @@ export const Menu = ({
   direction = "column",
   position = "bottom-right",
   variant = "dark",
+  frameless,
   open = false,
   closeOnClickInside,
   onClick,
@@ -41,7 +43,7 @@ export const Menu = ({
   if (root) {
     return (
       <div className={className}>
-        <Child direction={direction} variant={variant} root={root}>
+        <Child direction={direction} variant={variant} frameless={frameless}>
           {children}
         </Child>
       </div>
@@ -54,12 +56,7 @@ export const Menu = ({
         {href ? (
           <Link text={label} frameless href={href} target="_blank" />
         ) : (
-          <Text
-            text={label}
-            variant="light-ghost"
-            frameless
-            onClick={onClick}
-          />
+          <Text text={label} frameless onClick={onClick} />
         )}
       </div>
     );
@@ -70,17 +67,10 @@ export const Menu = ({
       <Dropdown
         position={position}
         openDefault={open}
-        trigger={
-          <Text
-            text={label}
-            variant="light-ghost"
-            frameless
-            onClick={onClick}
-          />
-        }
+        trigger={<Text text={label} frameless onClick={onClick} />}
         closeOnClickInside={closeOnClickInside}
       >
-        <Child direction={direction} variant={variant} root={root}>
+        <Child direction={direction} variant={variant} frameless={frameless}>
           {children}
         </Child>
       </Dropdown>

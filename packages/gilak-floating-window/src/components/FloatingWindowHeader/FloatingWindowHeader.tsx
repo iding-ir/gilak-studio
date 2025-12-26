@@ -1,4 +1,4 @@
-import { Header, Icon, Input } from "@gilak/components";
+import { Dropdown, Header, Icon, Input } from "@gilak/components";
 import clsx from "clsx";
 import type { PointerEvent, ReactNode } from "react";
 import { useCallback, useRef, useState } from "react";
@@ -6,6 +6,7 @@ import { useCallback, useRef, useState } from "react";
 import IconClose from "../../assets/icon-close.svg?url";
 import IconMaximize from "../../assets/icon-maximize.svg?url";
 import IconMaximized from "../../assets/icon-maximized.svg?url";
+import IconMenu from "../../assets/icon-menu.svg?url";
 import IconMinimize from "../../assets/icon-minimize.svg?url";
 import IconMinimized from "../../assets/icon-minimized.svg?url";
 import { useFloatingWindow } from "../../hooks/useFloatingWindow";
@@ -18,6 +19,7 @@ export type FloatingWindowHeaderProps = {
   draggable: boolean;
   maximizable: boolean;
   minimizable: boolean;
+  closable: boolean;
   actions?: ReactNode;
   onDragPointerDown?: (event: PointerEvent<HTMLElement>) => void;
 };
@@ -29,6 +31,7 @@ export const FloatingWindowHeader = ({
   draggable,
   maximizable,
   minimizable,
+  closable,
   actions,
   onDragPointerDown,
 }: FloatingWindowHeaderProps) => {
@@ -93,21 +96,54 @@ export const FloatingWindowHeader = ({
       }
       actions={
         <>
-          {status !== "minimized" && actions}
+          {status !== "minimized" && actions && (
+            <Dropdown
+              position="bottom"
+              trigger={<Icon frameless variant="light-ghost" icon={IconMenu} />}
+            >
+              {actions}
+            </Dropdown>
+          )}
           {maximizable && status !== "maximized" && (
-            <Icon icon={IconMaximize} onClick={maximizeFloatingWindow} />
+            <Icon
+              frameless
+              variant="light-ghost"
+              icon={IconMaximize}
+              onClick={maximizeFloatingWindow}
+            />
           )}
           {maximizable && status === "maximized" && (
-            <Icon icon={IconMaximized} onClick={openFloatingWindow} />
+            <Icon
+              frameless
+              variant="light-ghost"
+              icon={IconMaximized}
+              onClick={openFloatingWindow}
+            />
           )}
           {minimizable && status !== "minimized" && (
-            <Icon icon={IconMinimize} onClick={minimizeFloatingWindow} />
+            <Icon
+              frameless
+              variant="light-ghost"
+              icon={IconMinimize}
+              onClick={minimizeFloatingWindow}
+            />
           )}
           {minimizable && status === "minimized" && (
-            <Icon icon={IconMinimized} onClick={openFloatingWindow} />
+            <Icon
+              frameless
+              variant="light-ghost"
+              icon={IconMinimized}
+              onClick={openFloatingWindow}
+            />
           )}
-
-          <Icon icon={IconClose} onClick={handleCloseFloatingWindow} />
+          {closable && (
+            <Icon
+              frameless
+              variant="light-ghost"
+              icon={IconClose}
+              onClick={handleCloseFloatingWindow}
+            />
+          )}
         </>
       }
       className={clsx(styles.header, {

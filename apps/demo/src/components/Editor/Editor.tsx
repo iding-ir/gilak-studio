@@ -1,16 +1,11 @@
 import { FloatingWindowProvider } from "@gilak/floating-window";
 
-import { useAppSelector } from "../../app/hooks";
-import { selectSettingsOpen } from "../../features/settings/settings-slice";
 import { Navigation } from "../Navigation";
-import { Settings } from "../Settings";
 import { Tools } from "../Tools";
 import { Windows } from "../Windows";
 import styles from "./Editor.module.scss";
 
 export const Editor = () => {
-  const isSettingsOpen = useAppSelector(selectSettingsOpen);
-
   return (
     <FloatingWindowProvider>
       <div className={styles.root}>
@@ -24,8 +19,6 @@ export const Editor = () => {
           <Windows />
         </main>
       </div>
-
-      {isSettingsOpen && <Settings />}
     </FloatingWindowProvider>
   );
 };
