@@ -1,7 +1,7 @@
 import { Slider } from "@gilak/components";
 import { t } from "@gilak/localization";
-import { useZoomLevelScreenContext } from "@gilak/resizable-screen";
 
+import { useZoomLevelScreenContext } from "../../context";
 import type { ZoomLevel } from "../../context/types";
 
 export const ZoomSelector = () => {

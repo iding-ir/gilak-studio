@@ -18,14 +18,14 @@
     "url": "https://github.com/iding-ir/gilak-studio/issues"
   },
   "type": "module",
-  "main": "./dist/gilak-localization.umd.js",
-  "module": "./dist/gilak-localization.es.js",
+  "main": "./dist/index.umd.cjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/gilak-localization.es.js",
-      "require": "./dist/gilak-localization.umd.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.umd.cjs"
     }
   },
   "files": [
@@ -37,14 +37,18 @@
     "lint": "eslint .",
     "prepublishOnly": "pnpm build"
   },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
   "devDependencies": {
     "@gilak/build-config": "workspace:*",
     "@types/i18next": "^13.x",
-    "@types/react-i18next": "^8.x"
+    "@types/react-i18next": "^8.x",
+    "react": "^19.2.0"
   },
   "dependencies": {
     "i18next": "^25.x",
-    "react": "^19.x",
     "react-i18next": "^16.x"
   }
 }

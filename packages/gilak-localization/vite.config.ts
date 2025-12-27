@@ -5,7 +5,7 @@ import { createLibraryConfig } from "../build-config/vite.config.base";
 const baseConfig = createLibraryConfig({
   entry: "src/index.ts",
   name: "GilakLocalization",
-  fileName: "gilak-localization",
+  fileName: "index",
 });
 
 export default mergeConfig(

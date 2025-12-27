@@ -1,5 +1,5 @@
+import type { Position, Variant } from "@gilak/components";
 import { Dropdown, Icon, Input, List, Tab, Tabs } from "@gilak/components";
-import type { Position, Variant } from "@gilak/components/types";
 import { t } from "@gilak/localization";
 import { getContrastColor } from "@gilak/utils";
 

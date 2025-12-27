@@ -2,7 +2,6 @@ import react from "@vitejs/plugin-react";
 import { resolve } from "path";
 import { defineConfig, type UserConfig } from "vite";
 import dts from "vite-plugin-dts";
-import { libInjectCss } from "vite-plugin-lib-inject-css";
 import svgr from "vite-plugin-svgr";
 
 interface LibraryConfig {
@@ -13,22 +12,33 @@ interface LibraryConfig {
 
 export function createLibraryConfig(config: LibraryConfig): UserConfig {
   return defineConfig({
+    resolve: {
+      alias: {
+        "@gilak/localization": resolve(__dirname, "../gilak-localization/src"),
+        "@gilak/canvas": resolve(__dirname, "../gilak-canvas/src"),
+        "@gilak/color-picker": resolve(__dirname, "../gilak-color-picker/src"),
+        "@gilak/color-swatch": resolve(__dirname, "../gilak-color-swatch/src"),
+        "@gilak/utils": resolve(__dirname, "../gilak-utils/src"),
+        "@gilak/floating-window": resolve(
+          __dirname,
+          "../gilak-floating-window/src",
+        ),
+        "@gilak/components": resolve(__dirname, "../gilak-components/src"),
+        "@gilak/resizable-screen": resolve(
+          __dirname,
+          "../gilak-resizable-screen/src",
+        ),
+      },
+    },
     plugins: [
       react(),
-      libInjectCss(),
       svgr({
-        svgrOptions: {
-          exportType: "default",
-          ref: true,
-          svgo: false,
-          titleProp: true,
-        },
+        svgrOptions: { exportType: "default", ref: true, titleProp: true },
         include: "**/*.svg",
       }),
       dts({
         include: ["src"],
         exclude: ["**/*.stories.tsx", "**/*.stories.ts"],
-        rollupTypes: true,
         insertTypesEntry: true,
         outDir: "dist",
       }),
@@ -56,7 +66,6 @@ export function createLibraryConfig(config: LibraryConfig): UserConfig {
             react: "React",
             "react-dom": "ReactDOM",
           },
-          assetFileNames: `${config.fileName}.[ext]`,
         },
       },
     },

@@ -1,6 +1,6 @@
-import { useZoomLevelScreenContext } from "@gilak/resizable-screen";
 import { type ReactNode, useRef } from "react";
 
+import { useZoomLevelScreenContext } from "../../context";
 import { useZoomLevel } from "../../hooks/useZoomLevel";
 import styles from "./ResizableScreen.module.scss";
 

@@ -1,7 +1,7 @@
-import { drawRandomEffect } from "@gilak/canvas/methods";
 import type { RefObject } from "react";
 import { useEffect } from "react";
 
+import { drawRandomEffect } from "../../methods";
 import type { CanvasProps } from "../Canvas";
 import { Canvas } from "../Canvas";
 

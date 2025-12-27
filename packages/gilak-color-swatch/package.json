@@ -24,16 +24,15 @@
     "**/*.scss"
   ],
   "type": "module",
-  "main": "./dist/gilak-color-swatch.umd.js",
-  "module": "./dist/gilak-color-swatch.es.js",
+  "main": "./dist/index.umd.cjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/gilak-color-swatch.es.js",
-      "require": "./dist/gilak-color-swatch.umd.js"
-    },
-    "./dist/gilak-color-swatch.css": "./dist/gilak-color-swatch.css"
+      "import": "./dist/index.js",
+      "require": "./dist/index.umd.cjs"
+    }
   },
   "files": [
     "dist"
@@ -45,15 +44,17 @@
     "prepublishOnly": "pnpm build"
   },
   "peerDependencies": {
-    "react": "^18.0.0 || ^19.0.0",
-    "react-dom": "^18.0.0 || ^19.0.0"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@gilak/build-config": "workspace:*",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
   "dependencies": {
     "@gilak/components": "workspace:*",
+    "@gilak/localization": "workspace:*",
     "@gilak/stylist": "workspace:*",
     "@gilak/utils": "workspace:*",
     "clsx": "^2.1.1"

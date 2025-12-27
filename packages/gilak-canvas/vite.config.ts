@@ -5,7 +5,7 @@ import { createLibraryConfig } from "../build-config/vite.config.base";
 const baseConfig = createLibraryConfig({
   entry: "src/index.ts",
   name: "GilakCanvas",
-  fileName: "gilak-canvas",
+  fileName: "index",
 });
 
 export default mergeConfig(
@@ -13,7 +13,7 @@ export default mergeConfig(
   defineConfig({
     build: {
       rollupOptions: {
-        external: ["react", "react-dom", "@gilak/utils"],
+        external: ["react", "react-dom"],
       },
     },
   }),
