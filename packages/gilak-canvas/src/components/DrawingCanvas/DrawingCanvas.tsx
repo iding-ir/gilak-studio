@@ -1,3 +1,4 @@
+import { getCursorColor } from "@gilak/canvas/methods/get-cursor-color";
 import { type RefObject } from "react";
 
 import { useCursor, useDrawing, useEraser, useFill } from "../../hooks";
@@ -59,10 +60,17 @@ export const DrawingCanvas = ({
     brushShape,
     onChange,
   });
+
   const { cursorRef } = useCursor({
     canvasRef,
-    enabled: enabledDrawing || enabledEraser,
-    color: enabledDrawing ? color : "rgba(90,90,90,0.5)",
+    enabled: enabledDrawing || enabledEraser || enabledFill,
+    color: getCursorColor({
+      color,
+      backgroundColor,
+      enabledEraser,
+      enabledDrawing,
+      enabledFill,
+    }),
     brushSize,
     brushShape,
   });
