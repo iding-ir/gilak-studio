@@ -1,48 +1,70 @@
 @use "@gilak/stylist/scss" as *;
 
-.tooltip {
-  padding: var(--spacing-xxxs) var(--spacing-xxs);
-  @include solidVariants;
-  @include fontSize;
+.root {
+  position: relative;
+  display: inline-block;
 
-  * {
-    font-size: unset;
-    @include fontSize;
-  }
+  .tip {
+    position: absolute;
+    white-space: nowrap;
+    opacity: 0;
+    z-index: 999;
+    transform: translateY(4px);
+    transition:
+      opacity var(--transition-sm),
+      transform var(--transition-sm);
+    pointer-events: none;
+    touch-action: none;
 
-  &.primary {
-    :global(.tippy-arrow) {
-      color: var(--color-primary-md);
+    &.top {
+      bottom: 100%;
+      left: 50%;
+      transform-origin: center bottom;
+      transform: translate(-50%, 6px);
     }
-  }
 
-  &.secondary {
-    :global(.tippy-arrow) {
-      color: var(--color-secondary-md);
+    &.bottom {
+      top: 100%;
+      left: 50%;
+      transform-origin: center top;
+      transform: translate(-50%, -6px);
     }
-  }
 
-  &.light {
-    :global(.tippy-arrow) {
-      color: var(--color-light-md);
+    &.left {
+      right: 100%;
+      top: 50%;
+      transform-origin: right center;
+      transform: translate(6px, -50%);
     }
-  }
 
-  &.dark {
-    :global(.tippy-arrow) {
-      color: var(--color-dark-xxl);
+    &.right {
+      left: 100%;
+      top: 50%;
+      transform-origin: left center;
+      transform: translate(-6px, -50%);
     }
-  }
 
-  &.light-ghost {
-    :global(.tippy-arrow) {
-      color: transparent;
-    }
-  }
+    &.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+      touch-action: auto;
 
-  &.dark-ghost {
-    :global(.tippy-arrow) {
-      color: transparent;
+      &.top {
+        transform: translate(-50%, 0);
+      }
+
+      &.bottom {
+        transform: translate(-50%, 0);
+      }
+
+      &.left {
+        transform: translate(0, -50%);
+      }
+
+      &.right {
+        transform: translate(0, -50%);
+      }
     }
   }
 }

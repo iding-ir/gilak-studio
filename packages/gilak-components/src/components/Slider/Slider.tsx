@@ -51,21 +51,20 @@ export const Slider = ({
             width: `${((value - range[0]) / (range[1] - range[0] || 1)) * 100}%`,
           }}
         />
-
-        <ConditionalWrapper
-          condition={!!label}
-          wrapper={(children) => (
-            <Tooltip content={label as string}>{children}</Tooltip>
-          )}
+        <div
+          className={styles.thumb}
+          onPointerDown={handleThumbPointerDown}
+          style={thumbStyle as CSSProperties}
         >
-          <div
-            className={styles.thumb}
-            onPointerDown={handleThumbPointerDown}
-            style={thumbStyle as CSSProperties}
+          <ConditionalWrapper
+            condition={!!label}
+            wrapper={(children) => (
+              <Tooltip content={label as string}>{children}</Tooltip>
+            )}
           >
             {valueRenderer(value)}
-          </div>
-        </ConditionalWrapper>
+          </ConditionalWrapper>
+        </div>
       </div>
     </div>
   );
