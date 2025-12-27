@@ -1,8 +1,14 @@
 @use "@gilak/stylist/scss" as *;
 
 .tooltip {
-  padding: var(--spacing-xxs) var(--spacing-xs);
+  padding: var(--spacing-xxxs) var(--spacing-xxs);
   @include solidVariants;
+  @include fontSize;
+
+  * {
+    font-size: unset;
+    @include fontSize;
+  }
 
   &.primary {
     :global(.tippy-arrow) {
