@@ -59,5 +59,9 @@
     "png": "PNG",
     "jpeg": "JPEG",
     "webp": "WEBP"
+  },
+  "welcomeScreen": {
+    "newWindow": "Neues Fenster",
+    "github": "GitHub"
   }
 }

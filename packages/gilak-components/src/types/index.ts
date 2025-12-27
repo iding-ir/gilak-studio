@@ -1,4 +1,13 @@
-export type TshirtSize = "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
+export type TshirtSize =
+  | "xxxs"
+  | "xxs"
+  | "xs"
+  | "sm"
+  | "md"
+  | "lg"
+  | "xl"
+  | "xxl"
+  | "xxxl";
 
 export type Direction = "row" | "column" | "row-reverse" | "column-reverse";
 

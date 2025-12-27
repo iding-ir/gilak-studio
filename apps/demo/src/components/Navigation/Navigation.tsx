@@ -66,7 +66,7 @@ export const Navigation = () => {
           />
           <Menu
             label={t("app:navigation.github")}
-            href="https://github.com/iding-ir/gilak-studio"
+            href={import.meta.env.VITE_GITHUB_REPOSITORY}
           />
         </Menu>
       </Menu>

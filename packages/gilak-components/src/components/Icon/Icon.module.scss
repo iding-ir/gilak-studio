@@ -1,15 +1,18 @@
 @use "@gilak/stylist/scss" as *;
 
 .background {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: var(--icon-md);
-  height: var(--icon-md);
   box-shadow: var(--shadow-sm);
   @include solidVariants;
+  @include iconSizes;
 
   &.rounded {
     border-radius: var(--radius-md);
@@ -17,7 +20,6 @@
 
   &.frameless {
     box-shadow: none;
-    background-color: transparent;
   }
 
   &.selected {

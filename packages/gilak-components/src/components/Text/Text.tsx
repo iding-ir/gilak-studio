@@ -1,4 +1,4 @@
-import type { Variant } from "@gilak/components/types";
+import type { TshirtSize, Variant } from "@gilak/components/types";
 import clsx from "clsx";
 import type { ComponentProps } from "react";
 
@@ -8,6 +8,7 @@ export type TextProps = ComponentProps<"span"> & {
   text: string;
   rounded?: boolean;
   variant?: Variant;
+  size?: TshirtSize;
   selected?: boolean;
   frameless?: boolean;
   interactive?: boolean;
@@ -18,6 +19,7 @@ export const Text = ({
   text,
   rounded = true,
   variant = "light-ghost",
+  size = "sm",
   selected = false,
   frameless = false,
   interactive = false,
@@ -27,7 +29,7 @@ export const Text = ({
   return (
     <span
       {...props}
-      className={clsx(styles.root, styles[variant], className, {
+      className={clsx(styles.root, styles[variant], styles[size], className, {
         [styles.rounded]: rounded,
         [styles.selected]: selected,
         [styles.frameless]: frameless,

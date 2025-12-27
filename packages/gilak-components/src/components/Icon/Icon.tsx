@@ -1,4 +1,4 @@
-import type { Variant } from "@gilak/components/types";
+import type { TshirtSize, Variant } from "@gilak/components/types";
 import clsx from "clsx";
 import type { ComponentProps, CSSProperties } from "react";
 
@@ -10,6 +10,7 @@ export type IconProps = Omit<ComponentProps<"span">, "color"> & {
   icon: string;
   rounded?: boolean;
   variant?: Variant;
+  size?: TshirtSize;
   selected?: boolean;
   frameless?: boolean;
   interactive?: boolean;
@@ -24,6 +25,7 @@ export const Icon = ({
   icon,
   rounded = true,
   variant = "light",
+  size = "md",
   selected = false,
   frameless = false,
   interactive = true,
@@ -43,13 +45,19 @@ export const Icon = ({
     >
       <span
         {...props}
-        className={clsx(styles.background, styles[variant], className, {
-          [styles.rounded]: rounded,
-          [styles.selected]: selected,
-          [styles.frameless]: frameless,
-          [styles.interactive]: interactive,
-          [styles.disabled]: disabled,
-        })}
+        className={clsx(
+          styles.background,
+          styles[variant],
+          styles[size],
+          className,
+          {
+            [styles.rounded]: rounded,
+            [styles.selected]: selected,
+            [styles.frameless]: frameless,
+            [styles.interactive]: interactive,
+            [styles.disabled]: disabled,
+          },
+        )}
         style={
           {
             ...props.style,

@@ -1,4 +1,4 @@
-import type { Variant } from "@gilak/components/types";
+import type { TshirtSize, Variant } from "@gilak/components/types";
 import clsx from "clsx";
 import type { ComponentProps } from "react";
 
@@ -10,6 +10,7 @@ export type LinkProps = ComponentProps<"a"> & {
   rounded?: boolean;
   selected?: boolean;
   interactive?: boolean;
+  size: TshirtSize;
   frameless?: boolean;
   className?: string;
 };
@@ -20,6 +21,7 @@ export const Link = ({
   rounded = true,
   selected = false,
   interactive = false,
+  size = "sm",
   frameless = false,
   className,
   ...props
@@ -27,7 +29,7 @@ export const Link = ({
   return (
     <a
       {...props}
-      className={clsx(styles.root, styles[variant], className, {
+      className={clsx(styles.root, styles[variant], styles[size], className, {
         [styles.rounded]: rounded,
         [styles.selected]: selected,
         [styles.frameless]: frameless,
