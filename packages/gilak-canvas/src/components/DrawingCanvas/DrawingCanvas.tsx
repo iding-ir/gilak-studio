@@ -62,7 +62,7 @@ export const DrawingCanvas = ({
   const { cursorRef } = useCursor({
     canvasRef,
     enabled: enabledDrawing || enabledEraser,
-    color,
+    color: enabledDrawing ? color : "rgba(90,90,90,0.5)",
     brushSize,
     brushShape,
   });
