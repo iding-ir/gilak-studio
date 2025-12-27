@@ -1,6 +1,7 @@
 export type { CanvasHistory } from "./useCanvasHistory";
 export { useCanvasHistory } from "./useCanvasHistory";
 export { useCanvasPointer } from "./useCanvasPointer";
+export { useCanvasSize } from "./useCanvasSize";
 export { useCursor } from "./useCursor";
 export type { UseDrawingProps } from "./useDrawing";
 export { useDrawing } from "./useDrawing";

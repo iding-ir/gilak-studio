@@ -1,6 +1,7 @@
 import type { ComponentProps } from "react";
-import { type ReactNode, type RefObject, useEffect } from "react";
+import { type ReactNode, type RefObject } from "react";
 
+import { useCanvasSize } from "../../hooks";
 import styles from "./Canvas.module.scss";
 
 export type CanvasProps = {
@@ -17,23 +18,11 @@ export const Canvas = ({
   height = "300px",
   ...props
 }: CanvasProps) => {
-  useEffect(() => {
-    const canvas = canvasRef?.current;
-    if (!canvas) return;
-    // Create/obtain 2D context with willReadFrequently to optimize repeated
-    // getImageData calls (useful for undo/redo snapshots).
-    canvas.getContext("2d", { willReadFrequently: true });
-  }, [canvasRef]);
+  useCanvasSize({ canvasRef, width, height });
 
   return (
     <>
-      <canvas
-        ref={canvasRef}
-        className={styles.root}
-        width={width}
-        height={height}
-        {...props}
-      />
+      <canvas ref={canvasRef} className={styles.root} {...props} />
       {children}
     </>
   );

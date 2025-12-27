@@ -10,3 +10,4 @@ export { drawRandomEffect } from "./draw-random-effect";
 export { drawShape } from "./draw-shape";
 export type { FillAreaArgs } from "./fill-area";
 export { fillArea } from "./fill-area";
+export { parseSize } from "./parse-size";

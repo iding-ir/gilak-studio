@@ -10,7 +10,7 @@ export type LinkProps = ComponentProps<"a"> & {
   rounded?: boolean;
   selected?: boolean;
   interactive?: boolean;
-  size: TshirtSize;
+  size?: TshirtSize;
   frameless?: boolean;
   className?: string;
 };
