@@ -43,7 +43,7 @@ export const Tooltip = ({
           [styles.show]: visible,
         })}
       >
-        <Text text={content} size="xs" variant="light" />
+        <Text text={content} size="xs" variant="secondary" />
       </span>
     </div>
   );
