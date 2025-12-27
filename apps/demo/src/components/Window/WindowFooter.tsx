@@ -16,7 +16,7 @@ export const WindowFooter = ({ history }: { history: CanvasHistory }) => {
       <div className={styles.undoRedo}>
         <Icon
           icon={IconUndo}
-          label={t("app:undo")}
+          tooltip={t("app:undo")}
           interactive
           frameless
           variant="dark-ghost"
@@ -26,7 +26,7 @@ export const WindowFooter = ({ history }: { history: CanvasHistory }) => {
 
         <Icon
           icon={IconRedo}
-          label={t("app:redo")}
+          tooltip={t("app:redo")}
           interactive
           frameless
           variant="dark-ghost"

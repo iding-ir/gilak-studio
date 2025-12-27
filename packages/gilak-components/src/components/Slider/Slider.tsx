@@ -11,7 +11,7 @@ export type SliderProps = {
   range: [number, number];
   step: number;
   initial: number;
-  label?: string;
+  tooltip?: string;
   icon?: string;
   className?: string;
   onChange: (value: number) => void;
@@ -22,7 +22,7 @@ export const Slider = ({
   range,
   step,
   initial,
-  label,
+  tooltip,
   icon,
   className,
   onChange,
@@ -57,9 +57,9 @@ export const Slider = ({
           style={thumbStyle as CSSProperties}
         >
           <ConditionalWrapper
-            condition={!!label}
+            condition={!!tooltip}
             wrapper={(children) => (
-              <Tooltip content={label as string}>{children}</Tooltip>
+              <Tooltip content={tooltip as string}>{children}</Tooltip>
             )}
           >
             {valueRenderer(value)}

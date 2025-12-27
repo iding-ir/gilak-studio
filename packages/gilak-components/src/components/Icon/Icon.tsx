@@ -15,7 +15,7 @@ export type IconProps = Omit<ComponentProps<"span">, "color"> & {
   frameless?: boolean;
   interactive?: boolean;
   disabled?: boolean;
-  label?: string;
+  tooltip?: string;
   className?: string;
   color?: string;
   backgroundColor?: string;
@@ -30,7 +30,7 @@ export const Icon = ({
   frameless = false,
   interactive = true,
   disabled = false,
-  label,
+  tooltip,
   className,
   color,
   backgroundColor,
@@ -38,9 +38,9 @@ export const Icon = ({
 }: IconProps) => {
   return (
     <ConditionalWrapper
-      condition={!!label}
+      condition={!!tooltip}
       wrapper={(children) => (
-        <Tooltip content={label as string}>{children}</Tooltip>
+        <Tooltip content={tooltip as string}>{children}</Tooltip>
       )}
     >
       <span

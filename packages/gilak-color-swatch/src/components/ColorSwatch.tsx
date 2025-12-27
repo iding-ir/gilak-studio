@@ -40,7 +40,7 @@ export const ColorSwatch = ({
           icon={icon}
           color={color}
           backgroundColor={backgroundColor}
-          label={label}
+          tooltip={label}
         />
       }
     >

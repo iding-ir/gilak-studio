@@ -83,7 +83,7 @@ export const Tools = () => {
         <Icon
           icon={IconBrushTool}
           selected={selectedTool === "BRUSH"}
-          label={t("app:tools.brush")}
+          tooltip={t("app:tools.brush")}
           onClick={() => handleToggleTool("BRUSH")}
         />
       </li>
@@ -91,7 +91,7 @@ export const Tools = () => {
         <Icon
           icon={IconEraserTool}
           selected={selectedTool === "ERASER"}
-          label={t("app:tools.eraser")}
+          tooltip={t("app:tools.eraser")}
           onClick={() => handleToggleTool("ERASER")}
         />
       </li>
@@ -101,7 +101,7 @@ export const Tools = () => {
           trigger={
             <Icon
               icon={brushShapeIcons[brushShape]}
-              label={t("app:tools.brushShapes")}
+              tooltip={t("app:tools.brushShapes")}
               interactive
             />
           }
@@ -114,7 +114,7 @@ export const Tools = () => {
           range={[1, 10]}
           step={1}
           initial={brushSize}
-          label={t("app:tools.size")}
+          tooltip={t("app:tools.size")}
           onChange={(value) => handleBrushSizeChange(value as BrushSize)}
         />
       </li>
@@ -122,7 +122,7 @@ export const Tools = () => {
         <Icon
           icon={IconColorPicker}
           selected={selectedTool === "COLOR_PICKER"}
-          label={t("app:tools.colorPicker")}
+          tooltip={t("app:tools.colorPicker")}
           onClick={() => handleToggleTool("COLOR_PICKER")}
         />
       </li>
@@ -130,7 +130,7 @@ export const Tools = () => {
         <Icon
           icon={IconFillTool}
           selected={selectedTool === "FILL"}
-          label={t("app:tools.fill")}
+          tooltip={t("app:tools.fill")}
           onClick={() => handleToggleTool("FILL")}
         />
       </li>
@@ -139,7 +139,7 @@ export const Tools = () => {
           range={[0, 100]}
           step={5}
           initial={tolerance}
-          label={t("app:tools.tolerance")}
+          tooltip={t("app:tools.tolerance")}
           onChange={(value) => handleToleranceChange(value as number)}
         />
       </li>

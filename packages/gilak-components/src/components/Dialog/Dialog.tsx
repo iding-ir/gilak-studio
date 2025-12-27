@@ -48,7 +48,7 @@ export const Dialog = ({
                 className={styles.icon}
                 frameless
                 variant="light-ghost"
-                label={t("components:dialog.close")}
+                tooltip={t("components:dialog.close")}
                 onClick={onClose}
               />
             </>

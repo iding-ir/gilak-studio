@@ -3,6 +3,9 @@
 .root {
   position: relative;
   display: inline-grid;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
 
   .tip {
     position: absolute;

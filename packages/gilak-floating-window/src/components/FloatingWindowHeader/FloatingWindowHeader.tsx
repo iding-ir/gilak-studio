@@ -104,7 +104,7 @@ export const FloatingWindowHeader = ({
                 <Icon
                   icon={IconMenu}
                   variant="light-ghost"
-                  label={t("floatingWindow:actions.more")}
+                  tooltip={t("floatingWindow:actions.more")}
                   frameless
                 />
               }
@@ -117,7 +117,7 @@ export const FloatingWindowHeader = ({
               frameless
               variant="light-ghost"
               icon={IconMaximize}
-              label={t("floatingWindow:actions.maximize")}
+              tooltip={t("floatingWindow:actions.maximize")}
               onClick={maximizeFloatingWindow}
             />
           )}
@@ -126,7 +126,7 @@ export const FloatingWindowHeader = ({
               frameless
               variant="light-ghost"
               icon={IconMaximized}
-              label={t("floatingWindow:actions.restore")}
+              tooltip={t("floatingWindow:actions.restore")}
               onClick={openFloatingWindow}
             />
           )}
@@ -135,7 +135,7 @@ export const FloatingWindowHeader = ({
               frameless
               variant="light-ghost"
               icon={IconMinimize}
-              label={t("floatingWindow:actions.minimize")}
+              tooltip={t("floatingWindow:actions.minimize")}
               onClick={minimizeFloatingWindow}
             />
           )}
@@ -144,7 +144,7 @@ export const FloatingWindowHeader = ({
               frameless
               variant="light-ghost"
               icon={IconMinimized}
-              label={t("floatingWindow:actions.restore")}
+              tooltip={t("floatingWindow:actions.restore")}
               onClick={openFloatingWindow}
             />
           )}
@@ -153,7 +153,7 @@ export const FloatingWindowHeader = ({
               frameless
               variant="light-ghost"
               icon={IconClose}
-              label={t("floatingWindow:actions.close")}
+              tooltip={t("floatingWindow:actions.close")}
               onClick={handleCloseFloatingWindow}
             />
           )}

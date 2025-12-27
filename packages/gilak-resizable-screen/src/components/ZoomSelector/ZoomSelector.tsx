@@ -19,7 +19,7 @@ export const ZoomSelector = () => {
       range={[25, 200]}
       step={25}
       initial={zoomLevel}
-      label={t("resizableScreen:zoom")}
+      tooltip={t("resizableScreen:zoom")}
       onChange={(v) => handleClick(v as ZoomLevel)}
       valueRenderer={(value) => `${value}%`}
     />
