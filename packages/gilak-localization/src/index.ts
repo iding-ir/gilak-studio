@@ -1,3 +1,5 @@
-export { default as de } from "./files/de.json";
-export { default as en } from "./files/en.json";
-export { default as nl } from "./files/nl.json";
+export { i18n } from "./i18n";
+export { t } from "./i18n";
+export { default as de } from "./locales/de.json";
+export { default as en } from "./locales/en.json";
+export { default as nl } from "./locales/nl.json";

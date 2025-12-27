@@ -1,0 +1,63 @@
+{
+  "undo": "Ongedaan maken",
+  "redo": "Opnieuw uitvoeren",
+  "navigation": {
+    "file": "Bestand",
+    "view": "Beeld",
+    "help": "Help",
+    "new": "Nieuw",
+    "github": "GitHub",
+    "app": "App",
+    "preferences": "Voorkeuren",
+    "settings": "Instellingen",
+    "fullscreen": "Volledig scherm"
+  },
+  "tools": {
+    "colorSwatch": "Kleurstaal",
+    "brush": "Kwast",
+    "eraser": "Gum",
+    "brushShapes": "Kwastvormen",
+    "size": "Grootte",
+    "colorPicker": "Kleurkiezer",
+    "fill": "Vulgereedschap",
+    "tolerance": "Tolerantie"
+  },
+  "settings": {
+    "title": "Instellingen",
+    "width": "Breedte",
+    "height": "Hoogte",
+    "window": "Venstergrootte",
+    "document": "Documentgrootte",
+    "number": "Voer een nummer in",
+    "save": "Opslaan"
+  },
+  "preferences": {
+    "heading": "Voorkeuren",
+    "language": "Taal",
+    "theme": "Thema",
+    "save": "Opslaan"
+  },
+  "languages": {
+    "en": "Engels",
+    "de": "Duits",
+    "nl": "Nederlands"
+  },
+  "themes": {
+    "light": "Licht",
+    "dark": "Donker"
+  },
+  "window": {
+    "settings": {
+      "title": "Instellingen",
+      "document": "Document",
+      "number": "Voer een nummer in",
+      "width": "Breedte",
+      "height": "Hoogte",
+      "save": "Opslaan"
+    },
+    "export": "Exporteren",
+    "png": "PNG",
+    "jpeg": "JPEG",
+    "webp": "WEBP"
+  }
+}

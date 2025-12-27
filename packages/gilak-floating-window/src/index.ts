@@ -15,3 +15,6 @@ export * from "./types";
 export { useFloatingWindow } from "./hooks/useFloatingWindow";
 export { useFloatingWindows } from "./hooks/useFloatingWindows";
 export { useRegister } from "./hooks/useRegister";
+
+// i18n
+import "./i18n";

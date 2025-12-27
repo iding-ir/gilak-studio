@@ -1,8 +1,9 @@
 import clsx from "clsx";
 import type { CSSProperties, ReactNode } from "react";
 
+import { ConditionalWrapper } from "../ConditionalWrapper";
 import { Icon } from "../Icon";
-import { Text } from "../Text";
+import { Tooltip } from "../Tooltip";
 import styles from "./Slider.module.scss";
 import { useSlider } from "./useSlider";
 
@@ -39,10 +40,6 @@ export const Slider = ({
     <div className={clsx(styles.root, className)}>
       {icon && <Icon icon={icon} frameless={true} interactive={false} />}
 
-      {label && (
-        <Text text={label} variant="dark-ghost" frameless={true}></Text>
-      )}
-
       <div
         ref={trackRef}
         className={styles.track}
@@ -54,13 +51,21 @@ export const Slider = ({
             width: `${((value - range[0]) / (range[1] - range[0] || 1)) * 100}%`,
           }}
         />
-        <div
-          className={styles.thumb}
-          onPointerDown={handleThumbPointerDown}
-          style={thumbStyle as CSSProperties}
+
+        <ConditionalWrapper
+          condition={!!label}
+          wrapper={(children) => (
+            <Tooltip content={label as string}>{children}</Tooltip>
+          )}
         >
-          {valueRenderer(value)}
-        </div>
+          <div
+            className={styles.thumb}
+            onPointerDown={handleThumbPointerDown}
+            style={thumbStyle as CSSProperties}
+          >
+            {valueRenderer(value)}
+          </div>
+        </ConditionalWrapper>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
+import { i18n } from "@gilak/localization";
 import { createListenerMiddleware } from "@reduxjs/toolkit";
 
 import { setLanguage } from "../preferences-slice";
-import i18n from "./i18n";
 import type { LanguageType } from "./types";
 
 export const languageListenerMiddleware = createListenerMiddleware();

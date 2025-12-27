@@ -1,6 +1,6 @@
 import { Button, Dialog, Group, Input } from "@gilak/components";
+import { t } from "@gilak/localization";
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
@@ -13,7 +13,6 @@ import {
 
 export const Settings = () => {
   const dispatch = useAppDispatch();
-  const { t } = useTranslation();
   const documentSettings = useAppSelector(selectSettingsDocument);
   const windowSettings = useAppSelector(selectSettingsWindow);
   const [docW, setDocW] = useState(documentSettings.size.w);
@@ -35,46 +34,46 @@ export const Settings = () => {
     <Dialog
       open={true}
       onClose={handleClose}
-      heading={t("settings.heading")}
+      heading={t("app:settings.title")}
       actions={
         <Button variant="primary" onClick={handleSave}>
-          {t("settings.save")}
+          {t("app:settings.save")}
         </Button>
       }
     >
       <Group direction="column">
-        <Group direction="row" title={t("settings.document")}>
+        <Group direction="row" title={t("app:settings.document")}>
           <Input
             name="documentWidth"
             type="number"
-            label={t("settings.width")}
-            placeholder={t("settings.number")}
+            label={t("app:settings.width")}
+            placeholder={t("app:settings.number")}
             value={docW}
             onChange={(e) => setDocW(Number(e.target.value))}
           />
           <Input
             name="documentHeight"
             type="number"
-            label={t("settings.height")}
-            placeholder={t("settings.number")}
+            label={t("app:settings.height")}
+            placeholder={t("app:settings.number")}
             value={docH}
             onChange={(e) => setDocH(Number(e.target.value))}
           />
         </Group>
-        <Group direction="row" title={t("settings.window")}>
+        <Group direction="row" title={t("app:settings.window")}>
           <Input
             name="windowWidth"
             type="number"
-            label={t("settings.width")}
-            placeholder={t("settings.number")}
+            label={t("app:settings.width")}
+            placeholder={t("app:settings.number")}
             value={winW}
             onChange={(e) => setWinW(Number(e.target.value))}
           />
           <Input
             name="windowHeight"
             type="number"
-            label={t("settings.height")}
-            placeholder={t("settings.number")}
+            label={t("app:settings.height")}
+            placeholder={t("app:settings.number")}
             value={winH}
             onChange={(e) => setWinH(Number(e.target.value))}
           />

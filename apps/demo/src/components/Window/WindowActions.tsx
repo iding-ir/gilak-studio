@@ -1,7 +1,7 @@
 import { downloadCanvas, type ImageFormat } from "@gilak/canvas";
 import { Menu } from "@gilak/components";
 import { useFloatingWindow } from "@gilak/floating-window";
-import { useTranslation } from "react-i18next";
+import { t } from "@gilak/localization";
 
 export type WindowActionsProps = {
   id: string;
@@ -14,7 +14,6 @@ export const WindowActions = ({
   canvasRef,
   onClickDocumentSettings,
 }: WindowActionsProps) => {
-  const { t } = useTranslation();
   const { title } = useFloatingWindow(id);
 
   const handleExport = async (format: ImageFormat) => {
@@ -32,20 +31,26 @@ export const WindowActions = ({
   return (
     <Menu root open direction="column" variant="dark" label="">
       <Menu
-        label={t("document.settings")}
+        label={t("app:window.settings.title")}
         closeOnClickInside={true}
         onClick={onClickDocumentSettings}
       />
       <Menu
-        label={t("export.export")}
+        label={t("app:window.export")}
         direction="column"
         position="right"
         variant="dark"
         closeOnClickInside={false}
       >
-        <Menu label={t("export.png")} onClick={() => handleExport("png")} />
-        <Menu label={t("export.jpeg")} onClick={() => handleExport("jpeg")} />
-        <Menu label={t("export.webp")} onClick={() => handleExport("webp")} />
+        <Menu label={t("app:window.png")} onClick={() => handleExport("png")} />
+        <Menu
+          label={t("app:window.jpeg")}
+          onClick={() => handleExport("jpeg")}
+        />
+        <Menu
+          label={t("app:window.webp")}
+          onClick={() => handleExport("webp")}
+        />
       </Menu>
     </Menu>
   );

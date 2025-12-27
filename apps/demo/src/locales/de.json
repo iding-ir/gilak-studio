@@ -1,0 +1,63 @@
+{
+  "undo": "Rückgängig",
+  "redo": "Wiederholen",
+  "navigation": {
+    "file": "Datei",
+    "view": "Ansicht",
+    "help": "Hilfe",
+    "new": "Neu",
+    "github": "GitHub",
+    "app": "App",
+    "preferences": "Einstellungen",
+    "settings": "Einstellungen",
+    "fullscreen": "Vollbild"
+  },
+  "tools": {
+    "colorSwatch": "Farbmuster",
+    "brush": "Pinsel",
+    "eraser": "Radiergummi",
+    "brushShapes": "Pinselspitzen",
+    "size": "Größe",
+    "colorPicker": "Farbwähler",
+    "fill": "Füllwerkzeug",
+    "tolerance": "Toleranz"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "width": "Breite",
+    "height": "Höhe",
+    "window": "Fenstergröße",
+    "document": "Dokumentgröße",
+    "number": "Geben Sie eine Zahl ein",
+    "save": "Speichern"
+  },
+  "preferences": {
+    "heading": "Einstellungen",
+    "language": "Sprache",
+    "theme": "Thema",
+    "save": "Speichern"
+  },
+  "languages": {
+    "en": "Englisch",
+    "de": "Deutsch",
+    "nl": "Niederländisch"
+  },
+  "themes": {
+    "light": "Hell",
+    "dark": "Dunkel"
+  },
+  "window": {
+    "settings": {
+      "title": "Einstellungen",
+      "document": "Dokument",
+      "number": "Geben Sie eine Zahl ein",
+      "width": "Breite",
+      "height": "Höhe",
+      "save": "Speichern"
+    },
+    "export": "Exportieren",
+    "png": "PNG",
+    "jpeg": "JPEG",
+    "webp": "WEBP"
+  }
+}

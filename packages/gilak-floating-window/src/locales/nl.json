@@ -1,0 +1,9 @@
+{
+  "actions": {
+    "close": "Sluiten",
+    "maximize": "Maximaliseren",
+    "minimize": "Minimaliseren",
+    "restore": "Herstellen",
+    "more": "Meer..."
+  }
+}

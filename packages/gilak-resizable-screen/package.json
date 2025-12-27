@@ -58,6 +58,7 @@
   },
   "dependencies": {
     "@gilak/components": "workspace:*",
+    "@gilak/localization": "workspace:*",
     "@gilak/stylist": "workspace:*",
     "@gilak/utils": "workspace:*",
     "clsx": "^2.1.1"

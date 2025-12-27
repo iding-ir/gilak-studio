@@ -1,3 +1,4 @@
+import { t } from "@gilak/localization";
 import clsx from "clsx";
 import type { ReactNode } from "react";
 import { useRef } from "react";
@@ -45,6 +46,9 @@ export const Dialog = ({
               <Icon
                 icon={IconClose}
                 className={styles.icon}
+                frameless
+                variant="light-ghost"
+                label={t("components:dialog.close")}
                 onClick={onClose}
               />
             </>

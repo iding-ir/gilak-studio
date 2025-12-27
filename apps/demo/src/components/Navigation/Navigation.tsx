@@ -1,7 +1,7 @@
 import { Menu } from "@gilak/components";
 import { useFloatingWindows } from "@gilak/floating-window";
+import { t } from "@gilak/localization";
 import { toggleFullscreen } from "@gilak/utils";
-import { useTranslation } from "react-i18next";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
@@ -18,7 +18,6 @@ import { Preferences } from "../Preferences";
 import { Settings } from "../Settings";
 
 export const Navigation = () => {
-  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const isSettingsOpen = useAppSelector(selectSettingsOpen);
   const isPreferencesOpen = useAppSelector(selectPreferencesOpen);
@@ -47,26 +46,26 @@ export const Navigation = () => {
   return (
     <>
       <Menu root open frameless direction="row" variant="light-ghost" label="">
-        <Menu label={t("navigation.file.label")} closeOnClickInside>
-          <Menu label={t("navigation.file.new")} onClick={handleAddWindow} />
+        <Menu label={t("app:navigation.file")} closeOnClickInside>
+          <Menu label={t("app:navigation.new")} onClick={handleAddWindow} />
           <Menu
-            label={t("navigation.file.settings")}
+            label={t("app:navigation.settings")}
             onClick={handleClickSettings}
           />
         </Menu>
-        <Menu label={t("navigation.view.label")} closeOnClickInside>
+        <Menu label={t("app:navigation.view")} closeOnClickInside>
           <Menu
-            label={t("navigation.view.fullscreen")}
+            label={t("app:navigation.fullscreen")}
             onClick={handleToggleFullscreen}
           />
         </Menu>
-        <Menu label={t("navigation.app.label")} closeOnClickInside>
+        <Menu label={t("app:navigation.app")} closeOnClickInside>
           <Menu
-            label={t("navigation.app.preferences")}
+            label={t("app:navigation.preferences")}
             onClick={handleClickPreferences}
           />
           <Menu
-            label={t("navigation.app.github")}
+            label={t("app:navigation.github")}
             href="https://github.com/iding-ir/gilak-studio"
           />
         </Menu>

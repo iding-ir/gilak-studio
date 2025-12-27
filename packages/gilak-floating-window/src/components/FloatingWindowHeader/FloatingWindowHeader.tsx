@@ -1,4 +1,5 @@
 import { Dropdown, Header, Icon, Input } from "@gilak/components";
+import { t } from "@gilak/localization";
 import clsx from "clsx";
 import type { PointerEvent, ReactNode } from "react";
 import { useCallback, useRef, useState } from "react";
@@ -99,7 +100,14 @@ export const FloatingWindowHeader = ({
           {status !== "minimized" && actions && (
             <Dropdown
               position="bottom"
-              trigger={<Icon frameless variant="light-ghost" icon={IconMenu} />}
+              trigger={
+                <Icon
+                  icon={IconMenu}
+                  variant="light-ghost"
+                  label={t("floatingWindow:actions.more")}
+                  frameless
+                />
+              }
             >
               {actions}
             </Dropdown>
@@ -109,6 +117,7 @@ export const FloatingWindowHeader = ({
               frameless
               variant="light-ghost"
               icon={IconMaximize}
+              label={t("floatingWindow:actions.maximize")}
               onClick={maximizeFloatingWindow}
             />
           )}
@@ -117,6 +126,7 @@ export const FloatingWindowHeader = ({
               frameless
               variant="light-ghost"
               icon={IconMaximized}
+              label={t("floatingWindow:actions.restore")}
               onClick={openFloatingWindow}
             />
           )}
@@ -125,6 +135,7 @@ export const FloatingWindowHeader = ({
               frameless
               variant="light-ghost"
               icon={IconMinimize}
+              label={t("floatingWindow:actions.minimize")}
               onClick={minimizeFloatingWindow}
             />
           )}
@@ -133,6 +144,7 @@ export const FloatingWindowHeader = ({
               frameless
               variant="light-ghost"
               icon={IconMinimized}
+              label={t("floatingWindow:actions.restore")}
               onClick={openFloatingWindow}
             />
           )}
@@ -141,6 +153,7 @@ export const FloatingWindowHeader = ({
               frameless
               variant="light-ghost"
               icon={IconClose}
+              label={t("floatingWindow:actions.close")}
               onClick={handleCloseFloatingWindow}
             />
           )}

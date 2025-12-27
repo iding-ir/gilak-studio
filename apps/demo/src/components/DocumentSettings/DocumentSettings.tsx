@@ -1,6 +1,6 @@
 import { Button, Dialog, Group, Input } from "@gilak/components";
+import { t } from "@gilak/localization";
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
 
 export type DocumentSettingsProps = {
   documentWidth: number;
@@ -17,7 +17,6 @@ export const DocumentSettings = ({
   setDocumentHeight,
   setDocumentSettingsOpen,
 }: DocumentSettingsProps) => {
-  const { t } = useTranslation();
   const [docW, setDocW] = useState(documentWidth);
   const [docH, setDocH] = useState(documentHeight);
 
@@ -35,28 +34,28 @@ export const DocumentSettings = ({
     <Dialog
       open={true}
       onClose={handleClose}
-      heading={t("settings.heading")}
+      heading={t("app:window.settings.title")}
       actions={
         <Button variant="primary" onClick={handleSave}>
-          {t("settings.save")}
+          {t("app:window.settings.save")}
         </Button>
       }
     >
       <Group direction="column">
-        <Group direction="row" title={t("settings.document")}>
+        <Group direction="row" title={t("app:window.settings.document")}>
           <Input
             name="documentWidth"
             type="number"
-            label={t("settings.width")}
-            placeholder={t("settings.number")}
+            label={t("app:window.settings.width")}
+            placeholder={t("app:window.settings.number")}
             value={docW}
             onChange={(e) => setDocW(Number(e.target.value))}
           />
           <Input
             name="documentHeight"
             type="number"
-            label={t("settings.height")}
-            placeholder={t("settings.number")}
+            label={t("app:window.settings.height")}
+            placeholder={t("app:window.settings.number")}
             value={docH}
             onChange={(e) => setDocH(Number(e.target.value))}
           />

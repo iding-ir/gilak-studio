@@ -19,6 +19,10 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
+      "@gilak/localization": resolve(
+        __dirname,
+        "../../packages/gilak-localization/src",
+      ),
       "@gilak/canvas": resolve(__dirname, "../../packages/gilak-canvas/src"),
       "@gilak/color-picker": resolve(
         __dirname,
@@ -40,10 +44,6 @@ export default defineConfig({
       "@gilak/resizable-screen": resolve(
         __dirname,
         "../../packages/gilak-resizable-screen/src",
-      ),
-      "@gilak/localization": resolve(
-        __dirname,
-        "../../packages/gilak-localization/src",
       ),
     },
   },

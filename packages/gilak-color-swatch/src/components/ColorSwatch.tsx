@@ -1,5 +1,6 @@
 import { Dropdown, Icon, Input, List, Tab, Tabs } from "@gilak/components";
 import type { Position, Variant } from "@gilak/components/types";
+import { t } from "@gilak/localization";
 import { getContrastColor } from "@gilak/utils";
 
 import IconEmpty from "../assets/icon-empty.svg?url";
@@ -10,7 +11,7 @@ export type ColorSwatchProps = {
   backgroundColor: string;
   colors: string[];
   name?: { color: string; background: string };
-  labels?: { color: string; background: string };
+  label?: string;
   position?: Position;
   variant?: Variant;
   gridCount?: number;
@@ -23,7 +24,7 @@ export const ColorSwatch = ({
   color,
   backgroundColor,
   colors,
-  labels = { color: "Color", background: "Background" },
+  label,
   name = { color: "color-swatch-color", background: "color-swatch-background" },
   position = "bottom-right",
   variant = "light",
@@ -35,11 +36,16 @@ export const ColorSwatch = ({
     <Dropdown
       position={position}
       trigger={
-        <Icon icon={icon} color={color} backgroundColor={backgroundColor} />
+        <Icon
+          icon={icon}
+          color={color}
+          backgroundColor={backgroundColor}
+          label={label}
+        />
       }
     >
       <Tabs>
-        <Tab header={labels.color}>
+        <Tab header={t("colorSwatch:tabs.color")}>
           <Input
             value={color}
             readOnly
@@ -67,7 +73,7 @@ export const ColorSwatch = ({
             ))}
           />
         </Tab>
-        <Tab header={labels.background}>
+        <Tab header={t("colorSwatch:tabs.backgroundColor")}>
           <Input
             value={backgroundColor}
             readOnly

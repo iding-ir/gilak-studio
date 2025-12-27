@@ -1,66 +1,42 @@
 @use "@gilak/stylist/scss" as *;
 
-.root {
-  position: relative;
-  display: inline-block;
-}
+.tooltip {
+  padding: var(--spacing-xxs) var(--spacing-xs);
+  @include solidVariants;
 
-.tip {
-  position: absolute;
-  z-index: 999;
-  background: var(--color-dark-xxxl);
-  color: var(--color-light-xxxl);
-  padding: calc(var(--spacing-xxs)) calc(var(--spacing-xs));
-  border-radius: var(--radius-sm);
-  white-space: nowrap;
-  opacity: 0;
-  transform: translateY(4px) scale(0.98);
-  transition:
-    opacity var(--transition-sm),
-    transform var(--transition-sm);
-  pointer-events: none;
-
-  &.show {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    pointer-events: auto;
+  &.primary {
+    :global(.tippy-arrow) {
+      color: var(--color-primary-md);
+    }
   }
 
-  &.top {
-    bottom: 100%;
-    left: 50%;
-    transform-origin: center bottom;
-    transform: translate(-50%, 6px) scale(0.98);
-  }
-  &.bottom {
-    top: 100%;
-    left: 50%;
-    transform-origin: center top;
-    transform: translate(-50%, -6px) scale(0.98);
-  }
-  &.left {
-    right: 100%;
-    top: 50%;
-    transform-origin: right center;
-    transform: translate(6px, -50%) scale(0.98);
-  }
-  &.right {
-    left: 100%;
-    top: 50%;
-    transform-origin: left center;
-    transform: translate(-6px, -50%) scale(0.98);
+  &.secondary {
+    :global(.tippy-arrow) {
+      color: var(--color-secondary-md);
+    }
   }
 
-  &.top.show {
-    transform: translate(-50%, 0) scale(1);
+  &.light {
+    :global(.tippy-arrow) {
+      color: var(--color-light-md);
+    }
   }
-  &.bottom.show {
-    transform: translate(-50%, 0) scale(1);
+
+  &.dark {
+    :global(.tippy-arrow) {
+      color: var(--color-dark-xxl);
+    }
   }
-  &.left.show {
-    transform: translate(0, -50%) scale(1);
+
+  &.light-ghost {
+    :global(.tippy-arrow) {
+      color: transparent;
+    }
   }
-  &.right.show {
-    transform: translate(0, -50%) scale(1);
+
+  &.dark-ghost {
+    :global(.tippy-arrow) {
+      color: transparent;
+    }
   }
 }

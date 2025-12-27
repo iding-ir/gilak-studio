@@ -1,0 +1,63 @@
+{
+  "undo": "Undo",
+  "redo": "Redo",
+  "navigation": {
+    "file": "File",
+    "view": "View",
+    "help": "Help",
+    "new": "New",
+    "github": "GitHub",
+    "app": "App",
+    "preferences": "Preferences",
+    "settings": "Settings",
+    "fullscreen": "Fullscreen"
+  },
+  "tools": {
+    "colorSwatch": "Color Swatch",
+    "brush": "Brush",
+    "eraser": "Eraser",
+    "brushShapes": "Brush Shapes",
+    "size": "Size",
+    "colorPicker": "Color Picker",
+    "fill": "Fill Tool",
+    "tolerance": "Tolerance"
+  },
+  "settings": {
+    "title": "Settings",
+    "width": "Width",
+    "height": "Height",
+    "window": "Window Size",
+    "document": "Document Size",
+    "number": "Enter a number",
+    "save": "Save"
+  },
+  "preferences": {
+    "heading": "Preferences",
+    "language": "Language",
+    "theme": "Theme",
+    "save": "Save"
+  },
+  "languages": {
+    "en": "English",
+    "de": "German",
+    "nl": "Dutch"
+  },
+  "themes": {
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "window": {
+    "settings": {
+      "title": "Settings",
+      "document": "Document",
+      "number": "Enter a number",
+      "width": "Width",
+      "height": "Height",
+      "save": "Save"
+    },
+    "export": "Export",
+    "png": "PNG",
+    "jpeg": "JPEG",
+    "webp": "WEBP"
+  }
+}

@@ -2,6 +2,8 @@ import type { Variant } from "@gilak/components/types";
 import clsx from "clsx";
 import type { ComponentProps, CSSProperties } from "react";
 
+import { ConditionalWrapper } from "../ConditionalWrapper";
+import { Tooltip } from "../Tooltip";
 import styles from "./Icon.module.scss";
 
 export type IconProps = Omit<ComponentProps<"span">, "color"> & {
@@ -12,6 +14,7 @@ export type IconProps = Omit<ComponentProps<"span">, "color"> & {
   frameless?: boolean;
   interactive?: boolean;
   disabled?: boolean;
+  label?: string;
   className?: string;
   color?: string;
   backgroundColor?: string;
@@ -25,33 +28,41 @@ export const Icon = ({
   frameless = false,
   interactive = true,
   disabled = false,
+  label,
   className,
   color,
   backgroundColor,
   ...props
 }: IconProps) => {
   return (
-    <span
-      {...props}
-      className={clsx(styles.background, styles[variant], className, {
-        [styles.rounded]: rounded,
-        [styles.selected]: selected,
-        [styles.frameless]: frameless,
-        [styles.interactive]: interactive,
-        [styles.disabled]: disabled,
-      })}
-      style={
-        {
-          ...props.style,
-          "--props-url": `url("${icon}")`,
-          backgroundColor,
-        } as CSSProperties
-      }
+    <ConditionalWrapper
+      condition={!!label}
+      wrapper={(children) => (
+        <Tooltip content={label as string}>{children}</Tooltip>
+      )}
     >
-      <i
-        className={clsx(styles.icon, styles[variant])}
-        style={{ backgroundColor: color }}
-      />
-    </span>
+      <span
+        {...props}
+        className={clsx(styles.background, styles[variant], className, {
+          [styles.rounded]: rounded,
+          [styles.selected]: selected,
+          [styles.frameless]: frameless,
+          [styles.interactive]: interactive,
+          [styles.disabled]: disabled,
+        })}
+        style={
+          {
+            ...props.style,
+            "--props-url": `url("${icon}")`,
+            backgroundColor,
+          } as CSSProperties
+        }
+      >
+        <i
+          className={clsx(styles.icon, styles[variant])}
+          style={{ backgroundColor: color }}
+        />
+      </span>
+    </ConditionalWrapper>
   );
 };

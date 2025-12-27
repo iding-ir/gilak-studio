@@ -251,9 +251,15 @@ importers:
       '@gilak/utils':
         specifier: workspace:*
         version: link:../gilak-utils
+      '@tippyjs/react':
+        specifier: ^4.2.6
+        version: 4.2.6(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      tippy.js:
+        specifier: ^6.3.7
+        version: 6.3.7
     devDependencies:
       react:
         specifier: ^19.2.0
@@ -267,6 +273,9 @@ importers:
       '@gilak/components':
         specifier: workspace:*
         version: link:../gilak-components
+      '@gilak/localization':
+        specifier: workspace:*
+        version: link:../gilak-localization
       '@gilak/stylist':
         specifier: workspace:*
         version: link:../gilak-stylist
@@ -287,23 +296,23 @@ importers:
   packages/gilak-localization:
     dependencies:
       i18next:
-        specifier: ^25.7.1
+        specifier: ^25.x
         version: 25.7.1(typescript@5.9.3)
       react:
-        specifier: ^19.2.0
+        specifier: ^19.x
         version: 19.2.1
       react-i18next:
-        specifier: ^16.3.5
+        specifier: ^16.x
         version: 16.3.5(i18next@25.7.1(typescript@5.9.3))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(typescript@5.9.3)
     devDependencies:
       '@gilak/build-config':
         specifier: workspace:*
         version: link:../build-config
       '@types/i18next':
-        specifier: ^13.0.0
+        specifier: ^13.x
         version: 13.0.0(typescript@5.9.3)
       '@types/react-i18next':
-        specifier: ^8.1.0
+        specifier: ^8.x
         version: 8.1.0(i18next@25.7.1(typescript@5.9.3))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(typescript@5.9.3)
 
   packages/gilak-resizable-screen:
@@ -311,6 +320,9 @@ importers:
       '@gilak/components':
         specifier: workspace:*
         version: link:../gilak-components
+      '@gilak/localization':
+        specifier: workspace:*
+        version: link:../gilak-localization
       '@gilak/stylist':
         specifier: workspace:*
         version: link:../gilak-stylist
@@ -962,6 +974,9 @@ packages:
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
 
+  '@popperjs/core@2.11.8':
+    resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
+
   '@reduxjs/toolkit@2.11.1':
     resolution: {integrity: sha512-HjhlEREguAyBTGNzRlGNiDHGQ2EjLSPWwdhhpoEqHYy8hWak3Dp6/fU72OfqVsiMb8S6rbfPsWUF24fxpilrVA==}
     peerDependencies:
@@ -1373,6 +1388,12 @@ packages:
     engines: {node: '>=12', npm: '>=6'}
     peerDependencies:
       '@testing-library/dom': '>=7.21.4'
+
+  '@tippyjs/react@4.2.6':
+    resolution: {integrity: sha512-91RicDR+H7oDSyPycI13q3b7o4O60wa2oRbjlz2fyRLmHImc4vyDwuUP8NtZaN0VARJY5hybvDYrFzhY9+Lbyw==}
+    peerDependencies:
+      react: '>=16.8'
+      react-dom: '>=16.8'
 
   '@tootallnate/once@2.0.0':
     resolution: {integrity: sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==}
@@ -3415,6 +3436,9 @@ packages:
     resolution: {integrity: sha512-n1cw8k1k0x4pgA2+9XrOkFydTerNcJ1zWCO5Nn9scWHTD+5tp8dghT2x1uduQePZTZgd3Tupf+x9BxJjeJi77Q==}
     engines: {node: '>=14.0.0'}
 
+  tippy.js@6.3.7:
+    resolution: {integrity: sha512-E1d3oP2emgJ9dRQZdf3Kkn0qJgI6ZLpyS5z6ZkY1DF3kaQaBsGZsndEpHwx+eC+tYM41HaSNvNtLx8tU57FzTQ==}
+
   to-regex-range@5.0.1:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
     engines: {node: '>=8.0'}
@@ -4397,6 +4421,8 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
+  '@popperjs/core@2.11.8': {}
+
   '@reduxjs/toolkit@2.11.1(react-redux@9.2.0(@types/react@19.2.7)(react@19.2.1)(redux@5.0.1))(react@19.2.1)':
     dependencies:
       '@standard-schema/spec': 1.0.0
@@ -4835,6 +4861,12 @@ snapshots:
   '@testing-library/user-event@14.5.2(@testing-library/dom@10.4.0)':
     dependencies:
       '@testing-library/dom': 10.4.0
+
+  '@tippyjs/react@4.2.6(react-dom@19.2.1(react@19.2.1))(react@19.2.1)':
+    dependencies:
+      react: 19.2.1
+      react-dom: 19.2.1(react@19.2.1)
+      tippy.js: 6.3.7
 
   '@tootallnate/once@2.0.0':
     optional: true
@@ -7013,6 +7045,10 @@ snapshots:
   tinyrainbow@1.2.0: {}
 
   tinyspy@3.0.2: {}
+
+  tippy.js@6.3.7:
+    dependencies:
+      '@popperjs/core': 2.11.8
 
   to-regex-range@5.0.1:
     dependencies:

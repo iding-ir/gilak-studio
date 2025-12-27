@@ -1,6 +1,6 @@
 import { Button, Dialog, Group, List, Text } from "@gilak/components";
+import { t } from "@gilak/localization";
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { languages } from "../../features/preferences/language/languages";
@@ -15,8 +15,6 @@ import { themes } from "../../features/preferences/theme/themes";
 
 export const Preferences = () => {
   const dispatch = useAppDispatch();
-  const { t } = useTranslation();
-
   const language = useAppSelector(selectLanguage);
   const theme = useAppSelector(selectTheme);
   const [lang, setLang] = useState(language);
@@ -36,20 +34,20 @@ export const Preferences = () => {
     <Dialog
       open={true}
       onClose={handleClose}
-      heading={t("preferences.heading")}
+      heading={t("app:preferences.heading")}
       actions={
         <Button variant="primary" onClick={handleSave}>
-          {t("preferences.save")}
+          {t("app:preferences.save")}
         </Button>
       }
     >
       <Group direction="column">
-        <Group direction="row" title={t("preferences.language")}>
+        <Group direction="row" title={t("app:preferences.language")}>
           <List
             items={Object.values(languages).map(({ code }) => (
               <Text
                 key={code}
-                text={t(`languages.${code}`)}
+                text={t(`app:languages.${code}`)}
                 variant="dark-ghost"
                 selected={lang === code}
                 frameless
@@ -63,12 +61,12 @@ export const Preferences = () => {
             variant="dark-ghost"
           />
         </Group>
-        <Group direction="row" title={t("preferences.theme")}>
+        <Group direction="row" title={t("app:preferences.theme")}>
           <List
             items={Object.values(themes).map(({ code }) => (
               <Text
                 key={code}
-                text={t(`themes.${code}`)}
+                text={t(`app:themes.${code}`)}
                 variant="dark-ghost"
                 selected={thm === code}
                 frameless

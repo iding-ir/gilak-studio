@@ -6,3 +6,6 @@ export { ZoomSelector } from "./components/ZoomSelector/ZoomSelector";
 // Context
 export { useZoomLevelScreenContext } from "./context";
 export { ResizableScreenProvider } from "./context/provider";
+
+// i18n
+import "./i18n";

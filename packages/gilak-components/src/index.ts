@@ -2,6 +2,7 @@ export type { BodyProps } from "./components/Body";
 export { Body } from "./components/Body";
 export type { ButtonProps } from "./components/Button";
 export { Button } from "./components/Button";
+export { ConditionalWrapper } from "./components/ConditionalWrapper";
 export type { DialogProps } from "./components/Dialog";
 export { Dialog } from "./components/Dialog";
 export { DialogPortal } from "./components/Dialog";
@@ -43,3 +44,6 @@ export type { TshirtSize } from "./types";
 export type { Position } from "./types";
 export type { Direction } from "./types";
 export type { Variant } from "./types";
+
+// i18n
+import "./i18n";

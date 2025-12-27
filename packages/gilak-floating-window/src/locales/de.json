@@ -1,0 +1,9 @@
+{
+  "actions": {
+    "close": "Close",
+    "maximize": "Maximize",
+    "minimize": "Minimize",
+    "restore": "Restore",
+    "more": "More..."
+  }
+}
