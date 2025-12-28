@@ -171,7 +171,7 @@ export const Tools = () => {
       </li>
       <li>
         <Slider
-          range={[0, 100]}
+          range={[0, 250]}
           step={5}
           initial={tolerance}
           tooltip={t("app:tools.tolerance")}

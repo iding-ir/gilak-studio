@@ -10,7 +10,7 @@ export interface ToolsState {
 
 const initialState: ToolsState = {
   selected: "BRUSH",
-  tolerance: 15,
+  tolerance: 50,
 };
 
 export const toolsSlice = createAppSlice({
