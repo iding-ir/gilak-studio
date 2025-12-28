@@ -1,5 +1,5 @@
 import { getContrastColor } from "@gilak/utils";
-import { type RefObject } from "react";
+import { type RefObject, useMemo } from "react";
 
 import { useColorPicker, useMagnifier } from "../../hooks";
 import styles from "./Magnifier.module.scss";
@@ -18,11 +18,15 @@ export const Magnifier = ({ canvasRef, enabled, onSelect }: MagnifierProps) => {
     onSelect,
   });
 
+  const visibleColor = useMemo(() => {
+    return hoverColor === "transparent" ? "#ededed" : hoverColor;
+  }, [hoverColor]);
+
   return (
     <div className={styles.container} ref={containerRef}>
       <canvas
         ref={magnifierRef}
-        style={{ borderColor: hoverColor, borderWidth }}
+        style={{ borderColor: visibleColor, borderWidth }}
         width={0}
         height={0}
       />
@@ -31,7 +35,7 @@ export const Magnifier = ({ canvasRef, enabled, onSelect }: MagnifierProps) => {
         className={styles.text}
         style={{
           color: getContrastColor(hoverColor),
-          backgroundColor: hoverColor,
+          backgroundColor: visibleColor,
           borderColor: getContrastColor(hoverColor),
         }}
       >
