@@ -14,7 +14,7 @@ This repository contains component libraries, design-system utilities, and an ex
 - Bundler/Dev: `Vite`
 - Linting & Formatting: `ESLint`, `Prettier`
 - Release & Changelog: `Changesets`
-- Others: `Husky`, `Storybook`, `i18Next`
+- Others: `Husky`, `Storybook`, `i18Next`, `Redux Toolkit` (demo app)
 
 ## Workspace packages
 
