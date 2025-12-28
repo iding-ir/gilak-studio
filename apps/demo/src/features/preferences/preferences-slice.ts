@@ -4,13 +4,13 @@ import { createAppSlice } from "../../app/createAppSlice";
 import { DEFAULT_LANGUAGE, type LanguageType } from "./language/types";
 import type { ThemeType } from "./theme/types";
 
-export interface SettingsState {
+export interface AppearanceState {
   open: boolean;
   language: LanguageType;
   theme: ThemeType;
 }
 
-const initialState: SettingsState = {
+const initialState: AppearanceState = {
   open: false,
   language: DEFAULT_LANGUAGE,
   theme: "light",

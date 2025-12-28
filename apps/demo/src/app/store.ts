@@ -12,6 +12,7 @@ import { appearanceSlice } from "../features/preferences/preferences-slice";
 import { themeListenerMiddleware } from "../features/preferences/theme/theme-middleware";
 import { settingsSlice } from "../features/settings/settings-slice";
 import { toolsSlice } from "../features/tools/tools.slice";
+import { createPersistMiddleware, loadPersistedState } from "./persist";
 
 const rootReducer = combineSlices(
   brushSlice,
@@ -21,12 +22,22 @@ const rootReducer = combineSlices(
   appearanceSlice,
 );
 
+const preloadedState = loadPersistedState<RootState>("gilak");
+
+const persistMiddleware = createPersistMiddleware<RootState>({
+  key: "gilak",
+  whitelist: ["brush", "color", "tools", "settings", "appearance"],
+  throttleMs: 400,
+});
+
 export const store = configureStore({
   reducer: rootReducer,
+  preloadedState,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
-      .prepend(languageListenerMiddleware.middleware)
-      .prepend(themeListenerMiddleware.middleware),
+      .concat(languageListenerMiddleware.middleware)
+      .concat(themeListenerMiddleware.middleware)
+      .concat(persistMiddleware),
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

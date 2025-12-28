@@ -24,7 +24,10 @@ export { getCanvasColor as pickColorFromCanvas } from "./canvas/get-canvas-color
 export { convertArrayToHex as arrayToHex } from "./color/convert-array-to-hex";
 export { getContrastColor as getBlackAndWhiteColor } from "./color/get-contrast-color";
 
-// Storage utilities
+// DOM utilities
+export { setAttribute, toggleFullscreen } from "./dom";
+
+// Storage
 export {
   getItem,
   getItemSync,
@@ -35,6 +38,3 @@ export {
   setItem,
   setItemSync,
 } from "./storage";
-
-// DOM utilities
-export { setAttribute, toggleFullscreen } from "./dom";
