@@ -1,60 +1,63 @@
 # Gilak Studio
 
-A monorepo of React component packages for Gilak Studio, built with Vite, TypeScript, and Turborepo.
+Gilak Studio is a TypeScript monorepo of reusable React UI components, canvas tools, utilities, and a demo app.
 
-## Packages
+## Overview
 
-## Getting Started
+This repository contains component libraries, design-system utilities, and an example application used to prototype and demo features. It's organized as a pnpm workspace to develop, build, and test packages together.
 
-```bash
-# Install dependencies
+## Tech stack
+
+- Monorepo: `pnpm` workspaces, `turbo` (task running)
+- Language: `TypeScript`, `SCSS`
+- UI: `React`
+- Bundler/Dev: `Vite`
+- Linting & Formatting: `ESLint`, `Prettier`
+- Release & Changelog: `Changesets`
+- Others: `Husky`, `Storybook`, `i18Next`
+
+## Workspace packages
+
+- `@gilak/stylist` — Design tokens, themes, SCSS utilities.
+- `@gilak/components` — Reusable UI components.
+- `@gilak/canvas` — React canvas utilities and components.
+- `@gilak/floating-window` — Draggable/resizable floating window UI.
+- `@gilak/color-picker` — Canvas-based color picker.
+- `@gilak/color-swatch` — Color swatch.
+- `@gilak/resizable-screen` — Resizable / zoomable screen container.
+- `@gilak/utils` — Shared utility functions.
+- `@gilak/localization` — i18n helpers and locales.
+- `@gilak/build-config` — Shared Vite / build configuration for packages.
+- `apps/demo` — Example/demo application showcasing the components.
+
+## Quick start
+
+1. Bootstrap dependencies:
+
+```
 pnpm install
+```
 
-# Build all packages
-pnpm build
+2. Start the demo app locally:
 
-# Run demo app
+```
 pnpm dev
-
-# Run Storybook
-pnpm storybook
 ```
 
-## Development Workflow
-
-### Making Changes
-
-1. Make your changes to packages
-2. Create a changeset: `pnpm changeset`
-3. Commit your changes including the changeset file
-
-### Releasing
-
-1. Version packages: `pnpm version-packages`
-2. Commit version changes
-3. Publish: `pnpm release`
-
-## Project Structure
+3. Build all packages:
 
 ```
-gilak-studio/
-├── apps/
-│   └── demo/                    # Demo application
-├── packages/
-│   ├── build-config/            # Shared build configuration
-│   ├── gilak-color-picker/      # Canvas component package
-│   └── gilak-eyedropper/        # Eyedropper component package
-├── .storybook/                  # Storybook configuration
-└── tsconfig.base.json           # Shared TypeScript configuration
+pnpm build
 ```
 
-## Tech Stack
+4. Lint:
 
-- **Build**: Vite, TypeScript
-- **Monorepo**: Turborepo, pnpm workspaces
-- **Versioning**: Changesets
-- **Documentation**: Storybook
+```
+pnpm lint
+```
 
-## License
+5. Format:
 
-MIT [Aydin Ghane Kh.](https://github.com/iding-ir)
+```
+pnpm format
+```
