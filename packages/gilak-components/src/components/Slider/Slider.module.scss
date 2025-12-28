@@ -22,7 +22,6 @@
       bottom: 0;
       background-color: var(--color-primary-md);
       border-radius: var(--radius-full);
-      transition: width var(--transition-sm);
     }
 
     .thumb {
@@ -41,7 +40,7 @@
       background-color: var(--color-dark-md);
       border-radius: var(--radius-md);
       box-shadow: var(--shadow-md);
-      transition: all var(--transition-sm);
+      transition: background-color var(--transition-sm);
       outline: none;
 
       &:focus,

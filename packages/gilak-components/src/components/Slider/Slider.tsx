@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import type { CSSProperties, ReactNode } from "react";
+import type { ReactNode } from "react";
 
 import { ConditionalWrapper } from "../ConditionalWrapper";
 import { Icon } from "../Icon";
@@ -30,8 +30,9 @@ export const Slider = ({
 }: SliderProps) => {
   const {
     trackRef,
+    thumbRef,
+    fillRef,
     value,
-    thumbStyle,
     handleTrackPointerDown,
     handleThumbPointerDown,
   } = useSlider({ range, step, initial, onChange });
@@ -46,15 +47,17 @@ export const Slider = ({
         onPointerDown={handleTrackPointerDown}
       >
         <div
+          ref={fillRef}
           className={styles.fill}
           style={{
             width: `${((value - range[0]) / (range[1] - range[0] || 1)) * 100}%`,
           }}
         />
+
         <div
+          ref={thumbRef}
           className={styles.thumb}
           onPointerDown={handleThumbPointerDown}
-          style={thumbStyle as CSSProperties}
         >
           <ConditionalWrapper
             condition={!!tooltip}

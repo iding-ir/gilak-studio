@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const clamp = (v: number, a: number, b: number) => Math.min(Math.max(v, a), b);
 
@@ -17,14 +17,15 @@ export const useSlider = ({
 }: UseSliderArgs) => {
   const [min, max] = range;
   const trackRef = useRef<HTMLDivElement | null>(null);
+  const thumbRef = useRef<HTMLDivElement | null>(null);
+  const fillRef = useRef<HTMLDivElement | null>(null);
   const draggingRef = useRef(false);
-  const [value, setValue] = useState<number>(initial);
+  const rafRef = useRef<number | null>(null);
+  const valueRef = useRef(initial);
+  const [value, setValue] = useState(initial);
 
   const valueToPercent = useCallback(
-    (v: number) => {
-      if (max === min) return 0;
-      return ((v - min) / (max - min)) * 100;
-    },
+    (v: number) => (max === min ? 0 : ((v - min) / (max - min)) * 100),
     [min, max],
   );
 
@@ -37,18 +38,50 @@ export const useSlider = ({
     [min, max, step],
   );
 
+  const renderThumb = useCallback(
+    (nextValue: number) => {
+      const percent = valueToPercent(nextValue);
+
+      if (thumbRef.current) {
+        thumbRef.current.style.left = `${percent}%`;
+      }
+
+      if (fillRef.current) {
+        fillRef.current.style.width = `${percent}%`;
+      }
+    },
+    [valueToPercent],
+  );
+
+  const scheduleRender = useCallback(
+    (nextValue: number) => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(() => {
+        renderThumb(nextValue);
+      });
+    },
+    [renderThumb],
+  );
+
   const updateFromPointer = useCallback(
     (clientX: number) => {
       const track = trackRef.current;
       if (!track) return;
+
       const rect = track.getBoundingClientRect();
-      let p = ((clientX - rect.left) / rect.width) * 100;
-      p = clamp(p, 0, 100);
-      const newValue = percentToValue(p);
-      setValue(newValue);
-      onChange(newValue);
+      let percentage = ((clientX - rect.left) / rect.width) * 100;
+      percentage = clamp(percentage, 0, 100);
+
+      const nextValue = percentToValue(percentage);
+      if (nextValue === valueRef.current) return;
+
+      valueRef.current = nextValue;
+      scheduleRender(nextValue);
+
+      setValue(nextValue);
+      onChange(nextValue);
     },
-    [percentToValue, onChange],
+    [percentToValue, scheduleRender, onChange],
   );
 
   const handleTrackPointerDown = (e: React.PointerEvent) => {
@@ -58,32 +91,33 @@ export const useSlider = ({
   const handleThumbPointerDown = (event: React.PointerEvent) => {
     const element = event.currentTarget as Element;
     element.setPointerCapture?.(event.pointerId);
+
     draggingRef.current = true;
     updateFromPointer(event.clientX);
 
-    const onMove = (event: PointerEvent) => {
-      updateFromPointer(event.clientX);
-    };
+    const onMove = (event: PointerEvent) => updateFromPointer(event.clientX);
 
     const onUp = (event: PointerEvent) => {
       draggingRef.current = false;
       element.releasePointerCapture?.(event.pointerId);
+
       document.removeEventListener("pointermove", onMove);
       document.removeEventListener("pointerup", onUp);
     };
 
-    document.addEventListener("pointermove", onMove);
-    document.addEventListener("pointerup", onUp);
+    document.addEventListener("pointermove", onMove, { passive: true });
+    document.addEventListener("pointerup", onUp, { passive: true });
   };
 
-  const percent = valueToPercent(value);
-  const thumbStyle = { left: `${percent}%` } as const;
+  useEffect(() => {
+    renderThumb(valueRef.current);
+  }, [renderThumb]);
 
   return {
     trackRef,
+    thumbRef,
+    fillRef,
     value,
-    percent,
-    thumbStyle,
     handleTrackPointerDown,
     handleThumbPointerDown,
   } as const;
