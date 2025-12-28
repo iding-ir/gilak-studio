@@ -2,6 +2,8 @@ import type { Variant } from "@gilak/components/types";
 import clsx from "clsx";
 import type { ComponentProps, RefObject } from "react";
 
+import { ConditionalWrapper } from "../ConditionalWrapper";
+import { Tooltip } from "../Tooltip";
 import styles from "./Input.module.scss";
 
 export type InputProps = ComponentProps<"input"> & {
@@ -13,6 +15,7 @@ export type InputProps = ComponentProps<"input"> & {
   fullWidth?: boolean;
   label?: string;
   className?: string;
+  tooltip?: string;
 };
 
 export const Input = ({
@@ -24,23 +27,31 @@ export const Input = ({
   fullWidth = true,
   label,
   className,
+  tooltip,
   ...props
 }: InputProps) => {
   return (
-    <label
-      className={clsx(styles.label, {
-        [styles.error]: error,
-        [styles.fullWidth]: fullWidth,
-        [styles.rounded]: rounded,
-        [styles.frameless]: frameless,
-      })}
+    <ConditionalWrapper
+      condition={!!tooltip}
+      wrapper={(children) => (
+        <Tooltip content={tooltip as string}>{children}</Tooltip>
+      )}
     >
-      {label && <span className={styles.text}>{label}</span>}
-      <input
-        ref={ref}
-        {...props}
-        className={clsx(styles.input, styles[variant], className)}
-      />
-    </label>
+      <label
+        className={clsx(styles.label, {
+          [styles.error]: error,
+          [styles.fullWidth]: fullWidth,
+          [styles.rounded]: rounded,
+          [styles.frameless]: frameless,
+        })}
+      >
+        {label && <span className={styles.text}>{label}</span>}
+        <input
+          ref={ref}
+          {...props}
+          className={clsx(styles.input, styles[variant], className)}
+        />
+      </label>
+    </ConditionalWrapper>
   );
 };

@@ -83,7 +83,6 @@ export const FloatingWindowHeader = ({
           onClick={() => {
             if (editableTitle && status !== "minimized") {
               inputRef.current?.focus();
-              inputRef.current?.select();
             }
           }}
           onPointerDown={() => {
@@ -93,6 +92,7 @@ export const FloatingWindowHeader = ({
             if (key === "Enter") handleChangeTitle();
           }}
           onBlur={handleChangeTitle}
+          tooltip={t("floatingWindow:title.edit")}
         />
       }
       actions={

@@ -1,4 +1,7 @@
 {
+  "title": {
+    "edit": "Click to edit title"
+  },
   "actions": {
     "close": "Close",
     "maximize": "Maximize",

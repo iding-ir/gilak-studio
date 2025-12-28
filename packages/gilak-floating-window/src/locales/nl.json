@@ -1,4 +1,7 @@
 {
+  "title": {
+    "edit": "Klik om titel te bewerken"
+  },
   "actions": {
     "close": "Sluiten",
     "maximize": "Maximaliseren",

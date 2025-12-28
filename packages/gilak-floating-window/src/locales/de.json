@@ -1,9 +1,12 @@
 {
+  "title": {
+    "edit": "Klicken Sie, um den Titel zu bearbeiten"
+  },
   "actions": {
-    "close": "Close",
-    "maximize": "Maximize",
-    "minimize": "Minimize",
-    "restore": "Restore",
-    "more": "More..."
+    "close": "Schließen",
+    "maximize": "Maximieren",
+    "minimize": "Minimieren",
+    "restore": "Wiederherstellen",
+    "more": "Mehr..."
   }
 }
