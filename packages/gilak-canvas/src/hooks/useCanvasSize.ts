@@ -5,7 +5,7 @@ import { parseSize } from "../methods";
 import { storeCtx } from "../methods/store-ctx";
 
 export type UseCanvasSizeArgs = {
-  canvasRef?: RefObject<HTMLCanvasElement | null>;
+  canvasRef: RefObject<HTMLCanvasElement | null>;
   width?: string | number;
   height?: string | number;
   onChange?: () => void;
@@ -18,7 +18,7 @@ export const useCanvasSize = ({
   onChange,
 }: UseCanvasSizeArgs) => {
   useEffect(() => {
-    const canvas = canvasRef?.current;
+    const canvas = canvasRef.current;
     if (!canvas) return;
 
     const targetW = parseSize(width) ?? canvas.width;
@@ -27,13 +27,11 @@ export const useCanvasSize = ({
     if (canvas.width === targetW && canvas.height === targetH) return;
 
     const newCanvas = storeCtx({ canvas });
+    onChange?.();
     setCanvasSize(canvas, targetW, targetH);
 
     const restoreCtx = canvas.getContext("2d", { willReadFrequently: true });
-    if (restoreCtx) {
-      restoreCtx.drawImage(newCanvas, 0, 0);
-      onChange?.();
-    }
+    if (restoreCtx) restoreCtx.drawImage(newCanvas, 0, 0);
   }, [canvasRef, width, height, onChange]);
 };
 

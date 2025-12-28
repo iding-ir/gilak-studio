@@ -1,7 +1,13 @@
 import { getCursorColor } from "@gilak/canvas/methods/get-cursor-color";
 import { type RefObject } from "react";
 
-import { useCursor, useDrawing, useEraser, useFill } from "../../hooks";
+import {
+  useCanvasSize,
+  useCursor,
+  useDrawing,
+  useEraser,
+  useFill,
+} from "../../hooks";
 import { type BrushShape, type BrushSize } from "../../types";
 import type { CanvasProps } from "../Canvas";
 import { Canvas } from "../Canvas";
@@ -38,6 +44,12 @@ export const DrawingCanvas = ({
   onChange,
   ...props
 }: DrawingCanvasProps) => {
+  useCanvasSize({
+    canvasRef,
+    width,
+    height,
+    onChange,
+  });
   useDrawing({
     canvasRef,
     enabled: enabledDrawing,
@@ -77,7 +89,7 @@ export const DrawingCanvas = ({
 
   return (
     <div className={styles.canvas}>
-      <Canvas canvasRef={canvasRef} {...props} width={width} height={height} />
+      <Canvas canvasRef={canvasRef} {...props} />
       <Cursor cursorRef={cursorRef} />
     </div>
   );

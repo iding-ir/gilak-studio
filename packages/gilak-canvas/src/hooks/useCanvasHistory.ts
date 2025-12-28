@@ -14,14 +14,22 @@ export type CanvasHistory = {
 export type UseCanvasHistoryArgs = {
   canvasRef: React.RefObject<HTMLCanvasElement | null>;
   maxHistory?: number;
+  onChange?: (entry: HistoryEntry) => void;
+};
+
+export type HistoryEntry = {
+  image: ImageData;
+  width: number;
+  height: number;
 };
 
 export const useCanvasHistory = ({
   canvasRef,
   maxHistory = 50,
+  onChange,
 }: UseCanvasHistoryArgs): CanvasHistory => {
-  const undoStack = useRef<ImageData[]>([]);
-  const redoStack = useRef<ImageData[]>([]);
+  const undoStack = useRef<HistoryEntry[]>([]);
+  const redoStack = useRef<HistoryEntry[]>([]);
   const [canUndo, setHasUndo] = useState(false);
   const [canRedo, setHasRedo] = useState(false);
 
@@ -33,46 +41,77 @@ export const useCanvasHistory = ({
   const getCanUndo = useCallback(() => undoStack.current.length > 0, []);
   const getCanRedo = useCallback(() => redoStack.current.length > 0, []);
 
-  const getCtx = useCallback(() => {
+  const snapshot = useCallback(() => {
     const canvas = canvasRef.current;
-    return canvas?.getContext("2d") ?? null;
-  }, [canvasRef]);
-
-  const snapshot = () => {
-    const canvas = canvasRef.current;
-    const ctx = getCtx();
-    if (!canvas || !ctx) return;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
 
     const img = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    undoStack.current.push(img);
+    undoStack.current.push({
+      image: img,
+      width: canvas.width,
+      height: canvas.height,
+    });
+
     if (undoStack.current.length > maxHistory) undoStack.current.shift();
     redoStack.current.length = 0;
     updateFlags();
-  };
+  }, [canvasRef, maxHistory]);
 
   const undo = useCallback(() => {
     const canvas = canvasRef.current;
-    const ctx = getCtx();
-    if (!canvas || !ctx || undoStack.current.length === 0) return;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx || undoStack.current.length === 0) return;
 
     const current = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const prev = undoStack.current.pop()!;
-    redoStack.current.push(current);
-    ctx.putImageData(prev, 0, 0);
+    redoStack.current.push({
+      image: current,
+      width: canvas.width,
+      height: canvas.height,
+    });
+
+    if (canvas.width !== prev.width || canvas.height !== prev.height) {
+      canvas.width = prev.width;
+      canvas.height = prev.height;
+    }
+
+    const ctxAfter = canvas.getContext("2d");
+    if (!ctxAfter) return;
+
+    ctxAfter.putImageData(prev.image, 0, 0);
+    onChange?.(prev);
     updateFlags();
-  }, [canvasRef, getCtx]);
+  }, [canvasRef, onChange]);
 
   const redo = useCallback(() => {
     const canvas = canvasRef.current;
-    const ctx = getCtx();
-    if (!canvas || !ctx || redoStack.current.length === 0) return;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx || redoStack.current.length === 0) return;
 
     const current = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const next = redoStack.current.pop()!;
-    undoStack.current.push(current);
-    ctx.putImageData(next, 0, 0);
+    undoStack.current.push({
+      image: current,
+      width: canvas.width,
+      height: canvas.height,
+    });
+
+    if (canvas.width !== next.width || canvas.height !== next.height) {
+      canvas.width = next.width;
+      canvas.height = next.height;
+    }
+
+    const ctxAfter = canvas.getContext("2d");
+    if (!ctxAfter) return;
+
+    ctxAfter.putImageData(next.image, 0, 0);
+    onChange?.(next);
     updateFlags();
-  }, [canvasRef, getCtx]);
+  }, [canvasRef, onChange]);
 
   const clearHistory = useCallback(() => {
     undoStack.current.length = 0;
@@ -82,14 +121,17 @@ export const useCanvasHistory = ({
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const ctx = getCtx();
-    if (!canvas || !ctx) return;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
 
     const img = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    undoStack.current = [img];
+    undoStack.current = [
+      { image: img, width: canvas.width, height: canvas.height },
+    ];
     redoStack.current = [];
     updateFlags();
-  }, [canvasRef, getCtx]);
+  }, [canvasRef]);
 
   return {
     snapshot,

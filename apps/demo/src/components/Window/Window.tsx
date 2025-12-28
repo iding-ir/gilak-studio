@@ -43,7 +43,13 @@ export const Window = ({ id }: WindowProps) => {
   const [documentHeight, setDocumentHeight] = useState(defaultDocumentSize.h);
   const [openSettings, setOpenSettings] = useState(false);
   const { title, size, position } = useFloatingWindow(id);
-  const history = useCanvasHistory({ canvasRef });
+  const history = useCanvasHistory({
+    canvasRef,
+    onChange: ({ width, height }) => {
+      setDocumentWidth(width);
+      setDocumentHeight(height);
+    },
+  });
 
   const handleSelectColor = (color: string) => {
     dispatch(setColor(color));
