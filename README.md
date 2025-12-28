@@ -6,6 +6,10 @@ Gilak Studio is a TypeScript monorepo of reusable React UI components, canvas to
 
 This repository contains component libraries, design-system utilities, and an example application used to prototype and demo features. It's organized as a pnpm workspace to develop, build, and test packages together.
 
+## Demo
+
+[Demo App](https://studio.gilak.dev)
+
 ## Tech stack
 
 - Monorepo: `pnpm` workspaces, `turbo` (task running)
