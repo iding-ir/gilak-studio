@@ -9,7 +9,7 @@ export interface ColorState {
 }
 
 const initialState: ColorState = {
-  color: COLOR_PALETTE[1],
+  color: COLOR_PALETTE[3],
   backgroundColor: COLOR_PALETTE[0],
 };
 

@@ -9,7 +9,7 @@ export interface ToolsState {
 }
 
 const initialState: ToolsState = {
-  selected: undefined,
+  selected: "BRUSH",
   tolerance: 15,
 };
 
