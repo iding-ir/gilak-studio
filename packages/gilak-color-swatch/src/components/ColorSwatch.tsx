@@ -1,5 +1,6 @@
 import type { Position, Variant } from "@gilak/components";
-import { Dropdown, Icon, Input, List, Tab, Tabs } from "@gilak/components";
+import { Dropdown, Input, List, Tab, Tabs } from "@gilak/components";
+import { IconButton } from "@gilak/components/components/Icon/Icon";
 import { t } from "@gilak/localization";
 import { getContrastColor } from "@gilak/utils";
 
@@ -36,7 +37,7 @@ export const ColorSwatch = ({
     <Dropdown
       position={position}
       trigger={
-        <Icon
+        <IconButton
           icon={icon}
           color={color}
           backgroundColor={backgroundColor}
@@ -62,7 +63,7 @@ export const ColorSwatch = ({
             variant={variant}
             frameless
             items={colors.map((c) => (
-              <Icon
+              <IconButton
                 icon={IconEmpty}
                 style={{ color: c, backgroundColor: c }}
                 selected={color === c}
@@ -90,7 +91,7 @@ export const ColorSwatch = ({
             variant={variant}
             frameless
             items={colors.map((c) => (
-              <Icon
+              <IconButton
                 icon={IconEmpty}
                 style={{ color: c, backgroundColor: c }}
                 selected={backgroundColor === c}

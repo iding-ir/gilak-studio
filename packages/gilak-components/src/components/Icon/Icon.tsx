@@ -1,12 +1,17 @@
 import type { TshirtSize, Variant } from "@gilak/components/types";
 import clsx from "clsx";
-import type { ComponentProps, CSSProperties } from "react";
+import type {
+  ComponentPropsWithoutRef,
+  CSSProperties,
+  ElementType,
+} from "react";
 
 import { ConditionalWrapper } from "../ConditionalWrapper";
 import { Tooltip } from "../Tooltip";
 import styles from "./Icon.module.scss";
 
-export type IconProps = Omit<ComponentProps<"span">, "color"> & {
+export type IconProps<T extends ElementType> = {
+  tag?: T;
   icon: string;
   rounded?: boolean;
   variant?: Variant;
@@ -19,9 +24,10 @@ export type IconProps = Omit<ComponentProps<"span">, "color"> & {
   className?: string;
   color?: string;
   backgroundColor?: string;
-};
+} & ComponentPropsWithoutRef<T>;
 
-export const Icon = ({
+export const Icon = <T extends ElementType = "span">({
+  tag,
   icon,
   rounded = true,
   variant = "light",
@@ -35,7 +41,9 @@ export const Icon = ({
   color,
   backgroundColor,
   ...props
-}: IconProps) => {
+}: IconProps<T>) => {
+  const Tag = tag || "span";
+
   return (
     <ConditionalWrapper
       condition={!!tooltip}
@@ -43,7 +51,7 @@ export const Icon = ({
         <Tooltip content={tooltip as string}>{children}</Tooltip>
       )}
     >
-      <span
+      <Tag
         {...props}
         className={clsx(
           styles.background,
@@ -70,7 +78,11 @@ export const Icon = ({
           className={clsx(styles.icon, styles[variant])}
           style={{ backgroundColor: color }}
         />
-      </span>
+      </Tag>
     </ConditionalWrapper>
   );
+};
+
+export const IconButton = ({ ...props }: IconProps<"button">) => {
+  return <Icon {...props} tag="button" />;
 };

@@ -1,4 +1,4 @@
-import { Dropdown, Header, Icon, Input } from "@gilak/components";
+import { Dropdown, Header, IconButton, Input } from "@gilak/components";
 import { t } from "@gilak/localization";
 import clsx from "clsx";
 import type { PointerEvent, ReactNode } from "react";
@@ -101,7 +101,7 @@ export const FloatingWindowHeader = ({
             <Dropdown
               position="bottom"
               trigger={
-                <Icon
+                <IconButton
                   icon={IconMenu}
                   variant="light-ghost"
                   tooltip={t("floatingWindow:actions.more")}
@@ -113,7 +113,7 @@ export const FloatingWindowHeader = ({
             </Dropdown>
           )}
           {maximizable && status !== "maximized" && (
-            <Icon
+            <IconButton
               frameless
               variant="light-ghost"
               icon={IconMaximize}
@@ -122,7 +122,7 @@ export const FloatingWindowHeader = ({
             />
           )}
           {maximizable && status === "maximized" && (
-            <Icon
+            <IconButton
               frameless
               variant="light-ghost"
               icon={IconMaximized}
@@ -131,7 +131,7 @@ export const FloatingWindowHeader = ({
             />
           )}
           {minimizable && status !== "minimized" && (
-            <Icon
+            <IconButton
               frameless
               variant="light-ghost"
               icon={IconMinimize}
@@ -140,7 +140,7 @@ export const FloatingWindowHeader = ({
             />
           )}
           {minimizable && status === "minimized" && (
-            <Icon
+            <IconButton
               frameless
               variant="light-ghost"
               icon={IconMinimized}
@@ -149,7 +149,7 @@ export const FloatingWindowHeader = ({
             />
           )}
           {closable && (
-            <Icon
+            <IconButton
               frameless
               variant="light-ghost"
               icon={IconClose}

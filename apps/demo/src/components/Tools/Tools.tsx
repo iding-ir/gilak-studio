@@ -1,7 +1,17 @@
 import type { BrushShape, BrushSize } from "@gilak/canvas";
-import { brushShapeIcons } from "@gilak/canvas/types/brushShape";
+import IconBackslash from "@gilak/canvas/assets/brush-backslash.svg?url";
+import IconCircle from "@gilak/canvas/assets/brush-circle.svg?url";
+import IconDisamond from "@gilak/canvas/assets/brush-diamond.svg?url";
+import IconHorizontal from "@gilak/canvas/assets/brush-horizontal.svg?url";
+import IconSlash from "@gilak/canvas/assets/brush-slash.svg?url";
+import IconSquare from "@gilak/canvas/assets/brush-square.svg?url";
+import IconStar from "@gilak/canvas/assets/brush-star.svg?url";
+import IconTriangle from "@gilak/canvas/assets/brush-triangle.svg?url";
+import IconVerical from "@gilak/canvas/assets/brush-vertical.svg?url";
+import { BRUSH_SHAPES, brushShapeIcons } from "@gilak/canvas/types/brushShape";
 import { ColorSwatch } from "@gilak/color-swatch";
-import { Dropdown, Icon, Slider } from "@gilak/components";
+import { Dropdown, List, Slider } from "@gilak/components";
+import { IconButton } from "@gilak/components/components/Icon/Icon";
 import { t } from "@gilak/localization";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
@@ -30,7 +40,19 @@ import {
   toggleTool,
 } from "../../features/tools/tools.slice";
 import type { ToolType } from "../../features/tools/types";
-import { BrushShapes } from "../BrushShapes";
+
+const icons: Record<BrushShape, string> = {
+  CIRCLE: IconCircle,
+  SQUARE: IconSquare,
+  DIAMOND: IconDisamond,
+  TRIANGLE: IconTriangle,
+  STAR: IconStar,
+  HORIZONTAL: IconHorizontal,
+  VERTICAL: IconVerical,
+  BACKSLASH: IconBackslash,
+  SLASH: IconSlash,
+};
+
 import styles from "./Tools.module.scss";
 
 export const Tools = () => {
@@ -80,7 +102,7 @@ export const Tools = () => {
         />
       </li>
       <li>
-        <Icon
+        <IconButton
           icon={IconBrushTool}
           selected={selectedTool === "BRUSH"}
           tooltip={t("app:tools.brush")}
@@ -88,7 +110,7 @@ export const Tools = () => {
         />
       </li>
       <li>
-        <Icon
+        <IconButton
           icon={IconEraserTool}
           selected={selectedTool === "ERASER"}
           tooltip={t("app:tools.eraser")}
@@ -99,14 +121,27 @@ export const Tools = () => {
         <Dropdown
           position="bottom"
           trigger={
-            <Icon
+            <IconButton
               icon={brushShapeIcons[brushShape]}
               tooltip={t("app:tools.brushShapes")}
               interactive
             />
           }
         >
-          <BrushShapes brush={brushShape} onChange={handleBrushShapeChange} />
+          <List
+            direction="column"
+            count={3}
+            interactive
+            variant="light"
+            items={BRUSH_SHAPES.map((bs) => (
+              <IconButton
+                selected={bs === brushShape}
+                icon={icons[bs]}
+                frameless
+                onClick={() => handleBrushShapeChange(bs)}
+              />
+            ))}
+          />
         </Dropdown>
       </li>
       <li>
@@ -119,7 +154,7 @@ export const Tools = () => {
         />
       </li>
       <li>
-        <Icon
+        <IconButton
           icon={IconColorPicker}
           selected={selectedTool === "COLOR_PICKER"}
           tooltip={t("app:tools.colorPicker")}
@@ -127,7 +162,7 @@ export const Tools = () => {
         />
       </li>
       <li>
-        <Icon
+        <IconButton
           icon={IconFillTool}
           selected={selectedTool === "FILL"}
           tooltip={t("app:tools.fill")}

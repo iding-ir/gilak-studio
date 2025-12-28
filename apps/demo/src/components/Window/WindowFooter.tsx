@@ -1,5 +1,5 @@
 import { type CanvasHistory } from "@gilak/canvas";
-import { Icon } from "@gilak/components";
+import { IconButton } from "@gilak/components";
 import { t } from "@gilak/localization";
 import { ZoomSelector } from "@gilak/resizable-screen";
 
@@ -14,7 +14,7 @@ export const WindowFooter = ({ history }: { history: CanvasHistory }) => {
     <div className={styles.root}>
       <ZoomSelector />
       <div className={styles.undoRedo}>
-        <Icon
+        <IconButton
           icon={IconUndo}
           tooltip={t("app:undo")}
           interactive
@@ -24,7 +24,7 @@ export const WindowFooter = ({ history }: { history: CanvasHistory }) => {
           onClick={() => canUndo && undo()}
         />
 
-        <Icon
+        <IconButton
           icon={IconRedo}
           tooltip={t("app:redo")}
           interactive

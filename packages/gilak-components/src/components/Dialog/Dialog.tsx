@@ -8,7 +8,7 @@ import IconClose from "../../assets/icon-close.svg?url";
 import { Body } from "../Body";
 import { Footer } from "../Footer";
 import { Header } from "../Header";
-import { Icon } from "../Icon";
+import { IconButton } from "../Icon";
 import styles from "./Dialog.module.scss";
 
 export interface DialogProps {
@@ -43,7 +43,7 @@ export const Dialog = ({
           heading={heading}
           actions={
             <>
-              <Icon
+              <IconButton
                 icon={IconClose}
                 className={styles.icon}
                 frameless

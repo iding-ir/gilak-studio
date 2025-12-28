@@ -16,6 +16,7 @@ export type { HeaderProps } from "./components/Header";
 export { Header } from "./components/Header";
 export type { IconProps } from "./components/Icon";
 export { Icon } from "./components/Icon";
+export { IconButton } from "./components/Icon";
 export type { InfoProps } from "./components/Info";
 export { Info } from "./components/Info";
 export type { InputProps } from "./components/Input";
