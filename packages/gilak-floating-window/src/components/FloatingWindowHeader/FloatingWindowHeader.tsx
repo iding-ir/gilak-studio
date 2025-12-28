@@ -49,11 +49,6 @@ export const FloatingWindowHeader = ({
     setFloatingWindowTitle,
   } = useFloatingWindow(id);
 
-  const handlePointerDown = (event: PointerEvent<HTMLElement>) => {
-    focusFloatingWindow();
-    if (draggable && onDragPointerDown) onDragPointerDown(event);
-  };
-
   const handleChangeTitle = useCallback(() => {
     if (value.trim().length) {
       setFloatingWindowTitle(value);
@@ -62,38 +57,44 @@ export const FloatingWindowHeader = ({
     }
   }, [value, title, setFloatingWindowTitle]);
 
-  const handleCloseFloatingWindow = useCallback(() => {
-    unregisterFloatingWindow();
-  }, [unregisterFloatingWindow]);
-
   return (
     <Header
+      compact={status === "minimized"}
+      className={clsx(styles.header, {
+        [styles.draggable]: draggable,
+        [styles.maximized]: status === "maximized",
+        [styles.minimized]: status === "minimized",
+        [styles.dragging]: dragging,
+      })}
+      onPointerDown={(event) => {
+        focusFloatingWindow();
+        if (draggable && onDragPointerDown) onDragPointerDown(event);
+      }}
       heading={
-        <Input
-          name="floating-window-title"
-          ref={inputRef}
-          value={value}
-          onChange={({ target }) => setValue(target.value)}
-          readOnly={!editableTitle || status === "minimized"}
-          frameless={true}
-          fullWidth={false}
-          variant="primary"
-          size={value.length || 5}
-          autoComplete="off"
-          onClick={() => {
-            if (editableTitle && status !== "minimized") {
+        status === "minimized" || !editableTitle ? (
+          title
+        ) : (
+          <Input
+            name="floating-window-title"
+            ref={inputRef}
+            value={value}
+            onChange={({ target }) => setValue(target.value)}
+            frameless={true}
+            fullWidth={false}
+            variant="primary"
+            size={value.length || 5}
+            autoComplete="off"
+            onClick={() => {
               inputRef.current?.focus();
-            }
-          }}
-          onPointerDown={() => {
-            focusFloatingWindow();
-          }}
-          onKeyDown={({ key }) => {
-            if (key === "Enter") handleChangeTitle();
-          }}
-          onBlur={handleChangeTitle}
-          tooltip={t("floatingWindow:title.edit")}
-        />
+            }}
+            onPointerDown={focusFloatingWindow}
+            onKeyDown={({ key }) => {
+              if (key === "Enter") handleChangeTitle();
+            }}
+            onBlur={handleChangeTitle}
+            tooltip={t("floatingWindow:title.edit")}
+          />
+        )
       }
       actions={
         <>
@@ -154,18 +155,11 @@ export const FloatingWindowHeader = ({
               variant="light-ghost"
               icon={IconClose}
               tooltip={t("floatingWindow:actions.close")}
-              onClick={handleCloseFloatingWindow}
+              onClick={unregisterFloatingWindow}
             />
           )}
         </>
       }
-      className={clsx(styles.header, {
-        [styles.draggable]: draggable,
-        [styles.maximized]: status === "maximized",
-        [styles.minimized]: status === "minimized",
-        [styles.dragging]: dragging,
-      })}
-      onPointerDown={handlePointerDown}
     />
   );
 };
