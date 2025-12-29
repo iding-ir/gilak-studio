@@ -50,10 +50,8 @@ export const useCanvasPointer = ({
       startedPointers.set(canvas, map);
     }
 
-    const rectRef = { current: canvas.getBoundingClientRect() };
-
     const toCanvas = (ev: PointerEvent): Point => {
-      const rect = rectRef.current;
+      const rect = canvas.getBoundingClientRect();
       const sx = canvas.width / rect.width;
       const sy = canvas.height / rect.height;
       const x = Math.floor((ev.clientX - rect.left) * sx);
@@ -73,8 +71,6 @@ export const useCanvasPointer = ({
 
     const onPointerDown = (event: PointerEvent) => {
       if (map!.has(event.pointerId)) return;
-
-      rectRef.current = canvas.getBoundingClientRect();
 
       const point = toCanvas(event);
       map!.set(event.pointerId, point);

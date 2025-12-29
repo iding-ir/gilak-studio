@@ -29,7 +29,9 @@ export const useCursor = ({
   useCanvasPointer({
     canvasRef,
     enabled,
-    onEnter: () => {
+    onEnter: ({ point: { x, y } }) => {
+      console.log(x, y);
+
       const cursor = cursorRef.current;
       if (!cursor) return;
       cursor.style.display = "block";
@@ -54,6 +56,8 @@ export const useCursor = ({
       if (!cursor) return;
     },
     onMove: ({ point: { x, y } }) => {
+      console.log(x, y);
+
       const cursor = cursorRef.current;
       if (!cursor) return;
       cursor.style.setProperty(
