@@ -17,4 +17,4 @@ export { useFloatingWindows } from "./hooks/useFloatingWindows";
 export { useRegister } from "./hooks/useRegister";
 
 // i18n
-import "./i18n";
+export { registerFloatingWindowI18n } from "./i18n";
