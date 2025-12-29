@@ -20,6 +20,7 @@ export const appearanceSlice = createAppSlice({
   name: "appearance",
   initialState,
   reducers: (create) => ({
+    initializePreferences: create.reducer((state) => state),
     openPreferences: create.reducer((state) => {
       state.open = true;
     }),
@@ -42,8 +43,13 @@ export const appearanceSlice = createAppSlice({
   },
 });
 
-export const { openPreferences, closePreferences, setLanguage, setTheme } =
-  appearanceSlice.actions;
+export const {
+  initializePreferences,
+  openPreferences,
+  closePreferences,
+  setLanguage,
+  setTheme,
+} = appearanceSlice.actions;
 
 export const { selectPreferencesOpen, selectLanguage, selectTheme } =
   appearanceSlice.selectors;

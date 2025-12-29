@@ -8,7 +8,11 @@ import {
 import { brushSlice } from "../features/brush/brush-slice";
 import { colorSlice } from "../features/color/color-slice";
 import { languageListenerMiddleware } from "../features/preferences/language/language-middleware";
-import { appearanceSlice } from "../features/preferences/preferences-slice";
+import { preferencesListenerMiddleware } from "../features/preferences/preferences-middleware";
+import {
+  appearanceSlice,
+  initializePreferences,
+} from "../features/preferences/preferences-slice";
 import { themeListenerMiddleware } from "../features/preferences/theme/theme-middleware";
 import { settingsSlice } from "../features/settings/settings-slice";
 import { toolsSlice } from "../features/tools/tools.slice";
@@ -37,8 +41,11 @@ export const store = configureStore({
     getDefaultMiddleware()
       .concat(languageListenerMiddleware.middleware)
       .concat(themeListenerMiddleware.middleware)
+      .concat(preferencesListenerMiddleware.middleware)
       .concat(persistMiddleware),
 });
+
+store.dispatch(initializePreferences());
 
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppStore = typeof store;
