@@ -42,7 +42,7 @@ export const Window = ({ id }: WindowProps) => {
   const [documentWidth, setDocumentWidth] = useState(defaultDocumentSize.w);
   const [documentHeight, setDocumentHeight] = useState(defaultDocumentSize.h);
   const [openSettings, setOpenSettings] = useState(false);
-  const { title, size, position } = useFloatingWindow(id);
+  const { title } = useFloatingWindow(id);
   const history = useCanvasHistory({
     canvasRef,
     onChange: ({ width, height }) => {
@@ -60,8 +60,6 @@ export const Window = ({ id }: WindowProps) => {
       <FloatingWindow
         id={id}
         title={title}
-        initialPosition={position}
-        initialSize={size}
         editableTitle
         footer={<WindowFooter history={history} />}
         actions={

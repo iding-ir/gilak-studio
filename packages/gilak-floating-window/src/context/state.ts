@@ -1,7 +1,7 @@
 import type { FloatingWindowType } from "./types";
 
 export type State = {
-  windows: Record<string, FloatingWindowType>;
+  windows: Map<string, FloatingWindowType>;
 };
 
-export const initialState: State = { windows: {} };
+export const initialState: State = { windows: new Map() };

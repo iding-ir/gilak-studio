@@ -1,4 +1,4 @@
-@use "@gilak/stylist/mixins" as mixins;
+@use "@gilak/stylist/scss" as *;
 
 .header {
   display: flex;
@@ -18,7 +18,7 @@
     color: var(--color-light-md);
     font-size: var(--font-size-md);
     font-weight: var(--font-weight-lg);
-    @include mixins.ellipsis();
+    @include ellipsis;
   }
 
   &.compact {

@@ -1,7 +1,8 @@
 import { Body } from "@gilak/components";
+import { useFloatingWindows } from "@gilak/floating-window/hooks/useFloatingWindows";
 import clsx from "clsx";
 import type { ReactNode } from "react";
-import { memo, useRef } from "react";
+import { memo, useEffect, useRef } from "react";
 
 import {
   INITIAL_CLOSABLE,
@@ -18,7 +19,7 @@ import {
   MIN_SIZE,
 } from "../../constants";
 import type { Status } from "../../context";
-import { useDrag, useRegister, useResize } from "../../hooks";
+import { useDrag, useResize } from "../../hooks";
 import { useFloatingWindow } from "../../hooks/useFloatingWindow";
 import type { Position, Size } from "../../types";
 import { FloatingWindowFooter } from "../FloatingWindowFooter";
@@ -82,28 +83,34 @@ export const FloatingWindow = memo(
     onResizeEnd,
   }: FloatingWindowProps) => {
     const ref = useRef<HTMLDivElement | null>(null);
-
-    useRegister({
-      id,
-      title,
-      status: initialStatus,
-      minimizable,
-      maximizable,
-      draggable,
-      resizable,
-      dragging: false,
-      resizing: false,
-      position: initialPosition,
-      size: initialSize,
-      zIndex: initialZIndex,
-    });
-
+    const { windows } = useFloatingWindows();
+    const { registerFloatingWindow } = useFloatingWindows();
     const { size, position, status, zIndex, resizing, dragging } =
       useFloatingWindow(id);
 
+    useEffect(() => {
+      if (windows.has(id)) return;
+
+      registerFloatingWindow({
+        id,
+        title,
+        status: initialStatus,
+        minimizable,
+        maximizable,
+        draggable,
+        resizable,
+        dragging: false,
+        resizing: false,
+        position: initialPosition,
+        size: initialSize,
+        zIndex: initialZIndex,
+      });
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     const { onPointerDown: onDragPointerDown } = useDrag({
       id,
-      position: initialPosition,
+      position,
       status,
       draggable,
       restrictToParent,
@@ -115,7 +122,7 @@ export const FloatingWindow = memo(
 
     const { onPointerDown: onResizePointerDown } = useResize({
       id,
-      size: initialSize,
+      size,
       resizable,
       status,
       minSize,
@@ -138,10 +145,10 @@ export const FloatingWindow = memo(
           [styles.resizing]: resizing,
         })}
         style={{
-          transform: `translate3d(${(position || initialPosition).x}px, ${(position || initialPosition).y}px, 0)`,
+          transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
           zIndex,
-          width: (size || initialSize).w,
-          height: (size || initialSize).h,
+          width: size.w,
+          height: size.h,
         }}
       >
         <FloatingWindowHeader

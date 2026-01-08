@@ -1,4 +1,4 @@
-@use "@gilak/stylist/mixins" as mixins;
+@use "@gilak/stylist/scss" as *;
 
 .body {
   flex-grow: 1;
@@ -6,5 +6,5 @@
   color: var(--color-dark-xxl);
   background-color: var(--color-light-xl);
   overflow: auto;
-  @include mixins.scrollbar();
+  @include scrollbar;
 }

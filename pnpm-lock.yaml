@@ -353,6 +353,10 @@ importers:
         version: link:../build-config
 
   packages/gilak-utils:
+    dependencies:
+      '@gilak/stylist':
+        specifier: workspace:*
+        version: link:../gilak-stylist
     devDependencies:
       '@gilak/build-config':
         specifier: workspace:*

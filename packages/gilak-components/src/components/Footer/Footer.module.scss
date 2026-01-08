@@ -1,4 +1,4 @@
-@use "@gilak/stylist/mixins" as mixins;
+@use "@gilak/stylist/scss" as *;
 
 .footer {
   display: flex;
@@ -19,7 +19,7 @@
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-md);
     padding: 0 var(--spacing-sm);
-    @include mixins.ellipsis();
+    @include ellipsis;
   }
 
   .actions {

@@ -4,13 +4,12 @@ import type { FloatingWindowType, Status } from "./types";
 export type Action =
   | { type: "REGISTER"; payload: FloatingWindowType }
   | { type: "UNREGISTER"; payload: { id: string } }
+  | { type: "SET_TITLE"; payload: { id: string; title: string } }
   | { type: "SET_STATUS"; payload: { id: string; status: Status } }
   | { type: "SET_POSITION"; payload: { id: string; position: Position } }
-  | { type: "SET_TITLE"; payload: { id: string; title: string } }
   | { type: "SET_SIZE"; payload: { id: string; size: Size } }
   | { type: "SET_DRAGGING"; payload: { id: string; dragging: boolean } }
   | { type: "SET_RESIZING"; payload: { id: string; resizing: boolean } }
-  | { type: "BRING_TO_FRONT"; payload: { id: string } }
   | { type: "SET_FOCUSED"; payload: { id: string } };
 
 const registerFloatingWindow = (payload: FloatingWindowType): Action => ({
@@ -23,6 +22,11 @@ const unregisterFloatingWindow = (id: string): Action => ({
   payload: { id },
 });
 
+const setFloatingWindowTitle = (id: string, title: string): Action => ({
+  type: "SET_TITLE",
+  payload: { id, title },
+});
+
 const setFloatingWindowStatus = (id: string, status: Status): Action => ({
   type: "SET_STATUS",
   payload: { id, status },
@@ -31,11 +35,6 @@ const setFloatingWindowStatus = (id: string, status: Status): Action => ({
 const setFloatingWindowPosition = (id: string, position: Position): Action => ({
   type: "SET_POSITION",
   payload: { id, position },
-});
-
-const setFloatingWindowTitle = (id: string, title: string): Action => ({
-  type: "SET_TITLE",
-  payload: { id, title },
 });
 
 const setFloatingWindowSize = (id: string, size: Size): Action => ({
@@ -53,7 +52,7 @@ const setFloatingWindowResizing = (id: string, resizing: boolean): Action => ({
   payload: { id, resizing },
 });
 
-const setFocusedFloatingWindow = (id: string): Action => ({
+const focusFloatingWindow = (id: string): Action => ({
   type: "SET_FOCUSED",
   payload: { id },
 });
@@ -61,13 +60,13 @@ const setFocusedFloatingWindow = (id: string): Action => ({
 const actions = {
   registerFloatingWindow,
   unregisterFloatingWindow,
+  setFloatingWindowTitle,
   setFloatingWindowStatus,
   setFloatingWindowPosition,
   setFloatingWindowSize,
   setFloatingWindowDragging,
   setFloatingWindowResizing,
-  setFloatingWindowTitle,
-  setFocusedFloatingWindow,
+  focusFloatingWindow,
 };
 
 export { actions };

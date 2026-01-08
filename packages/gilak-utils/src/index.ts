@@ -25,7 +25,7 @@ export { convertArrayToHex as arrayToHex } from "./color/convert-array-to-hex";
 export { getContrastColor as getBlackAndWhiteColor } from "./color/get-contrast-color";
 
 // DOM utilities
-export { setAttribute, toggleFullscreen } from "./dom";
+export { setAttribute, toggleFullscreen, watchBreakpoint } from "./dom";
 
 // Storage
 export {

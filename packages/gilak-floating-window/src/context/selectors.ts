@@ -1,31 +1,31 @@
 import type { State } from "./state";
 
-export const selectFloatingWindow = (state: State) => {
-  return Object.values(state.windows);
+export const selectFloatingWindows = ({ windows }: State) => {
+  return Array.from(windows.values());
 };
 
-export const selectFloatingWindowById = (state: State, id: string) => {
-  return state.windows[id];
+export const selectFloatingWindowById = ({ windows }: State, id: string) => {
+  return windows.get(id);
 };
 
-export const selectOpenWindows = (state: State) => {
-  return Object.values(state.windows).filter((w) => w.status === "open");
+export const selectOpenWindows = ({ windows }: State) => {
+  return Array.from(windows.values()).filter((w) => w.status === "open");
 };
 
-export const selectMaximizedWindows = (state: State) => {
-  return Object.values(state.windows).filter((w) => w.status === "maximized");
+export const selectMaximizedWindows = ({ windows }: State) => {
+  return Array.from(windows.values()).filter((w) => w.status === "maximized");
 };
 
-export const selectMinimizedWindows = (state: State) => {
-  return Object.values(state.windows).filter((w) => w.status === "minimized");
+export const selectMinimizedWindows = ({ windows }: State) => {
+  return Array.from(windows.values()).filter((w) => w.status === "minimized");
 };
 
-export const hasMinimizedWindows = (state: State) => {
-  return Object.values(state.windows).some((w) => w.status === "minimized");
+export const hasMinimizedWindows = ({ windows }: State) => {
+  return Array.from(windows.values()).some((w) => w.status === "minimized");
 };
 
-export const selectFocusedWindow = (state: State) => {
-  return Object.values(state.windows).reduce((prev, current) =>
+export const selectFocusedWindow = ({ windows }: State) => {
+  return Array.from(windows.values()).reduce((prev, current) =>
     prev.zIndex > current.zIndex ? prev : current,
   );
 };

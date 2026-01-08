@@ -19,8 +19,8 @@ export { reducer } from "./reducer";
 // selectors:
 export {
   hasMinimizedWindows,
-  selectFloatingWindow,
   selectFloatingWindowById,
+  selectFloatingWindows,
   selectFocusedWindow,
   selectMaximizedWindows,
   selectMinimizedWindows,

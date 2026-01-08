@@ -5,82 +5,88 @@ export const reducer = (state: State, { type, payload }: Action): State => {
   switch (type) {
     case "REGISTER": {
       const { id } = payload;
+      const newWindows = new Map(state.windows);
 
       return {
         ...state,
-        windows: {
-          ...state.windows,
-          [id]: { ...state.windows[id], ...payload },
-        },
+        windows: newWindows.set(id, {
+          ...state.windows.get(id),
+          ...payload,
+        }),
       };
     }
     case "UNREGISTER": {
       const { id } = payload;
-      const rest = { ...state.windows };
-      delete rest[id];
+      const newWindows = new Map(state.windows);
 
-      return { ...state, windows: rest };
-    }
-    case "SET_STATUS": {
-      const { id, status } = payload;
+      newWindows.delete(id);
 
-      return {
-        ...state,
-        windows: { ...state.windows, [id]: { ...state.windows[id], status } },
-      };
-    }
-    case "SET_POSITION": {
-      const { id, position } = payload;
-
-      return {
-        ...state,
-        windows: { ...state.windows, [id]: { ...state.windows[id], position } },
-      };
+      return { ...state, windows: newWindows };
     }
     case "SET_TITLE": {
       const { id, title } = payload;
+      const newWindows = new Map(state.windows);
+      const window = state.windows.get(id);
 
-      return {
-        ...state,
-        windows: { ...state.windows, [id]: { ...state.windows[id], title } },
-      };
+      if (!window) return state;
+
+      return { ...state, windows: newWindows.set(id, { ...window, title }) };
+    }
+    case "SET_STATUS": {
+      const { id, status } = payload;
+      const newWindows = new Map(state.windows);
+      const window = state.windows.get(id);
+
+      if (!window) return state;
+
+      return { ...state, windows: newWindows.set(id, { ...window, status }) };
+    }
+    case "SET_POSITION": {
+      const { id, position } = payload;
+      const newWindows = new Map(state.windows);
+      const window = state.windows.get(id);
+
+      if (!window) return state;
+
+      return { ...state, windows: newWindows.set(id, { ...window, position }) };
     }
     case "SET_SIZE": {
       const { id, size } = payload;
+      const newWindows = new Map(state.windows);
+      const window = state.windows.get(id);
 
-      return {
-        ...state,
-        windows: { ...state.windows, [id]: { ...state.windows[id], size } },
-      };
+      if (!window) return state;
+
+      return { ...state, windows: newWindows.set(id, { ...window, size }) };
     }
     case "SET_DRAGGING": {
       const { id, dragging } = payload;
+      const newWindows = new Map(state.windows);
+      const window = state.windows.get(id);
 
-      return {
-        ...state,
-        windows: { ...state.windows, [id]: { ...state.windows[id], dragging } },
-      };
+      if (!window) return state;
+
+      return { ...state, windows: newWindows.set(id, { ...window, dragging }) };
     }
     case "SET_RESIZING": {
       const { id, resizing } = payload;
+      const newWindows = new Map(state.windows);
+      const window = state.windows.get(id);
 
-      return {
-        ...state,
-        windows: { ...state.windows, [id]: { ...state.windows[id], resizing } },
-      };
+      if (!window) return state;
+
+      return { ...state, windows: newWindows.set(id, { ...window, resizing }) };
     }
     case "SET_FOCUSED": {
       const { id } = payload;
-      const zIndexes = Object.values(state.windows).map((w) => w.zIndex);
-      const zIndexNew = Math.max(...zIndexes) + 1;
+      const newWindows = new Map(state.windows);
+      const window = state.windows.get(id);
+      const zIndexes = Array.from(state.windows.values()).map((w) => w.zIndex);
+      const zIndex = Math.max(...zIndexes) + 1;
 
-      return {
-        ...state,
-        windows: {
-          ...state.windows,
-          [id]: { ...state.windows[id], zIndex: zIndexNew },
-        },
-      };
+      if (!window) return state;
+
+      return { ...state, windows: newWindows.set(id, { ...window, zIndex }) };
     }
     default: {
       return state;

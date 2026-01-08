@@ -28,10 +28,12 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.umd.cjs"
-    }
+    },
+    "./scss": "./src/index.scss"
   },
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "scripts": {
     "dev": "vite build --watch",
@@ -41,5 +43,8 @@
   },
   "devDependencies": {
     "@gilak/build-config": "workspace:*"
+  },
+  "dependencies": {
+    "@gilak/stylist": "workspace:*"
   }
 }

@@ -7,7 +7,13 @@ import type { Position, Size } from "../types";
 
 export const useFloatingWindow = (id: string) => {
   const { state, dispatch } = useFloatingWindowContext();
-  const window = state.windows[id];
+  const window = state.windows.get(id);
+
+  if (!window) {
+    throw new Error(
+      `Floating window with id "${id}" is not registered. Make sure to register the floating window before using this hook.`,
+    );
+  }
 
   const unregisterFloatingWindow = useCallback(
     () => dispatch(actions.unregisterFloatingWindow(id)),
@@ -30,11 +36,11 @@ export const useFloatingWindow = (id: string) => {
 
   const maximizeFloatingWindow = useCallback(() => {
     dispatch(actions.setFloatingWindowStatus(id, "maximized"));
-    dispatch(actions.setFocusedFloatingWindow(id));
+    dispatch(actions.focusFloatingWindow(id));
   }, [dispatch, id]);
 
   const focusFloatingWindow = useCallback(() => {
-    dispatch(actions.setFocusedFloatingWindow(id));
+    dispatch(actions.focusFloatingWindow(id));
   }, [dispatch, id]);
 
   const setFloatingWindowSize = useCallback(

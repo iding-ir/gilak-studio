@@ -1,7 +1,6 @@
 @use "@gilak/stylist/scss" as *;
 
 .button {
-  all: unset;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -9,6 +8,8 @@
   padding: 0 var(--spacing-md);
   font-size: var(--font-size-md);
   height: var(--icon-md);
+  border: none;
+  outline: none;
   box-shadow: var(--shadow-sm);
   transition: background-color var(--transition-md);
   cursor: pointer;

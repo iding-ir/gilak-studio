@@ -5,8 +5,10 @@ import { useFloatingWindowContext } from "../context/hook";
 import type { FloatingWindowType } from "../context/types";
 
 export const useFloatingWindows = () => {
-  const { state, dispatch } = useFloatingWindowContext();
-  const { windows } = state;
+  const {
+    state: { windows },
+    dispatch,
+  } = useFloatingWindowContext();
 
   const registerFloatingWindow = useCallback(
     (window: FloatingWindowType) =>
@@ -14,14 +16,14 @@ export const useFloatingWindows = () => {
     [dispatch],
   );
 
-  const setFocusedFloatingWindow = useCallback(
-    (id: string) => dispatch(actions.setFocusedFloatingWindow(id)),
+  const focusFloatingWindow = useCallback(
+    (id: string) => dispatch(actions.focusFloatingWindow(id)),
     [dispatch],
   );
 
   return {
     windows,
     registerFloatingWindow,
-    setFocusedFloatingWindow,
+    focusFloatingWindow,
   };
 };

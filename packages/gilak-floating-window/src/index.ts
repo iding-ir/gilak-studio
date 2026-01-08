@@ -14,7 +14,6 @@ export * from "./types";
 // Hooks
 export { useFloatingWindow } from "./hooks/useFloatingWindow";
 export { useFloatingWindows } from "./hooks/useFloatingWindows";
-export { useRegister } from "./hooks/useRegister";
 
 // i18n
 export { registerFloatingWindowI18n } from "./i18n";

@@ -10,14 +10,13 @@ import { generateDefaultWindow, generateWindowId } from "../../methods";
 import styles from "./WelcomeScreen.module.scss";
 
 export const WelcomeScreen = () => {
-  const { setFocusedFloatingWindow, registerFloatingWindow } =
-    useFloatingWindows();
+  const { registerFloatingWindow, focusFloatingWindow } = useFloatingWindows();
   const { size: settingWindowSize } = useAppSelector(selectSettingsWindow);
 
   const handleAddWindow = () => {
     const id = generateWindowId();
     registerFloatingWindow(generateDefaultWindow(id, settingWindowSize));
-    queueMicrotask(() => setFocusedFloatingWindow(id));
+    queueMicrotask(() => focusFloatingWindow(id));
   };
 
   const handleClickGithub = () => {
@@ -40,7 +39,7 @@ export const WelcomeScreen = () => {
           interactive={false}
         />
 
-        <Button variant="primary" onClick={handleAddWindow}>
+        <Button variant="primary" fullWidth onClick={handleAddWindow}>
           {t("app:welcomeScreen.newWindow")}
         </Button>
       </div>
@@ -55,7 +54,7 @@ export const WelcomeScreen = () => {
           interactive={false}
         />
 
-        <Button variant="primary" onClick={handleClickGithub}>
+        <Button variant="primary" fullWidth onClick={handleClickGithub}>
           {t("app:welcomeScreen.github")}
         </Button>
       </div>
