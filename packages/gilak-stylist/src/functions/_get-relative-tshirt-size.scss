@@ -1,16 +1,17 @@
+@use "sass:list";
 @use "../tokens/sizes" as *;
 
 @function get-relative-tshirt-size($size, $relation, $sizes: $sizes) {
   $relation: round($relation);
-  $index: index($sizes, $size);
+  $index: list.index($sizes, $size);
 
   @if $index == null {
     @warn "get-relative-tshirt-size: `#{$size}` not found in list; returning first size.";
-    @return nth($sizes, 1);
+    @return list.nth($sizes, 1);
   }
 
   $new-index: $index + $relation;
-  $len: length($sizes);
+  $len: list.length($sizes);
 
   @if $new-index < 1 {
     $new-index: 1;
@@ -18,5 +19,5 @@
     $new-index: $len;
   }
 
-  @return nth($sizes, $new-index);
+  @return list.nth($sizes, $new-index);
 }
