@@ -7,7 +7,7 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 
 export default defineConfig([
-  globalIgnores(["dist", "node_modules", ".turbo", "storybook-static"]),
+  globalIgnores(["**/dist/**", "node_modules", ".turbo", "storybook-static"]),
   {
     files: ["**/*.{ts,tsx}"],
     extends: [
