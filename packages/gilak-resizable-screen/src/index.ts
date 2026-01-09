@@ -8,4 +8,4 @@ export { useZoomLevelScreenContext } from "./context";
 export { ResizableScreenProvider } from "./context/provider";
 
 // i18n
-export { registerResizableScreenI18n } from "./i18n";
+export { registerResizableScreenI18n } from "./locales/i18n";

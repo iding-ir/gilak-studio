@@ -49,4 +49,4 @@ export type { Direction } from "./types";
 export type { Variant } from "./types";
 
 // i18n
-export { registerComponentsI18n } from "./i18n";
+export { registerComponentsI18n } from "./locales/i18n";

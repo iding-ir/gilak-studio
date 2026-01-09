@@ -1,8 +1,8 @@
 import { i18n } from "@gilak/localization";
 
-import de from "./locales/de.json";
-import en from "./locales/en.json";
-import nl from "./locales/nl.json";
+import de from "./de.json";
+import en from "./en.json";
+import nl from "./nl.json";
 
 export function registerComponentsI18n() {
   i18n.addResourceBundle("en", "components", en);
