@@ -30,7 +30,7 @@ const preloadedState = loadPersistedState<RootState>("gilak");
 
 const persistMiddleware = createPersistMiddleware<RootState>({
   key: "gilak",
-  whitelist: ["brush", "color", "tools", "settings", "appearance"],
+  whitelist: ["brush", "color", "tools", "appearance"],
   throttleMs: 400,
 });
 

@@ -1,3 +1,4 @@
+import { Button } from "@gilak/components/components/Button";
 import clsx from "clsx";
 import type { ReactNode } from "react";
 
@@ -17,13 +18,13 @@ export const Header = ({
   setIndex,
 }: HeaderProps) => {
   return (
-    <button
+    <Button
       className={clsx(styles.header, {
         [styles.active]: index === activeIndex,
       })}
       onClick={() => setIndex(index)}
     >
       {header}
-    </button>
+    </Button>
   );
 };

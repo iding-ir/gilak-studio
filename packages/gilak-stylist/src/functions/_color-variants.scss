@@ -4,7 +4,6 @@
 // Per-theme color variant adjustments (each theme may override keys from `default`).
 $color-variant-adjustments: (
   default: (
-    xxxs: 30%,
     xxs: 16%,
     xs: 8%,
     sm: 4%,
@@ -12,10 +11,8 @@ $color-variant-adjustments: (
     lg: -4%,
     xl: -8%,
     xxl: -16%,
-    xxxl: -30%,
   ),
   dark: (
-    xxxs: 30%,
     xxs: 16%,
     xs: 8%,
     sm: 4%,
@@ -23,7 +20,6 @@ $color-variant-adjustments: (
     lg: -4%,
     xl: -8%,
     xxl: -16%,
-    xxxl: -30%,
   ),
 ) !default;
 

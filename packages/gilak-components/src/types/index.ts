@@ -1,13 +1,13 @@
-export type TshirtSize =
-  | "xxxs"
-  | "xxs"
-  | "xs"
-  | "sm"
-  | "md"
-  | "lg"
-  | "xl"
-  | "xxl"
-  | "xxxl";
+export const TSHIRT_SIZES = [
+  "xxs",
+  "xs",
+  "sm",
+  "md",
+  "lg",
+  "xl",
+  "xxl",
+] as const;
+export type TshirtSize = (typeof TSHIRT_SIZES)[number];
 
 export type Direction = "row" | "column" | "row-reverse" | "column-reverse";
 

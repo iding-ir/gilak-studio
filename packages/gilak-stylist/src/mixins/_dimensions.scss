@@ -1,0 +1,21 @@
+@use "../tokens/sizes" as *;
+@use "../functions/get-relative-tshirt-size" as *;
+
+@mixin widthSizes($relation: 0) {
+  @each $size in $sizes {
+    $relative-size: get-relative-tshirt-size($size, $relation);
+    &.#{$size} {
+      width: var(--icon-#{$relative-size});
+    }
+  }
+}
+
+@mixin heightSizes($relation: 0) {
+  @each $size in $sizes {
+    $relative-size: get-relative-tshirt-size($size, $relation);
+    &.#{$size} {
+      height: var(--icon-#{$relative-size});
+      line-height: var(--icon-#{$relative-size});
+    }
+  }
+}

@@ -38,16 +38,16 @@
 
   &.light-ghost {
     @include interactive(
-      $hover-color: var(--color-light-md),
-      $hover-bg-color: rgba(60, 60, 60, 0.2),
+      $hover-color: var(--color-light-xxs),
+      $hover-bg-color: rgba(30, 30, 30, 0.2),
       $reverse: $reverse
     );
   }
 
   &.dark-ghost {
     @include interactive(
-      $hover-color: var(--color-dark-md),
-      $hover-bg-color: rgba(60, 60, 60, 0.1),
+      $hover-color: var(--color-dark-xxl),
+      $hover-bg-color: rgba(90, 90, 90, 0.1),
       $reverse: $reverse
     );
   }

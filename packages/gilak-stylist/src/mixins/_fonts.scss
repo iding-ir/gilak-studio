@@ -1,0 +1,11 @@
+@use "../tokens/sizes" as *;
+@use "../functions/get-relative-tshirt-size" as *;
+
+@mixin fontSizes($relation: 0) {
+  @each $size in $sizes {
+    $relative-size: get-relative-tshirt-size($size, $relation);
+    &.#{$size} {
+      font-size: var(--font-size-#{$relative-size});
+    }
+  }
+}

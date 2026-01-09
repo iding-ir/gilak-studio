@@ -10,23 +10,23 @@
 
   .text {
     grid-area: label;
-    font-size: var(--font-size-sm);
     font-weight: var(--font-weight-md);
     color: var(--color-dark-lg);
-    margin: 0 0 var(--spacing-xs) 0;
     cursor: pointer;
+    @include fontSizes($relation: -2);
+    @include marginSizes($bottom: true, $relation: -2);
   }
 
   .input {
     grid-area: input;
-    font-size: var(--font-size-md);
     width: 100%;
-    line-height: var(--icon-md);
-    padding: 0 calc(var(--spacing-md));
     box-shadow: var(--shadow-sm);
     border: none;
     outline: none;
     @include interactiveVariants;
+    @include fontSizes;
+    @include heightSizes;
+    @include paddingSizes($left: true, $right: true);
 
     &::placeholder {
       color: var(--color-light-xxxl);

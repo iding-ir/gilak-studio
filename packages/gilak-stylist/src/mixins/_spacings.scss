@@ -1,0 +1,52 @@
+@use "../tokens/sizes" as *;
+@use "../functions/get-relative-tshirt-size" as *;
+
+$sides: top right bottom left;
+
+@mixin paddingSizes(
+  $top: false,
+  $right: false,
+  $bottom: false,
+  $left: false,
+  $relation: 0
+) {
+  @each $side in $sides {
+    @if (
+      ($side == top and $top) or
+        ($side == right and $right) or
+        ($side == bottom and $bottom) or
+        ($side == left and $left)
+    ) {
+      @each $size in $sizes {
+        $relative-size: get-relative-tshirt-size($size, $relation);
+        &.#{$size} {
+          padding-#{$side}: var(--spacing-#{$relative-size});
+        }
+      }
+    }
+  }
+}
+
+@mixin marginSizes(
+  $top: false,
+  $right: false,
+  $bottom: false,
+  $left: false,
+  $relation: 0
+) {
+  @each $side in $sides {
+    @if (
+      ($side == top and $top) or
+        ($side == right and $right) or
+        ($side == bottom and $bottom) or
+        ($side == left and $left)
+    ) {
+      @each $size in $sizes {
+        $relative-size: get-relative-tshirt-size($size, $relation);
+        &.#{$size} {
+          margin-#{$side}: var(--spacing-#{$relative-size});
+        }
+      }
+    }
+  }
+}

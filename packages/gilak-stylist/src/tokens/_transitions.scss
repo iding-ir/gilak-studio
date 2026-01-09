@@ -1,12 +1,11 @@
-// Transition tokens
 $transition: (
-  xxs: 100ms,
-  xs: 150ms,
-  sm: 200ms,
-  md: 250ms,
-  lg: 350ms,
-  xl: 500ms,
-  xxl: 700ms,
+  xxs: 150ms,
+  xs: 200ms,
+  sm: 250ms,
+  md: 300ms,
+  lg: 400ms,
+  xl: 600ms,
+  xxl: 800ms,
 );
 
 $easing: (

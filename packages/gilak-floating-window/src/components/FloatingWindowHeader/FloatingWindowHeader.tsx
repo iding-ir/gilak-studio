@@ -82,7 +82,7 @@ export const FloatingWindowHeader = ({
             frameless={true}
             fullWidth={false}
             variant="primary"
-            size={value.length || 5}
+            length={value.length || 5}
             autoComplete="off"
             onClick={() => {
               inputRef.current?.focus();

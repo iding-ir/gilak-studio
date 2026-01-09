@@ -4,16 +4,16 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-xs);
-  padding: 0 var(--spacing-md);
-  font-size: var(--font-size-md);
-  height: var(--icon-md);
   border: none;
   outline: none;
   box-shadow: var(--shadow-sm);
   transition: background-color var(--transition-md);
   cursor: pointer;
   @include interactiveVariants;
+  @include heightSizes;
+  @include fontSizes($relation: -1);
+  @include gapSizes;
+  @include paddingSizes($left: true, $right: true);
 
   &:disabled {
     opacity: 0.6;

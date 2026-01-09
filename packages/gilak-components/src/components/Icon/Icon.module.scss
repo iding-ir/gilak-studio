@@ -13,7 +13,8 @@
   justify-content: center;
   box-shadow: var(--shadow-sm);
   @include solidVariants;
-  @include iconSizes;
+  @include widthSizes;
+  @include heightSizes;
 
   &.rounded {
     border-radius: var(--radius-md);

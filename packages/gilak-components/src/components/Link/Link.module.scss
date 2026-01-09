@@ -6,12 +6,13 @@
   display: inline-flex;
   align-items: center;
   justify-content: start;
-  padding: var(--spacing-xs) var(--spacing-sm);
   box-shadow: var(--shadow-sm);
   text-decoration: none;
   cursor: pointer;
   @include solidVariants;
-  @include fontSize;
+  @include fontSizes;
+  @include paddingSizes($top: true, $bottom: true, $relation: -1);
+  @include paddingSizes($left: true, $right: true);
 
   &.rounded {
     border-radius: var(--radius-md);
