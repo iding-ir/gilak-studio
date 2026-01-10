@@ -1,3 +1,4 @@
+import type { TshirtSize, Variant } from "@gilak/components/types";
 import clsx from "clsx";
 import type { ReactNode } from "react";
 
@@ -13,6 +14,9 @@ export type SliderProps = {
   initial: number;
   tooltip?: string;
   icon?: string;
+  variant?: Variant;
+  size?: TshirtSize;
+  width?: string;
   className?: string;
   onChange: (value: number) => void;
   valueRenderer?: (value: number) => ReactNode;
@@ -24,6 +28,9 @@ export const Slider = ({
   initial,
   tooltip,
   icon,
+  variant = "primary",
+  size = "md",
+  width = "5rem",
   className,
   onChange,
   valueRenderer = (value) => value,
@@ -38,17 +45,26 @@ export const Slider = ({
   } = useSlider({ range, step, initial, onChange });
 
   return (
-    <div className={clsx(styles.root, className)}>
-      {icon && <Icon icon={icon} frameless={true} interactive={false} />}
+    <div className={clsx(styles.root, styles[size], className)}>
+      {icon && (
+        <Icon
+          icon={icon}
+          size={size}
+          variant={variant}
+          frameless={true}
+          interactive={false}
+        />
+      )}
 
       <div
         ref={trackRef}
-        className={styles.track}
+        className={clsx(styles.track, styles[variant], styles[size])}
+        style={{ width }}
         onPointerDown={handleTrackPointerDown}
       >
         <div
           ref={fillRef}
-          className={styles.fill}
+          className={clsx(styles.fill, styles[variant], styles[size])}
           style={{
             width: `${((value - range[0]) / (range[1] - range[0] || 1)) * 100}%`,
           }}
@@ -56,7 +72,7 @@ export const Slider = ({
 
         <div
           ref={thumbRef}
-          className={styles.thumb}
+          className={clsx(styles.thumb, styles[variant], styles[size])}
           onPointerDown={handleThumbPointerDown}
         >
           <ConditionalWrapper

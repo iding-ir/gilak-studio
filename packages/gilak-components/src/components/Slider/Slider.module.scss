@@ -1,27 +1,29 @@
+@use "@gilak/stylist/scss" as *;
+
 .root {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-xs);
-  font-size: var(--font-size-md);
   user-select: none;
+  @include heightSizes;
+  @include gapSizes;
+  @include paddingSizes($left: true, $right: true);
 
   .track {
     position: relative;
-    width: 6rem;
-    height: 0.4rem;
-    background-color: var(--color-light-xxs);
+    height: 20%;
     border-radius: var(--radius-full);
     box-shadow: var(--shadow-xs);
     cursor: pointer;
+    @include interactiveVariants($reverse: true);
 
     .fill {
       position: absolute;
       left: 0;
       top: 0;
       bottom: 0;
-      background-color: var(--color-primary-md);
       border-radius: var(--radius-full);
+      @include interactiveVariants;
     }
 
     .thumb {
@@ -33,15 +35,13 @@
       transform: translate(-50%, -50%);
       width: auto;
       min-width: var(--icon-xs);
-      height: var(--icon-xs);
-      font-size: var(--font-size-xs);
-      padding: var(--spacing-xs);
-      color: var(--color-light-xl);
-      background-color: var(--color-dark-md);
-      border-radius: var(--radius-md);
       box-shadow: var(--shadow-md);
       transition: background-color var(--transition-sm);
       outline: none;
+      @include interactiveVariants;
+      @include heightSizes($relation: -1);
+      @include paddingSizes($left: true, $right: true, $relation: -1);
+      @include fontSizes($relation: -2);
 
       &:focus,
       &:hover {
