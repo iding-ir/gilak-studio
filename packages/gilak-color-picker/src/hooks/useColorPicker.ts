@@ -3,32 +3,34 @@ import { useCallback } from "react";
 import { actions, useColorPickerContext } from "../context";
 
 export const useColorPicker = () => {
-  const { state, dispatch } = useColorPickerContext();
-  const { radiusCount, gridSize, borderWidth, hoverColor, selectedColor } =
-    state;
+  const {
+    state: { radiusCount, gridSize, borderWidth, hoverColor, selectedColor },
+    dispatch,
+  } = useColorPickerContext();
 
-  const setMagmifierRadius = useCallback(
+  const setRadiusCount = useCallback(
     (radiusCount: number) => dispatch(actions.setRadiusCount(radiusCount)),
     [dispatch],
   );
 
   const setGridSize = useCallback(
-    (size: number) => dispatch(actions.setGridSize(size)),
+    (gridSize: number) => dispatch(actions.setGridSize(gridSize)),
     [dispatch],
   );
 
   const setBorderWidth = useCallback(
-    (width: number) => dispatch(actions.setBorderWidth(width)),
+    (borderWidth: number) => dispatch(actions.setBorderWidth(borderWidth)),
     [dispatch],
   );
 
   const setHoverColor = useCallback(
-    (color: string) => dispatch(actions.setHoverColor(color)),
+    (hoverColor: string) => dispatch(actions.setHoverColor(hoverColor)),
     [dispatch],
   );
 
   const setSelectedColor = useCallback(
-    (color: string) => dispatch(actions.setSelectedColor(color)),
+    (selectedColor: string) =>
+      dispatch(actions.setSelectedColor(selectedColor)),
     [dispatch],
   );
 
@@ -38,7 +40,7 @@ export const useColorPicker = () => {
     borderWidth,
     hoverColor,
     selectedColor,
-    setMagmifierRadius,
+    setRadiusCount,
     setGridSize,
     setBorderWidth,
     setHoverColor,

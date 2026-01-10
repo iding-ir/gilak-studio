@@ -19,7 +19,9 @@ export const Magnifier = ({ canvasRef, enabled, onSelect }: MagnifierProps) => {
   });
 
   const visibleColor = useMemo(() => {
-    return hoverColor === "transparent" ? "#ededed" : hoverColor;
+    return hoverColor === "transparent"
+      ? "rgba(210, 210, 210, 0.5)"
+      : hoverColor;
   }, [hoverColor]);
 
   return (

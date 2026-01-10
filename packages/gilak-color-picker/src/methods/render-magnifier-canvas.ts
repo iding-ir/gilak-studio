@@ -24,44 +24,63 @@ export const renderMagnifierCanvas = ({
   if (!canvasCtx || !magnifierCtx) return;
 
   const diameter = radiusCount * 2 + 1;
-  magnifierCanvas.width = diameter * gridSize;
-  magnifierCanvas.height = diameter * gridSize;
+  const cssSize = diameter * gridSize;
 
-  magnifierCtx.clearRect(0, 0, magnifierCanvas.width, magnifierCanvas.height);
+  const dpr = window.devicePixelRatio || 1;
+
+  // Proper HiDPI canvas sizing
+  magnifierCanvas.width = cssSize * dpr;
+  magnifierCanvas.height = cssSize * dpr;
+  magnifierCanvas.style.width = `${cssSize}px`;
+  magnifierCanvas.style.height = `${cssSize}px`;
+
+  magnifierCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  magnifierCtx.clearRect(0, 0, cssSize, cssSize);
+
+  // Draw magnified pixels (no smoothing)
   magnifierCtx.imageSmoothingEnabled = false;
   magnifierCtx.drawImage(
     canvas,
-    x - diameter / 2,
-    y - diameter / 2,
+    Math.ceil(x - diameter / 2),
+    Math.ceil(y - diameter / 2),
     diameter,
     diameter,
     0,
     0,
-    diameter * gridSize,
-    diameter * gridSize,
+    cssSize,
+    cssSize,
   );
 
-  // Draw grid
-  magnifierCtx.strokeStyle = "rgba(0,0,0,1)";
+  // Draw crisp grid
+  magnifierCtx.save();
+  magnifierCtx.strokeStyle = "#000000";
+  magnifierCtx.lineWidth = 1;
+
+  // Pixel-align strokes
+  magnifierCtx.translate(0.5, 0.5);
+
   for (let i = 0; i <= diameter; i++) {
+    const pos = i * gridSize;
+
     magnifierCtx.beginPath();
-    magnifierCtx.moveTo(i * gridSize, 0);
-    magnifierCtx.lineTo(i * gridSize, magnifierCanvas.height);
+    magnifierCtx.moveTo(pos, 0);
+    magnifierCtx.lineTo(pos, cssSize);
     magnifierCtx.stroke();
 
     magnifierCtx.beginPath();
-    magnifierCtx.moveTo(0, i * gridSize);
-    magnifierCtx.lineTo(magnifierCanvas.width, i * gridSize);
+    magnifierCtx.moveTo(0, pos);
+    magnifierCtx.lineTo(cssSize, pos);
     magnifierCtx.stroke();
   }
 
-  // Draw white square in the center
+  magnifierCtx.restore();
+
+  // Draw white center square
   const squareSize = gridSize;
-  const centerX = magnifierCanvas.width / 2 - squareSize / 2;
-  const centerY = magnifierCanvas.height / 2 - squareSize / 2;
+  const centerX = cssSize / 2 - squareSize / 2;
+  const centerY = cssSize / 2 - squareSize / 2;
 
   magnifierCtx.strokeStyle = "#ffffff";
   magnifierCtx.lineWidth = 2;
-
   magnifierCtx.strokeRect(centerX, centerY, squareSize, squareSize);
 };
