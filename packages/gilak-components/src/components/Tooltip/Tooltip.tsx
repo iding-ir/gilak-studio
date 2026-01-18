@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import type { ReactNode } from "react";
-import React, { useRef, useState } from "react";
+import { useCallback, useId, useRef, useState } from "react";
 
 import { Text } from "../Text";
 import styles from "./Tooltip.module.scss";
@@ -20,25 +20,31 @@ export const Tooltip = ({
 }: TooltipProps) => {
   const [visible, setVisible] = useState(false);
   const timeoutRef = useRef<number | null>(null);
+  const tooltipId = useId();
 
-  const show = React.useCallback(() => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    timeoutRef.current = window.setTimeout(() => setVisible(true), delay);
-  }, [delay]);
-
-  const hide = React.useCallback(() => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    timeoutRef.current = window.setTimeout(() => setVisible(false), 50);
-  }, []);
+  const handleSetVisibility = useCallback(
+    (show: boolean) => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      timeoutRef.current = window.setTimeout(() => setVisible(show), delay);
+    },
+    [delay],
+  );
 
   return (
     <div
       className={clsx(styles.root, className)}
-      onMouseLeave={hide}
-      onMouseEnter={show}
+      onMouseEnter={() => handleSetVisibility(true)}
+      onMouseLeave={() => handleSetVisibility(false)}
+      onFocus={() => handleSetVisibility(true)}
+      onBlur={() => handleSetVisibility(false)}
+      aria-describedby={visible ? tooltipId : undefined}
     >
       {children}
+
       <span
+        id={tooltipId}
+        role="tooltip"
+        aria-hidden={!visible}
         className={clsx(styles.tip, styles.top, {
           [styles.show]: visible,
         })}

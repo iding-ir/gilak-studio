@@ -77,23 +77,25 @@ export const Slider = ({
           aria-hidden="true"
         />
 
-        <div
-          ref={thumbRef}
-          className={clsx(styles.thumb, styles[variant], styles[size])}
-          role="slider"
-          tabIndex={0}
-          aria-label={ariaLabel}
-          aria-valuemin={min}
-          aria-valuemax={max}
-          aria-valuenow={value}
-          aria-valuetext={String(value)}
-          onPointerDown={handleThumbPointerDown}
-          onKeyDown={handleKeyDown}
-        >
+        <div ref={thumbRef} className={styles.thumb} role="slider">
           <ConditionalWrapper
             condition={!!tooltip}
             wrapper={(children) => (
-              <Tooltip content={tooltip as string}>{children}</Tooltip>
+              <Tooltip content={tooltip as string}>
+                <div
+                  className={clsx(styles.value, styles[variant], styles[size])}
+                  tabIndex={0}
+                  aria-label={ariaLabel}
+                  aria-valuemin={min}
+                  aria-valuemax={max}
+                  aria-valuenow={value}
+                  aria-valuetext={String(value)}
+                  onPointerDown={handleThumbPointerDown}
+                  onKeyDown={handleKeyDown}
+                >
+                  {children}
+                </div>
+              </Tooltip>
             )}
           >
             {valueRenderer(value)}
