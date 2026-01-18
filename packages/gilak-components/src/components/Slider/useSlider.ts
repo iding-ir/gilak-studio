@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 const clamp = (v: number, a: number, b: number) => Math.min(Math.max(v, a), b);
 
@@ -19,10 +19,16 @@ export const useSlider = ({
   const trackRef = useRef<HTMLDivElement | null>(null);
   const thumbRef = useRef<HTMLDivElement | null>(null);
   const fillRef = useRef<HTMLDivElement | null>(null);
-  const draggingRef = useRef(false);
   const rafRef = useRef<number | null>(null);
   const valueRef = useRef(initial);
   const [value, setValue] = useState(initial);
+
+  const fillStyle = useMemo(
+    () => ({
+      width: `${((value - min) / (max - min || 1)) * 100}%`,
+    }),
+    [value, min, max],
+  );
 
   const valueToPercent = useCallback(
     (v: number) => (max === min ? 0 : ((v - min) / (max - min)) * 100),
@@ -55,12 +61,27 @@ export const useSlider = ({
 
   const scheduleRender = useCallback(
     (nextValue: number) => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
+
       rafRef.current = requestAnimationFrame(() => {
         renderThumb(nextValue);
       });
     },
     [renderThumb],
+  );
+
+  const commitValue = useCallback(
+    (nextValue: number) => {
+      if (nextValue === valueRef.current) return;
+
+      valueRef.current = nextValue;
+      scheduleRender(nextValue);
+      setValue(nextValue);
+      onChange(nextValue);
+    },
+    [onChange, scheduleRender],
   );
 
   const updateFromPointer = useCallback(
@@ -73,15 +94,9 @@ export const useSlider = ({
       percentage = clamp(percentage, 0, 100);
 
       const nextValue = percentToValue(percentage);
-      if (nextValue === valueRef.current) return;
-
-      valueRef.current = nextValue;
-      scheduleRender(nextValue);
-
-      setValue(nextValue);
-      onChange(nextValue);
+      commitValue(nextValue);
     },
-    [percentToValue, scheduleRender, onChange],
+    [percentToValue, commitValue],
   );
 
   const handleTrackPointerDown = (e: React.PointerEvent) => {
@@ -89,24 +104,53 @@ export const useSlider = ({
   };
 
   const handleThumbPointerDown = (event: React.PointerEvent) => {
-    const element = event.currentTarget as Element;
+    const element = event.currentTarget;
     element.setPointerCapture?.(event.pointerId);
 
-    draggingRef.current = true;
     updateFromPointer(event.clientX);
 
-    const onMove = (event: PointerEvent) => updateFromPointer(event.clientX);
+    const onMove = (e: PointerEvent) => {
+      updateFromPointer(e.clientX);
+    };
 
-    const onUp = (event: PointerEvent) => {
-      draggingRef.current = false;
-      element.releasePointerCapture?.(event.pointerId);
-
+    const onUp = (e: PointerEvent) => {
+      element.releasePointerCapture?.(e.pointerId);
       document.removeEventListener("pointermove", onMove);
       document.removeEventListener("pointerup", onUp);
     };
 
     document.addEventListener("pointermove", onMove, { passive: true });
     document.addEventListener("pointerup", onUp, { passive: true });
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    let nextValue = valueRef.current;
+
+    switch (event.key) {
+      case "ArrowRight":
+      case "ArrowUp":
+        nextValue = clamp(nextValue + step, min, max);
+        break;
+
+      case "ArrowLeft":
+      case "ArrowDown":
+        nextValue = clamp(nextValue - step, min, max);
+        break;
+
+      case "Home":
+        nextValue = min;
+        break;
+
+      case "End":
+        nextValue = max;
+        break;
+
+      default:
+        return;
+    }
+
+    event.preventDefault();
+    commitValue(nextValue);
   };
 
   useEffect(() => {
@@ -118,7 +162,9 @@ export const useSlider = ({
     thumbRef,
     fillRef,
     value,
+    fillStyle,
     handleTrackPointerDown,
     handleThumbPointerDown,
+    handleKeyDown,
   } as const;
 };

@@ -9,10 +9,12 @@
   box-shadow: var(--shadow-sm);
   text-decoration: none;
   cursor: pointer;
-  @include solidVariants;
-  @include fontSizes;
-  @include paddingSizes($top: true, $bottom: true, $relation: -1);
+  @include interactiveVariants;
+  @include heightSizes;
+  @include fontSizes($relation: -1);
+  @include gapSizes;
   @include paddingSizes($left: true, $right: true);
+  @include alignments;
 
   &.rounded {
     border-radius: var(--radius-md);

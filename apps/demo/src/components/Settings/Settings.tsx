@@ -35,6 +35,7 @@ export const Settings = () => {
       open={true}
       onClose={handleClose}
       heading={t("app:settings.title")}
+      inertId="editor"
       actions={
         <Button variant="primary" onClick={handleSave}>
           {t("app:settings.save")}

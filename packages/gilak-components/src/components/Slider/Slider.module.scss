@@ -37,13 +37,11 @@
       min-width: var(--icon-xs);
       box-shadow: var(--shadow-md);
       transition: background-color var(--transition-sm);
-      outline: none;
       @include interactiveVariants;
       @include heightSizes($relation: -1);
       @include paddingSizes($left: true, $right: true, $relation: -1);
       @include fontSizes($relation: -2);
 
-      &:focus,
       &:hover {
         color: var(--color-light-sm);
         background-color: var(--color-primary-md);

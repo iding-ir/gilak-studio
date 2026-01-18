@@ -150,6 +150,7 @@ export const Tools = () => {
           step={1}
           initial={brushSize}
           tooltip={t("app:tools.size")}
+          ariaLabel={t("app:tools.size")}
           onChange={(value) => handleBrushSizeChange(value as BrushSize)}
         />
       </li>
@@ -175,6 +176,7 @@ export const Tools = () => {
           step={5}
           initial={tolerance}
           tooltip={t("app:tools.tolerance")}
+          ariaLabel={t("app:tools.tolerance")}
           onChange={(value) => handleToleranceChange(value as number)}
         />
       </li>

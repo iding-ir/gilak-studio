@@ -5,7 +5,7 @@ import styles from "./Editor.module.scss";
 
 export const Editor = () => {
   return (
-    <div className={styles.root}>
+    <div id="editor" className={styles.root}>
       <nav className={styles.nav}>
         <Navigation />
       </nav>

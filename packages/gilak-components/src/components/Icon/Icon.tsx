@@ -83,6 +83,8 @@ export const Icon = <T extends ElementType = "span">({
   );
 };
 
-export const IconButton = ({ ...props }: IconProps<"button">) => {
-  return <Icon {...props} tag="button" />;
+export const IconButton = ({ tabIndex = 0, ...props }: IconProps<"button">) => {
+  return (
+    <Icon {...props} tag="button" tabIndex={props.disabled ? -1 : tabIndex} />
+  );
 };

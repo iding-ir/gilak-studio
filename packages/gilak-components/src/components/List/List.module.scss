@@ -2,11 +2,12 @@
 
 .list {
   display: grid;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-sm);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
   @include solidVariants;
+  @include paddingSizes($top: true, $bottom: true, $relation: -1);
+  @include paddingSizes($left: true, $right: true, $relation: -1);
+  @include gapSizes($relation: -2);
 
   &.frameless {
     padding: 0;
@@ -30,7 +31,6 @@
 
   .item {
     display: grid;
-    @include solidVariants;
 
     &.interactive {
       @include interactiveVariants;

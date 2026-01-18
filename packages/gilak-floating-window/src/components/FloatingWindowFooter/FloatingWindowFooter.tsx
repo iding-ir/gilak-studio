@@ -34,6 +34,7 @@ export const FloatingWindowFooter = ({
             frameless
             interactive={false}
             variant="dark-ghost"
+            tabIndex={-1}
             onPointerDown={onResizePointerDown}
           />
         )

@@ -3,7 +3,6 @@
 .button {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   border: none;
   outline: none;
   box-shadow: var(--shadow-sm);
@@ -14,6 +13,7 @@
   @include fontSizes($relation: -1);
   @include gapSizes;
   @include paddingSizes($left: true, $right: true);
+  @include alignments;
 
   &:disabled {
     opacity: 0.6;
@@ -22,6 +22,11 @@
 
   &.fullWidth {
     width: 100%;
+  }
+
+  &.frameless {
+    box-shadow: none;
+    background-color: transparent;
   }
 
   &.rounded {

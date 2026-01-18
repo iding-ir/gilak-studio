@@ -35,6 +35,7 @@ export const DocumentSettings = ({
       open={true}
       onClose={handleClose}
       heading={t("app:window.settings.title")}
+      inertId="editor"
       actions={
         <Button variant="primary" onClick={handleSave}>
           {t("app:window.settings.save")}

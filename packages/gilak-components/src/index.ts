@@ -47,6 +47,7 @@ export type { TshirtSize } from "./types";
 export type { Position } from "./types";
 export type { Direction } from "./types";
 export type { Variant } from "./types";
+export type { Alignment } from "./types";
 
 // i18n
 export { registerComponentsI18n } from "./locales/i18n";

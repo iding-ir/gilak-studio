@@ -3,9 +3,9 @@ import type { ReactNode } from "react";
 
 import type { Direction, Position } from "../../types";
 import type { Variant } from "../../types";
+import { Button } from "../Button";
 import { Dropdown } from "../DropDown";
 import { Link } from "../Link";
-import { Text } from "../Text";
 import { Child } from "./Child";
 import styles from "./Menu.module.scss";
 
@@ -54,9 +54,17 @@ export const Menu = ({
     return (
       <div className={className}>
         {href ? (
-          <Link text={label} frameless href={href} target="_blank" />
+          <Link text={label} size="sm" frameless href={href} target="_blank" />
         ) : (
-          <Text text={label} frameless onClick={onClick} />
+          <Button
+            variant="light-ghost"
+            alignment="start"
+            size="sm"
+            frameless
+            onClick={onClick}
+          >
+            {label}
+          </Button>
         )}
       </div>
     );
@@ -67,7 +75,17 @@ export const Menu = ({
       <Dropdown
         position={position}
         openDefault={open}
-        trigger={<Text text={label} frameless onClick={onClick} />}
+        trigger={
+          <Button
+            variant="light-ghost"
+            alignment="start"
+            size="sm"
+            frameless
+            onClick={onClick}
+          >
+            {label}
+          </Button>
+        }
         closeOnClickInside={closeOnClickInside}
       >
         <Child direction={direction} variant={variant} frameless={frameless}>

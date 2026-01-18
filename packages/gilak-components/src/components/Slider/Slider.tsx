@@ -17,6 +17,7 @@ export type SliderProps = {
   variant?: Variant;
   size?: TshirtSize;
   width?: string;
+  ariaLabel?: string;
   className?: string;
   onChange: (value: number) => void;
   valueRenderer?: (value: number) => ReactNode;
@@ -31,6 +32,7 @@ export const Slider = ({
   variant = "primary",
   size = "md",
   width = "5rem",
+  ariaLabel,
   className,
   onChange,
   valueRenderer = (value) => value,
@@ -40,9 +42,13 @@ export const Slider = ({
     thumbRef,
     fillRef,
     value,
+    fillStyle,
     handleTrackPointerDown,
     handleThumbPointerDown,
+    handleKeyDown,
   } = useSlider({ range, step, initial, onChange });
+
+  const [min, max] = range;
 
   return (
     <div className={clsx(styles.root, styles[size], className)}>
@@ -51,8 +57,9 @@ export const Slider = ({
           icon={icon}
           size={size}
           variant={variant}
-          frameless={true}
+          frameless
           interactive={false}
+          aria-hidden="true"
         />
       )}
 
@@ -61,19 +68,27 @@ export const Slider = ({
         className={clsx(styles.track, styles[variant], styles[size])}
         style={{ width }}
         onPointerDown={handleTrackPointerDown}
+        role="presentation"
       >
         <div
           ref={fillRef}
           className={clsx(styles.fill, styles[variant], styles[size])}
-          style={{
-            width: `${((value - range[0]) / (range[1] - range[0] || 1)) * 100}%`,
-          }}
+          style={fillStyle}
+          aria-hidden="true"
         />
 
         <div
           ref={thumbRef}
           className={clsx(styles.thumb, styles[variant], styles[size])}
+          role="slider"
+          tabIndex={0}
+          aria-label={ariaLabel}
+          aria-valuemin={min}
+          aria-valuemax={max}
+          aria-valuenow={value}
+          aria-valuetext={String(value)}
           onPointerDown={handleThumbPointerDown}
+          onKeyDown={handleKeyDown}
         >
           <ConditionalWrapper
             condition={!!tooltip}

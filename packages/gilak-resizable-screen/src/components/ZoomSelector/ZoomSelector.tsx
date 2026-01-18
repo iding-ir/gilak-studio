@@ -20,6 +20,7 @@ export const ZoomSelector = () => {
       step={25}
       initial={zoomLevel}
       tooltip={t("resizableScreen:zoom")}
+      ariaLabel={t("resizableScreen:zoom")}
       onChange={(v) => handleClick(v as ZoomLevel)}
       valueRenderer={(value) => `${value}%`}
     />

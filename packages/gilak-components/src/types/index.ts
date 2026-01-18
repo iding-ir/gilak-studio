@@ -28,3 +28,5 @@ export type Position =
   | "bottom-left"
   | "left"
   | "top-left";
+
+export type Alignment = "start" | "center" | "end";

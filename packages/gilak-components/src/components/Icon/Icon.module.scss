@@ -1,7 +1,6 @@
 @use "@gilak/stylist/scss" as *;
 
 .background {
-  all: unset;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,6 +10,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding: 0;
+  border: none;
+  outline: none;
   box-shadow: var(--shadow-sm);
   @include solidVariants;
   @include widthSizes;
@@ -25,8 +27,7 @@
   }
 
   &.selected {
-    outline: 2px solid var(--color-primary-lg);
-    outline-offset: 0px;
+    border: 2px solid var(--color-primary-lg);
   }
 
   &.disabled {

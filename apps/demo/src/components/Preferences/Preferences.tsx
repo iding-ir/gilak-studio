@@ -35,6 +35,7 @@ export const Preferences = () => {
       open={true}
       onClose={handleClose}
       heading={t("app:preferences.heading")}
+      inertId="editor"
       actions={
         <Button variant="primary" onClick={handleSave}>
           {t("app:preferences.save")}

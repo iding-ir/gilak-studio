@@ -4,7 +4,7 @@ import type { ComponentProps, ReactNode } from "react";
 import styles from "./Header.module.scss";
 
 export type HeaderProps = ComponentProps<"header"> & {
-  heading?: ReactNode;
+  heading: ReactNode;
   actions?: ReactNode;
   compact?: boolean;
   className?: string;
