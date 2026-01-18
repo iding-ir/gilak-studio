@@ -12,17 +12,19 @@ export type LinkProps = ComponentProps<"a"> & {
   interactive?: boolean;
   size?: TshirtSize;
   frameless?: boolean;
+  padded?: boolean;
   className?: string;
 };
 
 export const Link = ({
   text,
-  variant = "light-ghost",
   rounded = true,
+  variant = "light-ghost",
   selected = false,
   interactive = false,
-  size = "sm",
+  size = "md",
   frameless = false,
+  padded = true,
   className,
   ...props
 }: LinkProps) => {
@@ -33,6 +35,7 @@ export const Link = ({
         [styles.rounded]: rounded,
         [styles.selected]: selected,
         [styles.frameless]: frameless,
+        [styles.padded]: padded,
         [styles.interactive]: interactive,
       })}
     >

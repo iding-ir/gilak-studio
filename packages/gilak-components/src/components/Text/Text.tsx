@@ -6,12 +6,13 @@ import styles from "./Text.module.scss";
 
 export type TextProps = ComponentProps<"span"> & {
   text: string;
-  rounded?: boolean;
   variant?: Variant;
-  size?: TshirtSize;
+  rounded?: boolean;
   selected?: boolean;
-  frameless?: boolean;
   interactive?: boolean;
+  size?: TshirtSize;
+  frameless?: boolean;
+  padded?: boolean;
   className?: string;
 };
 
@@ -19,10 +20,11 @@ export const Text = ({
   text,
   rounded = true,
   variant = "light-ghost",
-  size = "sm",
   selected = false,
-  frameless = false,
   interactive = false,
+  size = "md",
+  frameless = false,
+  padded = true,
   className,
   ...props
 }: TextProps) => {
@@ -33,6 +35,7 @@ export const Text = ({
         [styles.rounded]: rounded,
         [styles.selected]: selected,
         [styles.frameless]: frameless,
+        [styles.padded]: padded,
         [styles.interactive]: interactive,
       })}
     >

@@ -6,15 +6,19 @@
   display: inline-flex;
   align-items: center;
   justify-content: start;
-  box-shadow: var(--shadow-sm);
   text-decoration: none;
+  border: 2px solid transparent;
+  box-shadow: var(--shadow-sm);
   cursor: pointer;
   @include interactiveVariants;
   @include heightSizes;
   @include fontSizes($relation: -1);
   @include gapSizes;
-  @include paddingSizes($left: true, $right: true);
   @include alignments;
+
+  &.padded {
+    @include paddingSizes($left: true, $right: true);
+  }
 
   &.rounded {
     border-radius: var(--radius-md);
@@ -26,8 +30,7 @@
   }
 
   &.selected {
-    outline: 2px solid var(--color-primary-lg);
-    outline-offset: 0px;
+    border-color: var(--color-primary-lg);
   }
 
   &.interactive {

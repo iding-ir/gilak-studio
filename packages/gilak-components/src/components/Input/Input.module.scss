@@ -1,6 +1,6 @@
 @use "@gilak/stylist/scss" as *;
 
-.label {
+.root {
   display: inline-grid;
   grid-template-rows: auto;
   grid-template-columns: 1fr;
@@ -8,13 +8,13 @@
     "label"
     "input";
 
-  .text {
+  .label {
     grid-area: label;
-    font-weight: var(--font-weight-md);
-    color: var(--color-dark-lg);
     cursor: pointer;
-    @include fontSizes($relation: -2);
-    @include marginSizes($bottom: true, $relation: -2);
+
+    &.rounded {
+      border-radius: var(--radius-md);
+    }
   }
 
   .input {
@@ -32,14 +32,22 @@
       color: var(--color-light-xxxl);
     }
 
+    &:read-only {
+      cursor: default;
+    }
+
     &:disabled {
       background-color: var(--color-light-md);
       cursor: not-allowed;
       opacity: 0.6;
     }
 
-    &:read-only {
-      cursor: default;
+    &.invisible {
+      display: none;
+    }
+
+    &.rounded {
+      border-radius: var(--radius-md);
     }
   }
 
@@ -52,7 +60,6 @@
   &.frameless {
     .input {
       box-shadow: none;
-      background-color: transparent;
       outline: none;
     }
   }

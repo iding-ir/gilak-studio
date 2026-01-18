@@ -1,4 +1,4 @@
-import { Button, Dialog, Group, List, Text } from "@gilak/components";
+import { Button, Dialog, Group, Radio } from "@gilak/components";
 import { t } from "@gilak/localization";
 import { useState } from "react";
 
@@ -19,6 +19,16 @@ export const Preferences = () => {
   const theme = useAppSelector(selectTheme);
   const [lang, setLang] = useState(language);
   const [thm, setThm] = useState(theme);
+
+  const languageArray = Object.values(languages).map(({ code }) => ({
+    value: code,
+    label: t(`app:languages.${code}`),
+  }));
+
+  const themeArray = Object.values(themes).map(({ code }) => ({
+    value: code,
+    label: t(`app:themes.${code}`),
+  }));
 
   const handleClose = () => {
     dispatch(closePreferences());
@@ -44,42 +54,10 @@ export const Preferences = () => {
     >
       <Group direction="column">
         <Group direction="row" title={t("app:preferences.language")}>
-          <List
-            items={Object.values(languages).map(({ code }) => (
-              <Text
-                key={code}
-                text={t(`app:languages.${code}`)}
-                variant="dark-ghost"
-                selected={lang === code}
-                frameless
-                interactive
-                onClick={() => setLang(code)}
-              />
-            ))}
-            count={1}
-            frameless
-            direction="row"
-            variant="dark-ghost"
-          />
+          <Radio items={languageArray} selected={lang} setSelected={setLang} />
         </Group>
         <Group direction="row" title={t("app:preferences.theme")}>
-          <List
-            items={Object.values(themes).map(({ code }) => (
-              <Text
-                key={code}
-                text={t(`app:themes.${code}`)}
-                variant="dark-ghost"
-                selected={thm === code}
-                frameless
-                interactive
-                onClick={() => setThm(code)}
-              />
-            ))}
-            count={1}
-            frameless
-            direction="row"
-            variant="dark-ghost"
-          />
+          <Radio items={themeArray} selected={thm} setSelected={setThm} />
         </Group>
       </Group>
     </Dialog>

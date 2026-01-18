@@ -1,8 +1,9 @@
 import { type TshirtSize, type Variant } from "@gilak/components/types";
 import clsx from "clsx";
-import type { ComponentProps, RefObject } from "react";
+import { type ComponentProps, type RefObject, useId } from "react";
 
 import { ConditionalWrapper } from "../ConditionalWrapper";
+import { Text } from "../Text";
 import { Tooltip } from "../Tooltip";
 import styles from "./Input.module.scss";
 
@@ -34,6 +35,9 @@ export const Input = ({
   tooltip,
   ...props
 }: InputProps) => {
+  const id = useId();
+  const isInputInvisible = ["checkbox", "radio"].includes(props.type || "");
+
   return (
     <ConditionalWrapper
       condition={!!tooltip}
@@ -41,26 +45,39 @@ export const Input = ({
         <Tooltip content={tooltip as string}>{children}</Tooltip>
       )}
     >
-      <label
-        className={clsx(styles.label, className, {
-          [styles.error]: error,
-          [styles.fullWidth]: fullWidth,
-          [styles.rounded]: rounded,
-          [styles.frameless]: frameless,
-        })}
-      >
+      <div className={styles.root}>
         {label && (
-          <span className={clsx(styles.text, styles[variant], styles[size])}>
-            {label}
-          </span>
+          <label
+            htmlFor={id}
+            tabIndex={isInputInvisible ? 0 : undefined}
+            className={clsx(styles.label, className, {
+              [styles.error]: error,
+              [styles.fullWidth]: fullWidth,
+              [styles.rounded]: rounded,
+              [styles.frameless]: frameless,
+            })}
+          >
+            <Text
+              text={label}
+              size={size}
+              variant={variant}
+              frameless
+              interactive={isInputInvisible}
+              selected={!!props.checked}
+              padded={isInputInvisible}
+            />
+          </label>
         )}
         <input
+          id={id}
           ref={ref}
           {...props}
           size={length}
-          className={clsx(styles.input, styles[variant], styles[size])}
+          className={clsx(styles.input, styles[variant], styles[size], {
+            [styles.invisible]: isInputInvisible,
+          })}
         />
-      </label>
+      </div>
     </ConditionalWrapper>
   );
 };

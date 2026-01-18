@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import type { ReactNode } from "react";
 
-import type { Direction, Position } from "../../types";
+import type { Direction, Position, TshirtSize } from "../../types";
 import type { Variant } from "../../types";
 import { Button } from "../Button";
 import { Dropdown } from "../DropDown";
@@ -17,6 +17,7 @@ export type MenuProps = {
   direction?: Direction;
   position?: Position;
   variant?: Variant;
+  size?: TshirtSize;
   frameless?: boolean;
   open?: boolean;
   closeOnClickInside?: boolean;
@@ -31,6 +32,7 @@ export const Menu = ({
   direction = "column",
   position = "bottom-right",
   variant = "dark",
+  size = "md",
   frameless,
   open = false,
   closeOnClickInside,
@@ -43,7 +45,12 @@ export const Menu = ({
   if (root) {
     return (
       <div className={className}>
-        <Child direction={direction} variant={variant} frameless={frameless}>
+        <Child
+          direction={direction}
+          variant={variant}
+          size={size}
+          frameless={frameless}
+        >
           {children}
         </Child>
       </div>
@@ -54,12 +61,18 @@ export const Menu = ({
     return (
       <div className={className}>
         {href ? (
-          <Link text={label} size="sm" frameless href={href} target="_blank" />
+          <Link
+            text={label}
+            size={size}
+            frameless
+            href={href}
+            target="_blank"
+          />
         ) : (
           <Button
             variant="light-ghost"
             alignment="start"
-            size="sm"
+            size={size}
             frameless
             onClick={onClick}
           >
@@ -79,7 +92,7 @@ export const Menu = ({
           <Button
             variant="light-ghost"
             alignment="start"
-            size="sm"
+            size={size}
             frameless
             onClick={onClick}
           >
@@ -88,7 +101,12 @@ export const Menu = ({
         }
         closeOnClickInside={closeOnClickInside}
       >
-        <Child direction={direction} variant={variant} frameless={frameless}>
+        <Child
+          direction={direction}
+          variant={variant}
+          size={size}
+          frameless={frameless}
+        >
           {children}
         </Child>
       </Dropdown>

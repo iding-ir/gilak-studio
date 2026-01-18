@@ -8,7 +8,7 @@ export type ListProps = {
   items: ReactNode[];
   direction?: Direction;
   count?: number;
-  size: TshirtSize;
+  size?: TshirtSize;
   frameless?: boolean;
   interactive?: boolean;
   variant?: Variant;

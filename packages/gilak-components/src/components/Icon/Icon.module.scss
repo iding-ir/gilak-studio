@@ -13,6 +13,7 @@
   padding: 0;
   border: none;
   outline: none;
+  border: 2px solid transparent;
   box-shadow: var(--shadow-sm);
   @include solidVariants;
   @include widthSizes;
@@ -27,7 +28,7 @@
   }
 
   &.selected {
-    border: 2px solid var(--color-primary-lg);
+    border-color: var(--color-primary-lg);
   }
 
   &.disabled {

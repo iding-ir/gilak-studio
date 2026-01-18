@@ -27,6 +27,8 @@ export type { ListProps } from "./components/List";
 export { List } from "./components/List";
 export type { MenuProps } from "./components/Menu";
 export { Menu } from "./components/Menu";
+export type { RadioItem, RadioProps } from "./components/Radio";
+export { Radio } from "./components/Radio";
 export type { SliderProps } from "./components/Slider";
 export { Slider } from "./components/Slider";
 export type { TabProps } from "./components/Tabs/Tab";
@@ -51,3 +53,7 @@ export type { Alignment } from "./types";
 
 // i18n
 export { registerComponentsI18n } from "./locales/i18n";
+
+// Methods
+export { getRelativeTshirtSize } from "./methods/get-relative-tshirt-size";
+export { onFocusKeyDown } from "./methods/on-focus-key-down";
