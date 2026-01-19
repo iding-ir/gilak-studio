@@ -29,7 +29,7 @@ export const ColorSwatch = ({
   name = { color: "color-swatch-color", background: "color-swatch-background" },
   position = "bottom-right",
   variant = "light",
-  gridCount = 4,
+  gridCount = 6,
   onChangeColor,
   onChangeBackgroundColor,
 }: ColorSwatchProps) => {
