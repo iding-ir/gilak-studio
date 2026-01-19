@@ -24,7 +24,7 @@
     border: none;
     outline: none;
     @include interactiveVariants;
-    @include fontSizes;
+    @include fontSizes($relation: -1);
     @include heightSizes;
     @include paddingSizes($left: true, $right: true);
 

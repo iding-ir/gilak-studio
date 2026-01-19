@@ -1,20 +1,47 @@
+@use "@gilak/stylist/scss" as *;
+
 .root {
   display: flex;
   flex-direction: column;
   border-radius: var(--radius-md);
-  background-color: var(--color-light-md);
+  background-color: var(--color-light-xl);
   overflow: hidden;
 
   .headers {
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
     padding: var(--spacing-sm);
-    background-color: var(--color-light-xl);
+    background-color: var(--color-light-md);
+
+    .header {
+      flex-grow: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-md);
+      border: 2px solid transparent;
+      cursor: pointer;
+
+      &.active {
+        border-color: var(--color-primary-md);
+      }
+    }
   }
 
   .bodies {
     flex-grow: 1;
     padding: var(--spacing-sm);
+
+    .body {
+      display: none;
+
+      &.active {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-sm);
+      }
+    }
   }
 }
