@@ -1,6 +1,8 @@
 {
   "tabs": {
     "color": "Farbe",
-    "backgroundColor": "Hintergrund"
+    "backgroundColor": "Hintergrund",
+    "copy": "In die Zwischenablage kopieren",
+    "copied": "Kopiert"
   }
 }

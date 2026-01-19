@@ -22,7 +22,7 @@ import { selectSettingsDocument } from "../../features/settings/settings-slice";
 import { selectTolerance, selectTool } from "../../features/tools/tools.slice";
 import { DocumentSettings } from "../DocumentSettings";
 import styles from "./Window.module.scss";
-import { WindowActions } from "./WindowActions.tsx";
+import { WindowActions } from "./WindowActions";
 import { WindowFooter } from "./WindowFooter";
 
 export type WindowProps = {

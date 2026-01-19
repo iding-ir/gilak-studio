@@ -1,5 +1,13 @@
 import type { Position, Variant } from "@gilak/components";
-import { Dropdown, Input, List, Tab, Tabs } from "@gilak/components";
+import {
+  CopyToClipboard,
+  Dropdown,
+  Group,
+  Input,
+  List,
+  Tab,
+  Tabs,
+} from "@gilak/components";
 import { IconButton } from "@gilak/components/components/Icon/Icon";
 import { t } from "@gilak/localization";
 import { getContrastColor } from "@gilak/utils";
@@ -47,16 +55,23 @@ export const ColorSwatch = ({
     >
       <Tabs>
         <Tab header={t("colorSwatch:tabs.color")}>
-          <Input
-            value={color}
-            readOnly
-            type="text"
-            name={name.color}
-            style={{
-              color: getContrastColor(color),
-              backgroundColor: color,
-            }}
-          />
+          <Group direction="row">
+            <Input
+              value={color}
+              readOnly
+              type="text"
+              name={name.color}
+              style={{
+                color: getContrastColor(color),
+                backgroundColor: color,
+              }}
+            />
+            <CopyToClipboard
+              tooltip={t("colorSwatch:tabs.copy")}
+              tooltipAfter={t("colorSwatch:tabs.copied")}
+              value={color}
+            />
+          </Group>
           <List
             direction="column"
             count={gridCount}
@@ -75,16 +90,23 @@ export const ColorSwatch = ({
           />
         </Tab>
         <Tab header={t("colorSwatch:tabs.backgroundColor")}>
-          <Input
-            value={backgroundColor}
-            readOnly
-            type="text"
-            name={name.background}
-            style={{
-              color: getContrastColor(backgroundColor),
-              backgroundColor: backgroundColor,
-            }}
-          />
+          <Group direction="row">
+            <Input
+              value={backgroundColor}
+              readOnly
+              type="text"
+              name={name.background}
+              style={{
+                color: getContrastColor(backgroundColor),
+                backgroundColor: backgroundColor,
+              }}
+            />
+            <CopyToClipboard
+              tooltip={t("colorSwatch:tabs.copy")}
+              tooltipAfter={t("colorSwatch:tabs.copied")}
+              value={backgroundColor}
+            />
+          </Group>
           <List
             direction="column"
             count={gridCount}

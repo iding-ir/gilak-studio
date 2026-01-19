@@ -1,6 +1,8 @@
 {
   "tabs": {
     "color": "Kleur",
-    "backgroundColor": "Achtergrond"
+    "backgroundColor": "Achtergrond",
+    "copy": "Kopieer naar klembord",
+    "copied": "Gekopieerd"
   }
 }

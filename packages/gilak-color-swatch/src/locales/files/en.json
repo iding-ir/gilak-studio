@@ -1,6 +1,8 @@
 {
   "tabs": {
     "color": "Color",
-    "backgroundColor": "Background"
+    "backgroundColor": "Background",
+    "copy": "Copy to clipboard",
+    "copied": "Copied"
   }
 }
