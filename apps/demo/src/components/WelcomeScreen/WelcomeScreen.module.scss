@@ -12,6 +12,7 @@
   padding: var(--spacing-lg);
   background-color: var(--color-dark-lg);
   border-radius: var(--radius-md);
+  z-index: 100;
 
   .item {
     width: 8rem;

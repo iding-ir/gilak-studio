@@ -22,12 +22,11 @@ export const Navigation = () => {
   const isSettingsOpen = useAppSelector(selectSettingsOpen);
   const isPreferencesOpen = useAppSelector(selectPreferencesOpen);
   const { size: settingWindowSize } = useAppSelector(selectSettingsWindow);
-  const { focusFloatingWindow, registerFloatingWindow } = useFloatingWindows();
+  const { registerFloatingWindow } = useFloatingWindows();
 
   const handleAddWindow = () => {
     const id = generateWindowId();
     registerFloatingWindow(generateDefaultWindow(id, settingWindowSize));
-    queueMicrotask(() => focusFloatingWindow(id));
   };
 
   const handleClickSettings = () => {

@@ -15,7 +15,7 @@ export const generateDefaultWindow = (
     dragging: false,
     resizing: false,
     size,
-    position: { x: 50, y: 50 },
+    position: { x: 0, y: 0 },
     zIndex: 1,
   };
 };

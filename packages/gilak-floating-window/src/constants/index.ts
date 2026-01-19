@@ -13,3 +13,4 @@ export const INITIAL_CLOSABLE = true;
 export const INITIAL_STATUS = "open";
 export const INITIAL_Z_INDEX = 1000;
 export const INITIAL_RESTRICT_TO_PARENT = true;
+export const FLOATING_WINDOWS_PADDING = 10;

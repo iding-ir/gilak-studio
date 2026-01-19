@@ -10,7 +10,8 @@ export type Action =
   | { type: "SET_SIZE"; payload: { id: string; size: Size } }
   | { type: "SET_DRAGGING"; payload: { id: string; dragging: boolean } }
   | { type: "SET_RESIZING"; payload: { id: string; resizing: boolean } }
-  | { type: "SET_FOCUSED"; payload: { id: string } };
+  | { type: "SET_FOCUSED"; payload: { id: string } }
+  | { type: "AUTO_PLACE_WINDOW"; payload: { id: string } };
 
 const registerFloatingWindow = (payload: FloatingWindowType): Action => ({
   type: "REGISTER",
@@ -57,6 +58,11 @@ const focusFloatingWindow = (id: string): Action => ({
   payload: { id },
 });
 
+const autoPlaceWindow = (id: string): Action => ({
+  type: "AUTO_PLACE_WINDOW",
+  payload: { id },
+});
+
 const actions = {
   registerFloatingWindow,
   unregisterFloatingWindow,
@@ -67,6 +73,7 @@ const actions = {
   setFloatingWindowDragging,
   setFloatingWindowResizing,
   focusFloatingWindow,
+  autoPlaceWindow,
 };
 
 export { actions };

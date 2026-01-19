@@ -1,4 +1,4 @@
-import { Button, Icon } from "@gilak/components";
+import { Button, Icon, Link } from "@gilak/components";
 import { useFloatingWindows } from "@gilak/floating-window";
 import { t } from "@gilak/localization";
 
@@ -10,21 +10,12 @@ import { generateDefaultWindow, generateWindowId } from "../../methods";
 import styles from "./WelcomeScreen.module.scss";
 
 export const WelcomeScreen = () => {
-  const { registerFloatingWindow, focusFloatingWindow } = useFloatingWindows();
+  const { registerFloatingWindow } = useFloatingWindows();
   const { size: settingWindowSize } = useAppSelector(selectSettingsWindow);
 
   const handleAddWindow = () => {
     const id = generateWindowId();
     registerFloatingWindow(generateDefaultWindow(id, settingWindowSize));
-    queueMicrotask(() => focusFloatingWindow(id));
-  };
-
-  const handleClickGithub = () => {
-    window.open(
-      import.meta.env.VITE_GITHUB_REPOSITORY,
-      "_blank",
-      "noopener,noreferrer",
-    );
   };
 
   return (
@@ -54,9 +45,13 @@ export const WelcomeScreen = () => {
           interactive={false}
         />
 
-        <Button variant="primary" fullWidth onClick={handleClickGithub}>
-          {t("app:welcomeScreen.github")}
-        </Button>
+        <Link
+          variant="primary"
+          text={t("app:welcomeScreen.github")}
+          fullWidth
+          href={import.meta.env.VITE_GITHUB_REPOSITORY}
+          target="_blank"
+        />
       </div>
     </div>
   );

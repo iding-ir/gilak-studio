@@ -1,4 +1,4 @@
-import type { TshirtSize, Variant } from "@gilak/components/types";
+import type { Alignment, TshirtSize, Variant } from "@gilak/components/types";
 import clsx from "clsx";
 import type { ComponentProps } from "react";
 
@@ -11,6 +11,8 @@ export type LinkProps = ComponentProps<"a"> & {
   selected?: boolean;
   interactive?: boolean;
   size?: TshirtSize;
+  fullWidth?: boolean;
+  alignment?: Alignment;
   frameless?: boolean;
   padded?: boolean;
   className?: string;
@@ -23,6 +25,8 @@ export const Link = ({
   selected = false,
   interactive = false,
   size = "md",
+  fullWidth = false,
+  alignment = "center",
   frameless = false,
   padded = true,
   className,
@@ -31,13 +35,21 @@ export const Link = ({
   return (
     <a
       {...props}
-      className={clsx(styles.root, styles[variant], styles[size], className, {
-        [styles.rounded]: rounded,
-        [styles.selected]: selected,
-        [styles.frameless]: frameless,
-        [styles.padded]: padded,
-        [styles.interactive]: interactive,
-      })}
+      className={clsx(
+        styles.root,
+        styles[variant],
+        styles[size],
+        styles[alignment],
+        className,
+        {
+          [styles.rounded]: rounded,
+          [styles.selected]: selected,
+          [styles.frameless]: frameless,
+          [styles.padded]: padded,
+          [styles.interactive]: interactive,
+          [styles.fullWidth]: fullWidth,
+        },
+      )}
     >
       {text}
     </a>

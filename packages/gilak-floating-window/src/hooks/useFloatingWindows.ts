@@ -11,8 +11,11 @@ export const useFloatingWindows = () => {
   } = useFloatingWindowContext();
 
   const registerFloatingWindow = useCallback(
-    (window: FloatingWindowType) =>
-      dispatch(actions.registerFloatingWindow(window)),
+    (window: FloatingWindowType) => {
+      dispatch(actions.registerFloatingWindow(window));
+      dispatch(actions.focusFloatingWindow(window.id));
+      dispatch(actions.autoPlaceWindow(window.id));
+    },
     [dispatch],
   );
 

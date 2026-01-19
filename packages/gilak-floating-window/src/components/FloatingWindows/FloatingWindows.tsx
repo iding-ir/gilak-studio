@@ -17,7 +17,9 @@ export const FloatingWindows = ({ children }: FloatingWindowsProps) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.windows}>{children}</div>
+      <div id="floating-windows" className={styles.windows}>
+        {children}
+      </div>
 
       {hasMinimizedWindows(state) && (
         <div className={styles.taskbar}>

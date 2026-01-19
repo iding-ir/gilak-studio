@@ -1,3 +1,6 @@
+import { watchElement } from "@gilak/utils";
+
+import { FLOATING_WINDOWS_PADDING } from "../constants";
 import type { Action } from "./actions";
 import type { State } from "./state";
 
@@ -88,6 +91,33 @@ export const reducer = (state: State, { type, payload }: Action): State => {
 
       return { ...state, windows: newWindows.set(id, { ...window, zIndex }) };
     }
+    case "AUTO_PLACE_WINDOW": {
+      const { id } = payload;
+      const newWindows = new Map(state.windows);
+      const window = state.windows.get(id);
+      const element = document.getElementById("floating-windows");
+
+      if (!element || !window) return state;
+
+      const { w, h } = window.size;
+      const { width, height, disconnect } = watchElement(element);
+      disconnect();
+
+      const newW = w > width ? width - FLOATING_WINDOWS_PADDING * 2 : w;
+      const newH = h > height ? height - FLOATING_WINDOWS_PADDING * 2 : h;
+      const newX = (width - newW) / 2;
+      const newY = (height - newH) / 2;
+
+      return {
+        ...state,
+        windows: newWindows.set(id, {
+          ...window,
+          size: { w: newW, h: newH },
+          position: { x: newX, y: newY },
+        }),
+      };
+    }
+
     default: {
       return state;
     }
