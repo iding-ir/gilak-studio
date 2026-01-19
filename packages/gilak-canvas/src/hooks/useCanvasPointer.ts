@@ -65,13 +65,13 @@ export const useCanvasPointer = ({
 
     const onPointerLeave = (event: PointerEvent) => {
       if (map!.has(event.pointerId)) map!.delete(event.pointerId);
-
       onLeave?.({ event, canvas, point: toCanvas(event) });
     };
 
     const onPointerDown = (event: PointerEvent) => {
       if (map!.has(event.pointerId)) return;
 
+      canvas.setPointerCapture(event.pointerId);
       const point = toCanvas(event);
       map!.set(event.pointerId, point);
       onDown?.({ event, canvas, point });
@@ -94,15 +94,30 @@ export const useCanvasPointer = ({
       });
     };
 
-    const onPointerUp = (event: PointerEvent) => {
-      if (map!.has(event.pointerId)) map!.delete(event.pointerId);
+    const endPointer = (event: PointerEvent) => {
+      if (map!.has(event.pointerId)) {
+        map!.delete(event.pointerId);
+      }
+
+      if (canvas.hasPointerCapture(event.pointerId)) {
+        canvas.releasePointerCapture(event.pointerId);
+      }
 
       onUp?.({ event, canvas, point: toCanvas(event) });
+    };
+
+    const onPointerUp = (event: PointerEvent) => {
+      endPointer(event);
+    };
+
+    const onPointerCancel = (event: PointerEvent) => {
+      endPointer(event);
     };
 
     canvas.addEventListener("pointerdown", onPointerDown);
     canvas.addEventListener("pointermove", onPointerMove);
     canvas.addEventListener("pointerup", onPointerUp);
+    canvas.addEventListener("pointercancel", onPointerCancel);
     canvas.addEventListener("pointerenter", onPointerEnter);
     canvas.addEventListener("pointerleave", onPointerLeave);
 
@@ -110,6 +125,7 @@ export const useCanvasPointer = ({
       canvas.removeEventListener("pointerdown", onPointerDown);
       canvas.removeEventListener("pointermove", onPointerMove);
       canvas.removeEventListener("pointerup", onPointerUp);
+      canvas.removeEventListener("pointercancel", onPointerCancel);
       canvas.removeEventListener("pointerenter", onPointerEnter);
       canvas.removeEventListener("pointerleave", onPointerLeave);
     };
