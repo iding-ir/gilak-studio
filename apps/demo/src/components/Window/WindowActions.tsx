@@ -29,19 +29,12 @@ export const WindowActions = ({
   };
 
   return (
-    <Menu root open direction="column" variant="dark" label="">
+    <Menu root open direction="column" frameless={false} label="">
       <Menu
         label={t("app:window.settings.title")}
-        closeOnClickInside={true}
         onClick={onClickDocumentSettings}
       />
-      <Menu
-        label={t("app:window.export")}
-        direction="column"
-        position="right"
-        variant="dark"
-        closeOnClickInside={false}
-      >
+      <Menu label={t("app:window.export")} direction="column" position="right">
         <Menu label={t("app:window.png")} onClick={() => handleExport("png")} />
         <Menu
           label={t("app:window.jpeg")}

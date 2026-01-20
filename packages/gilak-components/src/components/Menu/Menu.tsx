@@ -33,7 +33,7 @@ export const Menu = ({
   position = "bottom-right",
   variant = "dark",
   size = "md",
-  frameless,
+  frameless = false,
   open = false,
   closeOnClickInside,
   onClick,
@@ -63,6 +63,8 @@ export const Menu = ({
         {href ? (
           <Link
             text={label}
+            variant="light-ghost"
+            alignment="start"
             size={size}
             frameless
             href={href}
@@ -105,7 +107,7 @@ export const Menu = ({
           direction={direction}
           variant={variant}
           size={size}
-          frameless={frameless}
+          frameless={false}
         >
           {children}
         </Child>

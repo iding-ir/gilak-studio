@@ -1,4 +1,4 @@
-import type { Position, Variant } from "@gilak/components";
+import type { Position, TshirtSize, Variant } from "@gilak/components";
 import {
   CopyToClipboard,
   Dropdown,
@@ -23,6 +23,7 @@ export type ColorSwatchProps = {
   label?: string;
   position?: Position;
   variant?: Variant;
+  size?: TshirtSize;
   gridCount?: number;
   onChangeColor: (color: string) => void;
   onChangeBackgroundColor: (color: string) => void;
@@ -37,6 +38,7 @@ export const ColorSwatch = ({
   name = { color: "color-swatch-color", background: "color-swatch-background" },
   position = "bottom-right",
   variant = "light",
+  size = "md",
   gridCount = 6,
   onChangeColor,
   onChangeBackgroundColor,
@@ -47,13 +49,14 @@ export const ColorSwatch = ({
       trigger={
         <IconButton
           icon={icon}
+          size={size}
           color={color}
           backgroundColor={backgroundColor}
           tooltip={label}
         />
       }
     >
-      <Tabs>
+      <Tabs size={size}>
         <Tab header={t("colorSwatch:tabs.color")}>
           <Group direction="row">
             <Input
@@ -61,6 +64,7 @@ export const ColorSwatch = ({
               readOnly
               type="text"
               name={name.color}
+              size={size}
               style={{
                 color: getContrastColor(color),
                 backgroundColor: color,
@@ -70,16 +74,19 @@ export const ColorSwatch = ({
               tooltip={t("colorSwatch:tabs.copy")}
               tooltipAfter={t("colorSwatch:tabs.copied")}
               value={color}
+              size={size}
             />
           </Group>
           <List
             direction="column"
             count={gridCount}
             variant={variant}
+            size={size}
             frameless
             items={colors.map((c) => (
               <IconButton
                 icon={IconEmpty}
+                size={size}
                 style={{ color: c, backgroundColor: c }}
                 selected={color === c}
                 color={c}
@@ -96,6 +103,7 @@ export const ColorSwatch = ({
               readOnly
               type="text"
               name={name.background}
+              size={size}
               style={{
                 color: getContrastColor(backgroundColor),
                 backgroundColor: backgroundColor,
@@ -105,16 +113,19 @@ export const ColorSwatch = ({
               tooltip={t("colorSwatch:tabs.copy")}
               tooltipAfter={t("colorSwatch:tabs.copied")}
               value={backgroundColor}
+              size={size}
             />
           </Group>
           <List
             direction="column"
             count={gridCount}
             variant={variant}
+            size={size}
             frameless
             items={colors.map((c) => (
               <IconButton
                 icon={IconEmpty}
+                size={size}
                 style={{ color: c, backgroundColor: c }}
                 selected={backgroundColor === c}
                 color={c}

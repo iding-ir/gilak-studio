@@ -1,3 +1,4 @@
+import type { TshirtSize } from "@gilak/components";
 import { useRef, useState } from "react";
 
 import { IconButton } from "../Icon";
@@ -10,12 +11,14 @@ export type CopyToClipboardProps = {
   tooltip: string;
   tooltipAfter: string;
   value: string;
+  size?: TshirtSize;
 };
 
 export const CopyToClipboard = ({
   tooltip,
   tooltipAfter,
   value,
+  size = "md",
 }: CopyToClipboardProps) => {
   const [clicked, setClicked] = useState(false);
   const timeoutRef = useRef<number | null>(null);
@@ -39,6 +42,7 @@ export const CopyToClipboard = ({
         <IconButton
           variant="primary"
           icon={clicked ? IconCheck : IconCopy}
+          size={size}
           onClick={handleClick}
           aria-label={clicked ? tooltipAfter : tooltip}
         />

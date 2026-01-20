@@ -43,7 +43,7 @@ export const Navigation = () => {
 
   return (
     <>
-      <Menu root open frameless direction="row" variant="light-ghost" label="">
+      <Menu root open frameless direction="row" label="">
         <Menu label={t("app:navigation.file")} closeOnClickInside>
           <Menu label={t("app:navigation.new")} onClick={handleAddWindow} />
           <Menu
