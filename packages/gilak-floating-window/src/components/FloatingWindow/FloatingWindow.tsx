@@ -160,7 +160,7 @@ export const FloatingWindow = memo(
           minimizable={minimizable}
           closable={closable}
           actions={actions}
-          onDragPointerDown={draggable ? onDragPointerDown : undefined}
+          onDragPointerDown={onDragPointerDown}
         />
         <Body>{children}</Body>
         <FloatingWindowFooter

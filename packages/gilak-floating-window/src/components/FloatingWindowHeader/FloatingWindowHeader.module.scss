@@ -2,6 +2,7 @@
   cursor: move;
   cursor: grab;
   user-select: none;
+  touch-action: none;
 }
 
 .dragging {

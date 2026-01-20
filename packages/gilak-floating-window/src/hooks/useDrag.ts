@@ -63,16 +63,15 @@ export const useDrag = ({
 
   const onPointerDown = useCallback(
     (event: React.PointerEvent<HTMLElement>) => {
-      event.preventDefault();
-
       if (!draggable || status !== "open") return;
+      const element = ref.current;
+      if (!element) return;
 
       focusFloatingWindow();
       setFloatingWindowDragging(true);
       onDragStart?.(state.current.startPosition);
 
-      const element = ref.current;
-      if (!element) return;
+      element.setPointerCapture(event.pointerId);
 
       state.current.rect = element.getBoundingClientRect();
       state.current.startPosition = state.current.lastDispatched;
@@ -111,17 +110,31 @@ export const useDrag = ({
         }
       };
 
-      const onPointerUp = () => {
+      const endPointer = (event: PointerEvent) => {
         setFloatingWindowPosition(state.current.lastDispatched);
         setFloatingWindowDragging(false);
         onDragEnd?.(state.current.lastDispatched);
 
-        document.removeEventListener("pointermove", onPointerMove);
-        document.removeEventListener("pointerup", onPointerUp);
+        if (element.hasPointerCapture(event.pointerId)) {
+          element.releasePointerCapture(event.pointerId);
+        }
+
+        element.removeEventListener("pointermove", onPointerMove);
+        element.removeEventListener("pointerup", onPointerUp);
+        element.removeEventListener("pointercancel", onPointerCancel);
       };
 
-      document.addEventListener("pointermove", onPointerMove);
-      document.addEventListener("pointerup", onPointerUp);
+      const onPointerUp = (event: PointerEvent) => {
+        endPointer(event);
+      };
+
+      const onPointerCancel = (event: PointerEvent) => {
+        endPointer(event);
+      };
+
+      element.addEventListener("pointermove", onPointerMove);
+      element.addEventListener("pointerup", onPointerUp);
+      element.addEventListener("pointercancel", onPointerCancel);
     },
     [
       ref,

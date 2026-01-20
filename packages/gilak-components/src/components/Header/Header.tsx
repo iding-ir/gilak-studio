@@ -23,7 +23,14 @@ export const Header = ({
       className={clsx(styles.header, className, { [styles.compact]: compact })}
     >
       <h3 className={styles.heading}>{heading}</h3>
-      {actions && <nav className={styles.actions}>{actions}</nav>}
+      {actions && (
+        <nav
+          className={styles.actions}
+          onPointerDown={(event) => event.stopPropagation()}
+        >
+          {actions}
+        </nav>
+      )}
     </header>
   );
 };

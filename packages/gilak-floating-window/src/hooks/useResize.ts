@@ -84,16 +84,15 @@ export const useResize = ({
 
   const onPointerDown = useCallback(
     (event: React.PointerEvent<HTMLElement>) => {
-      event.preventDefault();
-
       if (!resizable || status !== "open") return;
+      const element = ref.current;
+      if (!element) return;
 
       focusFloatingWindow();
       setFloatingWindowResizing(true);
       onResizeStart?.(state.current.startSize);
 
-      const element = ref.current;
-      if (!element) return;
+      element.setPointerCapture(event.pointerId);
 
       state.current.rect = element.getBoundingClientRect();
       state.current.startSize = state.current.lastDispatched;
@@ -133,17 +132,31 @@ export const useResize = ({
         }
       };
 
-      const onPointerUp = () => {
+      const endPointer = (event: PointerEvent) => {
         setFloatingWindowSize(state.current.lastDispatched);
         setFloatingWindowResizing(false);
         onResizeEnd?.(state.current.lastDispatched);
 
-        document.removeEventListener("pointermove", onPointerMove);
-        document.removeEventListener("pointerup", onPointerUp);
+        if (element.hasPointerCapture(event.pointerId)) {
+          element.releasePointerCapture(event.pointerId);
+        }
+
+        element.removeEventListener("pointermove", onPointerMove);
+        element.removeEventListener("pointerup", onPointerUp);
+        element.removeEventListener("pointercancel", onPointerCancel);
       };
 
-      document.addEventListener("pointermove", onPointerMove);
-      document.addEventListener("pointerup", onPointerUp);
+      const onPointerUp = (event: PointerEvent) => {
+        endPointer(event);
+      };
+
+      const onPointerCancel = (event: PointerEvent) => {
+        endPointer(event);
+      };
+
+      element.addEventListener("pointermove", onPointerMove);
+      element.addEventListener("pointerup", onPointerUp);
+      element.addEventListener("pointercancel", onPointerCancel);
     },
     [
       ref,
