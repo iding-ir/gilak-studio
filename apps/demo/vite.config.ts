@@ -41,6 +41,10 @@ export default defineConfig({
         __dirname,
         "../../packages/gilak-color-swatch/src",
       ),
+      "@gilak/image-library": resolve(
+        __dirname,
+        "../../packages/gilak-image-library/src",
+      ),
       "@gilak/utils": resolve(__dirname, "../../packages/gilak-utils/src"),
       "@gilak/floating-window": resolve(
         __dirname,

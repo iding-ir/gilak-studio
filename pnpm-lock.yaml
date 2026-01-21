@@ -108,6 +108,9 @@ importers:
       '@gilak/floating-window':
         specifier: workspace:*
         version: link:../../packages/gilak-floating-window
+      '@gilak/image-library':
+        specifier: workspace:*
+        version: link:../../packages/gilak-image-library
       '@gilak/localization':
         specifier: workspace:*
         version: link:../../packages/gilak-localization
@@ -271,6 +274,31 @@ importers:
       '@gilak/localization':
         specifier: workspace:*
         version: link:../gilak-localization
+      '@gilak/stylist':
+        specifier: workspace:*
+        version: link:../gilak-stylist
+      '@gilak/utils':
+        specifier: workspace:*
+        version: link:../gilak-utils
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+    devDependencies:
+      '@gilak/build-config':
+        specifier: workspace:*
+        version: link:../build-config
+      react:
+        specifier: ^19.2.0
+        version: 19.2.3
+      react-dom:
+        specifier: ^19.2.0
+        version: 19.2.3(react@19.2.3)
+
+  packages/gilak-image-library:
+    dependencies:
+      '@gilak/canvas':
+        specifier: workspace:*
+        version: link:../gilak-canvas
       '@gilak/stylist':
         specifier: workspace:*
         version: link:../gilak-stylist

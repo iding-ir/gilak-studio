@@ -11,6 +11,7 @@ const packageNames = [
   "canvas",
   "color-picker",
   "color-swatch",
+  "image-library",
   "utils",
   "floating-window",
   "components",

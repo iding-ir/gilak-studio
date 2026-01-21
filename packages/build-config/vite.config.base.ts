@@ -18,6 +18,10 @@ export function createLibraryConfig(config: LibraryConfig): UserConfig {
         "@gilak/canvas": resolve(__dirname, "../gilak-canvas/src"),
         "@gilak/color-picker": resolve(__dirname, "../gilak-color-picker/src"),
         "@gilak/color-swatch": resolve(__dirname, "../gilak-color-swatch/src"),
+        "@gilak/image-library": resolve(
+          __dirname,
+          "../gilak-image-library/src",
+        ),
         "@gilak/utils": resolve(__dirname, "../gilak-utils/src"),
         "@gilak/floating-window": resolve(
           __dirname,

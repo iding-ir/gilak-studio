@@ -1,3 +1,5 @@
+import { ImageLibrary } from "@gilak/image-library";
+
 import { Navigation } from "../Navigation";
 import { Tools } from "../Tools";
 import { Version } from "../Version";
@@ -15,6 +17,7 @@ export const Editor = () => {
         <Tools />
       </header>
       <main className={styles.main}>
+        <ImageLibrary />
         <Windows />
       </main>
     </div>

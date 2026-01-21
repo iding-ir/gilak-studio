@@ -15,6 +15,7 @@
     "@gilak/color-swatch": "workspace:*",
     "@gilak/components": "workspace:*",
     "@gilak/floating-window": "workspace:*",
+    "@gilak/image-library": "workspace:*",
     "@gilak/localization": "workspace:*",
     "@gilak/resizable-screen": "workspace:*",
     "@gilak/stylist": "workspace:*",
