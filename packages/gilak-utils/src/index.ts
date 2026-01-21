@@ -19,13 +19,8 @@ export {
 // Performance utilities
 export { debounce, throttle } from "./performance";
 
-// Deprecated aliases for backward compatibility
-export { getCanvasColor as pickColorFromCanvas } from "./canvas/get-canvas-color";
-export { convertArrayToHex as arrayToHex } from "./color/convert-array-to-hex";
-export { getContrastColor as getBlackAndWhiteColor } from "./color/get-contrast-color";
-
 // DOM utilities
-export { setAttribute, toggleFullscreen, watchElement } from "./dom";
+export { setAttribute, toggleFullscreen, useHead, watchElement } from "./dom";
 
 // Storage
 export {

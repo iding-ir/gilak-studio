@@ -18,6 +18,7 @@
     "@gilak/localization": "workspace:*",
     "@gilak/resizable-screen": "workspace:*",
     "@gilak/stylist": "workspace:*",
+    "@gilak/utils": "workspace:*",
     "@reduxjs/toolkit": "^2.11.1",
     "clsx": "^2.1.1",
     "i18next": "^25.7.1",

@@ -7,6 +7,7 @@ import IconFile from "../../assets/icon-file.svg?url";
 import IconGithub from "../../assets/icon-github.svg?url";
 import { selectSettingsWindow } from "../../features/settings/settings-slice";
 import { generateDefaultWindow, generateWindowId } from "../../methods";
+import { getSafeEnvVar } from "../../utils/get-safe-env-var";
 import styles from "./WelcomeScreen.module.scss";
 
 export const WelcomeScreen = () => {
@@ -49,7 +50,7 @@ export const WelcomeScreen = () => {
           variant="primary"
           text={t("app:welcomeScreen.github")}
           fullWidth
-          href={import.meta.env.VITE_GITHUB_REPOSITORY}
+          href={getSafeEnvVar({ key: "VITE_GITHUB_REPOSITORY" })}
           target="_blank"
         />
       </div>

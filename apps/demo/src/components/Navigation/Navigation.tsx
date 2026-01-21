@@ -14,6 +14,7 @@ import {
   selectSettingsWindow,
 } from "../../features/settings/settings-slice";
 import { generateDefaultWindow, generateWindowId } from "../../methods";
+import { getSafeEnvVar } from "../../utils/get-safe-env-var";
 import { Preferences } from "../Preferences";
 import { Settings } from "../Settings";
 
@@ -64,7 +65,7 @@ export const Navigation = () => {
           />
           <Menu
             label={t("app:navigation.github")}
-            href={import.meta.env.VITE_GITHUB_REPOSITORY}
+            href={getSafeEnvVar({ key: "VITE_GITHUB_REPOSITORY" })}
           />
         </Menu>
       </Menu>

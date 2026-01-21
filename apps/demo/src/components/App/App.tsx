@@ -3,8 +3,11 @@ import { DialogPortal } from "@gilak/components";
 import { FloatingWindowProvider } from "@gilak/floating-window";
 
 import { Editor } from "../Editor";
+import { useAppHead } from "./useAppHead";
 
 export const App = () => {
+  useAppHead();
+
   return (
     <>
       <ColorPickerProvider radiusCount={5} gridSize={15} borderWidth={20}>

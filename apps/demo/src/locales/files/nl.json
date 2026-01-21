@@ -1,4 +1,8 @@
 {
+  "head": {
+    "title": "Studio",
+    "description": "Een toolset voor het maken van een canvas-editor"
+  },
   "undo": "Ongedaan maken",
   "redo": "Opnieuw uitvoeren",
   "navigation": {

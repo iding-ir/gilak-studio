@@ -3,6 +3,11 @@ import { resolve } from "path";
 import { defineConfig } from "vite";
 import svgr from "vite-plugin-svgr";
 
+import { getBuildVersion } from "./src/utils/build-version";
+import { manifestGenerator } from "./src/utils/manifest-generator";
+
+const buildVersion = getBuildVersion();
+
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
@@ -15,6 +20,10 @@ export default defineConfig({
         titleProp: true,
       },
       include: "**/*.svg",
+    }),
+    manifestGenerator({
+      source: "public/site.webmanifest",
+      output: "site.webmanifest",
     }),
   ],
   resolve: {
@@ -46,6 +55,9 @@ export default defineConfig({
         "../../packages/gilak-resizable-screen/src",
       ),
     },
+  },
+  define: {
+    "import.meta.env.VITE_BUILD_VERSION": JSON.stringify(buildVersion),
   },
   css: {
     modules: {

@@ -1,5 +1,6 @@
 import { Navigation } from "../Navigation";
 import { Tools } from "../Tools";
+import { Version } from "../Version";
 import { Windows } from "../Windows";
 import styles from "./Editor.module.scss";
 
@@ -8,6 +9,7 @@ export const Editor = () => {
     <div id="editor" className={styles.root}>
       <nav className={styles.nav}>
         <Navigation />
+        <Version />
       </nav>
       <header className={styles.header}>
         <Tools />

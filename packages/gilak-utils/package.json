@@ -41,8 +41,14 @@
     "lint": "eslint .",
     "prepublishOnly": "pnpm build"
   },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
   "devDependencies": {
-    "@gilak/build-config": "workspace:*"
+    "@gilak/build-config": "workspace:*",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
   },
   "dependencies": {
     "@gilak/stylist": "workspace:*"
