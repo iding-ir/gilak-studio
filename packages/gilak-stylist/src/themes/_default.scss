@@ -1,38 +1,4 @@
 @use "../tokens" as tokens;
-@use "../functions/token-to-var" as *;
+@use "create-theme" as *;
 
-// Generate CSS custom properties for all tokens
-:root {
-  // Spacing
-  @include tokens-to-vars(tokens.$spacing, "spacing");
-
-  // Typography
-  @include tokens-to-vars(tokens.$font-family, "font-family");
-  @include tokens-to-vars(tokens.$font-size, "font-size");
-  @include tokens-to-vars(tokens.$font-weight, "font-weight");
-  @include tokens-to-vars(tokens.$line-height, "line-height");
-
-  // Radius
-  @include tokens-to-vars(tokens.$radius, "radius");
-
-  // Shadows
-  @include tokens-to-vars(tokens.$shadow, "shadow");
-
-  // Breakpoints
-  @include tokens-to-vars(tokens.$breakpoints, "breakpoint");
-
-  // Z-index
-  @include tokens-to-vars(tokens.$z-index, "z-index");
-
-  // Transitions
-  @include tokens-to-vars(tokens.$transition, "transition");
-  @include tokens-to-vars(tokens.$easing, "easing");
-
-  // Icons
-  @include tokens-to-vars(tokens.$icon, "icon");
-
-  // Colors - loop through each color type
-  @each $color-name, $variants in tokens.$colors {
-    @include tokens-to-vars($variants, "color-#{$color-name}");
-  }
-}
+@include create-theme(":root", tokens.$colors);

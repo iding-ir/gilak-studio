@@ -1,8 +1,28 @@
-@use "../primitives/colors" as primitives;
 @use "../functions/color-variants" as fns;
 
-$colors: fns.generate-color-palettes(primitives.$color-primitives);
-$colors-dark: fns.generate-color-palettes(
-  primitives.$color-primitives-dark,
-  "dark"
+$color-primitives: (
+  primary: #00897b,
+  secondary: #fb8c00,
+  accent: #d81b60,
+  light: #fefefe,
+  dark: #969696,
+  success: #22c55e,
+  warning: #f59e0b,
+  error: #ef4444,
+  info: #3b82f6,
 );
+
+$color-primitives-dark: (
+  primary: #16476a,
+  secondary: #bf092f,
+  accent: #3b9797,
+  light: #dedede,
+  dark: #313131,
+  success: #22c55e,
+  warning: #f59e0b,
+  error: #ef4444,
+  info: #3b82f6,
+);
+
+$colors: fns.generate-color-palettes($color-primitives);
+$colors-dark: fns.generate-color-palettes($color-primitives-dark, "dark");
