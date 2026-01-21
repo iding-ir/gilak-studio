@@ -29,7 +29,7 @@
       "import": "./dist/gilak-stylist.js",
       "require": "./dist/gilak-stylist.umd.cjs"
     },
-    "./scss": "./src/index.scss",
+    "./scss": "./src/scss/index.scss",
     "./tokens": "./src/tokens/_index.scss",
     "./functions": "./src/functions/_index.scss",
     "./themes": "./src/themes/_index.scss",

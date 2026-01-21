@@ -56,8 +56,6 @@
     "@gilak/localization": "workspace:*",
     "@gilak/stylist": "workspace:*",
     "@gilak/utils": "workspace:*",
-    "@tippyjs/react": "^4.2.6",
-    "clsx": "^2.1.1",
-    "tippy.js": "^6.3.7"
+    "clsx": "^2.1.1"
   }
 }

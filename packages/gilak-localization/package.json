@@ -43,12 +43,12 @@
   },
   "devDependencies": {
     "@gilak/build-config": "workspace:*",
-    "@types/i18next": "^13.x",
-    "@types/react-i18next": "^8.x",
+    "@types/i18next": "^13.0.0",
+    "@types/react-i18next": "^8.1.0",
     "react": "^19.2.0"
   },
   "dependencies": {
-    "i18next": "^25.x",
-    "react-i18next": "^16.x"
+    "i18next": "^25.8.0",
+    "react-i18next": "^16.5.3"
   }
 }
