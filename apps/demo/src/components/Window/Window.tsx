@@ -1,5 +1,6 @@
 import { DrawingCanvas, useCanvasHistory } from "@gilak/canvas";
 import { MagnifierProvider } from "@gilak/color-picker";
+import { DropZone } from "@gilak/drag-n-drop";
 import { FloatingWindow } from "@gilak/floating-window";
 import { useFloatingWindow } from "@gilak/floating-window";
 import {
@@ -77,20 +78,26 @@ export const Window = ({ id }: WindowProps) => {
             enabled={selectedTool === "COLOR_PICKER"}
             onSelect={handleSelectColor}
           >
-            <DrawingCanvas
-              canvasRef={canvasRef}
-              enabledDrawing={selectedTool === "BRUSH"}
-              enabledFill={selectedTool === "FILL"}
-              enabledEraser={selectedTool === "ERASER"}
-              color={color}
-              backgroundColor={backgroundColor}
-              brushSize={brushSize}
-              brushShape={brushShape}
-              tolerance={tolerance}
-              width={documentWidth}
-              height={documentHeight}
-              onChange={history.snapshot}
-            />
+            <DropZone
+              zoneId={`drop-zone-${id}`}
+              accepts={["image"]}
+              onDrop={(data) => console.log("dropped data:", data)}
+            >
+              <DrawingCanvas
+                canvasRef={canvasRef}
+                enabledDrawing={selectedTool === "BRUSH"}
+                enabledFill={selectedTool === "FILL"}
+                enabledEraser={selectedTool === "ERASER"}
+                color={color}
+                backgroundColor={backgroundColor}
+                brushSize={brushSize}
+                brushShape={brushShape}
+                tolerance={tolerance}
+                width={documentWidth}
+                height={documentHeight}
+                onChange={history.snapshot}
+              />
+            </DropZone>
           </MagnifierProvider>
         </ResizableScreen>
       </FloatingWindow>

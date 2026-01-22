@@ -1,11 +1,19 @@
 import { List } from "@gilak/components";
 import { useImageLibrary } from "@gilak/image-library";
 import { t } from "@gilak/localization";
+import type { ReactNode } from "react";
 
+import type { ImageAsset } from "../../types";
 import { ImageLibraryAssetCard } from "../AssetCard/ImageLibraryAssetCard";
 import styles from "./ImageLibraryAssets.module.scss";
 
-export const ImageLibraryAssets = () => {
+export type ImageLibraryAssetsProps = {
+  itemRenderer?: (component: ReactNode, imafeAsset: ImageAsset) => ReactNode;
+};
+
+export const ImageLibraryAssets = ({
+  itemRenderer,
+}: ImageLibraryAssetsProps) => {
   const { assets, activeAsset, view, selectAsset } = useImageLibrary();
   const isListView = view === "list";
 
@@ -31,6 +39,7 @@ export const ImageLibraryAssets = () => {
             key={asset.id}
             asset={asset}
             isActive={asset.id === activeAsset?.id}
+            itemRenderer={itemRenderer}
             onClick={() => selectAsset(asset.id)}
           />
         ))}
