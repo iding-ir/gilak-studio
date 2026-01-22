@@ -1,3 +1,41 @@
 {
-  "title": "Title en"
+  "title": "Image Library",
+  "subtitle": "Curated textures, gradients, and scenes built for dramatic mockups.",
+  "view": {
+    "label": "Switch view",
+    "grid": "Grid",
+    "list": "List"
+  },
+  "stats": {
+    "visible": "{{visible}} / {{total}} assets",
+    "updated": "Updated {{date}}"
+  },
+  "actions": {
+    "open": "Open asset"
+  },
+  "upload": {
+    "button": "Upload image",
+    "buttonUploading": "Adding...",
+    "supported": "PNG, JPG, or WebP up to {{size}} MB.",
+    "status": {
+      "idle": "Pick something from your device.",
+      "uploading": "Adding {{name}}...",
+      "success": "Added {{name}} to your library"
+    },
+    "error": {
+      "type": "Only image files are supported.",
+      "size": "Please pick a file smaller than {{size}} MB.",
+      "generic": "We couldn't load that file. Try another one."
+    },
+    "description": "Custom upload from your device",
+    "resolutionFallback": "Custom resolution",
+    "fallbackName": "Untitled upload"
+  },
+  "empty": {
+    "title": "No assets found",
+    "description": "Upload an image to start building your library."
+  },
+  "palette": {
+    "label": "Color palette"
+  }
 }

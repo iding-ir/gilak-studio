@@ -1,3 +1,41 @@
 {
-  "title": "Title de"
+  "title": "Bildbibliothek",
+  "subtitle": "Kurierte Texturen, Verläufe und Szenen für markante Mockups.",
+  "view": {
+    "label": "Ansicht wechseln",
+    "grid": "Raster",
+    "list": "Liste"
+  },
+  "stats": {
+    "visible": "{{visible}} / {{total}} Assets",
+    "updated": "Aktualisiert {{date}}"
+  },
+  "actions": {
+    "open": "Asset öffnen"
+  },
+  "upload": {
+    "button": "Bild hochladen",
+    "buttonUploading": "Wird hinzugefügt...",
+    "supported": "PNG, JPG oder WebP bis {{size}} MB.",
+    "status": {
+      "idle": "Wähle eine Datei von deinem Gerät.",
+      "uploading": "{{name}} wird hinzugefügt...",
+      "success": "{{name}} wurde deiner Bibliothek hinzugefügt"
+    },
+    "error": {
+      "type": "Es werden nur Bilddateien unterstützt.",
+      "size": "Bitte wähle eine Datei kleiner als {{size}} MB.",
+      "generic": "Die Datei konnte nicht geladen werden. Versuche es erneut."
+    },
+    "description": "Eigener Upload von deinem Gerät",
+    "resolutionFallback": "Benutzerdefinierte Auflösung",
+    "fallbackName": "Unbenannter Upload"
+  },
+  "empty": {
+    "title": "Keine Assets gefunden",
+    "description": "Lade ein Bild hoch, um deine Bibliothek zu füllen."
+  },
+  "palette": {
+    "label": "Farbpalette"
+  }
 }

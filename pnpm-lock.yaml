@@ -299,6 +299,9 @@ importers:
       '@gilak/canvas':
         specifier: workspace:*
         version: link:../gilak-canvas
+      '@gilak/components':
+        specifier: workspace:*
+        version: link:../gilak-components
       '@gilak/stylist':
         specifier: workspace:*
         version: link:../gilak-stylist

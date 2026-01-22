@@ -1,3 +1,41 @@
 {
-  "title": "Title nl"
+  "title": "Beeldbibliotheek",
+  "subtitle": "Gecurateerde texturen, verlopen en scènes voor uitgesproken mock-ups.",
+  "view": {
+    "label": "Weergave wisselen",
+    "grid": "Raster",
+    "list": "Lijst"
+  },
+  "stats": {
+    "visible": "{{visible}} / {{total}} assets",
+    "updated": "Bijgewerkt {{date}}"
+  },
+  "actions": {
+    "open": "Asset openen"
+  },
+  "upload": {
+    "button": "Afbeelding uploaden",
+    "buttonUploading": "Bezig met toevoegen...",
+    "supported": "PNG, JPG of WebP tot {{size}} MB.",
+    "status": {
+      "idle": "Kies een bestand van je apparaat.",
+      "uploading": "{{name}} wordt toegevoegd...",
+      "success": "{{name}} staat nu in je bibliotheek"
+    },
+    "error": {
+      "type": "Alleen beeldbestanden worden ondersteund.",
+      "size": "Kies een bestand kleiner dan {{size}} MB.",
+      "generic": "Bestand kon niet worden geladen. Probeer het opnieuw."
+    },
+    "description": "Eigen upload vanaf je apparaat",
+    "resolutionFallback": "Aangepaste resolutie",
+    "fallbackName": "Naamloze upload"
+  },
+  "empty": {
+    "title": "Geen assets gevonden",
+    "description": "Upload een afbeelding om je bibliotheek te vullen."
+  },
+  "palette": {
+    "label": "Kleurenpalet"
+  }
 }

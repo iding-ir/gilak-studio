@@ -1,0 +1,42 @@
+@use "@gilak/stylist/scss" as *;
+
+.root {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  figure {
+    position: relative;
+    background-color: var(--color-dark-xxl);
+    overflow: hidden;
+    border-radius: var(--radius-md);
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    figcaption {
+      max-width: 100%;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      padding: var(--spacing-sm);
+
+      p {
+        text-align: start;
+        font-size: var(--font-size-xxs);
+        color: var(--color-light-xl);
+        word-break: break-all;
+        @include ellipsis();
+      }
+    }
+  }
+}

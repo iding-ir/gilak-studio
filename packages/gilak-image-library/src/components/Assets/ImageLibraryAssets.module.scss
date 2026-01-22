@@ -1,0 +1,22 @@
+@use "@gilak/stylist/scss" as *;
+
+.root {
+  flex-grow: 1;
+  height: 0;
+  overflow: auto;
+  padding: var(--spacing-sm);
+  @include scrollbar;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+
+  p {
+    color: var(--color-light-lg);
+    font-size: var(--font-size-sm);
+  }
+}

@@ -1,6 +1,6 @@
 import type { Direction, TshirtSize, Variant } from "@gilak/components/types";
 import clsx from "clsx";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
 import styles from "./List.module.scss";
 
@@ -34,12 +34,7 @@ export const List = ({
           [styles.frameless]: frameless,
         },
       )}
-      style={{
-        gridTemplateColumns:
-          direction === "column" ? `repeat(${count}, max-content)` : undefined,
-        gridTemplateRows:
-          direction === "row" ? `repeat(${count}, max-content)` : undefined,
-      }}
+      style={{ "--list-count": count } as CSSProperties}
     >
       {items.map((item, idx) => (
         <li

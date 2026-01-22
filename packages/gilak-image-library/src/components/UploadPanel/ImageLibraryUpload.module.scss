@@ -1,0 +1,38 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  background-color: var(--color-light-xl);
+
+  .controls {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: var(--spacing-sm);
+  }
+
+  .message {
+    font-size: var(--font-size-xs);
+    color: var(--color-dark-xxl);
+    text-align: center;
+  }
+
+  .hint {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-lg);
+    color: var(--color-dark-xxl);
+    text-align: center;
+  }
+
+  .input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    border: 0;
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+  }
+}

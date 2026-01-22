@@ -17,8 +17,12 @@ export const Editor = () => {
         <Tools />
       </header>
       <main className={styles.main}>
-        <ImageLibrary />
-        <Windows />
+        <div className={styles.imageLibrary}>
+          <ImageLibrary />
+        </div>
+        <div className={styles.windows}>
+          <Windows />
+        </div>
       </main>
     </div>
   );

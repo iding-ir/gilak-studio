@@ -31,7 +31,17 @@
   .main {
     grid-area: main;
     display: flex;
+    flex-direction: row;
     position: relative;
     background-color: var(--color-dark-xxl);
+
+    .imageLibrary {
+      width: 20rem;
+    }
+
+    .windows {
+      position: relative;
+      flex-grow: 1;
+    }
   }
 }

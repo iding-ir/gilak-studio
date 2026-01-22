@@ -2,6 +2,8 @@
 
 .list {
   display: grid;
+  width: max-content;
+  max-width: 100%;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
   @include solidVariants;
@@ -19,18 +21,18 @@
 
   &.column {
     grid-auto-flow: row;
-    grid-auto-rows: max-content;
-    justify-content: space-between;
+    grid-template-columns: repeat(var(--list-count), minmax(0, 1fr));
   }
 
   &.row {
     grid-auto-flow: column;
-    grid-auto-columns: max-content;
-    justify-content: space-between;
+    grid-template-rows: repeat(var(--list-count), minmax(0, 1fr));
   }
 
   .item {
     display: grid;
+    min-width: 0;
+    min-height: 0;
 
     &.interactive {
       @include interactiveVariants;
