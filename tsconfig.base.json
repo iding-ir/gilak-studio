@@ -33,6 +33,8 @@
       "@gilak/floating-window/*": ["./packages/gilak-floating-window/src/*"],
       "@gilak/image-library": ["./packages/gilak-image-library/src"],
       "@gilak/image-library/*": ["./packages/gilak-image-library/src/*"],
+      "@gilak/drag-n-drop": ["./packages/gilak-drag-n-drop/src"],
+      "@gilak/drag-n-drop/*": ["./packages/gilak-drag-n-drop/src/*"],
       "@gilak/resizable-screen": ["./packages/gilak-resizable-screen/src"],
       "@gilak/resizable-screen/*": ["./packages/gilak-resizable-screen/src/*"],
       "@gilak/localization": ["./packages/gilak-localization/src"],

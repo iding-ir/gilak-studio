@@ -16,6 +16,7 @@
     "@gilak/components": "workspace:*",
     "@gilak/floating-window": "workspace:*",
     "@gilak/image-library": "workspace:*",
+    "@gilak/drag-n-drop": "workspace:*",
     "@gilak/localization": "workspace:*",
     "@gilak/resizable-screen": "workspace:*",
     "@gilak/stylist": "workspace:*",

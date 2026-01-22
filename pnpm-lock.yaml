@@ -105,6 +105,9 @@ importers:
       '@gilak/components':
         specifier: workspace:*
         version: link:../../packages/gilak-components
+      '@gilak/drag-n-drop':
+        specifier: workspace:*
+        version: link:../../packages/gilak-drag-n-drop
       '@gilak/floating-window':
         specifier: workspace:*
         version: link:../../packages/gilak-floating-window
@@ -246,6 +249,31 @@ importers:
       '@gilak/localization':
         specifier: workspace:*
         version: link:../gilak-localization
+      '@gilak/stylist':
+        specifier: workspace:*
+        version: link:../gilak-stylist
+      '@gilak/utils':
+        specifier: workspace:*
+        version: link:../gilak-utils
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+    devDependencies:
+      '@gilak/build-config':
+        specifier: workspace:*
+        version: link:../build-config
+      react:
+        specifier: ^19.2.0
+        version: 19.2.3
+      react-dom:
+        specifier: ^19.2.0
+        version: 19.2.3(react@19.2.3)
+
+  packages/gilak-drag-n-drop:
+    dependencies:
+      '@gilak/components':
+        specifier: workspace:*
+        version: link:../gilak-components
       '@gilak/stylist':
         specifier: workspace:*
         version: link:../gilak-stylist

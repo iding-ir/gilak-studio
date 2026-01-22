@@ -12,6 +12,7 @@ const packageNames = [
   "color-picker",
   "color-swatch",
   "image-library",
+  "drag-n-drop",
   "utils",
   "floating-window",
   "components",

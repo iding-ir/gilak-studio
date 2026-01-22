@@ -22,6 +22,7 @@ export function createLibraryConfig(config: LibraryConfig): UserConfig {
           __dirname,
           "../gilak-image-library/src",
         ),
+        "@gilak/drag-n-drop": resolve(__dirname, "../gilak-drag-n-drop/src"),
         "@gilak/utils": resolve(__dirname, "../gilak-utils/src"),
         "@gilak/floating-window": resolve(
           __dirname,
