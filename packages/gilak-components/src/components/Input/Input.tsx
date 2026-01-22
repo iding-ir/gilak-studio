@@ -75,6 +75,7 @@ export const Input = ({
           size={length}
           className={clsx(styles.input, styles[variant], styles[size], {
             [styles.invisible]: isInputInvisible,
+            [styles.rounded]: rounded,
           })}
         />
       </div>

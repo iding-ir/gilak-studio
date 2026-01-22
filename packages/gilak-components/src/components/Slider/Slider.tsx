@@ -77,7 +77,11 @@ export const Slider = ({
           aria-hidden="true"
         />
 
-        <div ref={thumbRef} className={styles.thumb} role="slider">
+        <div
+          ref={thumbRef}
+          className={clsx(styles.thumb, styles[variant], styles[size])}
+          role="slider"
+        >
           <ConditionalWrapper
             condition={!!tooltip}
             wrapper={(children) => (

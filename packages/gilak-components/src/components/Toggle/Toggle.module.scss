@@ -1,0 +1,33 @@
+@use "@gilak/stylist/scss" as *;
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  border: none;
+  outline: none;
+  background-color: var(--color-dark-xxs);
+  box-shadow: var(--shadow-sm);
+  transition: background-color var(--transition-md);
+  cursor: pointer;
+  overflow: hidden;
+  @include fontSizes($relation: -1);
+  @include alignments;
+
+  &.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &.fullWidth {
+    width: 100%;
+  }
+
+  &.frameless {
+    box-shadow: none;
+    background-color: transparent;
+  }
+
+  &.rounded {
+    border-radius: var(--radius-md);
+  }
+}

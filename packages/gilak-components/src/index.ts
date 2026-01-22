@@ -41,6 +41,8 @@ export { Tabs } from "./components/Tabs";
 export { Tab } from "./components/Tabs";
 export type { TextProps } from "./components/Text";
 export { Text } from "./components/Text";
+export type { ToggleProps } from "./components/Toggle";
+export { Toggle } from "./components/Toggle";
 export type { TooltipProps } from "./components/Tooltip";
 export { Tooltip } from "./components/Tooltip";
 export type { TshirtSize } from "./types";

@@ -38,6 +38,7 @@
         width: auto;
         box-shadow: var(--shadow-md);
         transition: background-color var(--transition-sm);
+        border-radius: var(--radius-md);
         @include heightSizes($relation: -1);
         @include paddingSizes($left: true, $right: true, $relation: -1);
         @include interactiveVariants;

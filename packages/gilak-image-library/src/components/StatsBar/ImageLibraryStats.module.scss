@@ -10,16 +10,6 @@
   .count {
     font-size: var(--font-size-xs);
     color: var(--color-light-xxl);
-    padding: 0 var(--spacing-md);
     text-transform: uppercase;
-  }
-
-  .toggle {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--spacing-xs);
-    padding: var(--spacing-xs);
-    border-radius: var(--radius-md);
-    background-color: var(--color-dark-xxs);
   }
 }
