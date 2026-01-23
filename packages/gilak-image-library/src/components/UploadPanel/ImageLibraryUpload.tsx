@@ -45,6 +45,7 @@ export const ImageLibraryUpload = () => {
         accept="image/*"
         className={styles.input}
         onChange={handleFileChange}
+        multiple
         aria-hidden="true"
         tabIndex={-1}
       />
