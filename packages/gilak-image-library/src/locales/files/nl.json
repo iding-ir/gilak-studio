@@ -6,10 +6,6 @@
     "grid": "Raster",
     "list": "Lijst"
   },
-  "stats": {
-    "visible": "{{visible}} / {{total}} assets",
-    "updated": "Bijgewerkt {{date}}"
-  },
   "actions": {
     "open": "Asset openen"
   },

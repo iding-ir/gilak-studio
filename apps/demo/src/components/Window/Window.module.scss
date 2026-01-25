@@ -1,4 +1,8 @@
 .root {
+  .dragOver {
+    border: 2px solid var(--color-accent-lg);
+  }
+
   // Hacking ellipsis overflow in FloatingWindow header and footer instead
   // of in Header and Footer components to avoid affecting other uses of them.
   header > h3 {

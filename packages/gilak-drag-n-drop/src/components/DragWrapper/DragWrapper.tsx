@@ -3,13 +3,19 @@ import type {
   DragImageInput,
   Point,
 } from "@gilak/drag-n-drop/types";
-import type { ReactElement } from "react";
+import type { HTMLAttributes, ReactElement } from "react";
 import { Children, cloneElement } from "react";
 
 import { useDrag } from "../../hooks";
 
+export type DataAttributes = {
+  "data-gilak-drag-wrapper"?: string;
+};
+
+type DraggableElementProps = HTMLAttributes<HTMLElement> & DataAttributes;
+
 export type DragWrapperProps<TData> = {
-  children: ReactElement;
+  children: ReactElement<DraggableElementProps>;
   dragId: string;
   data: TData;
   dragType?: string;
@@ -45,10 +51,15 @@ export const DragWrapper = <TData,>({
     onDragEnd,
   });
 
-  return cloneElement(Children.only(children), {
+  const child = Children.only(children);
+
+  return cloneElement(child, {
     draggable: false,
-    onPointerDown,
+    onPointerDown: (event) => {
+      child.props.onPointerDown?.(event);
+      onPointerDown(event);
+    },
     "data-gilak-drag-wrapper": dragId,
     "aria-disabled": disabled || undefined,
-  } as Record<string, unknown>);
+  });
 };

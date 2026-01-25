@@ -10,6 +10,7 @@ import {
 import { useRef, useState } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { IMAGE_LIBRARY_DRAG_TYPE } from "../../constants";
 import {
   selectBrushShape,
   selectBrushSize,
@@ -80,7 +81,8 @@ export const Window = ({ id }: WindowProps) => {
           >
             <DropZone
               zoneId={`drop-zone-${id}`}
-              accepts={["image"]}
+              accepts={[IMAGE_LIBRARY_DRAG_TYPE]}
+              activeClassName={styles.dragOver}
               onDrop={(data) => console.log("dropped data:", data)}
             >
               <DrawingCanvas

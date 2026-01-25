@@ -6,10 +6,6 @@
     "grid": "Grid",
     "list": "List"
   },
-  "stats": {
-    "visible": "{{visible}} / {{total}} assets",
-    "updated": "Updated {{date}}"
-  },
   "actions": {
     "open": "Open asset"
   },

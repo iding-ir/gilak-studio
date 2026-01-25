@@ -2,9 +2,9 @@ import { t } from "@gilak/localization";
 
 import { ImageLibraryProvider } from "../../context";
 import type { ImageItemRenderer } from "../../types/";
+import { Controls } from "../Controls";
 import { ImageItems } from "../ImageItems";
 import { ImageUploader } from "../ImageUploader";
-import { ItemsStats } from "../ItemsStats";
 import styles from "./ImageLibrary.module.scss";
 
 export type ImageLibraryProps = {
@@ -16,7 +16,7 @@ export const ImageLibrary = ({ itemRenderer }: ImageLibraryProps) => {
     <ImageLibraryProvider>
       <section className={styles.root} aria-label={t("imageLibrary:title")}>
         <ImageUploader />
-        <ItemsStats />
+        <Controls />
         <ImageItems itemRenderer={itemRenderer} />
       </section>
     </ImageLibraryProvider>

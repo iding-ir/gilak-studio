@@ -1,6 +1,6 @@
 import { serializeAccepts } from "@gilak/drag-n-drop/methods/serialize-accepts";
 import clsx from "clsx";
-import type { ReactElement } from "react";
+import type { HTMLAttributes, ReactElement } from "react";
 import { Children, cloneElement, useEffect, useRef } from "react";
 
 import {
@@ -11,9 +11,18 @@ import {
 import { useDrop } from "../../hooks";
 import type { DropCallback } from "../../types";
 
+export type DropZoneDataAttributes = {
+  [DROP_ZONE_ATTRIBUTE]?: string;
+  [DROP_ZONE_ACCEPTS_ATTRIBUTE]?: string;
+  [DROP_ZONE_ACTIVE_ATTRIBUTE]?: "true";
+};
+
+type DropZoneElementProps = HTMLAttributes<HTMLElement> &
+  DropZoneDataAttributes;
+
 export type DropZoneProps<TData> = {
   zoneId: string;
-  children: ReactElement;
+  children: ReactElement<DropZoneElementProps>;
   accepts?: string[];
   disabled?: boolean;
   activeClassName?: string;
@@ -67,14 +76,16 @@ export const DropZone = <TData,>({
     zoneId,
   ]);
 
-  const child = Children.only(children) as ReactElement;
+  const child = Children.only(children);
   const acceptsAttr = serializeAccepts(accepts);
 
   return cloneElement(child, {
-    className: clsx(isActive && activeClassName),
+    className: clsx(child.props.className, {
+      [activeClassName!]: isActive,
+    }),
     [DROP_ZONE_ATTRIBUTE]: zoneId,
     [DROP_ZONE_ACCEPTS_ATTRIBUTE]: acceptsAttr || undefined,
     [DROP_ZONE_ACTIVE_ATTRIBUTE]: isActive ? "true" : undefined,
     "aria-disabled": disabled || undefined,
-  } as Record<string, unknown>);
+  });
 };

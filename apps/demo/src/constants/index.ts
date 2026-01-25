@@ -24,3 +24,5 @@ export const COLOR_PALETTE = [
   "#EC407A",
   "#00E5FF",
 ];
+
+export const IMAGE_LIBRARY_DRAG_TYPE = "image";
