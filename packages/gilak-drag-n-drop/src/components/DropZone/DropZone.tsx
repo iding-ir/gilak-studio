@@ -19,7 +19,7 @@ export type DropZoneProps<TData> = {
   activeClassName?: string;
   onDragEnter?: DropCallback<TData>;
   onDragLeave?: DropCallback<TData>;
-  onDrop?: DropCallback<TData>;
+  onDrop: DropCallback<TData>;
 };
 
 export const DropZone = <TData,>({
@@ -32,7 +32,6 @@ export const DropZone = <TData,>({
   onDragLeave,
   onDrop,
 }: DropZoneProps<TData>) => {
-  const handledDragRef = useRef<string | null>(null);
   const wasActiveRef = useRef(false);
   const { data, dragId, dragType, dropZoneId, pointer, isDragging, isActive } =
     useDrop<TData>({ zoneId, accepts, disabled });
@@ -50,12 +49,11 @@ export const DropZone = <TData,>({
   }, [data, disabled, dragType, isActive, onDragEnter, onDragLeave]);
 
   useEffect(() => {
-    if (disabled || !onDrop) return;
+    if (disabled) return;
     if (isDragging) return;
-    if (!dragId || handledDragRef.current === dragId) return;
+    if (!dragId) return;
     if (dropZoneId !== zoneId) return;
 
-    handledDragRef.current = dragId;
     onDrop({ data, dragType, pointer });
   }, [
     data,
