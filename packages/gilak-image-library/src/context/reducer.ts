@@ -9,15 +9,15 @@ export const reducer = (
     case "SET_VIEW": {
       return { ...state, view: action.payload };
     }
-    case "SELECT_ASSET": {
-      return { ...state, activeAssetId: action.payload };
+    case "SELECT_IMAGE": {
+      return { ...state, activeImageId: action.payload };
     }
-    case "ADD_ASSET": {
-      const nextAssets = [action.payload, ...state.assets];
+    case "ADD_IMAGE": {
+      const nextImages = [action.payload, ...state.images];
       return {
         ...state,
-        assets: nextAssets,
-        activeAssetId: action.payload.id,
+        images: nextImages,
+        activeImageId: action.payload.id,
       };
     }
     default:

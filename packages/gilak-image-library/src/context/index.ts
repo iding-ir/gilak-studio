@@ -5,6 +5,6 @@ export { useImageLibraryContext } from "./hook";
 export type { ImageLibraryProviderProps } from "./provider";
 export { ImageLibraryProvider } from "./provider";
 export { reducer } from "./reducer";
-export { selectActiveAsset, selectStats } from "./selectors";
+export { selectActiveImage, selectStats } from "./selectors";
 export { initialState } from "./state";
 export type { ContextValue, ImageLibraryState } from "./types";

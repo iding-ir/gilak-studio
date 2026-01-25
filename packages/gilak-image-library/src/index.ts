@@ -12,12 +12,12 @@ export type {
 export {
   actions as imageLibraryActions,
   ImageLibraryProvider,
-  selectActiveAsset as selectImageLibraryActiveAsset,
+  selectActiveImage as selectImageLibraryActiveImage,
   selectStats as selectImageLibraryStats,
 } from "./context";
 
 // Types
-export type { ImageAsset, ImageLibraryView } from "./types";
+export type { ImageItem, ImageLibraryView } from "./types";
 
 // i18n
 export { registerImageLibraryI18n } from "./locales/i18n";

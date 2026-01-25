@@ -1,24 +1,23 @@
 import { t } from "@gilak/localization";
-import type { ReactNode } from "react";
 
 import { ImageLibraryProvider } from "../../context";
-import type { ImageAsset } from "../../types/";
-import { ImageLibraryAssets } from "../Assets/ImageLibraryAssets";
-import { ImageLibraryStats } from "../StatsBar/ImageLibraryStats";
-import { ImageLibraryUpload } from "../UploadPanel/ImageLibraryUpload";
+import type { ImageItemRenderer } from "../../types/";
+import { ImageItems } from "../ImageItems";
+import { ImageUploader } from "../ImageUploader";
+import { ItemsStats } from "../ItemsStats";
 import styles from "./ImageLibrary.module.scss";
 
 export type ImageLibraryProps = {
-  itemRenderer?: (component: ReactNode, imageAsset: ImageAsset) => ReactNode;
+  itemRenderer?: ImageItemRenderer;
 };
 
 export const ImageLibrary = ({ itemRenderer }: ImageLibraryProps) => {
   return (
     <ImageLibraryProvider>
       <section className={styles.root} aria-label={t("imageLibrary:title")}>
-        <ImageLibraryUpload />
-        <ImageLibraryStats />
-        <ImageLibraryAssets itemRenderer={itemRenderer} />
+        <ImageUploader />
+        <ItemsStats />
+        <ImageItems itemRenderer={itemRenderer} />
       </section>
     </ImageLibraryProvider>
   );

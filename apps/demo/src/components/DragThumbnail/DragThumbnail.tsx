@@ -1,9 +1,9 @@
-import type { ImageAsset } from "@gilak/image-library";
+import type { ImageItem } from "@gilak/image-library";
 
 import styles from "./DragThumbnail.module.scss";
 
 export type DragThumbnailProps = {
-  data: ImageAsset;
+  data: ImageItem;
 };
 
 export const DragThumbnail = ({ data: { src, name } }: DragThumbnailProps) => {

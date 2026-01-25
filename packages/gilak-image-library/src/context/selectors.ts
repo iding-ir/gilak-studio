@@ -1,13 +1,9 @@
 import type { ImageLibraryState } from "./types";
 
-export const selectActiveAsset = (state: ImageLibraryState) => {
-  return state.assets.find((asset) => asset.id === state.activeAssetId);
+export const selectActiveImage = (state: ImageLibraryState) => {
+  return state.images.find((image) => image.id === state.activeImageId);
 };
 
 export const selectStats = (state: ImageLibraryState) => {
-  const total = state.assets.length;
-  return {
-    total,
-    visible: total,
-  };
+  return state.images.length;
 };

@@ -3,15 +3,15 @@ import { useImageLibrary } from "@gilak/image-library/hooks";
 import { t } from "@gilak/localization";
 
 import type { ImageLibraryView } from "../../types";
-import styles from "./ImageLibraryStats.module.scss";
+import styles from "./ItemsStats.module.scss";
 
-export const ImageLibraryStats = () => {
+export const ItemsStats = () => {
   const { stats, view, setView } = useImageLibrary();
 
   return (
     <div className={styles.root}>
       <span className={styles.count}>
-        {t("imageLibrary:stats.visible", stats)}
+        {t("imageLibrary:stats.visible", { count: stats })}
       </span>
 
       <Toggle

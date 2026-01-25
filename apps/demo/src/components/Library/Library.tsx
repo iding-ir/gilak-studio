@@ -7,10 +7,10 @@ import styles from "./Library.module.scss";
 export const Library = () => {
   return (
     <ImageLibrary
-      itemRenderer={(component, asset) => (
+      itemRenderer={(component, imageItem) => (
         <DragWrapper
-          dragId={`drag-id-${asset.id}`}
-          data={asset}
+          dragId={`drag-id-${imageItem.id}`}
+          data={imageItem}
           dragType="image"
           dragImageRenderer={({ data }) => <DragThumbnail data={data} />}
           onDragStart={() => console.log("drag start")}

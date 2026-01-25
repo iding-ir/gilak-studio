@@ -2,11 +2,11 @@ import { Button } from "@gilak/components";
 import { useImageLibrary } from "@gilak/image-library";
 import { t } from "@gilak/localization";
 
-import { useImageUpload } from "../../hooks/useImageUpload";
-import styles from "./ImageLibraryUpload.module.scss";
+import { useImageUploader } from "../../hooks/useImageUploader";
+import styles from "./ImageUploader.module.scss";
 
-export const ImageLibraryUpload = () => {
-  const { addAsset } = useImageLibrary();
+export const ImageUploader = () => {
+  const { addImage } = useImageLibrary();
   const {
     fileInputRef,
     handleFileChange,
@@ -14,7 +14,7 @@ export const ImageLibraryUpload = () => {
     isUploading,
     maxFileSizeMb,
     uploadMessageText,
-  } = useImageUpload(addAsset);
+  } = useImageUploader(addImage);
 
   return (
     <div className={styles.root}>

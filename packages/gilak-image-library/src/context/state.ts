@@ -1,7 +1,7 @@
 import type { ImageLibraryState } from "./types";
 
 export const initialState: ImageLibraryState = {
-  assets: [],
+  images: [],
   view: "grid",
-  activeAssetId: undefined,
+  activeImageId: undefined,
 };

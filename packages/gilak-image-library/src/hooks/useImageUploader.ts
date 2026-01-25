@@ -5,14 +5,14 @@ import { useCallback, useRef, useState } from "react";
 import { MAX_FILE_SIZE_BYTES, MAX_FILE_SIZE_MB } from "../constants";
 import { createAssetFromFile } from "../methods/create-asset-from-file";
 import { getDisplayName } from "../methods/get-display-name";
-import type { ImageAsset } from "../types";
+import type { ImageItem } from "../types";
 
 type UploadMessage = {
   key: string;
   params?: Record<string, string | number>;
 };
 
-export const useImageUpload = (addAsset: (asset: ImageAsset) => void) => {
+export const useImageUploader = (addAsset: (asset: ImageItem) => void) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [uploadMessage, setUploadMessage] = useState<UploadMessage>({
     key: "imageLibrary:upload.status.idle",

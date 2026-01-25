@@ -1,27 +1,27 @@
 import { ConditionalWrapper } from "@gilak/components";
-import type { ReactNode } from "react";
 
-import type { ImageAsset } from "../../types";
-import styles from "./ImageLibraryAssetCard.module.scss";
+import type { ImageItem, ImageItemRenderer } from "../../types";
+import styles from "./ItemCard.module.scss";
 
-type ImageLibraryAssetCardProps = {
-  asset: ImageAsset;
+export type ItemCardProps = {
+  image: ImageItem;
   isActive: boolean;
-  itemRenderer?: (component: ReactNode, imageAsset: ImageAsset) => ReactNode;
+  itemRenderer?: ImageItemRenderer;
   onClick: (id: string) => void;
 };
 
-export const ImageLibraryAssetCard = ({
-  asset,
+export const ItemCard = ({
+  image,
   isActive,
   itemRenderer,
   onClick,
-}: ImageLibraryAssetCardProps) => {
-  const { id, src, name, description, resolution, size } = asset;
+}: ItemCardProps) => {
+  const { id, src, name, resolution, size } = image;
+
   return (
     <ConditionalWrapper
       condition={!!itemRenderer}
-      wrapper={(children) => itemRenderer?.(children, asset)}
+      wrapper={(children) => itemRenderer?.(children, image)}
     >
       <button
         type="button"
@@ -33,7 +33,6 @@ export const ImageLibraryAssetCard = ({
           <img src={src} alt={name} loading="lazy" />
           <figcaption>
             <p>{name}</p>
-            <p>{description}</p>
             <p>{resolution}</p>
             <p>{size}</p>
           </figcaption>

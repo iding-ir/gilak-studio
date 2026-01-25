@@ -1,12 +1,12 @@
 import type { Dispatch } from "react";
 
-import type { ImageAsset, ImageLibraryView } from "../types";
+import type { ImageItem, ImageLibraryView } from "../types";
 import type { Action } from "./actions";
 
 export type ImageLibraryState = {
-  assets: ImageAsset[];
+  images: ImageItem[];
   view: ImageLibraryView;
-  activeAssetId?: string;
+  activeImageId?: string;
 };
 
 export type ContextValue = {
