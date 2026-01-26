@@ -10,6 +10,7 @@
     "open": "Open asset"
   },
   "upload": {
+    "header": "Images",
     "button": "Upload image",
     "buttonUploading": "Adding...",
     "supported": "PNG, JPG, or WebP up to {{size}} MB.",

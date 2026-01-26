@@ -1,13 +1,9 @@
 import type { Dispatch } from "react";
 
-import type { CanvasLayer } from "../types";
 import type { Action } from "./actions";
-
-export type CanvasState = {
-  layers: CanvasLayer[];
-};
+import type { State } from "./state";
 
 export type ContextValue = {
-  state: CanvasState;
+  state: State;
   dispatch: Dispatch<Action>;
 };

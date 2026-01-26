@@ -10,11 +10,10 @@ export const Library = () => {
     <ImageLibrary
       itemRenderer={(component, imageItem) => (
         <DragWrapper
-          dragId={`drag-id-${imageItem.id}`}
+          dragId={imageItem.id}
           data={imageItem}
           dragType={IMAGE_LIBRARY_DRAG_TYPE}
           dragImageRenderer={({ data }) => <DragThumbnail data={data} />}
-          onDragStart={() => console.log("drag start")}
         >
           <div className={styles.root}>{component}</div>
         </DragWrapper>

@@ -1,44 +1,24 @@
-import { Button } from "@gilak/components";
+import { Head } from "@gilak/components";
+import { t } from "@gilak/localization";
 import clsx from "clsx";
 import type { ComponentPropsWithoutRef } from "react";
 
 import { selectLayers } from "../../context";
-import { actions, useCanvasContext } from "../../context";
+import { useCanvasContext } from "../../context";
 import { LayerCard } from "../LayerCard";
 import styles from "./Layers.module.scss";
 
-export type LayersProps = ComponentPropsWithoutRef<"section"> & {
-  emptyLabel?: string;
-};
+export type LayersProps = ComponentPropsWithoutRef<"section">;
 
-export const Layers = ({
-  emptyLabel = "No layers yet",
-  className,
-  ...props
-}: LayersProps) => {
-  const { state, dispatch } = useCanvasContext();
+export const Layers = ({ className, ...props }: LayersProps) => {
+  const { state } = useCanvasContext();
   const layers = selectLayers(state);
-
-  const handleAddLayer = () => {
-    dispatch(
-      actions.addLayer({
-        id: new Date().getTime().toString(),
-        name: `Layer ${layers.length + 1}`,
-        visible: true,
-      }),
-    );
-  };
 
   return (
     <section {...props} className={clsx(styles.root, className)}>
-      <div className={styles.header}>
-        <Button type="button" onClick={handleAddLayer} className={styles.root}>
-          Add Layer
-        </Button>
-      </div>
-
+      <Head>{t("canvas:layers.header")}</Head>
       {layers.length === 0 ? (
-        <p className={styles.empty}>{emptyLabel}</p>
+        <p className={styles.empty}>{t("canvas:layers.noLayers")}</p>
       ) : (
         <ul className={styles.list}>
           {layers.map((layer, index) => (

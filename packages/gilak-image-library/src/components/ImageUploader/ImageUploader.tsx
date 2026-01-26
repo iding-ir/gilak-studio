@@ -18,24 +18,21 @@ export const ImageUploader = () => {
 
   return (
     <div className={styles.root}>
-      <div className={styles.controls}>
-        <Button
-          type="button"
-          className={styles.button}
-          fullWidth
-          onClick={handleUploadClick}
-          disabled={isUploading}
-          aria-busy={isUploading}
-        >
-          {isUploading
-            ? t("imageLibrary:upload.buttonUploading")
-            : t("imageLibrary:upload.button")}
-        </Button>
-
-        <p className={styles.message} aria-live="polite">
-          {uploadMessageText}
-        </p>
-      </div>
+      <Button
+        type="button"
+        className={styles.button}
+        fullWidth
+        onClick={handleUploadClick}
+        disabled={isUploading}
+        aria-busy={isUploading}
+      >
+        {isUploading
+          ? t("imageLibrary:upload.buttonUploading")
+          : t("imageLibrary:upload.button")}
+      </Button>
+      <p className={styles.message} aria-live="polite">
+        {uploadMessageText}
+      </p>
       <p className={styles.hint}>
         {t("imageLibrary:upload.supported", { size: maxFileSizeMb })}
       </p>

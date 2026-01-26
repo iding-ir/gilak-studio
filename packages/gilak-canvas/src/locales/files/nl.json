@@ -1,0 +1,11 @@
+{
+  "layers": {
+    "header": "Lagen",
+    "moveUp": "Omhoog verplaatsen",
+    "moveDown": "Omlaag verplaatsen",
+    "delete": "Verwijderen",
+    "hide": "Verbergen",
+    "show": "Weergeven",
+    "noLayers": "Nog geen lagen"
+  }
+}

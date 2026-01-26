@@ -1,8 +1,9 @@
+import { useLayers } from "@gilak/canvas/hooks/useLayers";
 import { IconButton } from "@gilak/components";
+import { t } from "@gilak/localization";
 import clsx from "clsx";
 import type { ComponentPropsWithoutRef } from "react";
 
-import { actions, useCanvasContext } from "../../context";
 import type { CanvasLayer } from "../../types";
 import IconDelete from "./icons/icon-delete.svg?url";
 import IconDown from "./icons/icon-down.svg?url";
@@ -15,9 +16,6 @@ export type LayerCardProps = ComponentPropsWithoutRef<"li"> & {
   layer: CanvasLayer;
   disableMoveUp?: boolean;
   disableMoveDown?: boolean;
-  onRemove?: (layer: CanvasLayer) => void;
-  onMoveUp?: (layer: CanvasLayer) => void;
-  onMoveDown?: (layer: CanvasLayer) => void;
 };
 
 export const LayerCard = ({
@@ -25,69 +23,52 @@ export const LayerCard = ({
   className,
   disableMoveUp = false,
   disableMoveDown = false,
-  onRemove,
-  onMoveUp,
-  onMoveDown,
+
   ...props
 }: LayerCardProps) => {
-  const { dispatch } = useCanvasContext();
-
-  const handleRemove = () => {
-    dispatch(actions.removeLayer(layer.id));
-    onRemove?.(layer);
-  };
-
-  const handleMoveUp = () => {
-    dispatch(actions.moveLayerUp(layer.id));
-    onMoveUp?.(layer);
-  };
-
-  const handleMoveDown = () => {
-    dispatch(actions.moveLayerDown(layer.id));
-    onMoveDown?.(layer);
-  };
-
-  const showLayer = () => {
-    dispatch(actions.showLayer(layer.id));
-  };
-
-  const hideLayer = () => {
-    dispatch(actions.hideLayer(layer.id));
-  };
+  const { id, name, visible } = layer;
+  const { moveLayerUp, moveLayerDown, removeLayer, showLayer, hideLayer } =
+    useLayers();
 
   return (
     <li {...props} className={clsx(styles.root, className)}>
-      <div className={styles.info}>{layer.name}</div>
+      <div className={styles.info}>{name}</div>
       <div className={styles.actions}>
         <IconButton
           icon={IconUp}
           size="sm"
           variant="light-ghost"
-          onClick={handleMoveUp}
+          tooltip={t("canvas:layers.moveUp")}
+          onClick={() => moveLayerUp(id)}
           disabled={disableMoveUp}
-          aria-label="Move layer up"
+          aria-label={t("canvas:layers.moveUp")}
         ></IconButton>
         <IconButton
           icon={IconDown}
           size="sm"
           variant="light-ghost"
-          onClick={handleMoveDown}
+          tooltip={t("canvas:layers.moveDown")}
+          onClick={() => moveLayerDown(id)}
           disabled={disableMoveDown}
-          aria-label="Move layer down"
+          aria-label={t("canvas:layers.moveDown")}
         />
         <IconButton
-          size="sm"
-          variant="light-ghost"
           icon={IconDelete}
-          onClick={handleRemove}
-          aria-label="Delete layer"
-        />
-        <IconButton
           size="sm"
           variant="light-ghost"
-          icon={layer.visible ? IconShow : IconHide}
-          onClick={layer.visible ? hideLayer : showLayer}
-          aria-label={layer.visible ? "Hide layer" : "Show layer"}
+          tooltip={t("canvas:layers.delete")}
+          onClick={() => removeLayer(id)}
+          aria-label={t("canvas:layers.delete")}
+        />
+        <IconButton
+          icon={visible ? IconShow : IconHide}
+          size="sm"
+          variant="light-ghost"
+          tooltip={visible ? t("canvas:layers.hide") : t("canvas:layers.show")}
+          onClick={() => (visible ? hideLayer(id) : showLayer(id))}
+          aria-label={
+            visible ? t("canvas:layers.hide") : t("canvas:layers.show")
+          }
         />
       </div>
     </li>

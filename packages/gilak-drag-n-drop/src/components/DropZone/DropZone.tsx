@@ -42,20 +42,35 @@ export const DropZone = <TData,>({
   onDrop,
 }: DropZoneProps<TData>) => {
   const wasActiveRef = useRef(false);
+  const dragEnterHandlerRef = useRef(onDragEnter);
+  const dragLeaveHandlerRef = useRef(onDragLeave);
+  const dropHandlerRef = useRef(onDrop);
   const { data, dragId, dragType, dropZoneId, pointer, isDragging, isActive } =
     useDrop<TData>({ zoneId, accepts, disabled });
+
+  useEffect(() => {
+    dragEnterHandlerRef.current = onDragEnter;
+  }, [onDragEnter]);
+
+  useEffect(() => {
+    dragLeaveHandlerRef.current = onDragLeave;
+  }, [onDragLeave]);
+
+  useEffect(() => {
+    dropHandlerRef.current = onDrop;
+  }, [onDrop]);
 
   useEffect(() => {
     if (disabled) return;
 
     if (isActive && !wasActiveRef.current) {
-      onDragEnter?.({ data, dragType });
+      dragEnterHandlerRef.current?.({ data, dragType });
     } else if (!isActive && wasActiveRef.current) {
-      onDragLeave?.({ data, dragType });
+      dragLeaveHandlerRef.current?.({ data, dragType });
     }
 
     wasActiveRef.current = isActive;
-  }, [data, disabled, dragType, isActive, onDragEnter, onDragLeave]);
+  }, [data, disabled, dragType, isActive]);
 
   useEffect(() => {
     if (disabled) return;
@@ -63,7 +78,7 @@ export const DropZone = <TData,>({
     if (!dragId) return;
     if (dropZoneId !== zoneId) return;
 
-    onDrop({ data, dragType, pointer });
+    dropHandlerRef.current?.({ data, dragType, pointer });
   }, [
     data,
     disabled,
@@ -71,7 +86,6 @@ export const DropZone = <TData,>({
     dragType,
     dropZoneId,
     isDragging,
-    onDrop,
     pointer,
     zoneId,
   ]);

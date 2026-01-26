@@ -16,6 +16,8 @@ export type { FooterProps } from "./components/Footer";
 export { Footer } from "./components/Footer";
 export type { GroupProps } from "./components/Group";
 export { Group } from "./components/Group";
+export type { HeadProps } from "./components/Head";
+export { Head } from "./components/Head";
 export type { HeaderProps } from "./components/Header";
 export { Header } from "./components/Header";
 export type { IconProps } from "./components/Icon";

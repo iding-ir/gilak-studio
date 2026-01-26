@@ -33,3 +33,6 @@ export {
   setItem,
   setItemSync,
 } from "./storage";
+
+// String
+export { randomId } from "./string/random-id";

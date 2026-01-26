@@ -1,0 +1,11 @@
+{
+  "layers": {
+    "header": "Ebenen",
+    "moveUp": "Nach oben verschieben",
+    "moveDown": "Nach unten verschieben",
+    "delete": "Löschen",
+    "hide": "Ausblenden",
+    "show": "Anzeigen",
+    "noLayers": "Noch keine Ebenen"
+  }
+}

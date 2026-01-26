@@ -1,4 +1,4 @@
-import { DrawingCanvas, useCanvasHistory } from "@gilak/canvas";
+import { DrawingCanvas, useCanvasHistory, useLayers } from "@gilak/canvas";
 import { MagnifierProvider } from "@gilak/color-picker";
 import { DropZone } from "@gilak/drag-n-drop";
 import { FloatingWindow } from "@gilak/floating-window";
@@ -7,6 +7,7 @@ import {
   ResizableScreen,
   ResizableScreenProvider,
 } from "@gilak/resizable-screen";
+import { randomId } from "@gilak/utils";
 import { useRef, useState } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
@@ -45,6 +46,7 @@ export const Window = ({ id }: WindowProps) => {
   const [documentHeight, setDocumentHeight] = useState(defaultDocumentSize.h);
   const [openSettings, setOpenSettings] = useState(false);
   const { title } = useFloatingWindow(id);
+  const { addLayer } = useLayers();
   const history = useCanvasHistory({
     canvasRef,
     onChange: ({ width, height }) => {
@@ -83,7 +85,13 @@ export const Window = ({ id }: WindowProps) => {
               zoneId={`drop-zone-${id}`}
               accepts={[IMAGE_LIBRARY_DRAG_TYPE]}
               activeClassName={styles.dragOver}
-              onDrop={(data) => console.log("dropped data:", data)}
+              onDrop={() => {
+                addLayer({
+                  id: randomId({ prefix: "layer-" }),
+                  name: "Untitled Layer",
+                  visible: true,
+                });
+              }}
             >
               <DrawingCanvas
                 canvasRef={canvasRef}

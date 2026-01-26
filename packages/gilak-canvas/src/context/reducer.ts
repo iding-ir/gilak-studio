@@ -1,8 +1,8 @@
 import type { Action } from "./actions";
-import type { CanvasState } from "./types";
+import type { State } from "./state";
 
 const moveLayer = (
-  layers: CanvasState["layers"],
+  layers: State["layers"],
   layerId: string,
   direction: "up" | "down",
 ) => {
@@ -25,12 +25,12 @@ const moveLayer = (
   return nextLayers;
 };
 
-export const reducer = (state: CanvasState, action: Action): CanvasState => {
-  switch (action.type) {
+export const reducer = (state: State, { type, payload }: Action): State => {
+  switch (type) {
     case "ADD_LAYER": {
       const layer = {
-        ...action.payload,
-        visible: action.payload.visible ?? true,
+        ...payload,
+        visible: payload.visible ?? true,
       };
 
       return { ...state, layers: [layer, ...state.layers] };
@@ -38,14 +38,14 @@ export const reducer = (state: CanvasState, action: Action): CanvasState => {
     case "REMOVE_LAYER": {
       return {
         ...state,
-        layers: state.layers.filter((layer) => layer.id !== action.payload),
+        layers: state.layers.filter((layer) => layer.id !== payload.id),
       };
     }
     case "HIDE_LAYER": {
       return {
         ...state,
         layers: state.layers.map((layer) =>
-          layer.id === action.payload ? { ...layer, visible: false } : layer,
+          layer.id === payload.id ? { ...layer, visible: false } : layer,
         ),
       };
     }
@@ -53,20 +53,20 @@ export const reducer = (state: CanvasState, action: Action): CanvasState => {
       return {
         ...state,
         layers: state.layers.map((layer) =>
-          layer.id === action.payload ? { ...layer, visible: true } : layer,
+          layer.id === payload.id ? { ...layer, visible: true } : layer,
         ),
       };
     }
     case "MOVE_LAYER_UP": {
       return {
         ...state,
-        layers: moveLayer(state.layers, action.payload, "up"),
+        layers: moveLayer(state.layers, payload.id, "up"),
       };
     }
     case "MOVE_LAYER_DOWN": {
       return {
         ...state,
-        layers: moveLayer(state.layers, action.payload, "down"),
+        layers: moveLayer(state.layers, payload.id, "down"),
       };
     }
     default:

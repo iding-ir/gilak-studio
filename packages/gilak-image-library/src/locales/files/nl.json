@@ -10,6 +10,7 @@
     "open": "Asset openen"
   },
   "upload": {
+    "header": "Afbeeldingen",
     "button": "Afbeelding uploaden",
     "buttonUploading": "Bezig met toevoegen...",
     "supported": "PNG, JPG of WebP tot {{size}} MB.",

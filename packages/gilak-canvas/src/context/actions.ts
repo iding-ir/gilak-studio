@@ -2,38 +2,38 @@ import type { CanvasLayer } from "../types";
 
 type Action =
   | { type: "ADD_LAYER"; payload: CanvasLayer }
-  | { type: "REMOVE_LAYER"; payload: string }
-  | { type: "HIDE_LAYER"; payload: string }
-  | { type: "SHOWS_LAYER"; payload: string }
-  | { type: "MOVE_LAYER_UP"; payload: string }
-  | { type: "MOVE_LAYER_DOWN"; payload: string };
+  | { type: "REMOVE_LAYER"; payload: Pick<CanvasLayer, "id"> }
+  | { type: "HIDE_LAYER"; payload: Pick<CanvasLayer, "id"> }
+  | { type: "SHOWS_LAYER"; payload: Pick<CanvasLayer, "id"> }
+  | { type: "MOVE_LAYER_UP"; payload: Pick<CanvasLayer, "id"> }
+  | { type: "MOVE_LAYER_DOWN"; payload: Pick<CanvasLayer, "id"> };
 
 const addLayer = (payload: CanvasLayer): Action => ({
   type: "ADD_LAYER",
   payload,
 });
 
-const removeLayer = (payload: string): Action => ({
+const removeLayer = (payload: Pick<CanvasLayer, "id">): Action => ({
   type: "REMOVE_LAYER",
   payload,
 });
 
-const hideLayer = (payload: string): Action => ({
+const hideLayer = (payload: Pick<CanvasLayer, "id">): Action => ({
   type: "HIDE_LAYER",
   payload,
 });
 
-const showLayer = (payload: string): Action => ({
+const showLayer = (payload: Pick<CanvasLayer, "id">): Action => ({
   type: "SHOWS_LAYER",
   payload,
 });
 
-const moveLayerUp = (payload: string): Action => ({
+const moveLayerUp = (payload: Pick<CanvasLayer, "id">): Action => ({
   type: "MOVE_LAYER_UP",
   payload,
 });
 
-const moveLayerDown = (payload: string): Action => ({
+const moveLayerDown = (payload: Pick<CanvasLayer, "id">): Action => ({
   type: "MOVE_LAYER_DOWN",
   payload,
 });

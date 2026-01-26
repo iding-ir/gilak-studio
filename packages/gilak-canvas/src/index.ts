@@ -11,12 +11,7 @@ export { RandomCanvas } from "./components/RandomCanvas";
 export type { CanvasHistory } from "./hooks/";
 
 // Context
-export type {
-  Action,
-  CanvasProviderProps,
-  CanvasState,
-  ContextValue,
-} from "./context";
+export type { Action, CanvasProviderProps, ContextValue } from "./context";
 export {
   actions,
   CanvasContext,
@@ -52,8 +47,12 @@ export type { UseEraserProps } from "./hooks/useEraser";
 export { useEraser } from "./hooks/useEraser";
 export type { UseFillArgs } from "./hooks/useFill";
 export { useFill } from "./hooks/useFill";
+export { useLayers } from "./hooks/useLayers";
 
 // Types
 export type { BrushShape, BrushSize, CanvasLayer } from "./types";
 export type { Point } from "./types";
 export { BRUSH_SHAPES, BRUSH_SIZES } from "./types";
+
+// i18n
+export { registerCanvasI18n } from "./locales/i18n";

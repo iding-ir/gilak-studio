@@ -1,5 +1,9 @@
-import type { CanvasState } from "./types";
+import type { CanvasLayer } from "../types";
 
-export const initialState: CanvasState = {
+export type State = {
+  layers: CanvasLayer[];
+};
+
+export const initialState: State = {
   layers: [],
 };

@@ -1,0 +1,19 @@
+@use "@gilak/stylist/scss" as *;
+
+.head {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  font-weight: var(--font-weight-lg);
+  box-shadow: var(--shadow-sm);
+  @include solidVariants;
+  @include heightSizes;
+  @include paddingSizes($top: true, $bottom: true, $relation: -1);
+  @include paddingSizes($left: true, $right: true, $relation: -1);
+
+  &.frameless {
+    box-shadow: none;
+  }
+}

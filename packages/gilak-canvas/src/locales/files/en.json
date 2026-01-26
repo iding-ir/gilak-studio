@@ -1,0 +1,11 @@
+{
+  "layers": {
+    "header": "Layers",
+    "moveUp": "Move up",
+    "moveDown": "Move down",
+    "delete": "Delete",
+    "hide": "Hide",
+    "show": "Show",
+    "noLayers": "No layers yet"
+  }
+}
