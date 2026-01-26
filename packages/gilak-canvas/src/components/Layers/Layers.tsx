@@ -1,19 +1,17 @@
+import type { CanvasLayer } from "@gilak/canvas/types";
 import { Head } from "@gilak/components";
 import { t } from "@gilak/localization";
 import clsx from "clsx";
 import type { ComponentPropsWithoutRef } from "react";
 
-import { selectLayers } from "../../context";
-import { useCanvasContext } from "../../context";
 import { LayerCard } from "../LayerCard";
 import styles from "./Layers.module.scss";
 
-export type LayersProps = ComponentPropsWithoutRef<"section">;
+export type LayersProps = ComponentPropsWithoutRef<"section"> & {
+  layers: CanvasLayer[];
+};
 
-export const Layers = ({ className, ...props }: LayersProps) => {
-  const { state } = useCanvasContext();
-  const layers = selectLayers(state);
-
+export const Layers = ({ className, layers = [], ...props }: LayersProps) => {
   return (
     <section {...props} className={clsx(styles.root, className)}>
       <Head>{t("canvas:layers.header")}</Head>

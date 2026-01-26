@@ -1,9 +1,7 @@
-import { serializeAccepts } from "@gilak/drag-n-drop/methods/serialize-accepts";
-import clsx from "clsx";
-import type { HTMLAttributes, ReactElement } from "react";
-import { Children, cloneElement, useEffect, useRef } from "react";
+import type { ReactNode, RefObject } from "react";
+import { useEffect } from "react";
 
-import {
+import type {
   DROP_ZONE_ACCEPTS_ATTRIBUTE,
   DROP_ZONE_ACTIVE_ATTRIBUTE,
   DROP_ZONE_ATTRIBUTE,
@@ -17,12 +15,10 @@ export type DropZoneDataAttributes = {
   [DROP_ZONE_ACTIVE_ATTRIBUTE]?: "true";
 };
 
-type DropZoneElementProps = HTMLAttributes<HTMLElement> &
-  DropZoneDataAttributes;
-
 export type DropZoneProps<TData> = {
+  ref: RefObject<HTMLElement | null>;
+  children?: ReactNode;
   zoneId: string;
-  children: ReactElement<DropZoneElementProps>;
   accepts?: string[];
   disabled?: boolean;
   activeClassName?: string;
@@ -32,74 +28,68 @@ export type DropZoneProps<TData> = {
 };
 
 export const DropZone = <TData,>({
-  zoneId,
+  ref,
   children,
+  zoneId,
   accepts,
   disabled,
-  activeClassName,
+  activeClassName = "",
   onDragEnter,
   onDragLeave,
   onDrop,
 }: DropZoneProps<TData>) => {
-  const wasActiveRef = useRef(false);
-  const dragEnterHandlerRef = useRef(onDragEnter);
-  const dragLeaveHandlerRef = useRef(onDragLeave);
-  const dropHandlerRef = useRef(onDrop);
-  const { data, dragId, dragType, dropZoneId, pointer, isDragging, isActive } =
-    useDrop<TData>({ zoneId, accepts, disabled });
-
-  useEffect(() => {
-    dragEnterHandlerRef.current = onDragEnter;
-  }, [onDragEnter]);
-
-  useEffect(() => {
-    dragLeaveHandlerRef.current = onDragLeave;
-  }, [onDragLeave]);
-
-  useEffect(() => {
-    dropHandlerRef.current = onDrop;
-  }, [onDrop]);
-
-  useEffect(() => {
-    if (disabled) return;
-
-    if (isActive && !wasActiveRef.current) {
-      dragEnterHandlerRef.current?.({ data, dragType });
-    } else if (!isActive && wasActiveRef.current) {
-      dragLeaveHandlerRef.current?.({ data, dragType });
-    }
-
-    wasActiveRef.current = isActive;
-  }, [data, disabled, dragType, isActive]);
-
-  useEffect(() => {
-    if (disabled) return;
-    if (isDragging) return;
-    if (!dragId) return;
-    if (dropZoneId !== zoneId) return;
-
-    dropHandlerRef.current?.({ data, dragType, pointer });
-  }, [
-    data,
-    disabled,
-    dragId,
-    dragType,
-    dropZoneId,
-    isDragging,
-    pointer,
+  const { data, dragType, canDrop } = useDrop<TData>({
     zoneId,
+    accepts,
+    disabled,
+  });
+
+  useEffect(() => {
+    if (!canDrop) return;
+
+    const element = ref.current;
+    if (!element) return;
+
+    const handleDragEnter = (event: PointerEvent) => {
+      element.classList.add(activeClassName);
+      const { top, left } = element.getBoundingClientRect();
+      const pointer = { x: event.clientX - left, y: event.clientY - top };
+      onDragEnter?.({ data, dragType, pointer });
+    };
+
+    const handleDragLeave = (event: PointerEvent) => {
+      element.classList.remove(activeClassName);
+      const { top, left } = element.getBoundingClientRect();
+      const pointer = { x: event.clientX - left, y: event.clientY - top };
+      onDragLeave?.({ data, dragType, pointer });
+    };
+
+    const handleDrop = (event: PointerEvent) => {
+      element.classList.remove(activeClassName);
+      const { top, left } = element.getBoundingClientRect();
+      const pointer = { x: event.clientX - left, y: event.clientY - top };
+      onDrop?.({ data, dragType, pointer });
+    };
+
+    element.addEventListener("pointerenter", handleDragEnter);
+    element.addEventListener("pointerleave", handleDragLeave);
+    element.addEventListener("pointerup", handleDrop);
+
+    return () => {
+      element.removeEventListener("pointerenter", handleDragEnter);
+      element.removeEventListener("pointerleave", handleDragLeave);
+      element.removeEventListener("pointerup", handleDrop);
+    };
+  }, [
+    canDrop,
+    ref,
+    activeClassName,
+    onDragEnter,
+    onDragLeave,
+    onDrop,
+    data,
+    dragType,
   ]);
 
-  const child = Children.only(children);
-  const acceptsAttr = serializeAccepts(accepts);
-
-  return cloneElement(child, {
-    className: clsx(child.props.className, {
-      [activeClassName!]: isActive,
-    }),
-    [DROP_ZONE_ATTRIBUTE]: zoneId,
-    [DROP_ZONE_ACCEPTS_ATTRIBUTE]: acceptsAttr || undefined,
-    [DROP_ZONE_ACTIVE_ATTRIBUTE]: isActive ? "true" : undefined,
-    "aria-disabled": disabled || undefined,
-  });
+  return children;
 };

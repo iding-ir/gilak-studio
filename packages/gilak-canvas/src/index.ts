@@ -50,8 +50,13 @@ export { useFill } from "./hooks/useFill";
 export { useLayers } from "./hooks/useLayers";
 
 // Types
-export type { BrushShape, BrushSize, CanvasLayer } from "./types";
-export type { Point } from "./types";
+export type {
+  BrushShape,
+  BrushSize,
+  CanvasLayer,
+  LayerContent,
+  Point,
+} from "./types";
 export { BRUSH_SHAPES, BRUSH_SIZES } from "./types";
 
 // i18n

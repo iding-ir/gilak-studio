@@ -21,6 +21,13 @@ export const useLayers = () => {
     [dispatch],
   );
 
+  const removeDocumentLayers = useCallback(
+    (documentId: string) => {
+      dispatch(actions.removeDocumentLayers({ documentId }));
+    },
+    [dispatch],
+  );
+
   const moveLayerUp = useCallback(
     (id: string) => {
       dispatch(actions.moveLayerUp({ id }));
@@ -56,6 +63,7 @@ export const useLayers = () => {
     hideLayer,
     showLayer,
     removeLayer,
+    removeDocumentLayers,
     layers,
   };
 };

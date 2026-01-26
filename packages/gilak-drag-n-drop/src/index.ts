@@ -6,3 +6,6 @@ export { DragNDropProvider } from "./context";
 
 // i18n
 export { registerDragNDropI18n } from "./locales/i18n";
+
+// Types
+export type { UpdatePointerPayload } from "./context";

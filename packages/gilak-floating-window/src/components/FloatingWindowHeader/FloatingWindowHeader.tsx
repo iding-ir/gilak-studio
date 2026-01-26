@@ -23,6 +23,7 @@ export type FloatingWindowHeaderProps = {
   closable: boolean;
   actions?: ReactNode;
   onDragPointerDown?: (event: PointerEvent<HTMLElement>) => void;
+  onClose?: () => void;
 };
 
 export const FloatingWindowHeader = ({
@@ -35,6 +36,7 @@ export const FloatingWindowHeader = ({
   closable,
   actions,
   onDragPointerDown,
+  onClose,
 }: FloatingWindowHeaderProps) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [value, setValue] = useState<string>(title);
@@ -155,7 +157,10 @@ export const FloatingWindowHeader = ({
               variant="light-ghost"
               icon={IconClose}
               tooltip={t("floatingWindow:actions.close")}
-              onClick={unregisterFloatingWindow}
+              onClick={() => {
+                unregisterFloatingWindow();
+                onClose?.();
+              }}
             />
           )}
         </>

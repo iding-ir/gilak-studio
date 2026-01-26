@@ -41,6 +41,14 @@ export const reducer = (state: State, { type, payload }: Action): State => {
         layers: state.layers.filter((layer) => layer.id !== payload.id),
       };
     }
+    case "REMOVE_DOCUMENT_LAYERS": {
+      return {
+        ...state,
+        layers: state.layers.filter(
+          (layer) => layer.documentId !== payload.documentId,
+        ),
+      };
+    }
     case "HIDE_LAYER": {
       return {
         ...state,
@@ -49,7 +57,7 @@ export const reducer = (state: State, { type, payload }: Action): State => {
         ),
       };
     }
-    case "SHOWS_LAYER": {
+    case "SHOW_LAYER": {
       return {
         ...state,
         layers: state.layers.map((layer) =>

@@ -23,6 +23,9 @@ import {
 } from "../../features/color/color-slice";
 import { selectSettingsDocument } from "../../features/settings/settings-slice";
 import { selectTolerance, selectTool } from "../../features/tools/tools.slice";
+import { useCanvasRenderer } from "../../hooks/useCanvasRenderer";
+import { useDocument } from "../../hooks/useDocument";
+import { createContentFormImage } from "../../methods/create-content-form-image";
 import { DocumentSettings } from "../DocumentSettings";
 import styles from "./Window.module.scss";
 import { WindowActions } from "./WindowActions";
@@ -46,7 +49,7 @@ export const Window = ({ id }: WindowProps) => {
   const [documentHeight, setDocumentHeight] = useState(defaultDocumentSize.h);
   const [openSettings, setOpenSettings] = useState(false);
   const { title } = useFloatingWindow(id);
-  const { addLayer } = useLayers();
+  const { addLayer, removeDocumentLayers } = useLayers();
   const history = useCanvasHistory({
     canvasRef,
     onChange: ({ width, height }) => {
@@ -54,9 +57,15 @@ export const Window = ({ id }: WindowProps) => {
       setDocumentHeight(height);
     },
   });
+  const { layers } = useDocument(id);
+  useCanvasRenderer({ canvasRef, layers });
 
   const handleSelectColor = (color: string) => {
     dispatch(setColor(color));
+  };
+
+  const onCloseWindow = () => {
+    removeDocumentLayers(id);
   };
 
   return (
@@ -74,6 +83,7 @@ export const Window = ({ id }: WindowProps) => {
           />
         }
         className={styles.root}
+        onClose={onCloseWindow}
       >
         <ResizableScreen>
           <MagnifierProvider
@@ -83,13 +93,25 @@ export const Window = ({ id }: WindowProps) => {
           >
             <DropZone
               zoneId={`drop-zone-${id}`}
+              ref={canvasRef}
               accepts={[IMAGE_LIBRARY_DRAG_TYPE]}
               activeClassName={styles.dragOver}
-              onDrop={() => {
+              onDrop={async ({ data, pointer }) => {
+                if (!pointer) return;
+
+                const content = await createContentFormImage({
+                  data,
+                  pointer,
+                  documentWidth,
+                  documentHeight,
+                });
+
                 addLayer({
                   id: randomId({ prefix: "layer-" }),
-                  name: "Untitled Layer",
+                  documentId: id,
+                  name: `Layer ${layers.length + 1}`,
                   visible: true,
+                  content: [content],
                 });
               }}
             >

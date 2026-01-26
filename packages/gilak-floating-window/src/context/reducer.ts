@@ -89,7 +89,11 @@ export const reducer = (state: State, { type, payload }: Action): State => {
 
       if (!window) return state;
 
-      return { ...state, windows: newWindows.set(id, { ...window, zIndex }) };
+      return {
+        ...state,
+        windows: newWindows.set(id, { ...window, zIndex }),
+        focused: id,
+      };
     }
     case "AUTO_PLACE_WINDOW": {
       const { id } = payload;

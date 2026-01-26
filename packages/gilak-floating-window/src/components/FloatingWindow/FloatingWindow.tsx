@@ -52,6 +52,7 @@ export type FloatingWindowProps = {
   onResizeStart?: (size?: Size) => void;
   onResize?: (size?: Size) => void;
   onResizeEnd?: (size?: Size) => void;
+  onClose?: () => void;
 };
 
 export const FloatingWindow = memo(
@@ -81,6 +82,7 @@ export const FloatingWindow = memo(
     onResizeStart,
     onResize,
     onResizeEnd,
+    onClose,
   }: FloatingWindowProps) => {
     const ref = useRef<HTMLDivElement | null>(null);
     const { windows } = useFloatingWindows();
@@ -161,6 +163,7 @@ export const FloatingWindow = memo(
           closable={closable}
           actions={actions}
           onDragPointerDown={onDragPointerDown}
+          onClose={onClose}
         />
         <Body>{children}</Body>
         <FloatingWindowFooter
