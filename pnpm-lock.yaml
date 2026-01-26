@@ -171,6 +171,12 @@ importers:
 
   packages/gilak-canvas:
     dependencies:
+      '@gilak/components':
+        specifier: workspace:*
+        version: link:../gilak-components
+      '@gilak/localization':
+        specifier: workspace:*
+        version: link:../gilak-localization
       '@gilak/stylist':
         specifier: workspace:*
         version: link:../gilak-stylist

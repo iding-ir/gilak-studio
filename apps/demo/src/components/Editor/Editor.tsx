@@ -1,3 +1,5 @@
+import { Layers } from "@gilak/canvas";
+
 import { Library } from "../Library";
 import { Navigation } from "../Navigation";
 import { Tools } from "../Tools";
@@ -15,13 +17,16 @@ export const Editor = () => {
       <header className={styles.header}>
         <Tools />
       </header>
-      <main className={styles.main}>
-        <div className={styles.library}>
+      <aside className={styles.aside}>
+        <div className={styles.panel}>
           <Library />
         </div>
-        <div className={styles.windows}>
-          <Windows />
+        <div className={styles.panel}>
+          <Layers />
         </div>
+      </aside>
+      <main className={styles.main}>
+        <Windows />
       </main>
     </div>
   );

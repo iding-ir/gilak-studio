@@ -1,3 +1,4 @@
+import { CanvasProvider } from "@gilak/canvas";
 import { ColorPickerProvider } from "@gilak/color-picker";
 import { DialogPortal } from "@gilak/components";
 import { DragImage, DragNDropProvider } from "@gilak/drag-n-drop";
@@ -14,7 +15,9 @@ export const App = () => {
       <ColorPickerProvider radiusCount={5} gridSize={15} borderWidth={20}>
         <FloatingWindowProvider>
           <DragNDropProvider>
-            <Editor />
+            <CanvasProvider>
+              <Editor />
+            </CanvasProvider>
             <DragImage />
           </DragNDropProvider>
         </FloatingWindowProvider>
