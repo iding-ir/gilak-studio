@@ -21,6 +21,27 @@ export const useLayers = () => {
     [dispatch],
   );
 
+  const removeLayers = useCallback(
+    (payload: CanvasLayer["id"][]) => {
+      dispatch(actions.removeLayers(payload));
+    },
+    [dispatch],
+  );
+
+  const showLayer = useCallback(
+    (payload: Pick<CanvasLayer, "id">) => {
+      dispatch(actions.showLayer(payload));
+    },
+    [dispatch],
+  );
+
+  const hideLayer = useCallback(
+    (payload: Pick<CanvasLayer, "id">) => {
+      dispatch(actions.hideLayer(payload));
+    },
+    [dispatch],
+  );
+
   const moveLayerUp = useCallback(
     (payload: Pick<CanvasLayer, "id">) => {
       dispatch(actions.moveLayerUp(payload));
@@ -35,16 +56,23 @@ export const useLayers = () => {
     [dispatch],
   );
 
-  const hideLayer = useCallback(
+  const selectLayer = useCallback(
     (payload: Pick<CanvasLayer, "id">) => {
-      dispatch(actions.hideLayer(payload));
+      dispatch(actions.selectLayer(payload));
     },
     [dispatch],
   );
 
-  const showLayer = useCallback(
+  const deselectLayer = useCallback(
     (payload: Pick<CanvasLayer, "id">) => {
-      dispatch(actions.showLayer(payload));
+      dispatch(actions.deselectLayer(payload));
+    },
+    [dispatch],
+  );
+
+  const focusLayer = useCallback(
+    (payload: Pick<CanvasLayer, "id">) => {
+      dispatch(actions.focusLayer(payload));
     },
     [dispatch],
   );
@@ -66,11 +94,15 @@ export const useLayers = () => {
   return {
     layers,
     addLayer,
+    removeLayer,
+    removeLayers,
+    showLayer,
+    hideLayer,
     moveLayerUp,
     moveLayerDown,
-    hideLayer,
-    showLayer,
-    removeLayer,
+    selectLayer,
+    deselectLayer,
+    focusLayer,
     addToLayerContent,
     clearLayerContent,
   };

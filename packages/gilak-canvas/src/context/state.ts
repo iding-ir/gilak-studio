@@ -1,9 +1,9 @@
 import type { CanvasLayer } from "../types";
 
 export type State = {
-  layers: CanvasLayer[];
+  layers: Map<string, CanvasLayer>;
 };
 
 export const initialState: State = {
-  layers: [],
+  layers: new Map(),
 };

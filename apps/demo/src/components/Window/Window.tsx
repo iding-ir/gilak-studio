@@ -116,6 +116,7 @@ export const Window = ({ id }: WindowProps) => {
 
                 addToLayerContent({ id: focusedLayer.id, content: [content] });
                 setContent(content);
+                history.snapshot();
               }}
             >
               <DrawingCanvas

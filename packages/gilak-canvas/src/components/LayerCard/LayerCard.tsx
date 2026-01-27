@@ -39,7 +39,7 @@ export const LayerCard = ({
           size="sm"
           variant="light-ghost"
           tooltip={t("canvas:layers.moveUp")}
-          onClick={() => moveLayerUp(id)}
+          onClick={() => moveLayerUp({ id })}
           disabled={disableMoveUp}
           aria-label={t("canvas:layers.moveUp")}
         ></IconButton>
@@ -48,7 +48,7 @@ export const LayerCard = ({
           size="sm"
           variant="light-ghost"
           tooltip={t("canvas:layers.moveDown")}
-          onClick={() => moveLayerDown(id)}
+          onClick={() => moveLayerDown({ id })}
           disabled={disableMoveDown}
           aria-label={t("canvas:layers.moveDown")}
         />
@@ -57,7 +57,7 @@ export const LayerCard = ({
           size="sm"
           variant="light-ghost"
           tooltip={t("canvas:layers.delete")}
-          onClick={() => removeLayer(id)}
+          onClick={() => removeLayer({ id })}
           aria-label={t("canvas:layers.delete")}
         />
         <IconButton
@@ -65,7 +65,7 @@ export const LayerCard = ({
           size="sm"
           variant="light-ghost"
           tooltip={visible ? t("canvas:layers.hide") : t("canvas:layers.show")}
-          onClick={() => (visible ? hideLayer(id) : showLayer(id))}
+          onClick={() => (visible ? hideLayer({ id }) : showLayer({ id }))}
           aria-label={
             visible ? t("canvas:layers.hide") : t("canvas:layers.show")
           }

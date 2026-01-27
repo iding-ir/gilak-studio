@@ -3,7 +3,7 @@ import type { CanvasLayer } from "../types";
 type Action =
   | { type: "ADD_LAYER"; payload: CanvasLayer }
   | { type: "REMOVE_LAYER"; payload: Pick<CanvasLayer, "id"> }
-  | { type: "REMOVE_DOCUMENT_LAYERS"; payload: { documentId: string } }
+  | { type: "REMOVE_LAYERS"; payload: CanvasLayer["id"][] }
   | { type: "HIDE_LAYER"; payload: Pick<CanvasLayer, "id"> }
   | { type: "SHOW_LAYER"; payload: Pick<CanvasLayer, "id"> }
   | { type: "MOVE_LAYER_UP"; payload: Pick<CanvasLayer, "id"> }
@@ -27,8 +27,8 @@ const removeLayer = (payload: Pick<CanvasLayer, "id">): Action => ({
   payload,
 });
 
-const removeDocumentLayers = (payload: { documentId: string }): Action => ({
-  type: "REMOVE_DOCUMENT_LAYERS",
+const removeLayers = (payload: CanvasLayer["id"][]): Action => ({
+  type: "REMOVE_LAYERS",
   payload,
 });
 
@@ -82,7 +82,7 @@ const clearLayerContent = (payload: Pick<CanvasLayer, "id">): Action => ({
 export const actions = {
   addLayer,
   removeLayer,
-  removeDocumentLayers,
+  removeLayers,
   hideLayer,
   showLayer,
   moveLayerUp,

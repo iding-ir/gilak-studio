@@ -6,64 +6,60 @@ const moveLayer = (
   layerId: string,
   direction: "up" | "down",
 ) => {
-  const index = layers.findIndex((layer) => layer.id === layerId);
+  const layerArray = Array.from(layers.values());
+  const index = layerArray.findIndex((layer) => layer.id === layerId);
 
-  if (index === -1) {
-    return layers;
-  }
+  if (index === -1) return layers;
 
-  const targetIndex = direction === "up" ? index - 1 : index + 1;
+  const newIndex =
+    direction === "up"
+      ? Math.min(index + 1, layerArray.length - 1)
+      : Math.max(index - 1, 0);
 
-  if (targetIndex < 0 || targetIndex >= layers.length) {
-    return layers;
-  }
+  if (newIndex === index) return layers;
 
-  const nextLayers = [...layers];
-  const [layer] = nextLayers.splice(index, 1);
-  nextLayers.splice(targetIndex, 0, layer);
+  const [movedLayer] = layerArray.splice(index, 1);
+  layerArray.splice(newIndex, 0, movedLayer);
 
-  return nextLayers;
+  const newLayers = new Map<string, typeof movedLayer>();
+  layerArray.forEach((layer) => {
+    newLayers.set(layer.id, layer);
+  });
+
+  return newLayers;
 };
 
 export const reducer = (state: State, { type, payload }: Action): State => {
   switch (type) {
     case "ADD_LAYER": {
-      const layer = {
-        ...payload,
-        visible: payload.visible ?? true,
-      };
+      const layers = new Map(state.layers);
+      layers.set(payload.id, payload);
 
-      return { ...state, layers: [layer, ...state.layers] };
+      return { ...state, layers };
     }
     case "REMOVE_LAYER": {
-      return {
-        ...state,
-        layers: state.layers.filter((layer) => layer.id !== payload.id),
-      };
+      const layers = new Map(state.layers);
+      layers.delete(payload.id);
+
+      return { ...state, layers };
     }
-    case "REMOVE_DOCUMENT_LAYERS": {
-      return {
-        ...state,
-        layers: state.layers.filter(
-          (layer) => layer.documentId !== payload.documentId,
-        ),
-      };
+    case "REMOVE_LAYERS": {
+      const layers = new Map(state.layers);
+      payload.forEach((id) => layers.delete(id));
+
+      return { ...state, layers };
     }
     case "HIDE_LAYER": {
-      return {
-        ...state,
-        layers: state.layers.map((layer) =>
-          layer.id === payload.id ? { ...layer, visible: false } : layer,
-        ),
-      };
+      const layers = new Map(state.layers);
+      layers.set(payload.id, { ...layers.get(payload.id)!, visible: false });
+
+      return { ...state, layers };
     }
     case "SHOW_LAYER": {
-      return {
-        ...state,
-        layers: state.layers.map((layer) =>
-          layer.id === payload.id ? { ...layer, visible: true } : layer,
-        ),
-      };
+      const layers = new Map(state.layers);
+      layers.set(payload.id, { ...layers.get(payload.id)!, visible: true });
+
+      return { ...state, layers };
     }
     case "MOVE_LAYER_UP": {
       return {
@@ -78,48 +74,46 @@ export const reducer = (state: State, { type, payload }: Action): State => {
       };
     }
     case "SELECT_LAYER": {
-      return {
-        ...state,
-        layers: state.layers.map((layer) =>
-          layer.id === payload.id ? { ...layer, selected: true } : layer,
-        ),
-      };
+      const layers = new Map(state.layers);
+      layers.set(payload.id, { ...layers.get(payload.id)!, selected: true });
+
+      return { ...state, layers };
     }
     case "DESELECT_LAYER": {
-      return {
-        ...state,
-        layers: state.layers.map((layer) =>
-          layer.id === payload.id ? { ...layer, selected: false } : layer,
-        ),
-      };
+      const layers = new Map(state.layers);
+      layers.set(payload.id, { ...layers.get(payload.id)!, selected: false });
+
+      return { ...state, layers };
     }
     case "FOCUS_LAYER": {
-      return {
-        ...state,
-        layers: state.layers.map((layer) =>
-          layer.id === payload.id
-            ? { ...layer, focused: true }
-            : { ...layer, focused: false },
-        ),
-      };
+      const layers = new Map(state.layers);
+      layers.set(payload.id, { ...layers.get(payload.id)!, focused: true });
+
+      return { ...state, layers };
     }
     case "ADD_TO_LAYER_CONTENT": {
-      return {
-        ...state,
-        layers: state.layers.map((layer) =>
-          layer.id === payload.id
-            ? { ...layer, content: [...layer.content, ...payload.content] }
-            : layer,
-        ),
-      };
+      const layers = new Map(state.layers);
+      const layer = layers.get(payload.id);
+      if (!layer) return state;
+
+      layers.set(payload.id, {
+        ...layer,
+        content: [...layer.content, ...payload.content],
+      });
+
+      return { ...state, layers };
     }
     case "CLEAR_LAYER_CONTENT": {
-      return {
-        ...state,
-        layers: state.layers.map((layer) =>
-          layer.id === payload.id ? { ...layer, content: [] } : layer,
-        ),
-      };
+      const layers = new Map(state.layers);
+      const layer = layers.get(payload.id);
+      if (!layer) return state;
+
+      layers.set(payload.id, {
+        ...layer,
+        content: [],
+      });
+
+      return { ...state, layers };
     }
     default:
       return state;
