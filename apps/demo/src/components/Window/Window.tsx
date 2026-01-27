@@ -1,4 +1,10 @@
-import { DrawingCanvas, useCanvasHistory, useLayers } from "@gilak/canvas";
+import {
+  DrawingCanvas,
+  type LayerContent,
+  useCanvasHistory,
+  useDocumentLayers,
+  useLayers,
+} from "@gilak/canvas";
 import { MagnifierProvider } from "@gilak/color-picker";
 import { DropZone } from "@gilak/drag-n-drop";
 import { FloatingWindow } from "@gilak/floating-window";
@@ -7,7 +13,6 @@ import {
   ResizableScreen,
   ResizableScreenProvider,
 } from "@gilak/resizable-screen";
-import { randomId } from "@gilak/utils";
 import { useRef, useState } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
@@ -24,7 +29,6 @@ import {
 import { selectSettingsDocument } from "../../features/settings/settings-slice";
 import { selectTolerance, selectTool } from "../../features/tools/tools.slice";
 import { useCanvasRenderer } from "../../hooks/useCanvasRenderer";
-import { useDocument } from "../../hooks/useDocument";
 import { createContentFormImage } from "../../methods/create-content-form-image";
 import { DocumentSettings } from "../DocumentSettings";
 import styles from "./Window.module.scss";
@@ -49,7 +53,6 @@ export const Window = ({ id }: WindowProps) => {
   const [documentHeight, setDocumentHeight] = useState(defaultDocumentSize.h);
   const [openSettings, setOpenSettings] = useState(false);
   const { title } = useFloatingWindow(id);
-  const { addLayer, removeDocumentLayers } = useLayers();
   const history = useCanvasHistory({
     canvasRef,
     onChange: ({ width, height }) => {
@@ -57,15 +60,19 @@ export const Window = ({ id }: WindowProps) => {
       setDocumentHeight(height);
     },
   });
-  const { layers } = useDocument(id);
-  useCanvasRenderer({ canvasRef, layers });
+  const [content, setContent] = useState<LayerContent>();
+  const { addToLayerContent } = useLayers();
+  const { focusedLayer, removeDocumentLayers } = useDocumentLayers({
+    documentId: id,
+  });
+  useCanvasRenderer({ canvasRef, content });
 
   const handleSelectColor = (color: string) => {
     dispatch(setColor(color));
   };
 
   const onCloseWindow = () => {
-    removeDocumentLayers(id);
+    removeDocumentLayers();
   };
 
   return (
@@ -98,6 +105,7 @@ export const Window = ({ id }: WindowProps) => {
               activeClassName={styles.dragOver}
               onDrop={async ({ data, pointer }) => {
                 if (!pointer) return;
+                if (!focusedLayer) return;
 
                 const content = await createContentFormImage({
                   data,
@@ -106,13 +114,8 @@ export const Window = ({ id }: WindowProps) => {
                   documentHeight,
                 });
 
-                addLayer({
-                  id: randomId({ prefix: "layer-" }),
-                  documentId: id,
-                  name: `Layer ${layers.length + 1}`,
-                  visible: true,
-                  content: [content],
-                });
+                addToLayerContent({ id: focusedLayer.id, content: [content] });
+                setContent(content);
               }}
             >
               <DrawingCanvas

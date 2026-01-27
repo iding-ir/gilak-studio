@@ -1,5 +1,4 @@
 import { Menu } from "@gilak/components";
-import { useFloatingWindows } from "@gilak/floating-window";
 import { t } from "@gilak/localization";
 import { toggleFullscreen } from "@gilak/utils";
 
@@ -13,7 +12,7 @@ import {
   selectSettingsOpen,
   selectSettingsWindow,
 } from "../../features/settings/settings-slice";
-import { generateDefaultWindow, generateWindowId } from "../../methods";
+import { useDocument } from "../../hooks/useDocument";
 import { getSafeEnvVar } from "../../utils/get-safe-env-var";
 import { Preferences } from "../Preferences";
 import { Settings } from "../Settings";
@@ -23,11 +22,10 @@ export const Navigation = () => {
   const isSettingsOpen = useAppSelector(selectSettingsOpen);
   const isPreferencesOpen = useAppSelector(selectPreferencesOpen);
   const { size: settingWindowSize } = useAppSelector(selectSettingsWindow);
-  const { registerFloatingWindow } = useFloatingWindows();
+  const { addDocument } = useDocument();
 
   const handleAddWindow = () => {
-    const id = generateWindowId();
-    registerFloatingWindow(generateDefaultWindow(id, settingWindowSize));
+    addDocument(settingWindowSize);
   };
 
   const handleClickSettings = () => {

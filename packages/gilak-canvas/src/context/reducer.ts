@@ -77,6 +77,50 @@ export const reducer = (state: State, { type, payload }: Action): State => {
         layers: moveLayer(state.layers, payload.id, "down"),
       };
     }
+    case "SELECT_LAYER": {
+      return {
+        ...state,
+        layers: state.layers.map((layer) =>
+          layer.id === payload.id ? { ...layer, selected: true } : layer,
+        ),
+      };
+    }
+    case "DESELECT_LAYER": {
+      return {
+        ...state,
+        layers: state.layers.map((layer) =>
+          layer.id === payload.id ? { ...layer, selected: false } : layer,
+        ),
+      };
+    }
+    case "FOCUS_LAYER": {
+      return {
+        ...state,
+        layers: state.layers.map((layer) =>
+          layer.id === payload.id
+            ? { ...layer, focused: true }
+            : { ...layer, focused: false },
+        ),
+      };
+    }
+    case "ADD_TO_LAYER_CONTENT": {
+      return {
+        ...state,
+        layers: state.layers.map((layer) =>
+          layer.id === payload.id
+            ? { ...layer, content: [...layer.content, ...payload.content] }
+            : layer,
+        ),
+      };
+    }
+    case "CLEAR_LAYER_CONTENT": {
+      return {
+        ...state,
+        layers: state.layers.map((layer) =>
+          layer.id === payload.id ? { ...layer, content: [] } : layer,
+        ),
+      };
+    }
     default:
       return state;
   }

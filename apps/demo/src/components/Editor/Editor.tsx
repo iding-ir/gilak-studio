@@ -1,7 +1,6 @@
-import { Layers } from "@gilak/canvas";
+import { Layers, useDocumentLayers } from "@gilak/canvas";
 import { useFloatingWindows } from "@gilak/floating-window";
 
-import { useDocument } from "../../hooks/useDocument";
 import { Library } from "../Library";
 import { Navigation } from "../Navigation";
 import { Tools } from "../Tools";
@@ -11,7 +10,9 @@ import styles from "./Editor.module.scss";
 
 export const Editor = () => {
   const { focused } = useFloatingWindows();
-  const { layers } = useDocument(focused || "");
+  const { documentLayers } = useDocumentLayers({
+    documentId: focused || "",
+  });
 
   return (
     <div id="editor" className={styles.root}>
@@ -27,7 +28,7 @@ export const Editor = () => {
           <Library />
         </div>
         <div className={styles.panel}>
-          <Layers layers={layers} />
+          <Layers layers={documentLayers} />
         </div>
       </aside>
       <main className={styles.main}>

@@ -5,7 +5,7 @@ import type { CanvasLayer } from "../types";
 
 export const useLayers = () => {
   const { state, dispatch } = useCanvasContext();
-  const layers = state.layers;
+  const { layers } = state;
 
   const addLayer = useCallback(
     (layer: CanvasLayer) => {
@@ -15,55 +15,63 @@ export const useLayers = () => {
   );
 
   const removeLayer = useCallback(
-    (id: string) => {
-      dispatch(actions.removeLayer({ id }));
-    },
-    [dispatch],
-  );
-
-  const removeDocumentLayers = useCallback(
-    (documentId: string) => {
-      dispatch(actions.removeDocumentLayers({ documentId }));
+    (payload: Pick<CanvasLayer, "id">) => {
+      dispatch(actions.removeLayer(payload));
     },
     [dispatch],
   );
 
   const moveLayerUp = useCallback(
-    (id: string) => {
-      dispatch(actions.moveLayerUp({ id }));
+    (payload: Pick<CanvasLayer, "id">) => {
+      dispatch(actions.moveLayerUp(payload));
     },
     [dispatch],
   );
 
   const moveLayerDown = useCallback(
-    (id: string) => {
-      dispatch(actions.moveLayerDown({ id }));
+    (payload: Pick<CanvasLayer, "id">) => {
+      dispatch(actions.moveLayerDown(payload));
     },
     [dispatch],
   );
 
   const hideLayer = useCallback(
-    (id: string) => {
-      dispatch(actions.hideLayer({ id }));
+    (payload: Pick<CanvasLayer, "id">) => {
+      dispatch(actions.hideLayer(payload));
     },
     [dispatch],
   );
 
   const showLayer = useCallback(
-    (id: string) => {
-      dispatch(actions.showLayer({ id }));
+    (payload: Pick<CanvasLayer, "id">) => {
+      dispatch(actions.showLayer(payload));
+    },
+    [dispatch],
+  );
+
+  const addToLayerContent = useCallback(
+    (payload: Pick<CanvasLayer, "id" | "content">) => {
+      dispatch(actions.addToLayerContent(payload));
+    },
+    [dispatch],
+  );
+
+  const clearLayerContent = useCallback(
+    (payload: Pick<CanvasLayer, "id">) => {
+      dispatch(actions.clearLayerContent(payload));
     },
     [dispatch],
   );
 
   return {
+    layers,
     addLayer,
     moveLayerUp,
     moveLayerDown,
     hideLayer,
     showLayer,
     removeLayer,
-    removeDocumentLayers,
-    layers,
+    addToLayerContent,
+    clearLayerContent,
   };
 };

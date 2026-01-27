@@ -41,6 +41,7 @@ export { useCanvasHistory } from "./hooks/useCanvasHistory";
 export { useCanvasPointer } from "./hooks/useCanvasPointer";
 export type { UseCursorArgs } from "./hooks/useCursor";
 export { useCursor } from "./hooks/useCursor";
+export { useDocumentLayers } from "./hooks/useDocumentLayers";
 export type { UseDrawingProps } from "./hooks/useDrawing";
 export { useDrawing } from "./hooks/useDrawing";
 export type { UseEraserProps } from "./hooks/useEraser";

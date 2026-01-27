@@ -1,22 +1,20 @@
 import { Button, Icon, Link } from "@gilak/components";
-import { useFloatingWindows } from "@gilak/floating-window";
 import { t } from "@gilak/localization";
 
 import { useAppSelector } from "../../app/hooks";
 import IconFile from "../../assets/icon-file.svg?url";
 import IconGithub from "../../assets/icon-github.svg?url";
 import { selectSettingsWindow } from "../../features/settings/settings-slice";
-import { generateDefaultWindow, generateWindowId } from "../../methods";
+import { useDocument } from "../../hooks/useDocument";
 import { getSafeEnvVar } from "../../utils/get-safe-env-var";
 import styles from "./WelcomeScreen.module.scss";
 
 export const WelcomeScreen = () => {
-  const { registerFloatingWindow } = useFloatingWindows();
   const { size: settingWindowSize } = useAppSelector(selectSettingsWindow);
+  const { addDocument } = useDocument();
 
   const handleAddWindow = () => {
-    const id = generateWindowId();
-    registerFloatingWindow(generateDefaultWindow(id, settingWindowSize));
+    addDocument(settingWindowSize);
   };
 
   return (

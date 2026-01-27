@@ -12,5 +12,7 @@ export type CanvasLayer = {
   documentId: string;
   name: string;
   visible: boolean;
+  selected: boolean;
+  focused: boolean;
   content: LayerContent[];
 };
