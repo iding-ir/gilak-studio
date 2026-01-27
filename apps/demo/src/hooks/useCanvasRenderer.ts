@@ -17,8 +17,6 @@ export const useCanvasRenderer = ({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
     for (const layer of [...layers].reverse()) {
       if (!layer.visible) continue;
 
@@ -34,5 +32,5 @@ export const useCanvasRenderer = ({
         );
       }
     }
-  }, [canvasRef, layers]);
+  }, [layers]);
 };
