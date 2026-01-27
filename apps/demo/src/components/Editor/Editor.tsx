@@ -10,9 +10,7 @@ import styles from "./Editor.module.scss";
 
 export const Editor = () => {
   const { focused } = useFloatingWindows();
-  const { documentLayers } = useDocumentLayers({
-    documentId: focused || "",
-  });
+  const { documentLayers } = useDocumentLayers({ documentId: focused || "" });
 
   return (
     <div id="editor" className={styles.root}>
@@ -28,7 +26,7 @@ export const Editor = () => {
           <Library />
         </div>
         <div className={styles.panel}>
-          <Layers layers={documentLayers} />
+          <Layers layers={documentLayers} documentId={focused} />
         </div>
       </aside>
       <main className={styles.main}>

@@ -24,7 +24,11 @@ export const reducer = (state: State, { type, payload }: Action): State => {
 
       newWindows.delete(id);
 
-      return { ...state, windows: newWindows };
+      return {
+        ...state,
+        windows: newWindows,
+        focused: state.focused === id ? undefined : state.focused,
+      };
     }
     case "SET_TITLE": {
       const { id, title } = payload;
