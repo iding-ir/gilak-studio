@@ -1,6 +1,7 @@
 import { type RefObject, useRef } from "react";
 
 import { findContentAtPoint } from "../methods/find-content-at-point";
+import { renderCanvasContent } from "../methods/render-canvas-content";
 import type { CanvasContent } from "../types/canvas";
 import { useCanvas } from "./useCanvas";
 import { useCanvasPointer } from "./useCanvasPointer";
@@ -33,9 +34,22 @@ export const useMove = ({
 
       content.current = findContentAtPoint({ contents, point });
     },
-    onDrag: () => {
+    onDrag: ({ point }) => {
       if (!content.current) return;
+
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+
       hasMoved.current = true;
+
+      renderCanvasContent({
+        ctx,
+        contents,
+        followPoint: { id: content.current.id, position: point },
+      });
     },
     onUp: ({ point }) => {
       if (!content.current) return;

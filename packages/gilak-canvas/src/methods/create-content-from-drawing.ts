@@ -11,12 +11,14 @@ export const createContentFromDrawing = ({
   stroke,
   documentSize,
 }: CreateContentFromDrawingParams) => {
-  const id = randomId({ prefix: "drawing-" });
-  const type = "drawing";
-  const position = { x: documentSize.w / 2, y: documentSize.h / 2 };
-  const size = documentSize;
-  const item = { strokes: [stroke] };
-  const content: CanvasContent = { id, type, position, size, item };
+  const canvasContent: CanvasContent = {
+    id: randomId({ prefix: "drawing-" }),
+    type: "drawing",
+    position: { x: documentSize.w / 2, y: documentSize.h / 2 },
+    size: documentSize,
+    item: { strokes: [stroke] },
+    visible: true,
+  };
 
-  return content;
+  return canvasContent;
 };

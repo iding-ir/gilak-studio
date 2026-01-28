@@ -16,18 +16,22 @@ export const createContentFromImage = async ({
   pointer,
   documentSize,
 }: CreateContentFromImageParams) => {
-  const id = randomId({ prefix: "content-" });
-  const type = "image";
   const imageItem = data as ImageItem;
   const blob = await fetch(imageItem.src).then((r) => r.blob());
-  const item = await createImageBitmap(blob);
-  const { width: itemWidth, height: itemHeight } = item;
-  const position = { x: pointer.x, y: pointer.y };
+  const image = await createImageBitmap(blob);
+  const { width: itemWidth, height: itemHeight } = image;
   const widthRatio = documentSize.w / itemWidth;
   const heightRatio = documentSize.h / itemHeight;
   const ratio = RATIO * Math.min(widthRatio, heightRatio);
-  const size = { w: itemWidth * ratio, h: itemHeight * ratio };
-  const content: CanvasContent = { id, type, item, position, size };
 
-  return content;
+  const canvasContent: CanvasContent = {
+    id: randomId({ prefix: "image-" }),
+    type: "image",
+    item: { image },
+    position: { x: pointer.x, y: pointer.y },
+    size: { w: itemWidth * ratio, h: itemHeight * ratio },
+    visible: true,
+  };
+
+  return canvasContent;
 };

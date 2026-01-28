@@ -12,11 +12,14 @@ export type CanvasItemBase = {
   id: string;
   position: Position;
   size: Size;
+  visible: boolean;
 };
 
 export type ImageItem = CanvasItemBase & {
   type: "image";
-  item: ImageBitmap;
+  item: {
+    image: ImageBitmap;
+  };
 };
 
 export type TextItem = CanvasItemBase & {
