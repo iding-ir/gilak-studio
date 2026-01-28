@@ -5,7 +5,11 @@ import { drawStrokes } from "./draw-strokes";
 export type RenderCanvasContentArgs = {
   ctx: CanvasRenderingContext2D;
   contents: CanvasContent[];
-  followPoint?: { id: CanvasContent["id"]; position: Position };
+  followPoint?: {
+    id: CanvasContent["id"];
+    position: Position;
+    offset: Position;
+  };
 };
 
 export const renderCanvasContent = ({
@@ -17,13 +21,20 @@ export const renderCanvasContent = ({
 
   contents.forEach(({ id, type, item, position, size }) => {
     const pos = id === followPoint?.id ? followPoint.position : position;
+    const off = id === followPoint?.id ? followPoint.offset : { x: 0, y: 0 };
 
     switch (type) {
       case "drawing":
-        drawStrokes({ ctx, strokes: item.strokes, position: pos, size });
+        drawStrokes({
+          ctx,
+          strokes: item.strokes,
+          position: pos,
+          size,
+          offset: off,
+        });
         break;
       case "image":
-        drawImage({ ctx, image: item.image, position: pos, size });
+        drawImage({ ctx, image: item.image, position: pos, size, offset: off });
         break;
       default:
         break;

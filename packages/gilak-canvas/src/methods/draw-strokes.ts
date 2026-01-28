@@ -1,11 +1,13 @@
 import type { DrawingStroke, Position, Size } from "../types/canvas";
 import { drawBrush } from "./draw-brush";
+import { getCornerFromCenter } from "./get-corner-from-center";
 
 export type DrawStrokesArgs = {
   ctx: CanvasRenderingContext2D;
   strokes: DrawingStroke[];
   position: Position;
   size: Size;
+  offset?: Position;
 };
 
 export const drawStrokes = ({
@@ -13,6 +15,7 @@ export const drawStrokes = ({
   strokes,
   position,
   size,
+  offset = { x: 0, y: 0 },
 }: DrawStrokesArgs) => {
   strokes.forEach(({ points, color, brushSize, brushShape }) => {
     ctx.save();
@@ -28,14 +31,10 @@ export const drawStrokes = ({
         color,
         brushSize,
         brushShape,
-        point: {
-          x: points[i].x + position.x - size.w / 2,
-          y: points[i].y + position.y - size.h / 2,
-        },
-        prevPoint: {
-          x: points[i - 1]?.x + position.x - size.w / 2,
-          y: points[i - 1]?.y + position.y - size.h / 2,
-        },
+        point: getCornerFromCenter(position, size, offset, [points[i]]),
+        prevPoint:
+          points[i - 1] &&
+          getCornerFromCenter(position, size, offset, [points[i - 1]]),
       });
     }
   });

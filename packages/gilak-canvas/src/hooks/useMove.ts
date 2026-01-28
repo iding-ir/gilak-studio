@@ -1,6 +1,7 @@
 import { type RefObject, useRef } from "react";
 
 import { findContentAtPoint } from "../methods/find-content-at-point";
+import { getOffsetPoint } from "../methods/get-offset-point";
 import { renderCanvasContent } from "../methods/render-canvas-content";
 import type { CanvasContent } from "../types/canvas";
 import { useCanvas } from "./useCanvas";
@@ -20,7 +21,7 @@ export const useMove = ({
   onChange,
 }: UseMoveArgs) => {
   const hasMoved = useRef<boolean>(false);
-  const content = useRef<CanvasContent | null>(null);
+  const content = useRef<ReturnType<typeof findContentAtPoint>>(null);
   const { updateContent } = useCanvas();
 
   useCanvasPointer({
@@ -36,10 +37,8 @@ export const useMove = ({
     },
     onDrag: ({ point }) => {
       if (!content.current) return;
-
       const canvas = canvasRef.current;
       if (!canvas) return;
-
       const ctx = canvas.getContext("2d");
       if (!ctx) return;
 
@@ -48,7 +47,11 @@ export const useMove = ({
       renderCanvasContent({
         ctx,
         contents,
-        followPoint: { id: content.current.id, position: point },
+        followPoint: {
+          id: content.current.content.id,
+          position: point,
+          offset: content.current.offset,
+        },
       });
     },
     onUp: ({ point }) => {
@@ -57,7 +60,10 @@ export const useMove = ({
 
       hasMoved.current = false;
 
-      updateContent({ ...content.current, position: point });
+      updateContent({
+        ...content.current.content,
+        position: getOffsetPoint(point, content.current.offset),
+      });
       onChange?.();
     },
   });
