@@ -1,16 +1,16 @@
-import { type RefObject } from "react";
+import { useRef } from "react";
 
-import { drawBrush } from "../methods";
 import type { BrushShape, BrushSize } from "../types";
+import type { DrawingStroke } from "../types/canvas";
 import { useCanvasPointer } from "./useCanvasPointer";
 
 export type UseDrawingProps = {
-  canvasRef: RefObject<HTMLCanvasElement | null>;
+  canvasRef: React.RefObject<HTMLCanvasElement | null>;
   enabled: boolean;
   color: string;
   brushSize: BrushSize;
   brushShape: BrushShape;
-  onChange?: () => void;
+  onStrokeComplete?: (stroke: DrawingStroke) => void;
 };
 
 export const useDrawing = ({
@@ -19,28 +19,29 @@ export const useDrawing = ({
   color,
   brushSize,
   brushShape,
-  onChange,
+  onStrokeComplete,
 }: UseDrawingProps) => {
+  const currentStrokeRef = useRef<DrawingStroke | null>(null);
+
   useCanvasPointer({
     canvasRef,
     enabled,
     onDown: ({ point }) => {
-      onChange?.();
-
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-      const ctx = canvas.getContext("2d");
-      if (!ctx) return;
-
-      drawBrush({ ctx, brushSize, brushShape, color, point, prevPoint: null });
+      currentStrokeRef.current = {
+        color,
+        brushSize,
+        brushShape,
+        points: [point],
+      };
     },
-    onDrag: ({ point, prevPoint }) => {
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-      const ctx = canvas.getContext("2d");
-      if (!ctx) return;
-
-      drawBrush({ ctx, brushSize, brushShape, color, point, prevPoint });
+    onDrag: ({ point }) => {
+      currentStrokeRef.current?.points.push(point);
+    },
+    onUp: () => {
+      if (currentStrokeRef.current) {
+        onStrokeComplete?.(currentStrokeRef.current);
+        currentStrokeRef.current = null;
+      }
     },
   });
 };

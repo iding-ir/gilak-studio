@@ -20,6 +20,8 @@ export {
 // Methods
 export type { ImageFormat } from "./methods/canvas-to-blob";
 export { canvasToBlob } from "./methods/canvas-to-blob";
+export { createContentFromDrawing } from "./methods/create-content-from-drawing";
+export { createContentFromImage } from "./methods/create-content-from-image";
 export { downloadCanvas } from "./methods/download-canvas";
 export type { DrawBrushProps } from "./methods/draw-brush";
 export { drawBrush } from "./methods/draw-brush";

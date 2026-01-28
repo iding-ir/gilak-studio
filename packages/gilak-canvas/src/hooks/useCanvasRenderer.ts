@@ -1,5 +1,6 @@
 import { type RefObject, useEffect } from "react";
 
+import { drawStroke } from "../methods/draw-stroke";
 import type { CanvasContent } from "../types/canvas";
 
 type UseCanvasRendererArgs = {
@@ -21,14 +22,25 @@ export const useCanvasRenderer = ({
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    contents.forEach(({ item, position, size }) => {
-      ctx.drawImage(
-        item,
-        position.x - size.w / 2,
-        position.y - size.h / 2,
-        size.w,
-        size.h,
-      );
+    contents.forEach((content) => {
+      switch (content.type) {
+        case "drawing":
+          content.item.strokes.forEach((stroke) => {
+            drawStroke(ctx, stroke);
+          });
+          break;
+        case "image":
+          ctx.drawImage(
+            content.item,
+            content.position.x - content.size.w / 2,
+            content.position.y - content.size.h / 2,
+            content.size.w,
+            content.size.h,
+          );
+          break;
+        default:
+          break;
+      }
     });
   }, [contents, canvasRef]);
 };

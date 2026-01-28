@@ -11,6 +11,7 @@ import {
 import { useCanvas } from "../../hooks/useCanvas";
 import { useCanvasRenderer } from "../../hooks/useCanvasRenderer";
 import { useMove } from "../../hooks/useMove";
+import { createContentFromDrawing } from "../../methods/create-content-from-drawing";
 import { getCursorColor } from "../../methods/get-cursor-color";
 import { type BrushShape, type BrushSize } from "../../types";
 import { Canvas } from "../Canvas";
@@ -51,7 +52,7 @@ export const DrawingCanvas = ({
   onChange,
   ...props
 }: DrawingCanvasProps) => {
-  const { contents } = useCanvas();
+  const { contents, addContent } = useCanvas();
 
   useCanvasSize({
     canvasRef,
@@ -65,7 +66,16 @@ export const DrawingCanvas = ({
     color,
     brushSize,
     brushShape,
-    onChange,
+    onStrokeComplete: (stroke) => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+
+      const documentSize = { w: canvas.width, h: canvas.height };
+      const content = createContentFromDrawing({ stroke, documentSize });
+
+      addContent(content);
+      onChange?.();
+    },
   });
   useFill({
     canvasRef,

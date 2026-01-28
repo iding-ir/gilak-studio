@@ -1,7 +1,7 @@
 import type { RefObject } from "react";
 import { useEffect } from "react";
 
-import { parseSize } from "../methods";
+import { parseSize } from "../methods/parse-size";
 import { storeCtx } from "../methods/store-ctx";
 
 export type UseCanvasSizeArgs = {

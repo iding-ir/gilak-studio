@@ -1,7 +1,7 @@
 import type { RefObject } from "react";
 import { useEffect } from "react";
 
-import { drawRandomEffect } from "../../methods";
+import { drawRandomEffect } from "../../methods/draw-random-effect";
 import type { CanvasProps } from "../Canvas";
 import { Canvas } from "../Canvas";
 

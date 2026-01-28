@@ -1,7 +1,7 @@
 import type { RefObject } from "react";
 import { useRef } from "react";
 
-import { drawBrush } from "../methods";
+import { drawBrush } from "../methods/draw-brush";
 import type { BrushShape, BrushSize } from "../types";
 import { useCanvasPointer } from "./useCanvasPointer";
 
