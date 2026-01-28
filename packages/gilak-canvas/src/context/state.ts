@@ -1,9 +1,11 @@
+import { type History, history } from "@gilak/utils";
+
 import type { CanvasContent } from "../types/canvas";
 
 export type State = {
-  contents: Map<string, CanvasContent>;
+  contentsHistory: History<Map<string, CanvasContent>>;
 };
 
 export const initialState: State = {
-  contents: new Map(),
+  contentsHistory: history.createHistory(new Map()),
 };

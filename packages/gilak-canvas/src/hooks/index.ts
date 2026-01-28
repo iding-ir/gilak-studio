@@ -1,5 +1,3 @@
-export type { CanvasHistory } from "./useCanvasHistory";
-export { useCanvasHistory } from "./useCanvasHistory";
 export { useCanvasPointer } from "./useCanvasPointer";
 export { useCanvasSize } from "./useCanvasSize";
 export { useCursor } from "./useCursor";

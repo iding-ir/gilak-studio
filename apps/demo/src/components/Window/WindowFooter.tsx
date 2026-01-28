@@ -1,4 +1,4 @@
-import { type CanvasHistory } from "@gilak/canvas";
+import { useCanvas } from "@gilak/canvas";
 import { IconButton } from "@gilak/components";
 import { t } from "@gilak/localization";
 import { ZoomSelector } from "@gilak/resizable-screen";
@@ -7,8 +7,8 @@ import IconRedo from "../../assets/icon-redo.svg?url";
 import IconUndo from "../../assets/icon-undo.svg?url";
 import styles from "./WindowFooter.module.scss";
 
-export const WindowFooter = ({ history }: { history: CanvasHistory }) => {
-  const { undo, redo, canUndo, canRedo } = history;
+export const WindowFooter = () => {
+  const { canRedo, canUndo, redo, undo } = useCanvas();
 
   return (
     <div className={styles.root}>

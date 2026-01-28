@@ -1,6 +1,7 @@
+import { history } from "@gilak/utils";
 import { useCallback } from "react";
 
-import { actions, selectAllContents, useCanvasContext } from "../context";
+import { actions, useCanvasContext } from "../context";
 import type { CanvasContent } from "../types/canvas";
 
 export const useCanvas = () => {
@@ -31,11 +32,23 @@ export const useCanvas = () => {
     dispatch(actions.clearContents());
   }, [dispatch]);
 
+  const redo = useCallback(() => {
+    dispatch(actions.redo());
+  }, [dispatch]);
+
+  const undo = useCallback(() => {
+    dispatch(actions.undo());
+  }, [dispatch]);
+
   return {
-    contents: selectAllContents(state),
+    state,
+    canUndo: history.canUndo(state.contentsHistory),
+    canRedo: history.canRedo(state.contentsHistory),
     addContent,
     removeContent,
     updateContent,
     clearContents,
+    redo,
+    undo,
   };
 };

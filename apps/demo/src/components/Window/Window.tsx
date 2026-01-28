@@ -2,7 +2,6 @@ import {
   createContentFromImage,
   DrawingCanvas,
   useCanvas,
-  useCanvasHistory,
 } from "@gilak/canvas";
 import { MagnifierProvider } from "@gilak/color-picker";
 import { DropZone } from "@gilak/drag-n-drop";
@@ -50,13 +49,6 @@ export const Window = ({ id }: WindowProps) => {
   const [documentHeight, setDocumentHeight] = useState(defaultDocumentSize.h);
   const [openSettings, setOpenSettings] = useState(false);
   const { title } = useFloatingWindow(id);
-  const history = useCanvasHistory({
-    canvasRef,
-    onChange: ({ width, height }) => {
-      setDocumentWidth(width);
-      setDocumentHeight(height);
-    },
-  });
   const { addContent } = useCanvas();
   const handleSelectColor = (color: string) => {
     dispatch(setColor(color));
@@ -68,7 +60,7 @@ export const Window = ({ id }: WindowProps) => {
         id={id}
         title={title}
         editableTitle
-        footer={<WindowFooter history={history} />}
+        footer={<WindowFooter />}
         actions={
           <WindowActions
             id={id}
@@ -100,7 +92,6 @@ export const Window = ({ id }: WindowProps) => {
                 });
 
                 addContent(content);
-                history.snapshot();
               }}
             >
               <DrawingCanvas
@@ -116,7 +107,6 @@ export const Window = ({ id }: WindowProps) => {
                 tolerance={tolerance}
                 width={documentWidth}
                 height={documentHeight}
-                onChange={history.snapshot}
               />
             </DropZone>
           </MagnifierProvider>

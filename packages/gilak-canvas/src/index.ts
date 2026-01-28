@@ -5,15 +5,16 @@ export type { DrawingCanvasProps } from "./components/DrawingCanvas";
 export { DrawingCanvas } from "./components/DrawingCanvas";
 export type { RandomCanvasProps } from "./components/RandomCanvas";
 export { RandomCanvas } from "./components/RandomCanvas";
-export type { CanvasHistory } from "./hooks/";
 
 // Context
 export type { ContextValue } from "./context";
 export {
   CanvasContext,
   CanvasProvider,
-  selectAllContents,
   selectContentById,
+  selectCurrentContents,
+  selectNextContents,
+  selectPreviousContents,
   useCanvasContext,
 } from "./context";
 
@@ -34,7 +35,6 @@ export { fillArea } from "./methods/fill-area";
 
 // Hooks
 export { useCanvas } from "./hooks/useCanvas";
-export { useCanvasHistory } from "./hooks/useCanvasHistory";
 export { useCanvasPointer } from "./hooks/useCanvasPointer";
 export { useCanvasRenderer } from "./hooks/useCanvasRenderer";
 export type { UseCanvasSizeArgs } from "./hooks/useCanvasSize";

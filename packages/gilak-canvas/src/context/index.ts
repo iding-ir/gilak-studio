@@ -14,7 +14,12 @@ export { CanvasProvider } from "./provider";
 export { reducer } from "./reducer";
 
 // Selectors:
-export { selectAllContents, selectContentById } from "./selectors";
+export {
+  selectContentById,
+  selectCurrentContents,
+  selectNextContents,
+  selectPreviousContents,
+} from "./selectors";
 
 // State:
 export type { State } from "./state";

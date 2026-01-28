@@ -1,3 +1,4 @@
+import { selectCurrentContents } from "@gilak/canvas/context";
 import clsx from "clsx";
 import { type RefObject } from "react";
 
@@ -32,7 +33,6 @@ export type DrawingCanvasProps = {
   height?: string | number;
   tolerance: number;
   className?: string;
-  onChange?: () => void;
 };
 
 export const DrawingCanvas = ({
@@ -49,16 +49,14 @@ export const DrawingCanvas = ({
   height,
   tolerance,
   className,
-  onChange,
   ...props
 }: DrawingCanvasProps) => {
-  const { contents, addContent } = useCanvas();
+  const { state, addContent } = useCanvas();
 
   useCanvasSize({
     canvasRef,
     width,
     height,
-    onChange,
   });
   useDrawing({
     canvasRef,
@@ -74,7 +72,6 @@ export const DrawingCanvas = ({
       const content = createContentFromDrawing({ stroke, documentSize });
 
       addContent(content);
-      onChange?.();
     },
   });
   useFill({
@@ -82,22 +79,19 @@ export const DrawingCanvas = ({
     enabled: enabledFill,
     color: backgroundColor,
     tolerance,
-    onChange,
   });
   useEraser({
     canvasRef,
     enabled: enabledEraser,
     brushSize,
     brushShape,
-    onChange,
   });
   useMove({
     canvasRef,
     enabled: enabledMove,
-    contents,
-    onChange,
+    contents: selectCurrentContents(state),
   });
-  useCanvasRenderer({ canvasRef, contents });
+  useCanvasRenderer({ canvasRef, contents: selectCurrentContents(state) });
 
   const { cursorRef } = useCursor({
     canvasRef,

@@ -36,3 +36,6 @@ export {
 
 // String
 export { randomId } from "./string/random-id";
+
+// History
+export { type History, history } from "./history/history";
