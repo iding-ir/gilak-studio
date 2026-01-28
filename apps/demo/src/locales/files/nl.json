@@ -24,7 +24,8 @@
     "size": "Grootte",
     "colorPicker": "Kleurkiezer",
     "fill": "Vulgereedschap",
-    "tolerance": "Tolerantie"
+    "tolerance": "Tolerantie",
+    "move": "Verplaats-gereedschap"
   },
   "settings": {
     "title": "Instellingen",

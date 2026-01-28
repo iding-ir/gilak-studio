@@ -24,7 +24,8 @@
     "size": "Size",
     "colorPicker": "Color Picker",
     "fill": "Fill Tool",
-    "tolerance": "Tolerance"
+    "tolerance": "Tolerance",
+    "move": "Move Tool"
   },
   "settings": {
     "title": "Settings",

@@ -1,3 +1,4 @@
+// Components
 export type { CanvasProps } from "./components/Canvas";
 export { Canvas } from "./components/Canvas";
 export type { DrawingCanvasProps } from "./components/DrawingCanvas";
@@ -5,6 +6,16 @@ export { DrawingCanvas } from "./components/DrawingCanvas";
 export type { RandomCanvasProps } from "./components/RandomCanvas";
 export { RandomCanvas } from "./components/RandomCanvas";
 export type { CanvasHistory } from "./hooks/";
+
+// Context
+export type { ContextValue } from "./context";
+export {
+  CanvasContext,
+  CanvasProvider,
+  selectAllContents,
+  selectContentById,
+  useCanvasContext,
+} from "./context";
 
 // Methods
 export type { ImageFormat } from "./methods/canvas-to-blob";
@@ -20,8 +31,12 @@ export type { FillAreaArgs } from "./methods/fill-area";
 export { fillArea } from "./methods/fill-area";
 
 // Hooks
+export { useCanvas } from "./hooks/useCanvas";
 export { useCanvasHistory } from "./hooks/useCanvasHistory";
 export { useCanvasPointer } from "./hooks/useCanvasPointer";
+export { useCanvasRenderer } from "./hooks/useCanvasRenderer";
+export type { UseCanvasSizeArgs } from "./hooks/useCanvasSize";
+export { useCanvasSize } from "./hooks/useCanvasSize";
 export type { UseCursorArgs } from "./hooks/useCursor";
 export { useCursor } from "./hooks/useCursor";
 export type { UseDrawingProps } from "./hooks/useDrawing";
@@ -30,6 +45,8 @@ export type { UseEraserProps } from "./hooks/useEraser";
 export { useEraser } from "./hooks/useEraser";
 export type { UseFillArgs } from "./hooks/useFill";
 export { useFill } from "./hooks/useFill";
+export type { UseMoveArgs } from "./hooks/useMove";
+export { useMove } from "./hooks/useMove";
 
 // Types
 export type {

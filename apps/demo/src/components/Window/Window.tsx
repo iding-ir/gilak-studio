@@ -1,4 +1,4 @@
-import { DrawingCanvas, useCanvasHistory } from "@gilak/canvas";
+import { DrawingCanvas, useCanvas, useCanvasHistory } from "@gilak/canvas";
 import { MagnifierProvider } from "@gilak/color-picker";
 import { DropZone } from "@gilak/drag-n-drop";
 import { FloatingWindow } from "@gilak/floating-window";
@@ -22,9 +22,7 @@ import {
 } from "../../features/color/color-slice";
 import { selectSettingsDocument } from "../../features/settings/settings-slice";
 import { selectTolerance, selectTool } from "../../features/tools/tools.slice";
-import { useCanvasRenderer } from "../../hooks/useCanvasRenderer";
-import { createContentFormImage } from "../../methods/create-content-form-image";
-import type { ImageContent } from "../../types";
+import { createContentFromImage } from "../../methods/create-content-form-image";
 import { DocumentSettings } from "../DocumentSettings";
 import styles from "./Window.module.scss";
 import { WindowActions } from "./WindowActions";
@@ -55,9 +53,7 @@ export const Window = ({ id }: WindowProps) => {
       setDocumentHeight(height);
     },
   });
-  const [content, setContent] = useState<ImageContent>();
-  useCanvasRenderer({ canvasRef, content });
-
+  const { addContent } = useCanvas();
   const handleSelectColor = (color: string) => {
     dispatch(setColor(color));
   };
@@ -92,14 +88,14 @@ export const Window = ({ id }: WindowProps) => {
               onDrop={async ({ data, pointer }) => {
                 if (!pointer) return;
 
-                const content = await createContentFormImage({
+                const content = await createContentFromImage({
                   data,
                   pointer,
                   documentWidth,
                   documentHeight,
                 });
 
-                setContent(content);
+                addContent(content);
                 history.snapshot();
               }}
             >
@@ -108,6 +104,7 @@ export const Window = ({ id }: WindowProps) => {
                 enabledDrawing={selectedTool === "BRUSH"}
                 enabledFill={selectedTool === "FILL"}
                 enabledEraser={selectedTool === "ERASER"}
+                enabledMove={selectedTool === "MOVE"}
                 color={color}
                 backgroundColor={backgroundColor}
                 brushSize={brushSize}

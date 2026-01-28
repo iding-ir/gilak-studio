@@ -1,4 +1,3 @@
-import { getCursorColor } from "@gilak/canvas/methods/get-cursor-color";
 import clsx from "clsx";
 import { type RefObject } from "react";
 
@@ -9,6 +8,10 @@ import {
   useEraser,
   useFill,
 } from "../../hooks";
+import { useCanvas } from "../../hooks/useCanvas";
+import { useCanvasRenderer } from "../../hooks/useCanvasRenderer";
+import { useMove } from "../../hooks/useMove";
+import { getCursorColor } from "../../methods/get-cursor-color";
 import { type BrushShape, type BrushSize } from "../../types";
 import { Canvas } from "../Canvas";
 import { Cursor } from "../Cursor";
@@ -18,7 +21,8 @@ export type DrawingCanvasProps = {
   canvasRef: RefObject<HTMLCanvasElement | null>;
   enabledDrawing: boolean;
   enabledFill: boolean;
-  enabledEraser?: boolean;
+  enabledEraser: boolean;
+  enabledMove: boolean;
   color: string;
   backgroundColor: string;
   brushSize: BrushSize;
@@ -34,7 +38,8 @@ export const DrawingCanvas = ({
   canvasRef,
   enabledDrawing,
   enabledFill,
-  enabledEraser = false,
+  enabledEraser,
+  enabledMove,
   color,
   backgroundColor,
   brushSize,
@@ -46,6 +51,8 @@ export const DrawingCanvas = ({
   onChange,
   ...props
 }: DrawingCanvasProps) => {
+  const { contents } = useCanvas();
+
   useCanvasSize({
     canvasRef,
     width,
@@ -74,6 +81,13 @@ export const DrawingCanvas = ({
     brushShape,
     onChange,
   });
+  useMove({
+    canvasRef,
+    enabled: enabledMove,
+    contents,
+    onChange,
+  });
+  useCanvasRenderer({ canvasRef, contents });
 
   const { cursorRef } = useCursor({
     canvasRef,

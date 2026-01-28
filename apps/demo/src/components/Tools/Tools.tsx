@@ -20,6 +20,7 @@ import IconColorPicker from "../../assets/icon-color-picker.svg?url";
 import IconSwatch from "../../assets/icon-color-swatch.svg?url";
 import IconEraserTool from "../../assets/icon-eraser.svg?url";
 import IconFillTool from "../../assets/icon-fill-tool.svg?url";
+import IconMoveTool from "../../assets/icon-move-tool.svg?url";
 import { COLOR_PALETTE } from "../../constants";
 import {
   selectBrushShape,
@@ -178,6 +179,14 @@ export const Tools = () => {
           tooltip={t("app:tools.tolerance")}
           ariaLabel={t("app:tools.tolerance")}
           onChange={(value) => handleToleranceChange(value as number)}
+        />
+      </li>
+      <li>
+        <IconButton
+          icon={IconMoveTool}
+          selected={selectedTool === "MOVE"}
+          tooltip={t("app:tools.move")}
+          onClick={() => handleToggleTool("MOVE")}
         />
       </li>
     </ul>

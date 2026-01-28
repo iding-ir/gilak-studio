@@ -1,3 +1,4 @@
+import { CanvasProvider } from "@gilak/canvas";
 import { FloatingWindows, useFloatingWindows } from "@gilak/floating-window";
 
 import { WelcomeScreen } from "../WelcomeScreen";
@@ -11,7 +12,9 @@ export const Windows = () => {
       {windows.size === 0 && <WelcomeScreen />}
       <FloatingWindows>
         {Array.from(windows.values()).map(({ id }) => (
-          <Window key={id} id={id} />
+          <CanvasProvider key={id}>
+            <Window id={id} />
+          </CanvasProvider>
         ))}
       </FloatingWindows>
     </>
