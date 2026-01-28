@@ -1,13 +1,1 @@
-{
-  "layers": {
-    "header": "Lagen",
-    "addLayer": "Laag toevoegen",
-    "defaultLayerName": "Laag {{number}}",
-    "moveUp": "Omhoog verplaatsen",
-    "moveDown": "Omlaag verplaatsen",
-    "delete": "Verwijderen",
-    "hide": "Verbergen",
-    "show": "Weergeven",
-    "noLayers": "Nog geen lagen"
-  }
-}
+{}

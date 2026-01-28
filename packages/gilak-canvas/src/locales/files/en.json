@@ -1,13 +1,1 @@
-{
-  "layers": {
-    "header": "Layers",
-    "addLayer": "Add Layer",
-    "defaultLayerName": "Layer {{number}}",
-    "moveUp": "Move up",
-    "moveDown": "Move down",
-    "delete": "Delete",
-    "hide": "Hide",
-    "show": "Show",
-    "noLayers": "No layers yet"
-  }
-}
+{}

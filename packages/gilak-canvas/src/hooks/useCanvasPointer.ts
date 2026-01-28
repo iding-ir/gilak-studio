@@ -1,6 +1,6 @@
 import { type RefObject, useEffect, useRef } from "react";
 
-import type { Point } from "../types/point";
+import type { Point } from "../types";
 
 export type Response = {
   event: PointerEvent;

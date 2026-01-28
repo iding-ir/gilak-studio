@@ -1,10 +1,4 @@
-import {
-  DrawingCanvas,
-  type LayerContent,
-  useCanvasHistory,
-  useDocumentLayers,
-  useLayers,
-} from "@gilak/canvas";
+import { DrawingCanvas, useCanvasHistory } from "@gilak/canvas";
 import { MagnifierProvider } from "@gilak/color-picker";
 import { DropZone } from "@gilak/drag-n-drop";
 import { FloatingWindow } from "@gilak/floating-window";
@@ -30,6 +24,7 @@ import { selectSettingsDocument } from "../../features/settings/settings-slice";
 import { selectTolerance, selectTool } from "../../features/tools/tools.slice";
 import { useCanvasRenderer } from "../../hooks/useCanvasRenderer";
 import { createContentFormImage } from "../../methods/create-content-form-image";
+import type { ImageContent } from "../../types";
 import { DocumentSettings } from "../DocumentSettings";
 import styles from "./Window.module.scss";
 import { WindowActions } from "./WindowActions";
@@ -60,19 +55,11 @@ export const Window = ({ id }: WindowProps) => {
       setDocumentHeight(height);
     },
   });
-  const [content, setContent] = useState<LayerContent>();
-  const { addToLayerContent } = useLayers();
-  const { focusedLayer, removeDocumentLayers } = useDocumentLayers({
-    documentId: id,
-  });
+  const [content, setContent] = useState<ImageContent>();
   useCanvasRenderer({ canvasRef, content });
 
   const handleSelectColor = (color: string) => {
     dispatch(setColor(color));
-  };
-
-  const onCloseWindow = () => {
-    removeDocumentLayers();
   };
 
   return (
@@ -90,7 +77,6 @@ export const Window = ({ id }: WindowProps) => {
           />
         }
         className={styles.root}
-        onClose={onCloseWindow}
       >
         <ResizableScreen>
           <MagnifierProvider
@@ -105,7 +91,6 @@ export const Window = ({ id }: WindowProps) => {
               activeClassName={styles.dragOver}
               onDrop={async ({ data, pointer }) => {
                 if (!pointer) return;
-                if (!focusedLayer) return;
 
                 const content = await createContentFormImage({
                   data,
@@ -114,7 +99,6 @@ export const Window = ({ id }: WindowProps) => {
                   documentHeight,
                 });
 
-                addToLayerContent({ id: focusedLayer.id, content: [content] });
                 setContent(content);
                 history.snapshot();
               }}

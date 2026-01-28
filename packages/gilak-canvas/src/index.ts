@@ -2,26 +2,9 @@ export type { CanvasProps } from "./components/Canvas";
 export { Canvas } from "./components/Canvas";
 export type { DrawingCanvasProps } from "./components/DrawingCanvas";
 export { DrawingCanvas } from "./components/DrawingCanvas";
-export type { LayerCardProps } from "./components/LayerCard";
-export { LayerCard } from "./components/LayerCard";
-export type { LayersProps } from "./components/Layers";
-export { Layers } from "./components/Layers";
 export type { RandomCanvasProps } from "./components/RandomCanvas";
 export { RandomCanvas } from "./components/RandomCanvas";
 export type { CanvasHistory } from "./hooks/";
-
-// Context
-export type { Action, CanvasProviderProps, ContextValue } from "./context";
-export {
-  actions,
-  CanvasContext,
-  CanvasProvider,
-  initialState,
-  reducer,
-  selectLayerById,
-  selectLayers,
-  useCanvasContext,
-} from "./context";
 
 // Methods
 export type { ImageFormat } from "./methods/canvas-to-blob";
@@ -41,22 +24,21 @@ export { useCanvasHistory } from "./hooks/useCanvasHistory";
 export { useCanvasPointer } from "./hooks/useCanvasPointer";
 export type { UseCursorArgs } from "./hooks/useCursor";
 export { useCursor } from "./hooks/useCursor";
-export { useDocumentLayers } from "./hooks/useDocumentLayers";
 export type { UseDrawingProps } from "./hooks/useDrawing";
 export { useDrawing } from "./hooks/useDrawing";
 export type { UseEraserProps } from "./hooks/useEraser";
 export { useEraser } from "./hooks/useEraser";
 export type { UseFillArgs } from "./hooks/useFill";
 export { useFill } from "./hooks/useFill";
-export { useLayers } from "./hooks/useLayers";
 
 // Types
 export type {
   BrushShape,
   BrushSize,
-  CanvasLayer,
-  LayerContent,
   Point,
+  Position,
+  Scale,
+  Size,
 } from "./types";
 export { BRUSH_SHAPES, BRUSH_SIZES } from "./types";
 

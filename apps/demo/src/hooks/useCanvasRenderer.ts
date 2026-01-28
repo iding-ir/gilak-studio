@@ -1,9 +1,10 @@
-import type { LayerContent } from "@gilak/canvas";
 import { type RefObject, useEffect } from "react";
+
+import type { ImageContent } from "../types";
 
 type UseCanvasRendererArgs = {
   canvasRef: RefObject<HTMLCanvasElement | null>;
-  content?: LayerContent;
+  content?: ImageContent;
 };
 
 export const useCanvasRenderer = ({

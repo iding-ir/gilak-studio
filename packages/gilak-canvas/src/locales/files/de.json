@@ -1,13 +1,1 @@
-{
-  "layers": {
-    "header": "Ebenen",
-    "addLayer": "Ebene hinzufügen",
-    "defaultLayerName": "Ebene {{number}}",
-    "moveUp": "Nach oben verschieben",
-    "moveDown": "Nach unten verschieben",
-    "delete": "Löschen",
-    "hide": "Ausblenden",
-    "show": "Anzeigen",
-    "noLayers": "Noch keine Ebenen"
-  }
-}
+{}

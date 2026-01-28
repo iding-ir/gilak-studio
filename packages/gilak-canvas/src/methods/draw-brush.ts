@@ -1,5 +1,4 @@
-import type { BrushShape, BrushSize } from "../types";
-import type { Point } from "../types/point";
+import type { BrushShape, BrushSize, Point } from "../types";
 import { drawShape } from "./draw-shape";
 
 export type DrawBrushProps = {
