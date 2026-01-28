@@ -38,7 +38,7 @@ export const DropZone = <TData,>({
   onDragLeave,
   onDrop,
 }: DropZoneProps<TData>) => {
-  const { data, dragType, canDrop } = useDrop<TData>({
+  const { data, dragType, canDrop, isDragging } = useDrop<TData>({
     zoneId,
     accepts,
     disabled,
@@ -46,6 +46,7 @@ export const DropZone = <TData,>({
 
   useEffect(() => {
     if (!canDrop) return;
+    if (!isDragging) return;
 
     const element = ref.current;
     if (!element) return;
@@ -71,24 +72,31 @@ export const DropZone = <TData,>({
       onDrop?.({ data, dragType, pointer });
     };
 
+    const handleCancel = () => {
+      element.classList.remove(activeClassName);
+    };
+
     element.addEventListener("pointerenter", handleDragEnter);
     element.addEventListener("pointerleave", handleDragLeave);
     element.addEventListener("pointerup", handleDrop);
+    element.addEventListener("pointercancel", handleCancel);
 
     return () => {
       element.removeEventListener("pointerenter", handleDragEnter);
       element.removeEventListener("pointerleave", handleDragLeave);
       element.removeEventListener("pointerup", handleDrop);
+      element.removeEventListener("pointercancel", handleCancel);
     };
   }, [
-    canDrop,
     ref,
     activeClassName,
+    canDrop,
+    data,
+    dragType,
+    isDragging,
     onDragEnter,
     onDragLeave,
     onDrop,
-    data,
-    dragType,
   ]);
 
   return children;

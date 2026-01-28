@@ -1,6 +1,6 @@
 import { type RefObject, useEffect } from "react";
 
-import { drawStroke } from "../methods/draw-stroke";
+import { drawBrush } from "../methods/draw-brush";
 import type { CanvasContent } from "../types/canvas";
 
 type UseCanvasRendererArgs = {
@@ -22,21 +22,46 @@ export const useCanvasRenderer = ({
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    contents.forEach((content) => {
-      switch (content.type) {
+    contents.forEach(({ type, item, position, size }) => {
+      switch (type) {
         case "drawing":
-          content.item.strokes.forEach((stroke) => {
-            drawStroke(ctx, stroke);
+          item.strokes.forEach(({ points, color, brushSize, brushShape }) => {
+            ctx.save();
+            ctx.strokeStyle = color;
+            ctx.lineWidth = brushSize;
+            ctx.lineCap = "round";
+            ctx.lineJoin = "round";
+
+            for (let i = 0; i < points.length; i++) {
+              drawBrush({
+                ctx,
+                color,
+                brushSize,
+                brushShape,
+                point: {
+                  x: points[i].x + position.x - size.w / 2,
+                  y: points[i].y + position.y - size.h / 2,
+                },
+                prevPoint: {
+                  x: points[i - 1]?.x + position.x - size.w / 2,
+                  y: points[i - 1]?.y + position.y - size.h / 2,
+                },
+              });
+            }
+
+            ctx.restore();
           });
           break;
         case "image":
+          ctx.save();
           ctx.drawImage(
-            content.item,
-            content.position.x - content.size.w / 2,
-            content.position.y - content.size.h / 2,
-            content.size.w,
-            content.size.h,
+            item,
+            position.x - size.w / 2,
+            position.y - size.h / 2,
+            size.w,
+            size.h,
           );
+          ctx.restore();
           break;
         default:
           break;

@@ -1,4 +1,4 @@
-import { type RefObject, useState } from "react";
+import { type RefObject, useRef } from "react";
 
 import { findContentAtPoint } from "../methods/find-content-at-point";
 import type { CanvasContent } from "../types/canvas";
@@ -18,7 +18,8 @@ export const useMove = ({
   contents = [],
   onChange,
 }: UseMoveArgs) => {
-  const [content, setContent] = useState<CanvasContent | null>(null);
+  const hasMoved = useRef<boolean>(false);
+  const content = useRef<CanvasContent | null>(null);
   const { updateContent } = useCanvas();
 
   useCanvasPointer({
@@ -30,13 +31,19 @@ export const useMove = ({
       const ctx = canvas.getContext("2d");
       if (!ctx) return;
 
-      const content = findContentAtPoint({ contents, point });
-      setContent(content);
+      content.current = findContentAtPoint({ contents, point });
+    },
+    onDrag: () => {
+      if (!content.current) return;
+      hasMoved.current = true;
     },
     onUp: ({ point }) => {
-      if (!content) return;
+      if (!content.current) return;
+      if (!hasMoved.current) return;
 
-      updateContent({ ...content, position: point });
+      hasMoved.current = false;
+
+      updateContent({ ...content.current, position: point });
       onChange?.();
     },
   });

@@ -5,6 +5,7 @@ import {
 } from "@gilak/canvas";
 import { MagnifierProvider } from "@gilak/color-picker";
 import { DropZone } from "@gilak/drag-n-drop";
+import { useDragNDropContext } from "@gilak/drag-n-drop";
 import { FloatingWindow } from "@gilak/floating-window";
 import { useFloatingWindow } from "@gilak/floating-window";
 import {
@@ -49,6 +50,7 @@ export const Window = ({ id }: WindowProps) => {
   const [documentHeight, setDocumentHeight] = useState(defaultDocumentSize.h);
   const [openSettings, setOpenSettings] = useState(false);
   const { title } = useFloatingWindow(id);
+  const { state: dnd } = useDragNDropContext();
   const { addContent } = useCanvas();
   const handleSelectColor = (color: string) => {
     dispatch(setColor(color));
@@ -96,10 +98,10 @@ export const Window = ({ id }: WindowProps) => {
             >
               <DrawingCanvas
                 canvasRef={canvasRef}
-                enabledDrawing={selectedTool === "BRUSH"}
-                enabledFill={selectedTool === "FILL"}
-                enabledEraser={selectedTool === "ERASER"}
-                enabledMove={selectedTool === "MOVE"}
+                enabledDrawing={selectedTool === "BRUSH" && !dnd.isDragging}
+                enabledFill={selectedTool === "FILL" && !dnd.isDragging}
+                enabledEraser={selectedTool === "ERASER" && !dnd.isDragging}
+                enabledMove={selectedTool === "MOVE" && !dnd.isDragging}
                 color={color}
                 backgroundColor={backgroundColor}
                 brushSize={brushSize}
