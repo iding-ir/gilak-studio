@@ -8,8 +8,8 @@ export const Controls = () => {
   const { view, setView } = useImageLibrary();
 
   return (
-    <Head>
-      <span>{t("imageLibrary:upload.header")}</span>
+    <Head variant="light-ghost">
+      {t("imageLibrary:upload.header")}
       <Toggle
         options={[
           { id: "grid", label: t("imageLibrary:view.grid") },

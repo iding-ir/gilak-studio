@@ -3,18 +3,18 @@
   flex-direction: column;
   gap: var(--spacing-sm);
   padding: var(--spacing-sm);
-  background-color: var(--color-light-xl);
+  background-color: var(--color-dark-xxl);
 
   .message {
     font-size: var(--font-size-xs);
-    color: var(--color-dark-xxl);
+    color: var(--color-light-md);
     text-align: center;
   }
 
   .hint {
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-lg);
-    color: var(--color-dark-xxl);
+    color: var(--color-light-md);
     text-align: center;
   }
 

@@ -9,8 +9,8 @@
   font-weight: var(--font-weight-lg);
   box-shadow: var(--shadow-sm);
   @include solidVariants;
-  @include heightSizes;
-  @include paddingSizes($top: true, $bottom: true, $relation: -1);
+  @include heightSizes($relation: 1);
+  @include fontSizes;
   @include paddingSizes($left: true, $right: true, $relation: -1);
 
   &.frameless {

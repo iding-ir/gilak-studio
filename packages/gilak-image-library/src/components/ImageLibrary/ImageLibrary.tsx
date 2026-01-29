@@ -15,8 +15,8 @@ export const ImageLibrary = ({ itemRenderer }: ImageLibraryProps) => {
   return (
     <ImageLibraryProvider>
       <section className={styles.root} aria-label={t("imageLibrary:title")}>
-        <ImageUploader />
         <Controls />
+        <ImageUploader />
         <ImageItems itemRenderer={itemRenderer} />
       </section>
     </ImageLibraryProvider>

@@ -7,7 +7,7 @@ import {
 import { MagnifierProvider } from "@gilak/color-picker";
 import { DropZone } from "@gilak/drag-n-drop";
 import { useDragNDropContext } from "@gilak/drag-n-drop";
-import { FloatingWindow } from "@gilak/floating-window";
+import { FloatingWindow, useFloatingWindows } from "@gilak/floating-window";
 import { useFloatingWindow } from "@gilak/floating-window";
 import {
   ResizableScreen,
@@ -51,6 +51,7 @@ export const Window = ({ id }: WindowProps) => {
   const [documentHeight, setDocumentHeight] = useState(defaultDocumentSize.h);
   const [openSettings, setOpenSettings] = useState(false);
   const { title } = useFloatingWindow(id);
+  const { focused } = useFloatingWindows();
   const { state: dnd } = useDragNDropContext();
   const { addElement, clearElements } = useCanvas();
 
@@ -64,7 +65,7 @@ export const Window = ({ id }: WindowProps) => {
 
   return (
     <ResizableScreenProvider>
-      <ElementsPortal />
+      {focused === id && <ElementsPortal />}
       <FloatingWindow
         id={id}
         title={title}
