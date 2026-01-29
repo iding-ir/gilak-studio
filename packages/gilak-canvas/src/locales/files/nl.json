@@ -1,11 +1,15 @@
 {
   "elements": {
-    "header": "Elemente",
-    "moveUp": "Nach oben verschieben",
-    "moveDown": "Nach unten verschieben",
-    "delete": "Löschen",
-    "hide": "Verstecken",
-    "show": "Anzeigen",
-    "noElements": "Noch keine Elemente. Beginnen Sie mit der Erstellung!"
+    "header": "Elementen",
+    "moveUp": "Omhoog verplaatsen",
+    "moveDown": "Omlaag verplaatsen",
+    "delete": "Verwijderen",
+    "hide": "Verbergen",
+    "show": "Tonen",
+    "noElements": "Nog geen elementen. Begin met maken!"
+  },
+  "undoRedo": {
+    "undo": "Ongedaan maken",
+    "redo": "Opnieuw"
   }
 }

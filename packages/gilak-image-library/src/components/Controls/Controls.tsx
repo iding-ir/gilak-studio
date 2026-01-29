@@ -8,7 +8,7 @@ export const Controls = () => {
   const { view, setView } = useImageLibrary();
 
   return (
-    <Head variant="light-ghost">
+    <Head variant="dark">
       {t("imageLibrary:upload.header")}
       <Toggle
         options={[

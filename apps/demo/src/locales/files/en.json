@@ -3,8 +3,6 @@
     "title": "Studio",
     "description": "Toolset for creating a canvas editor"
   },
-  "undo": "Undo",
-  "redo": "Redo",
   "navigation": {
     "file": "File",
     "view": "View",

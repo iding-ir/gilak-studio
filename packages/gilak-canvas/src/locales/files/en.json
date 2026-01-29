@@ -7,5 +7,9 @@
     "hide": "Hide",
     "show": "Show",
     "noElements": "No elements yet. Start creating!"
+  },
+  "undoRedo": {
+    "undo": "Undo",
+    "redo": "Redo"
   }
 }

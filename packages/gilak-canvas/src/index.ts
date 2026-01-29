@@ -5,9 +5,10 @@ export type { DrawingCanvasProps } from "./components/DrawingCanvas";
 export { DrawingCanvas } from "./components/DrawingCanvas";
 export { ElementCard } from "./components/ElementCard";
 export { Elements } from "./components/Elements";
-export { ElementsPortal } from "./components/ElementsPortal";
+export { ElementsPortal } from "./components/Elements";
 export type { RandomCanvasProps } from "./components/RandomCanvas";
 export { RandomCanvas } from "./components/RandomCanvas";
+export { UndoRedo, UndoRedoPortal } from "./components/UndoRedo";
 
 // Context
 export type { ContextValue } from "./context";

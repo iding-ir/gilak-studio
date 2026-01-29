@@ -1,9 +1,17 @@
-@mixin solid($color, $bg-color, $reverse: false) {
+@mixin solid($color, $bg-color, $reverse: false, $border: false) {
   @if $reverse {
     color: $bg-color;
     background-color: $color;
+
+    @if $border {
+      border-color: $bg-color;
+    }
   } @else {
     color: $color;
     background-color: $bg-color;
+
+    @if $border {
+      border-color: $color;
+    }
   }
 }

@@ -2,6 +2,7 @@ import {
   createElementFromImage,
   DrawingCanvas,
   ElementsPortal,
+  UndoRedoPortal,
   useCanvas,
 } from "@gilak/canvas";
 import { MagnifierProvider } from "@gilak/color-picker";
@@ -13,6 +14,7 @@ import {
   ResizableScreen,
   ResizableScreenProvider,
 } from "@gilak/resizable-screen";
+import { ZoomSelectorPortal } from "@gilak/resizable-screen";
 import { useRef, useState } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
@@ -65,7 +67,14 @@ export const Window = ({ id }: WindowProps) => {
 
   return (
     <ResizableScreenProvider>
-      {focused === id && <ElementsPortal />}
+      {focused === id && (
+        <>
+          <ElementsPortal />
+          <UndoRedoPortal />
+          <ZoomSelectorPortal />
+        </>
+      )}
+
       <FloatingWindow
         id={id}
         title={title}

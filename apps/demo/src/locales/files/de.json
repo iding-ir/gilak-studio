@@ -3,8 +3,6 @@
     "title": "Studio",
     "description": "Werkzeugsammlung zur Erstellung eines Canvas-Editors"
   },
-  "undo": "Rückgängig",
-  "redo": "Wiederholen",
   "navigation": {
     "file": "Datei",
     "view": "Ansicht",

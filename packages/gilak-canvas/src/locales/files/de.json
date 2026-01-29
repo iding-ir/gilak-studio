@@ -4,8 +4,12 @@
     "moveUp": "Nach oben verschieben",
     "moveDown": "Nach unten verschieben",
     "delete": "Löschen",
-    "hide": "Verstecken",
-    "show": "Anzeigen",
-    "noElements": "Noch keine Elemente. Beginnen Sie mit der Erstellung!"
+    "hide": "Ausblenden",
+    "show": "Einblenden",
+    "noElements": "Noch keine Elemente. Fang an zu erstellen!"
+  },
+  "undoRedo": {
+    "undo": "Rückgängig",
+    "redo": "Wiederholen"
   }
 }

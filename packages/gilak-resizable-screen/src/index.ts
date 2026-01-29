@@ -1,7 +1,7 @@
 // Components
 export type { ResizableScreenProps } from "./components/ResizableScreen/ResizableScreen";
 export { ResizableScreen } from "./components/ResizableScreen/ResizableScreen";
-export { ZoomSelector } from "./components/ZoomSelector/ZoomSelector";
+export { ZoomSelector, ZoomSelectorPortal } from "./components/ZoomSelector";
 
 // Context
 export { useZoomLevelScreenContext } from "./context";
