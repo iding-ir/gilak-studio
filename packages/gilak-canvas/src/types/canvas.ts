@@ -6,25 +6,27 @@ export type Size = { w: number; h: number };
 export type Point = { x: number; y: number };
 export type Scale = { sx: number; sy: number };
 
-export type CanvasContent = ImageItem | DrawingItem | TextItem;
+export type CanvasElement = ImageElement | DrawingElement | TextElement;
 
-export type CanvasItemBase = {
+export type CanvasElementBase = {
   id: string;
   position: Position;
   size: Size;
   visible: boolean;
+  focused: boolean;
+  selected: boolean;
 };
 
-export type ImageItem = CanvasItemBase & {
+export type ImageElement = CanvasElementBase & {
   type: "image";
-  item: {
+  content: {
     image: ImageBitmap;
   };
 };
 
-export type TextItem = CanvasItemBase & {
+export type TextElement = CanvasElementBase & {
   type: "text";
-  item: {
+  content: {
     text: string;
     font: string;
     color: string;
@@ -32,9 +34,9 @@ export type TextItem = CanvasItemBase & {
   };
 };
 
-export type DrawingItem = CanvasItemBase & {
+export type DrawingElement = CanvasElementBase & {
   type: "drawing";
-  item: {
+  content: {
     strokes: DrawingStroke[];
   };
 };

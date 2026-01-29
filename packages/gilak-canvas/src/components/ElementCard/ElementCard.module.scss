@@ -1,0 +1,24 @@
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs);
+  border-radius: var(--radius-md);
+  background-color: var(--color-dark-lg);
+
+  .info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: var(--color-light-sm);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-md);
+  }
+
+  .actions {
+    display: flex;
+    gap: var(--spacing-xs);
+  }
+}

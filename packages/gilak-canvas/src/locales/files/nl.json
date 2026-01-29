@@ -1,1 +1,11 @@
-{}
+{
+  "elements": {
+    "header": "Elemente",
+    "moveUp": "Nach oben verschieben",
+    "moveDown": "Nach unten verschieben",
+    "delete": "Löschen",
+    "hide": "Verstecken",
+    "show": "Anzeigen",
+    "noElements": "Noch keine Elemente. Beginnen Sie mit der Erstellung!"
+  }
+}

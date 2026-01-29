@@ -1,28 +1,28 @@
 import { type RefObject, useRef } from "react";
 
-import { findContentAtPoint } from "../methods/find-content-at-point";
+import { findElementAtPoint } from "../methods/find-element-at-point";
 import { getOffsetPoint } from "../methods/get-offset-point";
-import { renderCanvasContent } from "../methods/render-canvas-content";
-import type { CanvasContent } from "../types/canvas";
+import { renderCanvasElement } from "../methods/render-canvas-element";
+import type { CanvasElement } from "../types/canvas";
 import { useCanvas } from "./useCanvas";
 import { useCanvasPointer } from "./useCanvasPointer";
 
 export type UseMoveArgs = {
   canvasRef: RefObject<HTMLCanvasElement | null>;
   enabled: boolean;
-  contents?: CanvasContent[];
+  elements?: CanvasElement[];
   onChange?: () => void;
 };
 
 export const useMove = ({
   canvasRef,
   enabled,
-  contents = [],
+  elements = [],
   onChange,
 }: UseMoveArgs) => {
   const hasMoved = useRef<boolean>(false);
-  const content = useRef<ReturnType<typeof findContentAtPoint>>(null);
-  const { updateContent } = useCanvas();
+  const element = useRef<ReturnType<typeof findElementAtPoint>>(null);
+  const { updateElement } = useCanvas();
 
   useCanvasPointer({
     canvasRef,
@@ -33,10 +33,10 @@ export const useMove = ({
       const ctx = canvas.getContext("2d");
       if (!ctx) return;
 
-      content.current = findContentAtPoint({ contents, point });
+      element.current = findElementAtPoint({ elements, point });
     },
     onDrag: ({ point }) => {
-      if (!content.current) return;
+      if (!element.current) return;
       const canvas = canvasRef.current;
       if (!canvas) return;
       const ctx = canvas.getContext("2d");
@@ -44,25 +44,25 @@ export const useMove = ({
 
       hasMoved.current = true;
 
-      renderCanvasContent({
+      renderCanvasElement({
         ctx,
-        contents,
+        elements,
         followPoint: {
-          id: content.current.content.id,
+          id: element.current.element.id,
           position: point,
-          offset: content.current.offset,
+          offset: element.current.offset,
         },
       });
     },
     onUp: ({ point }) => {
-      if (!content.current) return;
+      if (!element.current) return;
       if (!hasMoved.current) return;
 
       hasMoved.current = false;
 
-      updateContent({
-        ...content.current.content,
-        position: getOffsetPoint(point, content.current.offset),
+      updateElement({
+        ...element.current.element,
+        position: getOffsetPoint(point, element.current.offset),
       });
       onChange?.();
     },

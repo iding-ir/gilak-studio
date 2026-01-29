@@ -1,1 +1,11 @@
-{}
+{
+  "elements": {
+    "header": "Elements",
+    "moveUp": "Move up",
+    "moveDown": "Move down",
+    "delete": "Delete",
+    "hide": "Hide",
+    "show": "Show",
+    "noElements": "No elements yet. Start creating!"
+  }
+}

@@ -1,17 +1,17 @@
-import type { CanvasContent, Point } from "../types/canvas";
+import type { CanvasElement, Point } from "../types/canvas";
 
-export type FindContentAtPointArgs = {
-  contents: CanvasContent[];
+export type FindElementAtPointArgs = {
+  elements: CanvasElement[];
   point: Point;
 };
 
-export const findContentAtPoint = ({
-  contents,
+export const findElementAtPoint = ({
+  elements,
   point: { x, y },
-}: FindContentAtPointArgs) => {
-  for (let i = contents.length - 1; i >= 0; i--) {
-    const content = contents[i];
-    const { size, position } = content;
+}: FindElementAtPointArgs) => {
+  for (let i = elements.length - 1; i >= 0; i--) {
+    const element = elements[i];
+    const { size, position } = element;
 
     const left = position.x - size.w / 2;
     const right = position.x + size.w / 2;
@@ -24,7 +24,7 @@ export const findContentAtPoint = ({
         y: y - position.y,
       };
 
-      return { content, offset };
+      return { element, offset };
     }
   }
   return null;

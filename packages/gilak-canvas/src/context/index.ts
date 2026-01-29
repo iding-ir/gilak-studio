@@ -15,10 +15,10 @@ export { reducer } from "./reducer";
 
 // Selectors:
 export {
-  selectContentById,
-  selectCurrentContents,
-  selectNextContents,
-  selectPreviousContents,
+  selectCurrentElements,
+  selectElementById,
+  selectNextElements,
+  selectPreviousElements,
 } from "./selectors";
 
 // State:

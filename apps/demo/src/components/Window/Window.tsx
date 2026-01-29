@@ -1,6 +1,7 @@
 import {
-  createContentFromImage,
+  createElementFromImage,
   DrawingCanvas,
+  ElementsPortal,
   useCanvas,
 } from "@gilak/canvas";
 import { MagnifierProvider } from "@gilak/color-picker";
@@ -51,13 +52,19 @@ export const Window = ({ id }: WindowProps) => {
   const [openSettings, setOpenSettings] = useState(false);
   const { title } = useFloatingWindow(id);
   const { state: dnd } = useDragNDropContext();
-  const { addContent } = useCanvas();
+  const { addElement, clearElements } = useCanvas();
+
   const handleSelectColor = (color: string) => {
     dispatch(setColor(color));
   };
 
+  const handleCloseWindow = () => {
+    clearElements();
+  };
+
   return (
     <ResizableScreenProvider>
+      <ElementsPortal />
       <FloatingWindow
         id={id}
         title={title}
@@ -71,6 +78,7 @@ export const Window = ({ id }: WindowProps) => {
           />
         }
         className={styles.root}
+        onClose={handleCloseWindow}
       >
         <ResizableScreen>
           <MagnifierProvider
@@ -87,13 +95,13 @@ export const Window = ({ id }: WindowProps) => {
                 if (!pointer) return;
 
                 const documentSize = { w: documentWidth, h: documentHeight };
-                const content = await createContentFromImage({
+                const element = await createElementFromImage({
                   data,
                   pointer,
                   documentSize,
                 });
 
-                addContent(content);
+                addElement(element);
               }}
             >
               <DrawingCanvas

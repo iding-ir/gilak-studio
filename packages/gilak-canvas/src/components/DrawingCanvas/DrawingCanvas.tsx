@@ -1,4 +1,4 @@
-import { selectCurrentContents } from "@gilak/canvas/context";
+import { selectCurrentElements } from "@gilak/canvas";
 import clsx from "clsx";
 import { type RefObject } from "react";
 
@@ -12,7 +12,7 @@ import {
 import { useCanvas } from "../../hooks/useCanvas";
 import { useCanvasRenderer } from "../../hooks/useCanvasRenderer";
 import { useMove } from "../../hooks/useMove";
-import { createContentFromDrawing } from "../../methods/create-content-from-drawing";
+import { createElementFromDrawing } from "../../methods/create-element-from-drawing";
 import { getCursorColor } from "../../methods/get-cursor-color";
 import { type BrushShape, type BrushSize } from "../../types";
 import { Canvas } from "../Canvas";
@@ -51,7 +51,7 @@ export const DrawingCanvas = ({
   className,
   ...props
 }: DrawingCanvasProps) => {
-  const { state, addContent } = useCanvas();
+  const { state, addElement } = useCanvas();
 
   useCanvasSize({
     canvasRef,
@@ -69,9 +69,9 @@ export const DrawingCanvas = ({
       if (!canvas) return;
 
       const documentSize = { w: canvas.width, h: canvas.height };
-      const content = createContentFromDrawing({ stroke, documentSize });
+      const element = createElementFromDrawing({ stroke, documentSize });
 
-      addContent(content);
+      addElement(element);
     },
   });
   useFill({
@@ -89,9 +89,9 @@ export const DrawingCanvas = ({
   useMove({
     canvasRef,
     enabled: enabledMove,
-    contents: selectCurrentContents(state),
+    elements: selectCurrentElements(state),
   });
-  useCanvasRenderer({ canvasRef, contents: selectCurrentContents(state) });
+  useCanvasRenderer({ canvasRef, elements: selectCurrentElements(state) });
 
   const { cursorRef } = useCursor({
     canvasRef,

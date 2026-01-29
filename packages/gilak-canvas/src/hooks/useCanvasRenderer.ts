@@ -1,16 +1,16 @@
 import { type RefObject, useEffect } from "react";
 
-import { renderCanvasContent } from "../methods/render-canvas-content";
-import type { CanvasContent } from "../types/canvas";
+import { renderCanvasElement } from "../methods/render-canvas-element";
+import type { CanvasElement } from "../types/canvas";
 
 type UseCanvasRendererArgs = {
   canvasRef: RefObject<HTMLCanvasElement | null>;
-  contents: CanvasContent[];
+  elements: CanvasElement[];
 };
 
 export const useCanvasRenderer = ({
   canvasRef,
-  contents,
+  elements,
 }: UseCanvasRendererArgs) => {
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -19,6 +19,6 @@ export const useCanvasRenderer = ({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    renderCanvasContent({ ctx, contents });
-  }, [contents, canvasRef]);
+    renderCanvasElement({ ctx, elements });
+  }, [elements, canvasRef]);
 };

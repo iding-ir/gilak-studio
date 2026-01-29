@@ -1,40 +1,50 @@
-import type { CanvasContent, Position } from "../types/canvas";
+import type { CanvasElement, Position } from "../types/canvas";
 import { drawImage } from "./draw-image";
 import { drawStrokes } from "./draw-strokes";
 
-export type RenderCanvasContentArgs = {
+export type RenderCanvasElementArgs = {
   ctx: CanvasRenderingContext2D;
-  contents: CanvasContent[];
+  elements: CanvasElement[];
   followPoint?: {
-    id: CanvasContent["id"];
+    id: CanvasElement["id"];
     position: Position;
     offset: Position;
   };
 };
 
-export const renderCanvasContent = ({
+export const renderCanvasElement = ({
   ctx,
-  contents,
+  elements,
   followPoint,
-}: RenderCanvasContentArgs) => {
+}: RenderCanvasElementArgs) => {
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-  contents.forEach(({ id, type, item, position, size }) => {
+  elements.forEach(({ id, type, content, position, size, visible }) => {
     const pos = id === followPoint?.id ? followPoint.position : position;
     const off = id === followPoint?.id ? followPoint.offset : { x: 0, y: 0 };
+
+    if (!visible) {
+      return;
+    }
 
     switch (type) {
       case "drawing":
         drawStrokes({
           ctx,
-          strokes: item.strokes,
+          strokes: content.strokes,
           position: pos,
           size,
           offset: off,
         });
         break;
       case "image":
-        drawImage({ ctx, image: item.image, position: pos, size, offset: off });
+        drawImage({
+          ctx,
+          image: content.image,
+          position: pos,
+          size,
+          offset: off,
+        });
         break;
       default:
         break;

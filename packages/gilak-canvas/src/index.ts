@@ -3,6 +3,9 @@ export type { CanvasProps } from "./components/Canvas";
 export { Canvas } from "./components/Canvas";
 export type { DrawingCanvasProps } from "./components/DrawingCanvas";
 export { DrawingCanvas } from "./components/DrawingCanvas";
+export { ElementCard } from "./components/ElementCard";
+export { Elements } from "./components/Elements";
+export { ElementsPortal } from "./components/ElementsPortal";
 export type { RandomCanvasProps } from "./components/RandomCanvas";
 export { RandomCanvas } from "./components/RandomCanvas";
 
@@ -11,18 +14,18 @@ export type { ContextValue } from "./context";
 export {
   CanvasContext,
   CanvasProvider,
-  selectContentById,
-  selectCurrentContents,
-  selectNextContents,
-  selectPreviousContents,
+  selectCurrentElements,
+  selectElementById,
+  selectNextElements,
+  selectPreviousElements,
   useCanvasContext,
 } from "./context";
 
 // Methods
 export type { ImageFormat } from "./methods/canvas-to-blob";
 export { canvasToBlob } from "./methods/canvas-to-blob";
-export { createContentFromDrawing } from "./methods/create-content-from-drawing";
-export { createContentFromImage } from "./methods/create-content-from-image";
+export { createElementFromDrawing } from "./methods/create-element-from-drawing";
+export { createElementFromImage } from "./methods/create-element-from-image";
 export { downloadCanvas } from "./methods/download-canvas";
 export type { DrawBrushProps } from "./methods/draw-brush";
 export { drawBrush } from "./methods/draw-brush";
