@@ -1,7 +1,10 @@
 import { useRef } from "react";
 
+import { createElementFromDrawing } from "../methods/create-element-from-drawing";
+import { drawBrush } from "../methods/draw-brush";
 import type { BrushShape, BrushSize } from "../types";
 import type { DrawingStroke } from "../types/canvas";
+import { useCanvas } from "./useCanvas";
 import { useCanvasPointer } from "./useCanvasPointer";
 
 export type UseDrawingProps = {
@@ -10,7 +13,6 @@ export type UseDrawingProps = {
   color: string;
   brushSize: BrushSize;
   brushShape: BrushShape;
-  onStrokeComplete?: (stroke: DrawingStroke) => void;
 };
 
 export const useDrawing = ({
@@ -19,9 +21,9 @@ export const useDrawing = ({
   color,
   brushSize,
   brushShape,
-  onStrokeComplete,
 }: UseDrawingProps) => {
   const currentStrokeRef = useRef<DrawingStroke | null>(null);
+  const { addElement } = useCanvas();
 
   useCanvasPointer({
     canvasRef,
@@ -35,13 +37,38 @@ export const useDrawing = ({
       };
     },
     onDrag: ({ point }) => {
+      const stroke = currentStrokeRef.current;
+      if (!stroke) return;
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+
       currentStrokeRef.current?.points.push(point);
+
+      drawBrush({
+        ctx,
+        color,
+        brushSize,
+        brushShape,
+        point,
+        prevPoint: stroke.points[stroke.points.length - 2] || null,
+      });
     },
     onUp: () => {
-      if (currentStrokeRef.current) {
-        onStrokeComplete?.(currentStrokeRef.current);
-        currentStrokeRef.current = null;
-      }
+      const stroke = currentStrokeRef.current;
+      if (!stroke) return;
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+
+      const documentSize = { w: canvas.width, h: canvas.height };
+      const element = createElementFromDrawing({
+        stroke,
+        documentSize,
+      });
+
+      addElement(element);
+      currentStrokeRef.current = null;
     },
   });
 };

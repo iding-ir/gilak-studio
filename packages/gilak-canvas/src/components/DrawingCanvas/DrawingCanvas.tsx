@@ -1,4 +1,4 @@
-import { createElementFromDrawing, selectElements } from "@gilak/canvas";
+import { selectElements } from "@gilak/canvas";
 import clsx from "clsx";
 import { type RefObject } from "react";
 
@@ -50,7 +50,7 @@ export const DrawingCanvas = ({
   className,
   ...props
 }: DrawingCanvasProps) => {
-  const { state, addElement } = useCanvas();
+  const { state } = useCanvas();
 
   useCanvasSize({
     canvasRef,
@@ -63,15 +63,6 @@ export const DrawingCanvas = ({
     color,
     brushSize,
     brushShape,
-    onStrokeComplete: (stroke) => {
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-
-      const documentSize = { w: canvas.width, h: canvas.height };
-      const element = createElementFromDrawing({ stroke, documentSize });
-
-      addElement(element);
-    },
   });
   useFill({
     canvasRef,
