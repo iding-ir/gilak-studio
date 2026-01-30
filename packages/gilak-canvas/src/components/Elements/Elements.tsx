@@ -5,7 +5,7 @@ import { type ComponentPropsWithoutRef } from "react";
 import { createPortal } from "react-dom";
 
 import { ELEMENTS_PORTAL_ID } from "../../constants";
-import { selectCurrentElements } from "../../context";
+import { selectElements } from "../../context";
 import { useCanvas } from "../../hooks/useCanvas";
 import { ElementCard } from "../ElementCard";
 import styles from "./Elements.module.scss";
@@ -34,7 +34,7 @@ export const ElementsPortal = () => {
 
 const ElementList = () => {
   const { state } = useCanvas();
-  const elements = selectCurrentElements(state);
+  const elements = selectElements(state);
 
   return elements.length === 0 ? (
     <p className={styles.empty}>{t("canvas:elements.noElements")}</p>

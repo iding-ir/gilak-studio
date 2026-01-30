@@ -8,7 +8,6 @@ export type UseFillArgs = {
   enabled: boolean;
   color: string;
   tolerance: number;
-  onChange?: () => void;
 };
 
 export const useFill = ({
@@ -16,14 +15,11 @@ export const useFill = ({
   enabled,
   color,
   tolerance,
-  onChange,
 }: UseFillArgs) => {
   useCanvasPointer({
     canvasRef,
     enabled,
     onDown: ({ point: { x, y } }) => {
-      onChange?.();
-
       const canvas = canvasRef.current;
       if (!canvas) return;
       const ctx = canvas.getContext("2d");

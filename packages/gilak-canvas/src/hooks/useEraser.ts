@@ -9,7 +9,6 @@ export type UseEraserProps = {
   enabled: boolean;
   brushSize: BrushSize;
   brushShape: BrushShape;
-  onChange?: () => void;
 };
 
 export const useEraser = ({
@@ -17,14 +16,11 @@ export const useEraser = ({
   enabled,
   brushSize,
   brushShape,
-  onChange,
 }: UseEraserProps) => {
   useCanvasPointer({
     canvasRef,
     enabled,
     onDown: ({ point }) => {
-      onChange?.();
-
       const canvas = canvasRef.current;
       if (!canvas) return;
       const ctx = canvas.getContext("2d");

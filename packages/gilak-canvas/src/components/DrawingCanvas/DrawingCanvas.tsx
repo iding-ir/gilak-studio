@@ -1,4 +1,4 @@
-import { selectCurrentElements } from "@gilak/canvas";
+import { createElementFromDrawing, selectElements } from "@gilak/canvas";
 import clsx from "clsx";
 import { type RefObject } from "react";
 
@@ -12,7 +12,6 @@ import {
 import { useCanvas } from "../../hooks/useCanvas";
 import { useCanvasRenderer } from "../../hooks/useCanvasRenderer";
 import { useMove } from "../../hooks/useMove";
-import { createElementFromDrawing } from "../../methods/create-element-from-drawing";
 import { getCursorColor } from "../../methods/get-cursor-color";
 import { type BrushShape, type BrushSize } from "../../types";
 import { Canvas } from "../Canvas";
@@ -89,9 +88,9 @@ export const DrawingCanvas = ({
   useMove({
     canvasRef,
     enabled: enabledMove,
-    elements: selectCurrentElements(state),
+    elements: selectElements(state),
   });
-  useCanvasRenderer({ canvasRef, elements: selectCurrentElements(state) });
+  useCanvasRenderer({ canvasRef, elements: selectElements(state) });
 
   const { cursorRef } = useCursor({
     canvasRef,

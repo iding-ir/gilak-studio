@@ -15,10 +15,15 @@ export type { ContextValue } from "./context";
 export {
   CanvasContext,
   CanvasProvider,
-  selectCurrentElements,
+  selectDrawingElements,
   selectElementById,
-  selectNextElements,
-  selectPreviousElements,
+  selectElements,
+  selectFocusedElement,
+  selectHiddenElements,
+  selectImageElements,
+  selectSelectedElements,
+  selectTextElements,
+  selectVisibleElements,
   useCanvasContext,
 } from "./context";
 

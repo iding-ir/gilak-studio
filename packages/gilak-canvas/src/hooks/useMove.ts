@@ -11,15 +11,9 @@ export type UseMoveArgs = {
   canvasRef: RefObject<HTMLCanvasElement | null>;
   enabled: boolean;
   elements?: CanvasElement[];
-  onChange?: () => void;
 };
 
-export const useMove = ({
-  canvasRef,
-  enabled,
-  elements = [],
-  onChange,
-}: UseMoveArgs) => {
+export const useMove = ({ canvasRef, enabled, elements = [] }: UseMoveArgs) => {
   const hasMoved = useRef<boolean>(false);
   const element = useRef<ReturnType<typeof findElementAtPoint>>(null);
   const { updateElement } = useCanvas();
@@ -64,7 +58,6 @@ export const useMove = ({
         ...element.current.element,
         position: getOffsetPoint(point, element.current.offset),
       });
-      onChange?.();
     },
   });
 };

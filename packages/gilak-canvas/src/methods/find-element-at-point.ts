@@ -1,14 +1,14 @@
 import type { CanvasElement, Point } from "../types/canvas";
 
-export type FindElementAtPointArgs = {
-  elements: CanvasElement[];
+export type FindElementAtPointArgs<T extends CanvasElement> = {
+  elements: T[];
   point: Point;
 };
 
-export const findElementAtPoint = ({
+export const findElementAtPoint = <T extends CanvasElement>({
   elements,
   point: { x, y },
-}: FindElementAtPointArgs) => {
+}: FindElementAtPointArgs<T>) => {
   for (let i = elements.length - 1; i >= 0; i--) {
     const element = elements[i];
     const { size, position } = element;

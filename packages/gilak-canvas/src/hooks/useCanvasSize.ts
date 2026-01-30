@@ -8,14 +8,12 @@ export type UseCanvasSizeArgs = {
   canvasRef: RefObject<HTMLCanvasElement | null>;
   width?: string | number;
   height?: string | number;
-  onChange?: () => void;
 };
 
 export const useCanvasSize = ({
   canvasRef,
   width,
   height,
-  onChange,
 }: UseCanvasSizeArgs) => {
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -27,12 +25,11 @@ export const useCanvasSize = ({
     if (canvas.width === targetW && canvas.height === targetH) return;
 
     const newCanvas = storeCtx({ canvas });
-    onChange?.();
     setCanvasSize(canvas, targetW, targetH);
 
     const restoreCtx = canvas.getContext("2d", { willReadFrequently: true });
     if (restoreCtx) restoreCtx.drawImage(newCanvas, 0, 0);
-  }, [canvasRef, width, height, onChange]);
+  }, [canvasRef, width, height]);
 };
 
 function setCanvasSize(

@@ -1,15 +1,7 @@
 import type { State } from "./state";
 
-export const selectCurrentElements = (state: State) => {
+export const selectElements = (state: State) => {
   return Array.from(state.elementsHistory.current.values());
-};
-
-export const selectPreviousElements = (state: State) => {
-  return Array.from(state.elementsHistory.prev.values());
-};
-
-export const selectNextElements = (state: State) => {
-  return Array.from(state.elementsHistory.next.values());
 };
 
 export const selectElementById = (state: State, id: string) => {
@@ -17,17 +9,29 @@ export const selectElementById = (state: State, id: string) => {
 };
 
 export const selectVisibleElements = (state: State) => {
-  return selectCurrentElements(state).filter((element) => element.visible);
+  return selectElements(state).filter((element) => element.visible);
 };
 
 export const selectHiddenElements = (state: State) => {
-  return selectCurrentElements(state).filter((element) => !element.visible);
+  return selectElements(state).filter((element) => !element.visible);
 };
 
 export const selectSelectedElements = (state: State) => {
-  return selectCurrentElements(state).filter((element) => element.selected);
+  return selectElements(state).filter((element) => element.selected);
 };
 
 export const selectFocusedElement = (state: State) => {
-  return selectCurrentElements(state).find((element) => element.focused);
+  return selectElements(state).find((element) => element.focused);
+};
+
+export const selectDrawingElements = (state: State) => {
+  return selectElements(state).filter((element) => element.type === "drawing");
+};
+
+export const selectImageElements = (state: State) => {
+  return selectElements(state).filter((element) => element.type === "image");
+};
+
+export const selectTextElements = (state: State) => {
+  return selectElements(state).filter((element) => element.type === "text");
 };
