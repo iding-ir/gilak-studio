@@ -22,7 +22,7 @@ export const useFloatingWindows = () => {
   );
 
   return {
-    ...state,
+    state,
     registerFloatingWindow,
     focusFloatingWindow,
   };

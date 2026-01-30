@@ -30,6 +30,11 @@
     display: none;
   }
 
+  &.focused {
+    outline: 2px solid var(--color-secondary-md);
+    outline-offset: 0;
+  }
+
   .resize {
     display: flex;
     flex-direction: column-reverse;

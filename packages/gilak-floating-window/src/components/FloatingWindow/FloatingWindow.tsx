@@ -1,4 +1,5 @@
 import { Body } from "@gilak/components";
+import { selectFocusedWindow } from "@gilak/floating-window/context/selectors";
 import { useFloatingWindows } from "@gilak/floating-window/hooks/useFloatingWindows";
 import clsx from "clsx";
 import type { ReactNode } from "react";
@@ -85,13 +86,12 @@ export const FloatingWindow = memo(
     onClose,
   }: FloatingWindowProps) => {
     const ref = useRef<HTMLDivElement | null>(null);
-    const { windows } = useFloatingWindows();
-    const { registerFloatingWindow } = useFloatingWindows();
+    const { state, registerFloatingWindow } = useFloatingWindows();
     const { size, position, status, zIndex, resizing, dragging } =
       useFloatingWindow(id);
 
     useEffect(() => {
-      if (windows.has(id)) return;
+      if (state.windows.has(id)) return;
 
       registerFloatingWindow({
         id,
@@ -145,6 +145,7 @@ export const FloatingWindow = memo(
           [styles.draggable]: draggable && status !== "maximized",
           [styles.dragging]: dragging,
           [styles.resizing]: resizing,
+          [styles.focused]: id === selectFocusedWindow(state),
         })}
         style={{
           transform: `translate3d(${position.x}px, ${position.y}px, 0)`,

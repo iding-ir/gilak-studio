@@ -69,7 +69,7 @@ export const FloatingWindowHeader = ({
         [styles.dragging]: dragging,
       })}
       onPointerDown={(event) => {
-        focusFloatingWindow();
+        if (status === "open") focusFloatingWindow();
         if (draggable && onDragPointerDown) onDragPointerDown(event);
       }}
       heading={

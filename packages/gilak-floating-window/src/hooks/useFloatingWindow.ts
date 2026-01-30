@@ -2,7 +2,6 @@ import { useCallback } from "react";
 
 import { actions } from "../context/actions";
 import { useFloatingWindowContext } from "../context/hook";
-import type { Status } from "../context/types";
 import type { Position, Size } from "../types";
 
 export const useFloatingWindow = (id: string) => {
@@ -15,28 +14,24 @@ export const useFloatingWindow = (id: string) => {
     );
   }
 
-  const unregisterFloatingWindow = useCallback(
-    () => dispatch(actions.unregisterFloatingWindow(id)),
-    [dispatch, id],
-  );
+  const unregisterFloatingWindow = useCallback(() => {
+    dispatch(actions.blurFloatingWindow(id));
+    dispatch(actions.unregisterFloatingWindow(id));
+  }, [dispatch, id]);
 
-  const setFloatingWindowStatus = useCallback(
-    (status: Status) => dispatch(actions.setFloatingWindowStatus(id, status)),
-    [dispatch, id],
-  );
-
-  const openFloatingWindow = useCallback(
-    () => dispatch(actions.setFloatingWindowStatus(id, "open")),
-    [dispatch, id],
-  );
+  const openFloatingWindow = useCallback(() => {
+    dispatch(actions.focusFloatingWindow(id));
+    dispatch(actions.setFloatingWindowStatus(id, "open"));
+  }, [dispatch, id]);
 
   const minimizeFloatingWindow = useCallback(() => {
+    dispatch(actions.blurFloatingWindow(id));
     dispatch(actions.setFloatingWindowStatus(id, "minimized"));
   }, [dispatch, id]);
 
   const maximizeFloatingWindow = useCallback(() => {
-    dispatch(actions.setFloatingWindowStatus(id, "maximized"));
     dispatch(actions.focusFloatingWindow(id));
+    dispatch(actions.setFloatingWindowStatus(id, "maximized"));
   }, [dispatch, id]);
 
   const focusFloatingWindow = useCallback(() => {
@@ -79,7 +74,6 @@ export const useFloatingWindow = (id: string) => {
   return {
     ...window,
     unregisterFloatingWindow,
-    setFloatingWindowStatus,
     openFloatingWindow,
     minimizeFloatingWindow,
     maximizeFloatingWindow,

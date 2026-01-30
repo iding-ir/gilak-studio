@@ -24,11 +24,7 @@ export const reducer = (state: State, { type, payload }: Action): State => {
 
       newWindows.delete(id);
 
-      return {
-        ...state,
-        windows: newWindows,
-        focused: state.focused === id ? undefined : state.focused,
-      };
+      return { ...state, windows: newWindows };
     }
     case "SET_TITLE": {
       const { id, title } = payload;
@@ -96,7 +92,22 @@ export const reducer = (state: State, { type, payload }: Action): State => {
       return {
         ...state,
         windows: newWindows.set(id, { ...window, zIndex }),
-        focused: id,
+        focus: [id, ...state.focus.filter((focusId) => focusId !== id)],
+      };
+    }
+    case "SET_BLURED": {
+      const { id } = payload;
+      const newWindows = new Map(state.windows);
+      const window = state.windows.get(id);
+      const zIndexes = Array.from(state.windows.values()).map((w) => w.zIndex);
+      const zIndex = Math.min(...zIndexes) - 1;
+
+      if (!window) return state;
+
+      return {
+        ...state,
+        windows: newWindows.set(id, { ...window, zIndex }),
+        focus: [...state.focus.filter((focusId) => focusId !== id)],
       };
     }
     case "AUTO_PLACE_WINDOW": {
