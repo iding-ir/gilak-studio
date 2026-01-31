@@ -25,6 +25,5 @@ export const hasMinimizedWindows = (state: State) => {
 };
 
 export const selectFocusedWindow = (state: State) => {
-  if (state.focus.length === 0) return undefined;
   return state.focus[0];
 };

@@ -7,10 +7,12 @@ export const useCanvas = () => {
   const { state, dispatch } = useCanvasContext();
 
   const addElement = (element: CanvasElement) => {
+    dispatch(actions.focusElement({ id: element.id }));
     dispatch(actions.addElement(element));
   };
 
   const removeElement = (id: CanvasElement["id"]) => {
+    dispatch(actions.blurElement({ id }));
     dispatch(actions.removeElement({ id }));
   };
 
@@ -58,6 +60,10 @@ export const useCanvas = () => {
     dispatch(actions.focusElement({ id }));
   };
 
+  const blurElement = (id: CanvasElement["id"]) => {
+    dispatch(actions.blurElement({ id }));
+  };
+
   return {
     state,
     canUndo: history.canUndo(state.elementsHistory),
@@ -75,5 +81,6 @@ export const useCanvas = () => {
     selectElement,
     deselectElement,
     focusElement,
+    blurElement,
   };
 };

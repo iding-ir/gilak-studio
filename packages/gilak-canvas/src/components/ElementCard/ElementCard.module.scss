@@ -1,3 +1,5 @@
+@use "@gilak/stylist/scss" as *;
+
 .root {
   display: flex;
   align-items: center;
@@ -6,6 +8,10 @@
   padding: var(--spacing-xs);
   border-radius: var(--radius-md);
   background-color: var(--color-dark-lg);
+
+  &.focused {
+    @include focus();
+  }
 
   .info {
     display: flex;

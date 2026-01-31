@@ -17,11 +17,13 @@ export const selectHiddenElements = (state: State) => {
 };
 
 export const selectSelectedElements = (state: State) => {
-  return selectElements(state).filter((element) => element.selected);
+  return selectElements(state).filter((element) =>
+    state.selected.has(element.id),
+  );
 };
 
 export const selectFocusedElement = (state: State) => {
-  return selectElements(state).find((element) => element.focused);
+  return state.focus[0];
 };
 
 export const selectDrawingElements = (state: State) => {

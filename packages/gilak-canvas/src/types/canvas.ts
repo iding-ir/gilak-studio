@@ -13,8 +13,6 @@ export type CanvasElementBase = {
   position: Position;
   size: Size;
   visible: boolean;
-  focused: boolean;
-  selected: boolean;
 };
 
 export type ImageElement = CanvasElementBase & {

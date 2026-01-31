@@ -31,8 +31,6 @@ export const createElementFromImage = async ({
     position: { x: pointer.x, y: pointer.y },
     size: { w: itemWidth * ratio, h: itemHeight * ratio },
     visible: true,
-    focused: false,
-    selected: false,
   };
 
   return canvasElement;

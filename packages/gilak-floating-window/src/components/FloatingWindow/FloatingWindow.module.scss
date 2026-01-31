@@ -1,3 +1,5 @@
+@use "@gilak/stylist/scss" as *;
+
 .window {
   position: absolute;
   top: 0;
@@ -31,8 +33,7 @@
   }
 
   &.focused {
-    outline: 2px solid var(--color-secondary-md);
-    outline-offset: 0;
+    @include focus();
   }
 
   .resize {

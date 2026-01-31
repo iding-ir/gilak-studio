@@ -1,6 +1,8 @@
+import { selectFocusedElement } from "@gilak/canvas";
 import type { IconProps } from "@gilak/components";
 import { Icon, IconButton } from "@gilak/components";
 import { t } from "@gilak/localization";
+import clsx from "clsx";
 
 import { useCanvas } from "../../hooks/useCanvas";
 import type { CanvasElement } from "../../types/canvas";
@@ -30,16 +32,17 @@ export const ElementCard = ({
   element,
   disableMoveUp = false,
   disableMoveDown = false,
-
   ...props
 }: ElementCardProps) => {
   const { id, visible } = element;
   const {
+    state,
     moveElementUp,
     moveElementDown,
     removeElement,
     showElement,
     hideElement,
+    focusElement,
   } = useCanvas();
 
   const options = {
@@ -47,8 +50,33 @@ export const ElementCard = ({
     variant: "light-ghost",
   } as Partial<IconProps<"button">>;
 
+  const handleClick = () => {
+    focusElement(id);
+  };
+
+  const handleMoveUp = (event: React.MouseEvent) => {
+    event.stopPropagation();
+    moveElementUp(id);
+  };
+
+  const handleMoveDown = (event: React.MouseEvent) => {
+    event.stopPropagation();
+    moveElementDown(id);
+  };
+
+  const handleRemove = (event: React.MouseEvent) => {
+    event.stopPropagation();
+    removeElement(id);
+  };
+
   return (
-    <li {...props} className={styles.root}>
+    <li
+      {...props}
+      className={clsx(styles.root, {
+        [styles.focused]: selectFocusedElement(state) === id,
+      })}
+      onClick={handleClick}
+    >
       <div className={styles.info}>
         <Icon
           icon={typeIcons[element.type]}
@@ -63,21 +91,21 @@ export const ElementCard = ({
         <IconButton
           icon={IconUp}
           {...options}
-          onClick={() => moveElementUp(id)}
+          onClick={handleMoveUp}
           disabled={disableMoveUp}
           aria-label={t("canvas:elements.moveUp")}
         ></IconButton>
         <IconButton
           icon={IconDown}
           {...options}
-          onClick={() => moveElementDown(id)}
+          onClick={handleMoveDown}
           disabled={disableMoveDown}
           aria-label={t("canvas:elements.moveDown")}
         />
         <IconButton
           icon={IconDelete}
           {...options}
-          onClick={() => removeElement(id)}
+          onClick={handleRemove}
           aria-label={t("canvas:elements.delete")}
         />
         <IconButton

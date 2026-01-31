@@ -13,7 +13,8 @@ type Action =
   | { type: "MOVE_ELEMENT_DOWN"; payload: Pick<CanvasElement, "id"> }
   | { type: "SELECT_ELEMENT"; payload: Pick<CanvasElement, "id"> }
   | { type: "DESELECT_ELEMENT"; payload: Pick<CanvasElement, "id"> }
-  | { type: "FOCUS_ELEMENT"; payload: Pick<CanvasElement, "id"> };
+  | { type: "FOCUS_ELEMENT"; payload: Pick<CanvasElement, "id"> }
+  | { type: "BLUR_ELEMENT"; payload: Pick<CanvasElement, "id"> };
 
 const addElement = (element: CanvasElement): Action => ({
   type: "ADD_ELEMENT",
@@ -77,6 +78,11 @@ const focusElement = (id: Pick<CanvasElement, "id">): Action => ({
   payload: id,
 });
 
+const blurElement = (id: Pick<CanvasElement, "id">): Action => ({
+  type: "BLUR_ELEMENT",
+  payload: id,
+});
+
 export const actions = {
   addElement,
   removeElement,
@@ -91,6 +97,7 @@ export const actions = {
   selectElement,
   deselectElement,
   focusElement,
+  blurElement,
 };
 
 export type { Action };

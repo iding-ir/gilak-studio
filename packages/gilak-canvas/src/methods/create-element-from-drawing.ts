@@ -18,8 +18,6 @@ export const createElementFromDrawing = ({
     size: documentSize,
     content: { strokes: [stroke] },
     visible: true,
-    focused: false,
-    selected: false,
   };
 
   return canvasElement;

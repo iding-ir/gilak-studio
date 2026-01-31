@@ -1,0 +1,4 @@
+@mixin focus() {
+  outline: 2px solid var(--color-secondary-md);
+  outline-offset: -2px;
+}

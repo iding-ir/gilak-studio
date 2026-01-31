@@ -24,7 +24,11 @@ export const reducer = (state: State, { type, payload }: Action): State => {
       return { ...state, elementsHistory: newHistory };
     }
     case "CLEAR_ELEMENTS": {
-      return { ...state, elementsHistory: history.createHistory(new Map()) };
+      return {
+        ...state,
+        elementsHistory: history.createHistory(new Map()),
+        focus: [],
+      };
     }
     case "UNDO": {
       const newHistory = history.undoHistory(state.elementsHistory);
@@ -58,31 +62,26 @@ export const reducer = (state: State, { type, payload }: Action): State => {
     case "MOVE_ELEMENT_DOWN":
       return moveElement(state, payload.id, -1);
     case "SELECT_ELEMENT": {
-      const newElements = new Map(state.elementsHistory.current);
-      newElements.set(payload.id, {
-        ...newElements.get(payload.id)!,
-        selected: true,
-      });
-      const newHistory = history.setHistory(state.elementsHistory, newElements);
-      return { ...state, elementsHistory: newHistory };
+      const newSelected = new Set(state.selected);
+      newSelected.add(payload.id);
+      return { ...state, selected: newSelected };
     }
     case "DESELECT_ELEMENT": {
-      const newElements = new Map(state.elementsHistory.current);
-      newElements.set(payload.id, {
-        ...newElements.get(payload.id)!,
-        selected: false,
-      });
-      const newHistory = history.setHistory(state.elementsHistory, newElements);
-      return { ...state, elementsHistory: newHistory };
+      const newSelected = new Set(state.selected);
+      newSelected.delete(payload.id);
+      return { ...state, selected: newSelected };
     }
     case "FOCUS_ELEMENT": {
-      const newElements = new Map(state.elementsHistory.current);
-      newElements.set(payload.id, {
-        ...newElements.get(payload.id)!,
-        focused: true,
-      });
-      const newHistory = history.setHistory(state.elementsHistory, newElements);
-      return { ...state, elementsHistory: newHistory };
+      return {
+        ...state,
+        focus: [payload.id, ...state.focus.filter((id) => id !== payload.id)],
+      };
+    }
+    case "BLUR_ELEMENT": {
+      return {
+        ...state,
+        focus: [...state.focus.filter((focusId) => focusId !== payload.id)],
+      };
     }
     default:
       return state;
