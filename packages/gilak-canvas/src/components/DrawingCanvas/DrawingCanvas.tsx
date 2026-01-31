@@ -10,8 +10,8 @@ import {
 } from "../../hooks";
 import { useCanvasRenderer } from "../../hooks/useCanvasRenderer";
 import { useMove } from "../../hooks/useMove";
-import { getCursorColor } from "../../methods/get-cursor-color";
-import { type BrushShape, type BrushSize } from "../../types";
+import { getCursor } from "../../methods/get-cursor";
+import type { BrushShape, BrushSize } from "../../types";
 import { Canvas } from "../Canvas";
 import { Cursor } from "../Cursor";
 import styles from "./DrawingCanvas.module.scss";
@@ -53,6 +53,7 @@ export const DrawingCanvas = ({
     width,
     height,
   });
+
   useDrawing({
     canvasRef,
     enabled: enabledDrawing,
@@ -60,36 +61,44 @@ export const DrawingCanvas = ({
     brushSize,
     brushShape,
   });
+
   useFill({
     canvasRef,
     enabled: enabledFill,
     color,
     tolerance,
   });
+
   useEraser({
     canvasRef,
     enabled: enabledEraser,
     brushSize,
     brushShape,
   });
+
   useMove({
     canvasRef,
     enabled: enabledMove,
   });
+
   useCanvasRenderer({ canvasRef });
+
+  const cursor = getCursor({
+    color,
+    brushShape,
+    brushSize,
+    enabledEraser,
+    enabledDrawing,
+    enabledFill,
+    enabledMove,
+  });
 
   const { cursorRef } = useCursor({
     canvasRef,
-    enabled: enabledDrawing || enabledEraser || enabledFill,
-    color: getCursorColor({
-      color,
-      backgroundColor,
-      enabledEraser,
-      enabledDrawing,
-      enabledFill,
-    }),
-    brushSize,
-    brushShape,
+    enabled: enabledDrawing || enabledEraser || enabledFill || enabledMove,
+    color: cursor.color,
+    size: cursor.size,
+    shape: cursor.shape,
   });
 
   return (

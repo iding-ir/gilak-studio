@@ -1,11 +1,11 @@
-import type { BrushShape, BrushSize } from "../types";
+import type { BrushShape, BrushSize, CursorShape } from "../types";
 
 export const drawShape = (
   ctx: CanvasRenderingContext2D,
   x: number,
   y: number,
   size: BrushSize,
-  brushShape: BrushShape,
+  brushShape: BrushShape | CursorShape,
 ) => {
   ctx.beginPath();
   const r = size * 2;
@@ -58,6 +58,28 @@ export const drawShape = (
     case "SLASH":
       ctx.moveTo(x + r, y - r);
       ctx.lineTo(x - r, y + r);
+      break;
+    case "CROSS":
+      ctx.moveTo(x - r, y - r);
+      ctx.lineTo(x + r, y + r);
+      ctx.moveTo(x + r, y - r);
+      ctx.lineTo(x - r, y + r);
+      break;
+    case "PLUS":
+      ctx.moveTo(x - r, y);
+      ctx.lineTo(x + r, y);
+      ctx.moveTo(x, y - r);
+      ctx.lineTo(x, y + r);
+      break;
+    case "DOT":
+      ctx.arc(x, y, r / 4, 0, 2 * Math.PI);
+      break;
+    case "TEXT":
+      ctx.moveTo(x - r, y - r);
+      ctx.lineTo(x + r, y - r);
+      ctx.moveTo(x, y - r);
+      ctx.lineTo(x, y + r);
+      ctx.closePath();
       break;
     default:
       ctx.arc(x, y, r, 0, 2 * Math.PI);

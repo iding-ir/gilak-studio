@@ -63,12 +63,13 @@ export { useMove } from "./hooks/useMove";
 export type {
   BrushShape,
   BrushSize,
+  CursorShape,
   Point,
   Position,
   Scale,
   Size,
 } from "./types";
-export { BRUSH_SHAPES, BRUSH_SIZES } from "./types";
+export { BRUSH_SHAPES, BRUSH_SIZES, CURSOR_SHAPES } from "./types";
 
 // i18n
 export { registerCanvasI18n } from "./locales/i18n";
