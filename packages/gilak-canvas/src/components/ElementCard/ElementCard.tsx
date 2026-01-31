@@ -45,6 +45,8 @@ export const ElementCard = ({
     focusElement,
   } = useCanvas();
 
+  const selectedElementId = selectFocusedElement(state)?.id;
+
   const options = {
     size: "sm",
     variant: "light-ghost",
@@ -73,7 +75,7 @@ export const ElementCard = ({
     <li
       {...props}
       className={clsx(styles.root, {
-        [styles.focused]: selectFocusedElement(state) === id,
+        [styles.focused]: selectedElementId === id,
       })}
       onClick={handleClick}
     >

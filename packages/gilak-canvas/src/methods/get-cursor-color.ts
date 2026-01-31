@@ -11,8 +11,8 @@ export const getCursorColor = ({
   enabledDrawing?: boolean;
   enabledFill?: boolean;
 }) => {
-  if (enabledEraser) return "rgba(90,90,90,0.5)";
+  if (enabledEraser) return "rgba(90, 90, 90, 0.5)";
   if (enabledDrawing) return color;
-  if (enabledFill) return backgroundColor;
-  return "transparent";
+  if (enabledFill) return color;
+  return backgroundColor;
 };

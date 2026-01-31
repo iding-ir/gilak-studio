@@ -8,6 +8,7 @@
   padding: var(--spacing-xs);
   border-radius: var(--radius-md);
   background-color: var(--color-dark-lg);
+  cursor: pointer;
 
   &.focused {
     @include focus();

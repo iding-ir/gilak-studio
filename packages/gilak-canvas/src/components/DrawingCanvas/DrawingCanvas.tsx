@@ -1,4 +1,3 @@
-import { selectElements } from "@gilak/canvas";
 import clsx from "clsx";
 import { type RefObject } from "react";
 
@@ -9,7 +8,6 @@ import {
   useEraser,
   useFill,
 } from "../../hooks";
-import { useCanvas } from "../../hooks/useCanvas";
 import { useCanvasRenderer } from "../../hooks/useCanvasRenderer";
 import { useMove } from "../../hooks/useMove";
 import { getCursorColor } from "../../methods/get-cursor-color";
@@ -50,8 +48,6 @@ export const DrawingCanvas = ({
   className,
   ...props
 }: DrawingCanvasProps) => {
-  const { state } = useCanvas();
-
   useCanvasSize({
     canvasRef,
     width,
@@ -67,9 +63,8 @@ export const DrawingCanvas = ({
   useFill({
     canvasRef,
     enabled: enabledFill,
-    color: backgroundColor,
+    color,
     tolerance,
-    elements: selectElements(state),
   });
   useEraser({
     canvasRef,
@@ -80,9 +75,8 @@ export const DrawingCanvas = ({
   useMove({
     canvasRef,
     enabled: enabledMove,
-    elements: selectElements(state),
   });
-  useCanvasRenderer({ canvasRef, elements: selectElements(state) });
+  useCanvasRenderer({ canvasRef });
 
   const { cursorRef } = useCursor({
     canvasRef,

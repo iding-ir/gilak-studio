@@ -23,7 +23,9 @@ export const selectSelectedElements = (state: State) => {
 };
 
 export const selectFocusedElement = (state: State) => {
-  return state.focus[0];
+  const focusedId = state.focus[0];
+  const focusedElement = state.elementsHistory.current.get(focusedId);
+  return focusedElement;
 };
 
 export const selectDrawingElements = (state: State) => {
