@@ -7,6 +7,15 @@ export { FloatingWindows } from "./components/FloatingWindows";
 // Context
 export type { FloatingWindowType } from "./context";
 export { FloatingWindowProvider } from "./context";
+export {
+  hasMinimizedWindows,
+  selectFloatingWindowById,
+  selectFloatingWindows,
+  selectFocusedWindow,
+  selectMaximizedWindows,
+  selectMinimizedWindows,
+  selectOpenWindows,
+} from "./context";
 
 // Types
 export * from "./types";

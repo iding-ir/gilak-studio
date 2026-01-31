@@ -15,33 +15,36 @@ export type CanvasElementBase = {
   visible: boolean;
 };
 
+export type ImageContent = {
+  image: ImageBitmap;
+  ratio: number;
+};
+
 export type ImageElement = CanvasElementBase & {
   type: "image";
-  content: {
-    image: ImageBitmap;
-  };
+  content: ImageContent;
 };
 
-export type TextElement = CanvasElementBase & {
-  type: "text";
-  content: {
-    text: string;
-    font: string;
-    color: string;
-    align: CanvasTextAlign;
-  };
-};
-
-export type DrawingElement = CanvasElementBase & {
-  type: "drawing";
-  content: {
-    strokes: DrawingStroke[];
-  };
-};
-
-export type DrawingStroke = {
+export type DrawingContent = {
   points: Point[];
   color: string;
   brushSize: BrushSize;
   brushShape: BrushShape;
+};
+
+export type DrawingElement = CanvasElementBase & {
+  type: "drawing";
+  content: DrawingContent;
+};
+
+export type TextContent = {
+  text: string;
+  font: string;
+  color: string;
+  align: CanvasTextAlign;
+};
+
+export type TextElement = CanvasElementBase & {
+  type: "text";
+  content: TextContent;
 };

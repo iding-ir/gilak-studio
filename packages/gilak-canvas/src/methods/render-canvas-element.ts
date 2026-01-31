@@ -1,6 +1,6 @@
 import type { CanvasElement, Position } from "../types/canvas";
 import { drawImage } from "./draw-image";
-import { drawStrokes } from "./draw-strokes";
+import { drawStroke } from "./draw-stroke";
 
 export type RenderCanvasElementArgs = {
   ctx: CanvasRenderingContext2D;
@@ -28,26 +28,38 @@ export const renderCanvasElement = ({
     }
 
     switch (type) {
-      case "drawing":
-        drawStrokes({
+      case "drawing": {
+        const { points, color, brushSize, brushShape } = content;
+
+        drawStroke({
           ctx,
-          strokes: content.strokes,
-          position: pos,
           size,
+          position: pos,
           offset: off,
+          points,
+          color,
+          brushSize,
+          brushShape,
         });
         break;
-      case "image":
+      }
+      case "image": {
+        const { image, ratio } = content;
+        const RATIO = 0.5;
+
         drawImage({
           ctx,
-          image: content.image,
-          position: pos,
           size,
+          position: pos,
           offset: off,
+          image,
+          ratio: ratio * RATIO,
         });
         break;
-      default:
+      }
+      default: {
         break;
+      }
     }
   });
 };

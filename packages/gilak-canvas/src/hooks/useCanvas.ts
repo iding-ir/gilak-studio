@@ -1,6 +1,7 @@
 import { history } from "@gilak/utils";
 
 import { actions, useCanvasContext } from "../context";
+import type { BrushShape, BrushSize } from "../types";
 import type { CanvasElement } from "../types/canvas";
 
 export const useCanvas = () => {
@@ -64,6 +65,28 @@ export const useCanvas = () => {
     dispatch(actions.blurElement({ id }));
   };
 
+  const changeDrawingColor = (id: CanvasElement["id"], color: string) => {
+    dispatch(actions.changeDrawingColor({ id, color }));
+  };
+
+  const changeDrawingBrushSize = (
+    id: CanvasElement["id"],
+    brushSize: BrushSize,
+  ) => {
+    dispatch(actions.changeDrawingBrushSize({ id, brushSize }));
+  };
+
+  const changeDrawingBrushShape = (
+    id: CanvasElement["id"],
+    brushShape: BrushShape,
+  ) => {
+    dispatch(actions.changeDrawingBrushShape({ id, brushShape }));
+  };
+
+  const changeImageSource = (id: CanvasElement["id"], image: ImageBitmap) => {
+    dispatch(actions.changeImageSource({ id, image }));
+  };
+
   return {
     state,
     canUndo: history.canUndo(state.elementsHistory),
@@ -82,5 +105,9 @@ export const useCanvas = () => {
     deselectElement,
     focusElement,
     blurElement,
+    changeDrawingColor,
+    changeDrawingBrushSize,
+    changeDrawingBrushShape,
+    changeImageSource,
   };
 };

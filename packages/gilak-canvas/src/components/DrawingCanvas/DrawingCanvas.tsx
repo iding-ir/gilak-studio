@@ -69,6 +69,7 @@ export const DrawingCanvas = ({
     enabled: enabledFill,
     color: backgroundColor,
     tolerance,
+    elements: selectElements(state),
   });
   useEraser({
     canvasRef,

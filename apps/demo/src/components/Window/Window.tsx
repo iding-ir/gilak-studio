@@ -10,7 +10,8 @@ import { DropZone } from "@gilak/drag-n-drop";
 import { useDragNDropContext } from "@gilak/drag-n-drop";
 import { FloatingWindow, useFloatingWindows } from "@gilak/floating-window";
 import { useFloatingWindow } from "@gilak/floating-window";
-import { selectFocusedWindow } from "@gilak/floating-window/context/selectors";
+import { selectFocusedWindow } from "@gilak/floating-window";
+import type { ImageItem } from "@gilak/image-library";
 import {
   ResizableScreen,
   ResizableScreenProvider,
@@ -105,11 +106,10 @@ export const Window = ({ id }: WindowProps) => {
               onDrop={async ({ data, pointer }) => {
                 if (!pointer) return;
 
-                const documentSize = { w: documentWidth, h: documentHeight };
                 const element = await createElementFromImage({
-                  data,
-                  pointer,
-                  documentSize,
+                  src: (data as ImageItem).src,
+                  position: pointer,
+                  documentSize: { w: documentWidth, h: documentHeight },
                 });
 
                 addElement(element);

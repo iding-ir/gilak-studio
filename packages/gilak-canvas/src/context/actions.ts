@@ -1,3 +1,4 @@
+import type { BrushShape, BrushSize } from "../types";
 import type { CanvasElement } from "../types/canvas";
 
 type Action =
@@ -14,16 +15,32 @@ type Action =
   | { type: "SELECT_ELEMENT"; payload: Pick<CanvasElement, "id"> }
   | { type: "DESELECT_ELEMENT"; payload: Pick<CanvasElement, "id"> }
   | { type: "FOCUS_ELEMENT"; payload: Pick<CanvasElement, "id"> }
-  | { type: "BLUR_ELEMENT"; payload: Pick<CanvasElement, "id"> };
+  | { type: "BLUR_ELEMENT"; payload: Pick<CanvasElement, "id"> }
+  | {
+      type: "CHANGE_DRAWING_COLOR";
+      payload: Pick<CanvasElement, "id"> & { color: string };
+    }
+  | {
+      type: "CHANGE_DRAWING_BRUSH_SIZE";
+      payload: Pick<CanvasElement, "id"> & { brushSize: BrushSize };
+    }
+  | {
+      type: "CHANGE_DRAWING_BRUSH_SHAPE";
+      payload: Pick<CanvasElement, "id"> & { brushShape: BrushShape };
+    }
+  | {
+      type: "CHANGE_IMAGE_SOURCE";
+      payload: Pick<CanvasElement, "id"> & { image: ImageBitmap };
+    };
 
 const addElement = (element: CanvasElement): Action => ({
   type: "ADD_ELEMENT",
   payload: element,
 });
 
-const removeElement = (id: Pick<CanvasElement, "id">): Action => ({
+const removeElement = (payload: Pick<CanvasElement, "id">): Action => ({
   type: "REMOVE_ELEMENT",
-  payload: id,
+  payload,
 });
 
 const updateElement = (element: CanvasElement): Action => ({
@@ -43,44 +60,72 @@ const redo = (): Action => ({
   type: "REDO",
 });
 
-const hideElement = (id: Pick<CanvasElement, "id">): Action => ({
+const hideElement = (payload: Pick<CanvasElement, "id">): Action => ({
   type: "HIDE_ELEMENT",
-  payload: id,
+  payload,
 });
 
-const showElement = (id: Pick<CanvasElement, "id">): Action => ({
+const showElement = (payload: Pick<CanvasElement, "id">): Action => ({
   type: "SHOW_ELEMENT",
-  payload: id,
+  payload,
 });
 
-const moveElementUp = (id: Pick<CanvasElement, "id">): Action => ({
+const moveElementUp = (payload: Pick<CanvasElement, "id">): Action => ({
   type: "MOVE_ELEMENT_UP",
-  payload: id,
+  payload,
 });
 
-const moveElementDown = (id: Pick<CanvasElement, "id">): Action => ({
+const moveElementDown = (payload: Pick<CanvasElement, "id">): Action => ({
   type: "MOVE_ELEMENT_DOWN",
-  payload: id,
+  payload,
 });
 
-const selectElement = (id: Pick<CanvasElement, "id">): Action => ({
+const selectElement = (payload: Pick<CanvasElement, "id">): Action => ({
   type: "SELECT_ELEMENT",
-  payload: id,
+  payload,
 });
 
-const deselectElement = (id: Pick<CanvasElement, "id">): Action => ({
+const deselectElement = (payload: Pick<CanvasElement, "id">): Action => ({
   type: "DESELECT_ELEMENT",
-  payload: id,
+  payload,
 });
 
-const focusElement = (id: Pick<CanvasElement, "id">): Action => ({
+const focusElement = (payload: Pick<CanvasElement, "id">): Action => ({
   type: "FOCUS_ELEMENT",
-  payload: id,
+  payload,
 });
 
-const blurElement = (id: Pick<CanvasElement, "id">): Action => ({
+const blurElement = (payload: Pick<CanvasElement, "id">): Action => ({
   type: "BLUR_ELEMENT",
-  payload: id,
+  payload,
+});
+
+const changeDrawingColor = (
+  payload: Pick<CanvasElement, "id"> & { color: string },
+): Action => ({
+  type: "CHANGE_DRAWING_COLOR",
+  payload,
+});
+
+const changeDrawingBrushSize = (
+  payload: Pick<CanvasElement, "id"> & { brushSize: BrushSize },
+): Action => ({
+  type: "CHANGE_DRAWING_BRUSH_SIZE",
+  payload,
+});
+
+const changeDrawingBrushShape = (
+  payload: Pick<CanvasElement, "id"> & { brushShape: BrushShape },
+): Action => ({
+  type: "CHANGE_DRAWING_BRUSH_SHAPE",
+  payload,
+});
+
+const changeImageSource = (
+  payload: Pick<CanvasElement, "id"> & { image: ImageBitmap },
+): Action => ({
+  type: "CHANGE_IMAGE_SOURCE",
+  payload,
 });
 
 export const actions = {
@@ -98,6 +143,10 @@ export const actions = {
   deselectElement,
   focusElement,
   blurElement,
+  changeDrawingColor,
+  changeDrawingBrushSize,
+  changeDrawingBrushShape,
+  changeImageSource,
 };
 
 export type { Action };

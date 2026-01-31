@@ -1,5 +1,9 @@
+type AnyCanvas2DContext =
+  | CanvasRenderingContext2D
+  | OffscreenCanvasRenderingContext2D;
+
 export type FillAreaArgs = {
-  ctx: CanvasRenderingContext2D;
+  ctx: AnyCanvas2DContext;
   x: number;
   y: number;
   color: string; // supports #rrggbb, #rgb, rgb(...), rgba(...)

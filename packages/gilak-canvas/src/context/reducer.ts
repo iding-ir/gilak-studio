@@ -1,5 +1,6 @@
 import { history } from "@gilak/utils";
 
+import type { DrawingElement } from "../types/canvas";
 import type { Action } from "./actions";
 import type { State } from "./state";
 
@@ -82,6 +83,72 @@ export const reducer = (state: State, { type, payload }: Action): State => {
         ...state,
         focus: [...state.focus.filter((focusId) => focusId !== payload.id)],
       };
+    }
+    case "CHANGE_DRAWING_COLOR": {
+      const newElements = new Map(state.elementsHistory.current);
+      const element = newElements.get(payload.id) as DrawingElement | undefined;
+      if (!element) return state;
+
+      newElements.set(payload.id, {
+        ...element,
+        content: {
+          ...element.content,
+          color: payload.color,
+        },
+      });
+
+      const newHistory = history.setHistory(state.elementsHistory, newElements);
+      return { ...state, elementsHistory: newHistory };
+    }
+    case "CHANGE_DRAWING_BRUSH_SIZE": {
+      const newElements = new Map(state.elementsHistory.current);
+      const element = newElements.get(payload.id) as DrawingElement | undefined;
+      if (!element) return state;
+
+      newElements.set(payload.id, {
+        ...element,
+        content: {
+          ...element.content,
+          brushSize: payload.brushSize,
+        },
+      });
+
+      const newHistory = history.setHistory(state.elementsHistory, newElements);
+      return { ...state, elementsHistory: newHistory };
+    }
+    case "CHANGE_DRAWING_BRUSH_SHAPE": {
+      const newElements = new Map(state.elementsHistory.current);
+      const element = newElements.get(payload.id) as DrawingElement | undefined;
+      if (!element) return state;
+
+      newElements.set(payload.id, {
+        ...element,
+        content: {
+          ...element.content,
+          brushShape: payload.brushShape,
+        },
+      });
+
+      const newHistory = history.setHistory(state.elementsHistory, newElements);
+      return { ...state, elementsHistory: newHistory };
+    }
+    case "CHANGE_IMAGE_SOURCE": {
+      const newElements = new Map(state.elementsHistory.current);
+      const element = newElements.get(payload.id);
+      if (!element || element.type !== "image") return state;
+
+      const updatedElement = {
+        ...element,
+        content: {
+          ...element.content,
+          image: payload.image,
+        },
+      };
+
+      newElements.set(payload.id, updatedElement);
+
+      const newHistory = history.setHistory(state.elementsHistory, newElements);
+      return { ...state, elementsHistory: newHistory };
     }
     default:
       return state;

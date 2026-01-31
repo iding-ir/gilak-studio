@@ -21,6 +21,7 @@ export {
   hasMinimizedWindows,
   selectFloatingWindowById,
   selectFloatingWindows,
+  selectFocusedWindow,
   selectMaximizedWindows,
   selectMinimizedWindows,
   selectOpenWindows,

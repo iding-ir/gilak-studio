@@ -1,14 +1,14 @@
 import { randomId } from "@gilak/utils";
 
-import type { CanvasElement, DrawingStroke, Size } from "../types/canvas";
+import type { CanvasElement, DrawingContent, Size } from "../types/canvas";
 
 export type CreateElementFromDrawingParams = {
-  stroke: DrawingStroke;
+  content: DrawingContent;
   documentSize: Size;
 };
 
 export const createElementFromDrawing = ({
-  stroke,
+  content,
   documentSize,
 }: CreateElementFromDrawingParams) => {
   const canvasElement: CanvasElement = {
@@ -16,7 +16,7 @@ export const createElementFromDrawing = ({
     type: "drawing",
     position: { x: documentSize.w / 2, y: documentSize.h / 2 },
     size: documentSize,
-    content: { strokes: [stroke] },
+    content,
     visible: true,
   };
 

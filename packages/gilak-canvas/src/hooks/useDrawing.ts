@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { createElementFromDrawing } from "../methods/create-element-from-drawing";
 import { drawBrush } from "../methods/draw-brush";
 import type { BrushShape, BrushSize } from "../types";
-import type { DrawingStroke } from "../types/canvas";
+import type { DrawingContent } from "../types/canvas";
 import { useCanvas } from "./useCanvas";
 import { useCanvasPointer } from "./useCanvasPointer";
 
@@ -22,14 +22,14 @@ export const useDrawing = ({
   brushSize,
   brushShape,
 }: UseDrawingProps) => {
-  const currentStrokeRef = useRef<DrawingStroke | null>(null);
+  const currentContentRef = useRef<DrawingContent | null>(null);
   const { addElement } = useCanvas();
 
   useCanvasPointer({
     canvasRef,
     enabled,
     onDown: ({ point }) => {
-      currentStrokeRef.current = {
+      currentContentRef.current = {
         color,
         brushSize,
         brushShape,
@@ -37,14 +37,14 @@ export const useDrawing = ({
       };
     },
     onDrag: ({ point }) => {
-      const stroke = currentStrokeRef.current;
-      if (!stroke) return;
+      const content = currentContentRef.current;
+      if (!content) return;
       const canvas = canvasRef.current;
       if (!canvas) return;
       const ctx = canvas.getContext("2d");
       if (!ctx) return;
 
-      currentStrokeRef.current?.points.push(point);
+      currentContentRef.current?.points.push(point);
 
       drawBrush({
         ctx,
@@ -52,23 +52,20 @@ export const useDrawing = ({
         brushSize,
         brushShape,
         point,
-        prevPoint: stroke.points[stroke.points.length - 2] || null,
+        prevPoint: content.points[content.points.length - 2] || null,
       });
     },
     onUp: () => {
-      const stroke = currentStrokeRef.current;
-      if (!stroke) return;
+      const content = currentContentRef.current;
+      if (!content) return;
       const canvas = canvasRef.current;
       if (!canvas) return;
 
       const documentSize = { w: canvas.width, h: canvas.height };
-      const element = createElementFromDrawing({
-        stroke,
-        documentSize,
-      });
+      const element = createElementFromDrawing({ content, documentSize });
 
       addElement(element);
-      currentStrokeRef.current = null;
+      currentContentRef.current = null;
     },
   });
 };

@@ -15,7 +15,7 @@ export type UseMoveArgs = {
 
 export const useMove = ({ canvasRef, enabled, elements = [] }: UseMoveArgs) => {
   const hasMoved = useRef<boolean>(false);
-  const element = useRef<ReturnType<typeof findElementAtPoint>>(null);
+  const foundRef = useRef<ReturnType<typeof findElementAtPoint>>(null);
   const { updateElement } = useCanvas();
 
   useCanvasPointer({
@@ -27,10 +27,10 @@ export const useMove = ({ canvasRef, enabled, elements = [] }: UseMoveArgs) => {
       const ctx = canvas.getContext("2d");
       if (!ctx) return;
 
-      element.current = findElementAtPoint({ elements, point });
+      foundRef.current = findElementAtPoint({ elements, point });
     },
     onDrag: ({ point }) => {
-      if (!element.current) return;
+      if (!foundRef.current) return;
       const canvas = canvasRef.current;
       if (!canvas) return;
       const ctx = canvas.getContext("2d");
@@ -42,21 +42,21 @@ export const useMove = ({ canvasRef, enabled, elements = [] }: UseMoveArgs) => {
         ctx,
         elements,
         followPoint: {
-          id: element.current.element.id,
+          id: foundRef.current.element.id,
           position: point,
-          offset: element.current.offset,
+          offset: foundRef.current.offset,
         },
       });
     },
     onUp: ({ point }) => {
-      if (!element.current) return;
+      if (!foundRef.current) return;
       if (!hasMoved.current) return;
 
       hasMoved.current = false;
 
       updateElement({
-        ...element.current.element,
-        position: getOffsetPoint(point, element.current.offset),
+        ...foundRef.current.element,
+        position: getOffsetPoint(point, foundRef.current.offset),
       });
     },
   });
