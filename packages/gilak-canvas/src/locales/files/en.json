@@ -11,5 +11,10 @@
   "undoRedo": {
     "undo": "Undo",
     "redo": "Redo"
+  },
+  "textDialog": {
+    "heading": "Enter Text",
+    "text": "Text",
+    "enter": "Enter"
   }
 }

@@ -2,7 +2,7 @@ import { history } from "@gilak/utils";
 
 import { actions, useCanvasContext } from "../context";
 import type { BrushShape, BrushSize } from "../types";
-import type { CanvasElement } from "../types/canvas";
+import type { CanvasElement, TextContent } from "../types/canvas";
 
 export const useCanvas = () => {
   const { state, dispatch } = useCanvasContext();
@@ -87,6 +87,14 @@ export const useCanvas = () => {
     dispatch(actions.changeImageSource({ id, image }));
   };
 
+  const switchTextDialog = (open: boolean) => {
+    dispatch(actions.switchTextDialog({ open }));
+  };
+
+  const updateTextSettings = (settings: TextContent) => {
+    dispatch(actions.updateTextSettings({ settings }));
+  };
+
   return {
     state,
     canUndo: history.canUndo(state.elementsHistory),
@@ -109,5 +117,7 @@ export const useCanvas = () => {
     changeDrawingBrushSize,
     changeDrawingBrushShape,
     changeImageSource,
+    switchTextDialog,
+    updateTextSettings,
   };
 };

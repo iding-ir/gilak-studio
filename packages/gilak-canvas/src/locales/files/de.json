@@ -11,5 +11,10 @@
   "undoRedo": {
     "undo": "Rückgängig",
     "redo": "Wiederholen"
+  },
+  "textDialog": {
+    "heading": "Text eingeben",
+    "text": "Text",
+    "enter": "Eingeben"
   }
 }

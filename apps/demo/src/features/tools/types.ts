@@ -4,6 +4,7 @@ export const toolTypes = [
   "FILL",
   "COLOR_PICKER",
   "MOVE",
+  "TEXT",
 ] as const;
 
 export type ToolType = (typeof toolTypes)[number];

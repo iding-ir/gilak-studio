@@ -9,12 +9,9 @@ export type UseDialogArgs = {
 export const useDialog = ({ open, onClose, inertId }: UseDialogArgs) => {
   const headingId = useId();
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const previouslyFocusedRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if (!open) return;
-
-    previouslyFocusedRef.current = document.activeElement as HTMLElement | null;
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -27,7 +24,6 @@ export const useDialog = ({ open, onClose, inertId }: UseDialogArgs) => {
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
-      previouslyFocusedRef.current?.focus();
     };
   }, [open, onClose]);
 

@@ -23,6 +23,8 @@ export {
   selectImageElements,
   selectSelectedElements,
   selectTextElements,
+  selectTextInputOpen,
+  selectTextSettings,
   selectVisibleElements,
 } from "./selectors";
 

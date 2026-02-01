@@ -1,6 +1,7 @@
 import type { CanvasElement, Position } from "../types/canvas";
 import { drawImage } from "./draw-image";
 import { drawStroke } from "./draw-stroke";
+import { drawText } from "./draw-text";
 
 export type RenderCanvasElementArgs = {
   ctx: CanvasRenderingContext2D;
@@ -54,6 +55,21 @@ export const renderCanvasElement = ({
           offset: off,
           image,
           ratio: ratio * RATIO,
+        });
+        break;
+      }
+      case "text": {
+        const { text, color, fontSize, fontFamily } = content;
+
+        drawText({
+          ctx,
+          size,
+          position: pos,
+          offset: off,
+          color,
+          text,
+          fontSize,
+          fontFamily,
         });
         break;
       }

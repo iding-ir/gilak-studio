@@ -21,6 +21,7 @@ import IconSwatch from "../../assets/icon-color-swatch.svg?url";
 import IconEraserTool from "../../assets/icon-eraser.svg?url";
 import IconFillTool from "../../assets/icon-fill-tool.svg?url";
 import IconMoveTool from "../../assets/icon-move-tool.svg?url";
+import IconText from "../../assets/icon-text.svg?url";
 import { COLOR_PALETTE } from "../../constants";
 import {
   selectBrushShape,
@@ -38,7 +39,7 @@ import {
   selectTolerance,
   selectTool,
   setTolerance,
-  toggleTool,
+  setTool,
 } from "../../features/tools/tools.slice";
 import type { ToolType } from "../../features/tools/types";
 
@@ -70,7 +71,7 @@ export const Tools = () => {
   };
 
   const handleToggleTool = (tool: ToolType) => {
-    dispatch(toggleTool(tool));
+    dispatch(setTool(tool));
   };
 
   const handleBrushSizeChange = (size: BrushSize) => {
@@ -100,6 +101,14 @@ export const Tools = () => {
           onChangeColor={handleChangeColor}
           onChangeBackgroundColor={handleChangeBackgroundColor}
           label={t("app:tools.colorSwatch")}
+        />
+      </li>
+      <li>
+        <IconButton
+          icon={IconText}
+          selected={selectedTool === "TEXT"}
+          tooltip={t("app:tools.text")}
+          onClick={() => handleToggleTool("TEXT")}
         />
       </li>
       <li>

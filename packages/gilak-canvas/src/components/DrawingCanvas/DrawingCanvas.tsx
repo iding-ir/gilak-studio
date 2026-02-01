@@ -7,13 +7,16 @@ import {
   useDrawing,
   useEraser,
   useFill,
+  useText,
 } from "../../hooks";
+import { useCanvas } from "../../hooks/useCanvas";
 import { useCanvasRenderer } from "../../hooks/useCanvasRenderer";
 import { useMove } from "../../hooks/useMove";
 import { getCursor } from "../../methods/get-cursor";
-import type { BrushShape, BrushSize } from "../../types";
+import type { BrushShape, BrushSize, Size } from "../../types";
 import { Canvas } from "../Canvas";
 import { Cursor } from "../Cursor";
+import { TextDialog } from "../TextDialog";
 import styles from "./DrawingCanvas.module.scss";
 
 export type DrawingCanvasProps = {
@@ -22,12 +25,12 @@ export type DrawingCanvasProps = {
   enabledFill: boolean;
   enabledEraser: boolean;
   enabledMove: boolean;
+  enabledText: boolean;
   color: string;
   backgroundColor: string;
   brushSize: BrushSize;
   brushShape: BrushShape;
-  width?: string | number;
-  height?: string | number;
+  size: Size;
   tolerance: number;
   className?: string;
 };
@@ -38,20 +41,21 @@ export const DrawingCanvas = ({
   enabledFill,
   enabledEraser,
   enabledMove,
+  enabledText,
   color,
   backgroundColor,
   brushSize,
   brushShape,
-  width,
-  height,
+  size,
   tolerance,
   className,
   ...props
 }: DrawingCanvasProps) => {
+  const { switchTextDialog } = useCanvas();
+
   useCanvasSize({
     canvasRef,
-    width,
-    height,
+    size,
   });
 
   useDrawing({
@@ -81,6 +85,14 @@ export const DrawingCanvas = ({
     enabled: enabledMove,
   });
 
+  useText({
+    canvasRef,
+    enabled: enabledText,
+    onClick: () => {
+      switchTextDialog(true);
+    },
+  });
+
   useCanvasRenderer({ canvasRef });
 
   const cursor = getCursor({
@@ -95,7 +107,7 @@ export const DrawingCanvas = ({
 
   const { cursorRef } = useCursor({
     canvasRef,
-    enabled: enabledDrawing || enabledEraser || enabledFill || enabledMove,
+    enabled: true,
     color: cursor.color,
     size: cursor.size,
     shape: cursor.shape,
@@ -105,6 +117,7 @@ export const DrawingCanvas = ({
     <div {...props} className={clsx(styles.canvas, className)}>
       <Canvas canvasRef={canvasRef} />
       <Cursor cursorRef={cursorRef} />
+      <TextDialog size={size} color={color} />
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import type { BrushShape, BrushSize } from "../types";
-import type { CanvasElement } from "../types/canvas";
+import type { CanvasElement, TextContent } from "../types/canvas";
 
 type Action =
   | { type: "ADD_ELEMENT"; payload: CanvasElement }
@@ -31,7 +31,9 @@ type Action =
   | {
       type: "CHANGE_IMAGE_SOURCE";
       payload: Pick<CanvasElement, "id"> & { image: ImageBitmap };
-    };
+    }
+  | { type: "SWITCH_TEXT_DIALOG"; payload: { open: boolean } }
+  | { type: "UPDATE_TEXT_SETTINGS"; payload: { settings: TextContent } };
 
 const addElement = (element: CanvasElement): Action => ({
   type: "ADD_ELEMENT",
@@ -128,6 +130,16 @@ const changeImageSource = (
   payload,
 });
 
+const switchTextDialog = (payload: { open: boolean }): Action => ({
+  type: "SWITCH_TEXT_DIALOG",
+  payload,
+});
+
+const updateTextSettings = (payload: { settings: TextContent }): Action => ({
+  type: "UPDATE_TEXT_SETTINGS",
+  payload,
+});
+
 export const actions = {
   addElement,
   removeElement,
@@ -147,6 +159,8 @@ export const actions = {
   changeDrawingBrushSize,
   changeDrawingBrushShape,
   changeImageSource,
+  switchTextDialog,
+  updateTextSettings,
 };
 
 export type { Action };

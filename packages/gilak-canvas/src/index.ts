@@ -33,30 +33,20 @@ export { canvasToBlob } from "./methods/canvas-to-blob";
 export { createElementFromDrawing } from "./methods/create-element-from-drawing";
 export { createElementFromImage } from "./methods/create-element-from-image";
 export { downloadCanvas } from "./methods/download-canvas";
-export type { DrawBrushProps } from "./methods/draw-brush";
 export { drawBrush } from "./methods/draw-brush";
-export type { DrawEraserProps } from "./methods/draw-eraser";
 export { drawEraser } from "./methods/draw-eraser";
-export type { EffectType } from "./methods/draw-random-effect";
 export { drawRandomEffect } from "./methods/draw-random-effect";
-export type { FillAreaArgs } from "./methods/fill-area";
 export { fillArea } from "./methods/fill-area";
 
 // Hooks
 export { useCanvas } from "./hooks/useCanvas";
 export { useCanvasPointer } from "./hooks/useCanvasPointer";
 export { useCanvasRenderer } from "./hooks/useCanvasRenderer";
-export type { UseCanvasSizeArgs } from "./hooks/useCanvasSize";
 export { useCanvasSize } from "./hooks/useCanvasSize";
-export type { UseCursorArgs } from "./hooks/useCursor";
 export { useCursor } from "./hooks/useCursor";
-export type { UseDrawingProps } from "./hooks/useDrawing";
 export { useDrawing } from "./hooks/useDrawing";
-export type { UseEraserProps } from "./hooks/useEraser";
 export { useEraser } from "./hooks/useEraser";
-export type { UseFillArgs } from "./hooks/useFill";
 export { useFill } from "./hooks/useFill";
-export type { UseMoveArgs } from "./hooks/useMove";
 export { useMove } from "./hooks/useMove";
 
 // Types

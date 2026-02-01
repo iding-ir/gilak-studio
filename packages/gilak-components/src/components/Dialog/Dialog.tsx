@@ -1,76 +1,26 @@
-import { t } from "@gilak/localization";
-import clsx from "clsx";
-import type { ReactNode } from "react";
 import { createPortal } from "react-dom";
 
-import IconClose from "../../assets/icon-close.svg?url";
-import { Body } from "../Body";
-import { Footer } from "../Footer";
-import { Header } from "../Header";
-import { IconButton } from "../Icon";
-import styles from "./Dialog.module.scss";
-import { useDialog } from "./useDialog";
+import type { DialogContentProps } from "./DialogContent";
+import { DialogContent } from "./DialogContent";
 
-export interface DialogProps {
-  open: boolean;
-  heading: ReactNode;
-  actions?: ReactNode;
-  className?: string;
-  inertId?: string;
-  children: ReactNode;
-  onClose: () => void;
-}
+export const PORTAL_ID = "gilak-dialog-root";
+
+export type DialogProps = DialogContentProps & {
+  portal?: boolean;
+  portalId?: string;
+};
 
 export const Dialog = ({
-  open,
-  heading,
-  actions,
-  className,
-  inertId,
-  children,
-  onClose,
+  portal = true,
+  portalId = PORTAL_ID,
+  ...props
 }: DialogProps) => {
-  const { dialogRef, headingId } = useDialog({
-    open,
-    onClose,
-    inertId,
-  });
+  if (portal) {
+    return createPortal(
+      <DialogContent {...props} />,
+      document.getElementById(portalId) as HTMLElement,
+    );
+  }
 
-  if (!open) return null;
-
-  return createPortal(
-    <div className={styles.overlay} role="presentation" onPointerDown={onClose}>
-      <dialog
-        ref={dialogRef}
-        className={clsx(styles.dialog, className)}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby={headingId}
-        tabIndex={-1}
-        open
-        onPointerDown={(e) => e.stopPropagation()}
-      >
-        <Header
-          id={headingId}
-          heading={heading}
-          actions={
-            <>
-              <IconButton
-                icon={IconClose}
-                className={styles.icon}
-                frameless
-                variant="light-ghost"
-                aria-label={t("components:dialog.close")}
-                tooltip={t("components:dialog.close")}
-                onClick={onClose}
-              />
-            </>
-          }
-        />
-        <Body>{children}</Body>
-        <Footer actions={actions} />
-      </dialog>
-    </div>,
-    document.getElementById("dialog-root") as HTMLElement,
-  );
+  return <DialogContent {...props} />;
 };

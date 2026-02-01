@@ -7,7 +7,7 @@ import type { DrawingContent } from "../types/canvas";
 import { useCanvas } from "./useCanvas";
 import { useCanvasPointer } from "./useCanvasPointer";
 
-export type UseDrawingProps = {
+export type UseDrawingArgs = {
   canvasRef: React.RefObject<HTMLCanvasElement | null>;
   enabled: boolean;
   color: string;
@@ -21,7 +21,7 @@ export const useDrawing = ({
   color,
   brushSize,
   brushShape,
-}: UseDrawingProps) => {
+}: UseDrawingArgs) => {
   const currentContentRef = useRef<DrawingContent | null>(null);
   const { addElement } = useCanvas();
 

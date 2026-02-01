@@ -1,5 +1,10 @@
+import { PORTAL_ID } from "./Dialog";
 import styles from "./DialogPortal.module.scss";
 
-export const DialogPortal = () => {
-  return <div id="dialog-root" className={styles.root} />;
+export type DialogPortalProps = {
+  portalId?: string;
+};
+
+export const DialogPortal = ({ portalId = PORTAL_ID }: DialogPortalProps) => {
+  return <div id={portalId} className={styles.root} />;
 };

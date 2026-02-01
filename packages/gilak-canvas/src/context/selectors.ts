@@ -39,3 +39,11 @@ export const selectImageElements = (state: State) => {
 export const selectTextElements = (state: State) => {
   return selectElements(state).filter((element) => element.type === "text");
 };
+
+export const selectTextSettings = (state: State) => {
+  return state.text.settings;
+};
+
+export const selectTextInputOpen = (state: State) => {
+  return state.text.open;
+};

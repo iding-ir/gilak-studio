@@ -1,6 +1,6 @@
 import { randomId } from "@gilak/utils";
 
-import type { CanvasElement, Position, Size } from "../types/canvas";
+import type { ImageElement, Position, Size } from "../types/canvas";
 
 export type CreateElementFromImageParams = {
   src: string;
@@ -18,7 +18,7 @@ export const createElementFromImage = async ({
   const { width, height } = image;
   const ratio = Math.min(documentSize.w / width, documentSize.h / height);
 
-  const canvasElement: CanvasElement = {
+  const canvasElement: ImageElement = {
     id: randomId({ prefix: "image-" }),
     type: "image",
     content: { image, ratio },

@@ -50,9 +50,9 @@ export const Window = ({ id }: WindowProps) => {
   const color = useAppSelector(selectColor);
   const backgroundColor = useAppSelector(selectBackgroundColor);
   const tolerance = useAppSelector(selectTolerance);
-  const { size: defaultDocumentSize } = useAppSelector(selectSettingsDocument);
-  const [documentWidth, setDocumentWidth] = useState(defaultDocumentSize.w);
-  const [documentHeight, setDocumentHeight] = useState(defaultDocumentSize.h);
+  const { size: documentSize } = useAppSelector(selectSettingsDocument);
+  const [documentWidth, setDocumentWidth] = useState(documentSize.w);
+  const [documentHeight, setDocumentHeight] = useState(documentSize.h);
   const [openSettings, setOpenSettings] = useState(false);
   const { title } = useFloatingWindow(id);
   const { state } = useFloatingWindows();
@@ -109,7 +109,7 @@ export const Window = ({ id }: WindowProps) => {
                 const element = await createElementFromImage({
                   src: (data as ImageItem).src,
                   position: pointer,
-                  documentSize: { w: documentWidth, h: documentHeight },
+                  documentSize,
                 });
 
                 addElement(element);
@@ -121,13 +121,13 @@ export const Window = ({ id }: WindowProps) => {
                 enabledFill={selectedTool === "FILL" && !dnd.isDragging}
                 enabledEraser={selectedTool === "ERASER" && !dnd.isDragging}
                 enabledMove={selectedTool === "MOVE" && !dnd.isDragging}
+                enabledText={selectedTool === "TEXT" && !dnd.isDragging}
                 color={color}
                 backgroundColor={backgroundColor}
                 brushSize={brushSize}
                 brushShape={brushShape}
                 tolerance={tolerance}
-                width={documentWidth}
-                height={documentHeight}
+                size={documentSize}
               />
             </DropZone>
           </MagnifierProvider>

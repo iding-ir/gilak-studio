@@ -150,6 +150,24 @@ export const reducer = (state: State, { type, payload }: Action): State => {
       const newHistory = history.setHistory(state.elementsHistory, newElements);
       return { ...state, elementsHistory: newHistory };
     }
+    case "SWITCH_TEXT_DIALOG": {
+      return {
+        ...state,
+        text: {
+          ...state.text,
+          open: payload.open,
+        },
+      };
+    }
+    case "UPDATE_TEXT_SETTINGS": {
+      return {
+        ...state,
+        text: {
+          ...state.text,
+          settings: payload.settings,
+        },
+      };
+    }
     default:
       return state;
   }

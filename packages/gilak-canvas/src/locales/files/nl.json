@@ -11,5 +11,10 @@
   "undoRedo": {
     "undo": "Ongedaan maken",
     "redo": "Opnieuw"
+  },
+  "textDialog": {
+    "heading": "Voer tekst in",
+    "text": "Tekst",
+    "enter": "Invoeren"
   }
 }

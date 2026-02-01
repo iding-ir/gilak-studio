@@ -45,14 +45,13 @@ export const Input = ({
         <Tooltip content={tooltip as string}>{children}</Tooltip>
       )}
     >
-      <div className={styles.root}>
+      <div className={clsx(styles.root, { [styles.fullWidth]: fullWidth })}>
         {label && (
           <label
             htmlFor={id}
             tabIndex={isInputInvisible ? 0 : undefined}
             className={clsx(styles.label, className, {
               [styles.error]: error,
-              [styles.fullWidth]: fullWidth,
               [styles.rounded]: rounded,
               [styles.frameless]: frameless,
             })}

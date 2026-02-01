@@ -3,17 +3,16 @@ import { useEffect } from "react";
 
 import { parseSize } from "../methods/parse-size";
 import { storeCtx } from "../methods/store-ctx";
+import type { Size } from "../types";
 
 export type UseCanvasSizeArgs = {
   canvasRef: RefObject<HTMLCanvasElement | null>;
-  width?: string | number;
-  height?: string | number;
+  size: Size;
 };
 
 export const useCanvasSize = ({
   canvasRef,
-  width,
-  height,
+  size: { w: width, h: height },
 }: UseCanvasSizeArgs) => {
   useEffect(() => {
     const canvas = canvasRef.current;

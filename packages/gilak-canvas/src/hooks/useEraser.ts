@@ -4,7 +4,7 @@ import { drawEraser } from "../methods/draw-eraser";
 import type { BrushShape, BrushSize } from "../types";
 import { useCanvasPointer } from "./useCanvasPointer";
 
-export type UseEraserProps = {
+export type UseEraserArgs = {
   canvasRef: RefObject<HTMLCanvasElement | null>;
   enabled: boolean;
   brushSize: BrushSize;
@@ -16,7 +16,7 @@ export const useEraser = ({
   enabled,
   brushSize,
   brushShape,
-}: UseEraserProps) => {
+}: UseEraserArgs) => {
   useCanvasPointer({
     canvasRef,
     enabled,

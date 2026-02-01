@@ -39,9 +39,9 @@ export type DrawingElement = CanvasElementBase & {
 
 export type TextContent = {
   text: string;
-  font: string;
+  fontFamily: string;
+  fontSize: number;
   color: string;
-  align: CanvasTextAlign;
 };
 
 export type TextElement = CanvasElementBase & {
