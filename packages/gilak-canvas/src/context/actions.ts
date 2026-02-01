@@ -33,7 +33,10 @@ type Action =
       payload: Pick<CanvasElement, "id"> & { image: ImageBitmap };
     }
   | { type: "SWITCH_TEXT_DIALOG"; payload: { open: boolean } }
-  | { type: "UPDATE_TEXT_SETTINGS"; payload: { settings: TextContent } };
+  | {
+      type: "UPDATE_TEXT_SETTINGS";
+      payload: Pick<CanvasElement, "id"> & { settings: TextContent };
+    };
 
 const addElement = (element: CanvasElement): Action => ({
   type: "ADD_ELEMENT",
@@ -135,7 +138,9 @@ const switchTextDialog = (payload: { open: boolean }): Action => ({
   payload,
 });
 
-const updateTextSettings = (payload: { settings: TextContent }): Action => ({
+const updateTextSettings = (
+  payload: Pick<CanvasElement, "id"> & { settings: TextContent },
+): Action => ({
   type: "UPDATE_TEXT_SETTINGS",
   payload,
 });

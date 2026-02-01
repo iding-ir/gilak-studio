@@ -160,13 +160,22 @@ export const reducer = (state: State, { type, payload }: Action): State => {
       };
     }
     case "UPDATE_TEXT_SETTINGS": {
-      return {
-        ...state,
-        text: {
-          ...state.text,
-          settings: payload.settings,
+      const newElements = new Map(state.elementsHistory.current);
+      const element = newElements.get(payload.id);
+      if (!element || element.type !== "text") return state;
+
+      const updatedElement = {
+        ...element,
+        content: {
+          ...element.content,
+          ...payload.settings,
         },
       };
+
+      newElements.set(payload.id, updatedElement);
+
+      const newHistory = history.setHistory(state.elementsHistory, newElements);
+      return { ...state, elementsHistory: newHistory };
     }
     default:
       return state;

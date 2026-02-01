@@ -18,7 +18,8 @@ export const useFill = ({
   color,
   tolerance,
 }: UseFillArgs) => {
-  const { state, changeDrawingColor, changeImageSource } = useCanvas();
+  const { state, changeDrawingColor, changeImageSource, updateTextSettings } =
+    useCanvas();
   const element = selectFocusedElement(state);
 
   useCanvasPointer({
@@ -45,6 +46,10 @@ export const useFill = ({
 
       if (element.type === "drawing") {
         changeDrawingColor(element.id, color);
+      }
+
+      if (element.type === "text") {
+        updateTextSettings(element.id, { ...element.content, color });
       }
     },
   });

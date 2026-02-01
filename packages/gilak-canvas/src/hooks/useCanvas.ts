@@ -91,8 +91,11 @@ export const useCanvas = () => {
     dispatch(actions.switchTextDialog({ open }));
   };
 
-  const updateTextSettings = (settings: TextContent) => {
-    dispatch(actions.updateTextSettings({ settings }));
+  const updateTextSettings = (
+    id: CanvasElement["id"],
+    settings: TextContent,
+  ) => {
+    dispatch(actions.updateTextSettings({ id, settings }));
   };
 
   return {
