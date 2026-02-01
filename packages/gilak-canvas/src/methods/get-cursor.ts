@@ -19,6 +19,7 @@ type GetCursorArgs = {
   enabledDrawing: boolean;
   enabledFill: boolean;
   enabledMove: boolean;
+  enabledText: boolean;
 };
 
 export const getCursor = ({
@@ -29,6 +30,7 @@ export const getCursor = ({
   enabledDrawing,
   enabledFill,
   enabledMove,
+  enabledText,
 }: GetCursorArgs): Cursor => {
   if (enabledDrawing) {
     return {
@@ -57,6 +59,14 @@ export const getCursor = ({
   if (enabledMove) {
     return {
       shape: "PLUS",
+      size: BRUSH_SIZES[3],
+      color: "rgba(0, 0, 0, 0.9)",
+    };
+  }
+
+  if (enabledText) {
+    return {
+      shape: "TEXT",
       size: BRUSH_SIZES[3],
       color: "rgba(0, 0, 0, 0.9)",
     };

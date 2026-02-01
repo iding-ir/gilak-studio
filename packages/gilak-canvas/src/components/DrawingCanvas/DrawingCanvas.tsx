@@ -103,6 +103,7 @@ export const DrawingCanvas = ({
     enabledDrawing,
     enabledFill,
     enabledMove,
+    enabledText,
   });
 
   const { cursorRef } = useCursor({
