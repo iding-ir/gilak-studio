@@ -15,6 +15,9 @@
   "textDialog": {
     "heading": "Voer tekst in",
     "text": "Tekst",
-    "enter": "Invoeren"
+    "enter": "Invoeren",
+    "header": "Lettertype",
+    "fontFamily": "Lettertypefamilie",
+    "fontSize": "Lettergrootte"
   }
 }

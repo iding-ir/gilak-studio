@@ -1,11 +1,20 @@
-import { Button, Dialog, Group, Input } from "@gilak/components";
+import {
+  Button,
+  Dialog,
+  Dropdown,
+  Group,
+  Input,
+  List,
+} from "@gilak/components";
 import { t } from "@gilak/localization";
 import { useState } from "react";
 
 import { selectTextInputOpen, selectTextSettings } from "../../context";
 import { useCanvas } from "../../hooks/useCanvas";
 import { createElementFromText } from "../../methods/create-element-from-text";
-import type { Size } from "../../types/index";
+import { FONT_FAMILIES, type FontFamily } from "../../types/fontFamily";
+import { FONT_SIZES, type FontSize } from "../../types/fontSize";
+import { type Size } from "../../types/index";
 
 export type TextDialogProps = {
   size: Size;
@@ -14,10 +23,13 @@ export type TextDialogProps = {
 
 export const TextDialog = ({ size, color }: TextDialogProps) => {
   const { state, addElement, switchTextDialog } = useCanvas();
-  const { fontSize, fontFamily } = selectTextSettings(state);
+  const textSettings = selectTextSettings(state);
   const open = selectTextInputOpen(state);
   const [value, setValue] = useState("");
-
+  const [fontFamily, setFontFamily] = useState<FontFamily>(
+    textSettings.fontFamily,
+  );
+  const [fontSize, setFontSize] = useState<FontSize>(textSettings.fontSize);
   const handleClose = () => {
     switchTextDialog(false);
   };
@@ -57,6 +69,56 @@ export const TextDialog = ({ size, color }: TextDialogProps) => {
       }
     >
       <Group direction="column">
+        <Group direction="row" title={t("canvas:textDialog.header")}>
+          <Dropdown
+            position="bottom-left"
+            trigger={<Button fullWidth>{fontFamily}</Button>}
+          >
+            <List
+              direction="column"
+              count={2}
+              interactive
+              variant="light"
+              items={FONT_FAMILIES.map((item) => (
+                <Button
+                  key={item}
+                  selected={item === fontFamily}
+                  variant="light"
+                  onClick={() => setFontFamily(item)}
+                  style={{ fontFamily: item }}
+                >
+                  {item}
+                </Button>
+              ))}
+            />
+          </Dropdown>
+          <Dropdown
+            position="bottom-left"
+            trigger={
+              <Button variant="primary" fullWidth>
+                {fontSize}
+              </Button>
+            }
+          >
+            <List
+              direction="column"
+              count={4}
+              interactive
+              variant="light"
+              items={FONT_SIZES.map((item) => (
+                <Button
+                  key={item}
+                  selected={item === fontSize}
+                  variant="light"
+                  size="xs"
+                  onClick={() => setFontSize(item)}
+                >
+                  {item}
+                </Button>
+              ))}
+            />
+          </Dropdown>
+        </Group>
         <Group direction="row" title={t("canvas:textDialog.text")}>
           <Input fullWidth value={value} onChange={handleChange} />
         </Group>

@@ -30,7 +30,7 @@ export const Menu = ({
   href,
   label,
   direction = "column",
-  position = "bottom-right",
+  position = "bottom-left",
   variant = "dark",
   size = "md",
   frameless = false,

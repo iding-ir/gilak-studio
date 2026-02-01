@@ -11,6 +11,7 @@ export type ButtonProps = ComponentProps<"button"> & {
   fullWidth?: boolean;
   alignment?: Alignment;
   frameless?: boolean;
+  selected?: boolean;
   children: ReactNode;
   className?: string;
 };
@@ -22,6 +23,7 @@ export const Button = ({
   fullWidth = false,
   alignment = "center",
   frameless = false,
+  selected = false,
   className,
   children,
   ...props
@@ -39,6 +41,7 @@ export const Button = ({
           [styles.rounded]: rounded,
           [styles.fullWidth]: fullWidth,
           [styles.frameless]: frameless,
+          [styles.selected]: selected,
         },
       )}
     >

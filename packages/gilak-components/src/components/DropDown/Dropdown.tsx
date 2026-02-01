@@ -33,7 +33,7 @@ export const Dropdown = ({
   trigger,
   className,
   openDefault = false,
-  position = "bottom-right",
+  position = "bottom-left",
   closeOnClickInside = false,
 }: DropdownProps) => {
   const { triggerRef, menuRef, open, menuId, triggerId, setOpen } = useDropdown(

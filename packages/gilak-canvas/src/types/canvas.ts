@@ -1,5 +1,7 @@
 import type { BrushShape } from "./brushShape";
 import type { BrushSize } from "./brushSize";
+import type { FontFamily } from "./fontFamily";
+import type { FontSize } from "./fontSize";
 
 export type Position = { x: number; y: number };
 export type Size = { w: number; h: number };
@@ -39,8 +41,8 @@ export type DrawingElement = CanvasElementBase & {
 
 export type TextContent = {
   text: string;
-  fontFamily: string;
-  fontSize: number;
+  fontFamily: FontFamily;
+  fontSize: FontSize;
   color: string;
 };
 

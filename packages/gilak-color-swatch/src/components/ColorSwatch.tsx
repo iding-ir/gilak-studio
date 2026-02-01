@@ -36,7 +36,7 @@ export const ColorSwatch = ({
   colors,
   label,
   name = { color: "color-swatch-color", background: "color-swatch-background" },
-  position = "bottom-right",
+  position = "bottom-left",
   variant = "light",
   size = "md",
   gridCount = 6,

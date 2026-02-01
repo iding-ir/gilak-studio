@@ -7,6 +7,7 @@
   outline: none;
   box-shadow: var(--shadow-sm);
   transition: background-color var(--transition-md);
+  border: 2px solid transparent;
   cursor: pointer;
   @include interactiveVariants;
   @include heightSizes;
@@ -31,5 +32,9 @@
 
   &.rounded {
     border-radius: var(--radius-md);
+  }
+
+  &.selected {
+    border-color: var(--color-primary-lg);
   }
 }

@@ -15,6 +15,9 @@
   "textDialog": {
     "heading": "Text eingeben",
     "text": "Text",
-    "enter": "Eingeben"
+    "enter": "Eingeben",
+    "header": "Schriftart",
+    "fontFamily": "Schriftfamilie",
+    "fontSize": "Schriftgröße"
   }
 }

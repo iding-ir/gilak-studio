@@ -15,6 +15,9 @@
   "textDialog": {
     "heading": "Enter Text",
     "text": "Text",
-    "enter": "Enter"
+    "enter": "Enter",
+    "header": "Font",
+    "fontFamily": "Font Family",
+    "fontSize": "Font Size"
   }
 }
