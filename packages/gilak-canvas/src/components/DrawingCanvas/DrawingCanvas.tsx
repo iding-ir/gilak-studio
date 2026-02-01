@@ -26,6 +26,7 @@ export type DrawingCanvasProps = {
   enabledEraser: boolean;
   enabledMove: boolean;
   enabledText: boolean;
+  enabledColorPicker: boolean;
   color: string;
   backgroundColor: string;
   brushSize: BrushSize;
@@ -42,6 +43,7 @@ export const DrawingCanvas = ({
   enabledEraser,
   enabledMove,
   enabledText,
+  enabledColorPicker,
   color,
   backgroundColor,
   brushSize,
@@ -108,7 +110,7 @@ export const DrawingCanvas = ({
 
   const { cursorRef } = useCursor({
     canvasRef,
-    enabled: true,
+    enabled: !enabledColorPicker,
     color: cursor.color,
     size: cursor.size,
     shape: cursor.shape,

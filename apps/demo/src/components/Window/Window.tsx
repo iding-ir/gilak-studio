@@ -95,7 +95,7 @@ export const Window = ({ id }: WindowProps) => {
         <ResizableScreen>
           <MagnifierProvider
             canvasRef={canvasRef}
-            enabled={selectedTool === "COLOR_PICKER"}
+            enabled={selectedTool === "PICKER" && !dnd.isDragging}
             onSelect={handleSelectColor}
           >
             <DropZone
@@ -122,6 +122,9 @@ export const Window = ({ id }: WindowProps) => {
                 enabledEraser={selectedTool === "ERASER" && !dnd.isDragging}
                 enabledMove={selectedTool === "MOVE" && !dnd.isDragging}
                 enabledText={selectedTool === "TEXT" && !dnd.isDragging}
+                enabledColorPicker={
+                  selectedTool === "PICKER" && !dnd.isDragging
+                }
                 color={color}
                 backgroundColor={backgroundColor}
                 brushSize={brushSize}

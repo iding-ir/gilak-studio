@@ -2,7 +2,7 @@ export const toolTypes = [
   "BRUSH",
   "ERASER",
   "FILL",
-  "COLOR_PICKER",
+  "PICKER",
   "MOVE",
   "TEXT",
 ] as const;

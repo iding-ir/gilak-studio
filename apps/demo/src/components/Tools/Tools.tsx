@@ -167,9 +167,9 @@ export const Tools = () => {
       <li>
         <IconButton
           icon={IconColorPicker}
-          selected={selectedTool === "COLOR_PICKER"}
+          selected={selectedTool === "PICKER"}
           tooltip={t("app:tools.colorPicker")}
-          onClick={() => handleToggleTool("COLOR_PICKER")}
+          onClick={() => handleToggleTool("PICKER")}
         />
       </li>
       <li>
