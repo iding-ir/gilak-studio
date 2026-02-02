@@ -5,13 +5,13 @@ import {
   type CursorShape,
 } from "../types";
 
-type Cursor = {
+export type CursorType = {
   shape: BrushShape | CursorShape;
   size: BrushSize;
   color: string;
 };
 
-type GetCursorArgs = {
+export type GetCursorArgs = {
   color: string;
   brushShape: BrushShape;
   brushSize: BrushSize;
@@ -31,7 +31,7 @@ export const getCursor = ({
   enabledFill,
   enabledMove,
   enabledText,
-}: GetCursorArgs): Cursor => {
+}: GetCursorArgs): CursorType => {
   if (enabledDrawing) {
     return {
       shape: brushShape,

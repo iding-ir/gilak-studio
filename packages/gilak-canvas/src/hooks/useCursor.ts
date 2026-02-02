@@ -29,42 +29,34 @@ export const useCursor = ({
   useCanvasPointer({
     canvasRef,
     enabled,
-    onEnter: () => {
-      const cursor = cursorRef.current;
-      if (!cursor) return;
-
-      cursor.style.display = "block";
-      cursor.width = width;
-      cursor.height = height;
-      cursor.style.width = `${width}px`;
-      cursor.style.height = `${height}px`;
-
-      const ctx = cursor.getContext("2d");
-      if (!ctx) return;
-
-      ctx.clearRect(0, 0, width, height);
-
-      const point = { x: width / 2, y: height / 2 };
-      ctx.strokeStyle = color;
-      ctx.lineWidth = 2;
-      drawShape(ctx, point.x, point.y, size, shape);
-    },
     onLeave: () => {
       const cursor = cursorRef.current;
       if (!cursor) return;
-      cursor.style.display = "none";
-    },
-    onDown: () => {
-      const cursor = cursorRef.current;
-      if (!cursor) return;
+
+      cursor.style.setProperty("display", "none");
     },
     onMove: ({ point: { x, y } }) => {
       const cursor = cursorRef.current;
       if (!cursor) return;
+      const ctx = cursor.getContext("2d");
+      if (!ctx) return;
+
+      cursor.width = width;
+      cursor.height = height;
+      cursor.style.setProperty("width", `${width}px`);
+      cursor.style.setProperty("height", `${height}px`);
+      cursor.style.setProperty("display", "block");
       cursor.style.setProperty(
         "transform",
         `translate3d(calc(${x}px - 50%), calc(${y}px - 50%), 0)`,
       );
+
+      const point = { x: width / 2, y: height / 2 };
+
+      ctx.clearRect(0, 0, width, height);
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2;
+      drawShape(ctx, point.x, point.y, size, shape);
     },
   });
 

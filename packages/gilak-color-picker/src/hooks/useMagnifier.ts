@@ -22,15 +22,11 @@ export const useMagnifier = ({
   useCanvasPointer({
     canvasRef,
     enabled,
-    onEnter: () => {
-      const container = containerRef.current;
-      if (!container) return;
-      container.style.display = "block";
-    },
     onLeave: () => {
       const container = containerRef.current;
       if (!container) return;
-      container.style.display = "none";
+
+      container.style.setProperty("display", "none");
     },
     onDown: ({ point: { x, y }, canvas }) => {
       const color = getCanvasColor({ canvas, x, y });
@@ -39,6 +35,8 @@ export const useMagnifier = ({
     onMove: ({ point: { x, y }, canvas }) => {
       const container = containerRef.current;
       if (!container || !canvas) return;
+
+      container.style.setProperty("display", "block");
       container.style.setProperty(
         "transform",
         `translate3d(calc(${x}px - 50%), calc(${y}px - 50%), 0)`,

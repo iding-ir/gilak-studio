@@ -25,11 +25,7 @@ import {
   selectBrushShape,
   selectBrushSize,
 } from "../../features/brush/brush-slice";
-import {
-  selectBackgroundColor,
-  selectColor,
-  setColor,
-} from "../../features/color/color-slice";
+import { selectColor, setColor } from "../../features/color/color-slice";
 import { selectSettingsDocument } from "../../features/settings/settings-slice";
 import { selectTolerance, selectTool } from "../../features/tools/tools.slice";
 import { DocumentSettings } from "../DocumentSettings";
@@ -48,7 +44,6 @@ export const Window = ({ id }: WindowProps) => {
   const brushShape = useAppSelector(selectBrushShape);
   const selectedTool = useAppSelector(selectTool);
   const color = useAppSelector(selectColor);
-  const backgroundColor = useAppSelector(selectBackgroundColor);
   const tolerance = useAppSelector(selectTolerance);
   const { size: documentSize } = useAppSelector(selectSettingsDocument);
   const [documentWidth, setDocumentWidth] = useState(documentSize.w);
@@ -117,16 +112,13 @@ export const Window = ({ id }: WindowProps) => {
             >
               <DrawingCanvas
                 canvasRef={canvasRef}
-                enabledDrawing={selectedTool === "BRUSH" && !dnd.isDragging}
-                enabledFill={selectedTool === "FILL" && !dnd.isDragging}
-                enabledEraser={selectedTool === "ERASER" && !dnd.isDragging}
-                enabledMove={selectedTool === "MOVE" && !dnd.isDragging}
-                enabledText={selectedTool === "TEXT" && !dnd.isDragging}
-                enabledColorPicker={
-                  selectedTool === "PICKER" && !dnd.isDragging
-                }
+                enabled={!dnd.isDragging && selectedTool !== "PICKER"}
+                enabledDrawing={selectedTool === "BRUSH"}
+                enabledFill={selectedTool === "FILL"}
+                enabledEraser={selectedTool === "ERASER"}
+                enabledMove={selectedTool === "MOVE"}
+                enabledText={selectedTool === "TEXT"}
                 color={color}
-                backgroundColor={backgroundColor}
                 brushSize={brushSize}
                 brushShape={brushShape}
                 tolerance={tolerance}

@@ -21,14 +21,14 @@ import styles from "./DrawingCanvas.module.scss";
 
 export type DrawingCanvasProps = {
   canvasRef: RefObject<HTMLCanvasElement | null>;
+  enabled?: boolean;
+  enabledCursor?: boolean;
   enabledDrawing: boolean;
   enabledFill: boolean;
   enabledEraser: boolean;
   enabledMove: boolean;
   enabledText: boolean;
-  enabledColorPicker: boolean;
   color: string;
-  backgroundColor: string;
   brushSize: BrushSize;
   brushShape: BrushShape;
   size: Size;
@@ -38,14 +38,14 @@ export type DrawingCanvasProps = {
 
 export const DrawingCanvas = ({
   canvasRef,
+  enabled = true,
+  enabledCursor = true,
   enabledDrawing,
   enabledFill,
   enabledEraser,
   enabledMove,
   enabledText,
-  enabledColorPicker,
   color,
-  backgroundColor,
   brushSize,
   brushShape,
   size,
@@ -62,7 +62,7 @@ export const DrawingCanvas = ({
 
   useDrawing({
     canvasRef,
-    enabled: enabledDrawing,
+    enabled: enabled && enabledDrawing,
     color,
     brushSize,
     brushShape,
@@ -70,26 +70,26 @@ export const DrawingCanvas = ({
 
   useFill({
     canvasRef,
-    enabled: enabledFill,
+    enabled: enabled && enabledFill,
     color,
     tolerance,
   });
 
   useEraser({
     canvasRef,
-    enabled: enabledEraser,
+    enabled: enabled && enabledEraser,
     brushSize,
     brushShape,
   });
 
   useMove({
     canvasRef,
-    enabled: enabledMove,
+    enabled: enabled && enabledMove,
   });
 
   useText({
     canvasRef,
-    enabled: enabledText,
+    enabled: enabled && enabledText,
     onClick: () => {
       switchTextDialog(true);
     },
@@ -110,7 +110,7 @@ export const DrawingCanvas = ({
 
   const { cursorRef } = useCursor({
     canvasRef,
-    enabled: !enabledColorPicker,
+    enabled: enabled && enabledCursor,
     color: cursor.color,
     size: cursor.size,
     shape: cursor.shape,
@@ -119,7 +119,7 @@ export const DrawingCanvas = ({
   return (
     <div {...props} className={clsx(styles.canvas, className)}>
       <Canvas canvasRef={canvasRef} />
-      <Cursor cursorRef={cursorRef} />
+      {enabled && enabledCursor && <Cursor cursorRef={cursorRef} />}
       <TextDialog size={size} color={color} />
     </div>
   );

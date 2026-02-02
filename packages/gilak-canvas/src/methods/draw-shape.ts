@@ -75,10 +75,13 @@ export const drawShape = (
       ctx.arc(x, y, r / 4, 0, 2 * Math.PI);
       break;
     case "TEXT":
-      ctx.moveTo(x - r, y - r);
-      ctx.lineTo(x + r, y - r);
+      ctx.moveTo(x - r / 2, y - r);
+      ctx.lineTo(x + r / 2, y - r);
       ctx.moveTo(x, y - r);
       ctx.lineTo(x, y + r);
+      ctx.moveTo(x - r / 2, y + r);
+      ctx.lineTo(x + r / 2, y + r);
+
       ctx.closePath();
       break;
     default:
