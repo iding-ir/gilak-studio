@@ -15,10 +15,6 @@
   .content {
     display: flex;
     gap: var(--spacing-sm);
-
-    & > * {
-      flex-grow: 1;
-    }
   }
 
   &.column,
