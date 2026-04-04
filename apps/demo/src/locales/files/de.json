@@ -23,7 +23,8 @@
     "colorPicker": "Farbwähler",
     "fill": "Füllwerkzeug",
     "tolerance": "Toleranz",
-    "move": "Verschieben-Werkzeug"
+    "move": "Verschieben-Werkzeug",
+    "text": "Text-Werkzeug"
   },
   "settings": {
     "title": "Einstellungen",

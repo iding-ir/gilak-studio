@@ -23,7 +23,8 @@
     "colorPicker": "Kleurkiezer",
     "fill": "Vulgereedschap",
     "tolerance": "Tolerantie",
-    "move": "Verplaats-gereedschap"
+    "move": "Verplaats-gereedschap",
+    "text": "Tekst-gereedschap"
   },
   "settings": {
     "title": "Instellingen",

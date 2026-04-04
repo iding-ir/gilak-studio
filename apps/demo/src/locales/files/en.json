@@ -23,7 +23,8 @@
     "colorPicker": "Color Picker",
     "fill": "Fill Tool",
     "tolerance": "Tolerance",
-    "move": "Move Tool"
+    "move": "Move Tool",
+    "text": "Text Tool"
   },
   "settings": {
     "title": "Settings",
