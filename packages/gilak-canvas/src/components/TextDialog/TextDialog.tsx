@@ -58,7 +58,7 @@ export const TextDialog = ({ size, color }: TextDialogProps) => {
 
   return (
     <Dialog
-      portal={false}
+      portal={true}
       open={open}
       onClose={handleClose}
       heading={t("canvas:textDialog.heading")}
