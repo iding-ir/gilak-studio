@@ -22,6 +22,9 @@ export { debounce, throttle } from "./performance";
 // DOM utilities
 export { setAttribute, toggleFullscreen, useHead, watchElement } from "./dom";
 
+// File utilities
+export { blobToDataUrl, dataUrlToImage, subscribeToImageLoad } from "./file";
+
 // Storage
 export {
   getItem,

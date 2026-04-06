@@ -18,7 +18,7 @@ export type CanvasElementBase = {
 };
 
 export type ImageContent = {
-  image: ImageBitmap;
+  src: string;
   ratio: number;
 };
 

@@ -45,7 +45,7 @@ export const renderCanvasElement = ({
         break;
       }
       case "image": {
-        const { image, ratio } = content;
+        const { src, ratio } = content;
         const RATIO = 0.5;
 
         drawImage({
@@ -53,7 +53,7 @@ export const renderCanvasElement = ({
           size,
           position: pos,
           offset: off,
-          image,
+          src,
           ratio: ratio * RATIO,
         });
         break;

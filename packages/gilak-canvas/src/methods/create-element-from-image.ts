@@ -1,4 +1,4 @@
-import { randomId } from "@gilak/utils";
+import { blobToDataUrl, randomId } from "@gilak/utils";
 
 import type { ImageElement, Position, Size } from "../types/canvas";
 
@@ -15,13 +15,15 @@ export const createElementFromImage = async ({
 }: CreateElementFromImageParams) => {
   const blob = await fetch(src).then((r) => r.blob());
   const image = await createImageBitmap(blob);
+  const dataUrl = await blobToDataUrl(blob);
   const { width, height } = image;
+  image.close();
   const ratio = Math.min(documentSize.w / width, documentSize.h / height);
 
   const canvasElement: ImageElement = {
     id: randomId({ prefix: "image-" }),
     type: "image",
-    content: { image, ratio },
+    content: { src: dataUrl, ratio },
     position,
     size: { w: width, h: height },
     visible: true,

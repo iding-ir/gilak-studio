@@ -1,3 +1,5 @@
+import { dataUrlToImage } from "@gilak/utils";
+
 import type { Position, Size } from "../types";
 import { getEdgeFromCenter } from "./get-edge-from-center";
 
@@ -6,7 +8,7 @@ export type drawImageArgs = {
   size: Size;
   position: Position;
   offset?: Position;
-  image: CanvasImageSource;
+  src: string;
   ratio: number;
 };
 
@@ -15,9 +17,15 @@ export const drawImage = ({
   size,
   position,
   offset = { x: 0, y: 0 },
-  image,
+  src,
   ratio,
 }: drawImageArgs) => {
+  const { image, isReady } = dataUrlToImage(src);
+
+  if (!image || !isReady) {
+    return;
+  }
+
   const width = size.w * ratio;
   const height = size.h * ratio;
   const x = getEdgeFromCenter(position.x, width, offset.x);

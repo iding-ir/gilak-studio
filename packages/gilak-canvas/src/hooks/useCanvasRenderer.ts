@@ -1,3 +1,4 @@
+import { subscribeToImageLoad } from "@gilak/utils";
 import { type RefObject, useEffect } from "react";
 
 import { selectElements } from "../context";
@@ -18,6 +19,24 @@ export const useCanvasRenderer = ({ canvasRef }: UseCanvasRendererArgs) => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    renderCanvasElement({ ctx, elements });
+    const render = () => {
+      renderCanvasElement({ ctx, elements });
+    };
+
+    render();
+
+    const cleanupFns = elements.flatMap((element) => {
+      if (element.type !== "image") {
+        return [];
+      }
+
+      return [subscribeToImageLoad(element.content.src, render)];
+    });
+
+    return () => {
+      cleanupFns.forEach((cleanup) => {
+        cleanup();
+      });
+    };
   }, [elements, canvasRef]);
 };

@@ -142,7 +142,7 @@ export const reducer = (state: State, { type, payload }: Action): State => {
         ...element,
         content: {
           ...element.content,
-          image: payload.image,
+          src: payload.src,
         },
       };
 

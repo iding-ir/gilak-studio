@@ -2,7 +2,7 @@ import { history } from "@gilak/utils";
 
 import { actions, useCanvasContext } from "../context";
 import type { BrushShape, BrushSize } from "../types";
-import type { CanvasElement, TextContent } from "../types/canvas";
+import type { CanvasElement, ImageContent, TextContent } from "../types/canvas";
 
 export const useCanvas = () => {
   const { state, dispatch } = useCanvasContext();
@@ -83,8 +83,11 @@ export const useCanvas = () => {
     dispatch(actions.changeDrawingBrushShape({ id, brushShape }));
   };
 
-  const changeImageSource = (id: CanvasElement["id"], image: ImageBitmap) => {
-    dispatch(actions.changeImageSource({ id, image }));
+  const changeImageSource = (
+    id: CanvasElement["id"],
+    src: ImageContent["src"],
+  ) => {
+    dispatch(actions.changeImageSource({ id, src }));
   };
 
   const switchTextDialog = (open: boolean) => {

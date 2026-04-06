@@ -1,5 +1,5 @@
 import type { BrushShape, BrushSize } from "../types";
-import type { CanvasElement, TextContent } from "../types/canvas";
+import type { CanvasElement, ImageContent, TextContent } from "../types/canvas";
 
 type Action =
   | { type: "ADD_ELEMENT"; payload: CanvasElement }
@@ -30,7 +30,7 @@ type Action =
     }
   | {
       type: "CHANGE_IMAGE_SOURCE";
-      payload: Pick<CanvasElement, "id"> & { image: ImageBitmap };
+      payload: Pick<CanvasElement, "id"> & Pick<ImageContent, "src">;
     }
   | { type: "SWITCH_TEXT_DIALOG"; payload: { open: boolean } }
   | {
@@ -127,7 +127,7 @@ const changeDrawingBrushShape = (
 });
 
 const changeImageSource = (
-  payload: Pick<CanvasElement, "id"> & { image: ImageBitmap },
+  payload: Pick<CanvasElement, "id"> & Pick<ImageContent, "src">,
 ): Action => ({
   type: "CHANGE_IMAGE_SOURCE",
   payload,
