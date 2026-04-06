@@ -26,7 +26,12 @@ export { getRelativeTimeBucket, type RelativeTimeBucket } from "./time";
 export { setAttribute, toggleFullscreen, useHead, watchElement } from "./dom";
 
 // File utilities
-export { blobToDataUrl, dataUrlToImage, subscribeToImageLoad } from "./file";
+export {
+  blobToDataUrl,
+  dataUrlToImage,
+  loadImageFromSrc,
+  subscribeToImageLoad,
+} from "./file";
 
 // Storage
 export {
