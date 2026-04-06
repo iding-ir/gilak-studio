@@ -1,5 +1,13 @@
 import styles from "./WindowFooter.module.scss";
 
-export const WindowFooter = () => {
-  return <div className={styles.root}>Hi there!</div>;
+export type WindowFooterProps = {
+  id: string;
+};
+
+export const WindowFooter = ({ id }: WindowFooterProps) => {
+  return (
+    <div className={styles.root}>
+      <span id={id} />
+    </div>
+  );
 };

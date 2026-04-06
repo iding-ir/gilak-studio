@@ -1,4 +1,5 @@
 import {
+  CanvasAutoSave,
   createElementFromImage,
   DrawingCanvas,
   ElementsPortal,
@@ -32,6 +33,8 @@ import { DocumentSettings } from "../DocumentSettings";
 import styles from "./Window.module.scss";
 import { WindowActions } from "./WindowActions";
 import { WindowFooter } from "./WindowFooter";
+
+const getWindowFooterPortalId = (id: string) => `window-footer-save-time-${id}`;
 
 export type WindowProps = {
   id: string;
@@ -71,12 +74,12 @@ export const Window = ({ id }: WindowProps) => {
           <ZoomSelectorPortal />
         </>
       )}
-
+      <CanvasAutoSave id={getWindowFooterPortalId(id)} />
       <FloatingWindow
         id={id}
         title={title}
         editableTitle
-        footer={<WindowFooter />}
+        footer={<WindowFooter id={getWindowFooterPortalId(id)} />}
         actions={
           <WindowActions
             id={id}

@@ -29,6 +29,7 @@ export const reducer = (state: State, { type, payload }: Action): State => {
         ...state,
         elementsHistory: history.createHistory(new Map()),
         focus: [],
+        selected: new Set(),
       };
     }
     case "UNDO": {

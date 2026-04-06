@@ -13,7 +13,7 @@ export const Windows = () => {
       {state.windows.size === 0 && <WelcomeScreen />}
       <FloatingWindows>
         {selectFloatingWindows(state).map(({ id }) => (
-          <CanvasProvider key={id}>
+          <CanvasProvider key={id} id={id}>
             <Window id={id} />
           </CanvasProvider>
         ))}

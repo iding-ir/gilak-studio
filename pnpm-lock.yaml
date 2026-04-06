@@ -117,6 +117,9 @@ importers:
       '@gilak/localization':
         specifier: workspace:*
         version: link:../../packages/gilak-localization
+      '@gilak/persist':
+        specifier: workspace:*
+        version: link:../../packages/gilak-persist
       '@gilak/resizable-screen':
         specifier: workspace:*
         version: link:../../packages/gilak-resizable-screen
@@ -177,6 +180,9 @@ importers:
       '@gilak/localization':
         specifier: workspace:*
         version: link:../gilak-localization
+      '@gilak/persist':
+        specifier: workspace:*
+        version: link:../gilak-persist
       '@gilak/stylist':
         specifier: workspace:*
         version: link:../gilak-stylist
@@ -308,6 +314,9 @@ importers:
       '@gilak/localization':
         specifier: workspace:*
         version: link:../gilak-localization
+      '@gilak/persist':
+        specifier: workspace:*
+        version: link:../gilak-persist
       '@gilak/stylist':
         specifier: workspace:*
         version: link:../gilak-stylist
@@ -380,6 +389,25 @@ importers:
       react:
         specifier: ^19.2.0
         version: 19.2.3
+
+  packages/gilak-persist:
+    dependencies:
+      '@gilak/utils':
+        specifier: workspace:*
+        version: link:../gilak-utils
+      '@reduxjs/toolkit':
+        specifier: ^2.11.1
+        version: 2.11.2(react-redux@9.2.0(@types/react@19.2.9)(react@19.2.3)(redux@5.0.1))(react@19.2.3)
+    devDependencies:
+      '@gilak/build-config':
+        specifier: workspace:*
+        version: link:../build-config
+      react:
+        specifier: ^19.2.0
+        version: 19.2.3
+      react-dom:
+        specifier: ^19.2.0
+        version: 19.2.3(react@19.2.3)
 
   packages/gilak-resizable-screen:
     dependencies:

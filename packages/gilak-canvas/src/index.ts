@@ -1,6 +1,7 @@
 // Components
 export type { CanvasProps } from "./components/Canvas";
 export { Canvas } from "./components/Canvas";
+export { CanvasAutoSave } from "./components/CanvasAutoSave";
 export type { DrawingCanvasProps } from "./components/DrawingCanvas";
 export { DrawingCanvas } from "./components/DrawingCanvas";
 export { ElementCard } from "./components/ElementCard";

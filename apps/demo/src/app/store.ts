@@ -1,3 +1,4 @@
+import { createPersistMiddleware, loadPersistedState } from "@gilak/persist";
 import {
   type Action,
   combineSlices,
@@ -16,7 +17,6 @@ import {
 import { themeListenerMiddleware } from "../features/preferences/theme/theme-middleware";
 import { settingsSlice } from "../features/settings/settings-slice";
 import { toolsSlice } from "../features/tools/tools.slice";
-import { createPersistMiddleware, loadPersistedState } from "./persist";
 
 const rootReducer = combineSlices(
   brushSlice,
@@ -30,8 +30,7 @@ const preloadedState = loadPersistedState<RootState>("gilak");
 
 const persistMiddleware = createPersistMiddleware<RootState>({
   key: "gilak",
-  whitelist: ["brush", "color", "tools", "appearance"],
-  throttleMs: 400,
+  slices: ["brush", "color", "tools", "appearance"],
 });
 
 export const store = configureStore({

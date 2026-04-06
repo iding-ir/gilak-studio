@@ -16,6 +16,7 @@
 
     /* Path Mapping */
     "baseUrl": ".",
+    "rootDir": ".",
     "paths": {
       "@gilak/stylist": ["./packages/gilak-stylist/src"],
       "@gilak/stylist/*": ["./packages/gilak-stylist/src/*"],
@@ -29,6 +30,8 @@
       "@gilak/components/*": ["./packages/gilak-components/src/*"],
       "@gilak/utils": ["./packages/gilak-utils/src"],
       "@gilak/utils/*": ["./packages/gilak-utils/src/*"],
+      "@gilak/persist": ["./packages/gilak-persist/src"],
+      "@gilak/persist/*": ["./packages/gilak-persist/src/*"],
       "@gilak/floating-window": ["./packages/gilak-floating-window/src"],
       "@gilak/floating-window/*": ["./packages/gilak-floating-window/src/*"],
       "@gilak/image-library": ["./packages/gilak-image-library/src"],

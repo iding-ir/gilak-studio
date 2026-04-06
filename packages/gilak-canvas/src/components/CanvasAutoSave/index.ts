@@ -1,0 +1,1 @@
+export { CanvasAutoSave } from "./CanvasAutoSave";

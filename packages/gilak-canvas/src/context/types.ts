@@ -6,4 +6,5 @@ import type { State } from "./state";
 export type ContextValue = {
   state: State;
   dispatch: Dispatch<Action>;
+  lastSavedAt: Date | null;
 };

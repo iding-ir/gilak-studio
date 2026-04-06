@@ -1,29 +1,25 @@
 {
-  "name": "@gilak/floating-window",
+  "name": "@gilak/persist",
   "version": "0.0.1",
-  "description": "A React floating window component with draggable functionality",
+  "description": "Redux state persistence utilities for Gilak Studio",
   "author": "Aydin Ghane Kh. <https://github.com/iding-ir>",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/iding-ir/gilak-studio.git",
-    "directory": "packages/gilak-floating-window"
+    "directory": "packages/gilak-persist"
   },
   "keywords": [
-    "react",
-    "floating-window",
-    "draggable",
-    "ui",
+    "redux",
+    "persist",
+    "autosave",
+    "state",
     "gilak"
   ],
   "homepage": "https://github.com/iding-ir/gilak-studio#readme",
   "bugs": {
     "url": "https://github.com/iding-ir/gilak-studio/issues"
   },
-  "sideEffects": [
-    "**/*.css",
-    "**/*.scss"
-  ],
   "type": "module",
   "main": "./dist/index.umd.cjs",
   "module": "./dist/index.js",
@@ -54,11 +50,7 @@
     "react-dom": "^19.2.0"
   },
   "dependencies": {
-    "@gilak/components": "workspace:*",
-    "@gilak/localization": "workspace:*",
-    "@gilak/persist": "workspace:*",
-    "@gilak/stylist": "workspace:*",
     "@gilak/utils": "workspace:*",
-    "clsx": "^2.1.1"
+    "@reduxjs/toolkit": "^2.11.1"
   }
 }

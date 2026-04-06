@@ -50,6 +50,7 @@ export default defineConfig({
         "../../packages/gilak-drag-n-drop/src",
       ),
       "@gilak/utils": resolve(__dirname, "../../packages/gilak-utils/src"),
+      "@gilak/persist": resolve(__dirname, "../../packages/gilak-persist/src"),
       "@gilak/floating-window": resolve(
         __dirname,
         "../../packages/gilak-floating-window/src",

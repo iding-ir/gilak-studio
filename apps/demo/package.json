@@ -18,6 +18,7 @@
     "@gilak/image-library": "workspace:*",
     "@gilak/drag-n-drop": "workspace:*",
     "@gilak/localization": "workspace:*",
+    "@gilak/persist": "workspace:*",
     "@gilak/resizable-screen": "workspace:*",
     "@gilak/stylist": "workspace:*",
     "@gilak/utils": "workspace:*",
