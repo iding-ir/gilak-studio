@@ -37,7 +37,12 @@
     "autoSave": {
       "title": "Autosave",
       "enabled": "Enabled",
-      "disabled": "Disabled"
+      "disabled": "Disabled",
+      "clear": {
+        "button": "Clear saved data",
+        "clearing": "Clearing...",
+        "confirm": "This will remove all saved app data and reload the page. Continue?"
+      }
     }
   },
   "preferences": {

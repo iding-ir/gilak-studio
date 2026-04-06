@@ -1,7 +1,8 @@
 import type { Dispatch, SetStateAction } from "react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { localStorageAdapter, type PersistStorageAdapter } from "../storage";
+import { registerPersistClearer } from "./persistManager";
 
 export interface UsePersistedStateOptions<T> {
   key: string;
@@ -16,6 +17,7 @@ export interface UsePersistedStateReturn<T> {
   state: T;
   setState: Dispatch<SetStateAction<T>>;
   lastSavedAt: Date | null;
+  clearPersistedState: () => Promise<void>;
 }
 
 export const usePersistedState = <T>({
@@ -29,6 +31,24 @@ export const usePersistedState = <T>({
   const [state, setState] = useState<T>(() => initialState);
   const [isHydrated, setIsHydrated] = useState(false);
   const [lastSavedAt, setLastSavedAt] = useState<Date | null>(null);
+  const skipNextPersistRef = useRef(false);
+
+  const clearPersistedState = useCallback(async () => {
+    try {
+      skipNextPersistRef.current = true;
+      await storage.removeItem?.(key);
+      setState(initialState);
+      setLastSavedAt(null);
+    } catch (error) {
+      console.warn(`Failed to clear persisted state for "${key}"`, error);
+      throw error;
+    }
+  }, [initialState, key, storage]);
+
+  useEffect(
+    () => registerPersistClearer(key, clearPersistedState),
+    [clearPersistedState, key],
+  );
 
   useEffect(() => {
     let isActive = true;
@@ -82,6 +102,11 @@ export const usePersistedState = <T>({
       return;
     }
 
+    if (skipNextPersistRef.current) {
+      skipNextPersistRef.current = false;
+      return;
+    }
+
     let isCancelled = false;
 
     const persist = async () => {
@@ -120,5 +145,5 @@ export const usePersistedState = <T>({
     };
   }, [delayMs, enabled, isHydrated, key, onSave, state, storage]);
 
-  return { state, setState, lastSavedAt };
+  return { state, setState, lastSavedAt, clearPersistedState };
 };

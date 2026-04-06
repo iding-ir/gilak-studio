@@ -37,7 +37,12 @@
     "autoSave": {
       "title": "Automatisch opslaan",
       "enabled": "Ingeschakeld",
-      "disabled": "Uitgeschakeld"
+      "disabled": "Uitgeschakeld",
+      "clear": {
+        "button": "Opgeslagen gegevens wissen",
+        "clearing": "Bezig met wissen...",
+        "confirm": "Dit verwijdert alle opgeslagen app-gegevens en laadt de pagina opnieuw. Doorgaan?"
+      }
     }
   },
   "preferences": {

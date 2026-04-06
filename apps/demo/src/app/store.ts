@@ -26,16 +26,7 @@ const rootReducer = combineSlices(
   appearanceSlice,
 );
 
-const persistedState = loadPersistedState<RootState>("gilak");
-const preloadedState: Partial<RootState> = persistedState.settings
-  ? {
-      ...persistedState,
-      settings: {
-        ...persistedState.settings,
-        open: false,
-      },
-    }
-  : persistedState;
+const preloadedState = loadPersistedState<RootState>("gilak");
 
 const persistMiddleware = createPersistMiddleware<RootState>({
   key: "gilak",

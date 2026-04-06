@@ -1,5 +1,10 @@
 // React
-export { usePersistedReducer, usePersistedState } from "./react";
+export {
+  clearAllPersistedState,
+  registerPersistClearer,
+  usePersistedReducer,
+  usePersistedState,
+} from "./react";
 
 // Redux
 export {

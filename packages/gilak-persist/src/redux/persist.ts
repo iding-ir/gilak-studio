@@ -1,5 +1,6 @@
 import type { Middleware } from "@reduxjs/toolkit";
 
+import { registerPersistClearer } from "../react/persistManager";
 import {
   localStorageAdapter,
   type PersistStorageAdapter,
@@ -67,6 +68,10 @@ export const createPersistMiddleware = <T extends Record<string, unknown>>({
   const delay = intervalMs ?? throttleMs ?? 0;
   let timeout: ReturnType<typeof setTimeout> | null = null;
   let lastSerializedState = "";
+
+  registerPersistClearer(`redux:${key}`, async () => {
+    await storage.removeItem?.(key);
+  });
 
   const middleware: Middleware<unknown, T> =
     (storeAPI) => (next) => (action) => {

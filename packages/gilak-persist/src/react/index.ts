@@ -1,3 +1,8 @@
+export {
+  clearAllPersistedState,
+  type PersistClearer,
+  registerPersistClearer,
+} from "./persistManager";
 export type {
   UsePersistedReducerOptions,
   UsePersistedReducerReturn,

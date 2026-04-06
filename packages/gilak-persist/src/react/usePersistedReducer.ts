@@ -1,7 +1,8 @@
 import type { Dispatch, Reducer } from "react";
-import { useCallback, useEffect, useReducer, useState } from "react";
+import { useCallback, useEffect, useReducer, useRef, useState } from "react";
 
 import { localStorageAdapter, type PersistStorageAdapter } from "../storage";
+import { registerPersistClearer } from "./persistManager";
 
 export interface UsePersistedReducerOptions<TState, TAction> {
   key: string;
@@ -19,6 +20,7 @@ export interface UsePersistedReducerReturn<TState, TAction> {
   state: TState;
   dispatch: Dispatch<TAction>;
   lastSavedAt: Date | null;
+  clearPersistedState: () => Promise<void>;
 }
 
 type InternalAction<TState, TAction> =
@@ -47,6 +49,7 @@ export const usePersistedReducer = <TState, TAction>({
 > => {
   const [isHydrated, setIsHydrated] = useState(false);
   const [lastSavedAt, setLastSavedAt] = useState<Date | null>(null);
+  const skipNextPersistRef = useRef(false);
 
   const [state, baseDispatch] = useReducer(
     (currentState: TState, action: InternalAction<TState, TAction>) => {
@@ -62,6 +65,29 @@ export const usePersistedReducer = <TState, TAction>({
   const dispatch = useCallback<Dispatch<TAction>>((action) => {
     baseDispatch({ kind: "dispatch", action });
   }, []);
+
+  const clearPersistedState = useCallback(async () => {
+    try {
+      skipNextPersistRef.current = true;
+      await storage.removeItem?.(key);
+      baseDispatch({
+        kind: "hydrate",
+        payload: initialState,
+      });
+      setLastSavedAt(null);
+    } catch (error) {
+      console.warn(
+        `Failed to clear persisted reducer state for "${key}"`,
+        error,
+      );
+      throw error;
+    }
+  }, [initialState, key, storage]);
+
+  useEffect(
+    () => registerPersistClearer(key, clearPersistedState),
+    [clearPersistedState, key],
+  );
 
   useEffect(() => {
     let isActive = true;
@@ -131,6 +157,11 @@ export const usePersistedReducer = <TState, TAction>({
       return;
     }
 
+    if (skipNextPersistRef.current) {
+      skipNextPersistRef.current = false;
+      return;
+    }
+
     let isCancelled = false;
 
     const persist = async () => {
@@ -174,5 +205,5 @@ export const usePersistedReducer = <TState, TAction>({
     };
   }, [delayMs, enabled, isHydrated, key, onSave, serialize, state, storage]);
 
-  return { state, dispatch, lastSavedAt };
+  return { state, dispatch, lastSavedAt, clearPersistedState };
 };

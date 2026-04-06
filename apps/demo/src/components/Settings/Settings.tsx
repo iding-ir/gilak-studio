@@ -2,6 +2,7 @@ import { Button, Dialog, Group, Input, Toggle } from "@gilak/components";
 import { t } from "@gilak/localization";
 import { useState } from "react";
 
+import { clearAllPersistedState } from "../../app/clear-persisted-state";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
   closeSettings,
@@ -23,9 +24,28 @@ export const Settings = () => {
   const [winW, setWinW] = useState(windowSettings.size.w);
   const [winH, setWinH] = useState(windowSettings.size.h);
   const [autoSave, setAutoSave] = useState(autoSaveEnabled);
+  const [clearingInProgress, setClearingInProgress] = useState(false);
 
   const handleClose = () => {
     dispatch(closeSettings());
+  };
+
+  const handleClearPersistedState = async () => {
+    const confirmed = window.confirm(t("app:settings.autoSave.clear.confirm"));
+
+    if (!confirmed) {
+      return;
+    }
+
+    setClearingInProgress(true);
+
+    try {
+      await clearAllPersistedState();
+      window.location.reload();
+    } catch (error) {
+      console.warn("Failed to clear persisted state.", error);
+      setClearingInProgress(false);
+    }
   };
 
   const handleSave = () => {
@@ -99,6 +119,18 @@ export const Settings = () => {
             selected={autoSave ? "enabled" : "disabled"}
             onChange={(id) => setAutoSave(id === "enabled")}
           />
+          <Button
+            type="button"
+            variant="dark"
+            disabled={clearingInProgress}
+            onClick={() => {
+              void handleClearPersistedState();
+            }}
+          >
+            {clearingInProgress
+              ? t("app:settings.autoSave.clear.clearing")
+              : t("app:settings.autoSave.clear.button")}
+          </Button>
         </Group>
       </Group>
     </Dialog>

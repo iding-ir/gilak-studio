@@ -37,7 +37,12 @@
     "autoSave": {
       "title": "Automatisches Speichern",
       "enabled": "Aktiviert",
-      "disabled": "Deaktiviert"
+      "disabled": "Deaktiviert",
+      "clear": {
+        "button": "Gespeicherte Daten löschen",
+        "clearing": "Wird gelöscht...",
+        "confirm": "Dadurch werden alle gespeicherten App-Daten entfernt und die Seite neu geladen. Fortfahren?"
+      }
     }
   },
   "preferences": {
