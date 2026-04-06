@@ -54,6 +54,7 @@
   },
   "dependencies": {
     "@gilak/components": "workspace:*",
+    "@gilak/drag-n-drop": "workspace:*",
     "@gilak/localization": "workspace:*",
     "@gilak/persist": "workspace:*",
     "@gilak/stylist": "workspace:*",

@@ -58,11 +58,8 @@ export const reducer = (state: State, { type, payload }: Action): State => {
       const newHistory = history.setHistory(state.elementsHistory, newElements);
       return { ...state, elementsHistory: newHistory };
     }
-    case "MOVE_ELEMENT_UP":
-      return moveElement(state, payload.id, 1);
-
-    case "MOVE_ELEMENT_DOWN":
-      return moveElement(state, payload.id, -1);
+    case "MOVE_ELEMENT_TO_INDEX":
+      return moveElementToIndex(state, payload.id, payload.index);
     case "SELECT_ELEMENT": {
       const newSelected = new Set(state.selected);
       newSelected.add(payload.id);
@@ -183,26 +180,31 @@ export const reducer = (state: State, { type, payload }: Action): State => {
   }
 };
 
-function moveElement(state: State, id: string, direction: 1 | -1) {
+function moveElementToIndex(state: State, id: string, targetIndex: number) {
   const entries = Array.from(state.elementsHistory.current.entries());
   const index = entries.findIndex(([key]) => key === id);
 
-  const targetIndex = index + direction;
-
-  if (index === -1 || targetIndex < 0 || targetIndex >= entries.length) {
+  if (index === -1) {
     return state;
   }
 
+  const clampedTargetIndex = Math.max(0, Math.min(targetIndex, entries.length));
   const [entry] = entries.splice(index, 1);
-  entries.splice(targetIndex, 0, entry);
+  const adjustedTargetIndex =
+    index < clampedTargetIndex ? clampedTargetIndex - 1 : clampedTargetIndex;
 
-  const reorderedElements = new Map(entries);
+  if (adjustedTargetIndex === index) {
+    entries.splice(index, 0, entry);
+    return state;
+  }
+
+  entries.splice(adjustedTargetIndex, 0, entry);
 
   return {
     ...state,
     elementsHistory: history.setHistory(
       state.elementsHistory,
-      reorderedElements,
+      new Map(entries),
     ),
   };
 }

@@ -41,12 +41,8 @@ export const useCanvas = () => {
     dispatch(actions.showElement({ id }));
   };
 
-  const moveElementUp = (id: CanvasElement["id"]) => {
-    dispatch(actions.moveElementUp({ id }));
-  };
-
-  const moveElementDown = (id: CanvasElement["id"]) => {
-    dispatch(actions.moveElementDown({ id }));
+  const moveElementToIndex = (id: CanvasElement["id"], index: number) => {
+    dispatch(actions.moveElementToIndex({ id, index }));
   };
 
   const selectElement = (id: CanvasElement["id"]) => {
@@ -113,8 +109,7 @@ export const useCanvas = () => {
     undo,
     hideElement,
     showElement,
-    moveElementUp,
-    moveElementDown,
+    moveElementToIndex,
     selectElement,
     deselectElement,
     focusElement,

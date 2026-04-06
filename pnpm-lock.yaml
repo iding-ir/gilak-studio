@@ -177,6 +177,9 @@ importers:
       '@gilak/components':
         specifier: workspace:*
         version: link:../gilak-components
+      '@gilak/drag-n-drop':
+        specifier: workspace:*
+        version: link:../gilak-drag-n-drop
       '@gilak/localization':
         specifier: workspace:*
         version: link:../gilak-localization
@@ -345,6 +348,9 @@ importers:
       '@gilak/components':
         specifier: workspace:*
         version: link:../gilak-components
+      '@gilak/persist':
+        specifier: workspace:*
+        version: link:../gilak-persist
       '@gilak/stylist':
         specifier: workspace:*
         version: link:../gilak-stylist

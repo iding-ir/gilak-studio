@@ -1,49 +1,29 @@
 import { selectFocusedElement } from "@gilak/canvas";
 import type { IconProps } from "@gilak/components";
-import { Icon, IconButton } from "@gilak/components";
+import { IconButton } from "@gilak/components";
+import { DragWrapper } from "@gilak/drag-n-drop";
 import { t } from "@gilak/localization";
 import clsx from "clsx";
+import { type MouseEvent, useState } from "react";
 
+import { CANVAS_ELEMENT_DRAG_TYPE } from "../../constants";
 import { useCanvas } from "../../hooks/useCanvas";
 import type { CanvasElement } from "../../types/canvas";
 import styles from "./ElementCard.module.scss";
+import { ElementInfo } from "./ElementInfo";
 import IconDelete from "./icons/icon-delete.svg?url";
-import IconDown from "./icons/icon-down.svg?url";
-import IconDrawing from "./icons/icon-drawing.svg?url";
 import IconHide from "./icons/icon-hide.svg?url";
-import IconImage from "./icons/icon-image.svg?url";
 import IconShow from "./icons/icon-show.svg?url";
-import IconText from "./icons/icon-text.svg?url";
-import IconUp from "./icons/icon-up.svg?url";
-
-const typeIcons: Record<CanvasElement["type"], string> = {
-  image: IconImage,
-  drawing: IconDrawing,
-  text: IconText,
-};
 
 export type ElementCardProps = {
   element: CanvasElement;
-  disableMoveUp?: boolean;
-  disableMoveDown?: boolean;
 };
 
-export const ElementCard = ({
-  element,
-  disableMoveUp = false,
-  disableMoveDown = false,
-  ...props
-}: ElementCardProps) => {
+export const ElementCard = ({ element }: ElementCardProps) => {
   const { id, visible } = element;
-  const {
-    state,
-    moveElementUp,
-    moveElementDown,
-    removeElement,
-    showElement,
-    hideElement,
-    focusElement,
-  } = useCanvas();
+  const [isDragging, setIsDragging] = useState(false);
+  const { state, removeElement, showElement, hideElement, focusElement } =
+    useCanvas();
 
   const selectedElementId = selectFocusedElement(state)?.id;
 
@@ -56,54 +36,46 @@ export const ElementCard = ({
     focusElement(id);
   };
 
-  const handleMoveUp = (event: React.MouseEvent) => {
-    event.stopPropagation();
-    moveElementUp(id);
-  };
-
-  const handleMoveDown = (event: React.MouseEvent) => {
-    event.stopPropagation();
-    moveElementDown(id);
-  };
-
-  const handleRemove = (event: React.MouseEvent) => {
+  const handleRemove = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     removeElement(id);
   };
 
+  const handleToggleVisibility = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+
+    if (visible) {
+      hideElement(id);
+    } else {
+      showElement(id);
+    }
+  };
+
   return (
     <li
-      {...props}
       className={clsx(styles.root, {
         [styles.focused]: selectedElementId === id,
+        [styles.dragging]: isDragging,
       })}
       onClick={handleClick}
     >
-      <div className={styles.info}>
-        <Icon
-          icon={typeIcons[element.type]}
-          size="sm"
-          variant="light-ghost"
-          frameless
-          interactive={false}
-        />
-        {id}
-      </div>
+      <DragWrapper
+        dragId={id}
+        data={element}
+        dragType={CANVAS_ELEMENT_DRAG_TYPE}
+        dragImageRenderer={({ data }) => (
+          <div className={styles.dragPreview}>
+            <ElementInfo element={data} />
+          </div>
+        )}
+        onDragStart={() => setIsDragging(true)}
+        onDragEnd={() => setIsDragging(false)}
+      >
+        <div className={styles.info}>
+          <ElementInfo element={element} />
+        </div>
+      </DragWrapper>
       <div className={styles.actions}>
-        <IconButton
-          icon={IconUp}
-          {...options}
-          onClick={handleMoveUp}
-          disabled={disableMoveUp}
-          aria-label={t("canvas:elements.moveUp")}
-        ></IconButton>
-        <IconButton
-          icon={IconDown}
-          {...options}
-          onClick={handleMoveDown}
-          disabled={disableMoveDown}
-          aria-label={t("canvas:elements.moveDown")}
-        />
         <IconButton
           icon={IconDelete}
           {...options}
@@ -113,7 +85,7 @@ export const ElementCard = ({
         <IconButton
           icon={visible ? IconShow : IconHide}
           {...options}
-          onClick={() => (visible ? hideElement(id) : showElement(id))}
+          onClick={handleToggleVisibility}
           aria-label={
             visible ? t("canvas:elements.hide") : t("canvas:elements.show")
           }

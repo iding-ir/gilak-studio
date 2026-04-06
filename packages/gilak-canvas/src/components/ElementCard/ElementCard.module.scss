@@ -9,12 +9,24 @@
   border-radius: var(--radius-md);
   background-color: var(--color-dark-lg);
   cursor: pointer;
+  user-select: none;
+  transition: var(--transition-md);
 
   &.focused {
     @include focus();
   }
 
+  &.dragging {
+    opacity: 0.6;
+    box-shadow: var(--shadow-none);
+
+    .info {
+      cursor: grabbing;
+    }
+  }
+
   .info {
+    flex-grow: 10;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -22,10 +34,22 @@
     color: var(--color-light-sm);
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-md);
+    cursor: grab;
   }
 
   .actions {
     display: flex;
     gap: var(--spacing-xs);
+    cursor: default;
   }
+}
+
+.dragPreview {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background-color: var(--color-dark-lg);
+  color: var(--color-light-sm);
+  font-size: var(--font-size-xs);
 }

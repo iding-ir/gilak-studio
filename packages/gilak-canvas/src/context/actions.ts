@@ -10,8 +10,10 @@ type Action =
   | { type: "REDO"; payload?: undefined }
   | { type: "HIDE_ELEMENT"; payload: Pick<CanvasElement, "id"> }
   | { type: "SHOW_ELEMENT"; payload: Pick<CanvasElement, "id"> }
-  | { type: "MOVE_ELEMENT_UP"; payload: Pick<CanvasElement, "id"> }
-  | { type: "MOVE_ELEMENT_DOWN"; payload: Pick<CanvasElement, "id"> }
+  | {
+      type: "MOVE_ELEMENT_TO_INDEX";
+      payload: Pick<CanvasElement, "id"> & { index: number };
+    }
   | { type: "SELECT_ELEMENT"; payload: Pick<CanvasElement, "id"> }
   | { type: "DESELECT_ELEMENT"; payload: Pick<CanvasElement, "id"> }
   | { type: "FOCUS_ELEMENT"; payload: Pick<CanvasElement, "id"> }
@@ -75,13 +77,10 @@ const showElement = (payload: Pick<CanvasElement, "id">): Action => ({
   payload,
 });
 
-const moveElementUp = (payload: Pick<CanvasElement, "id">): Action => ({
-  type: "MOVE_ELEMENT_UP",
-  payload,
-});
-
-const moveElementDown = (payload: Pick<CanvasElement, "id">): Action => ({
-  type: "MOVE_ELEMENT_DOWN",
+const moveElementToIndex = (
+  payload: Pick<CanvasElement, "id"> & { index: number },
+): Action => ({
+  type: "MOVE_ELEMENT_TO_INDEX",
   payload,
 });
 
@@ -154,8 +153,7 @@ export const actions = {
   redo,
   hideElement,
   showElement,
-  moveElementUp,
-  moveElementDown,
+  moveElementToIndex,
   selectElement,
   deselectElement,
   focusElement,
