@@ -27,14 +27,21 @@ export { blobToDataUrl, dataUrlToImage, subscribeToImageLoad } from "./file";
 
 // Storage
 export {
+  getIndexedDbFactory,
   getItem,
   getItemSync,
+  getValue,
   keysWithPrefix,
   keysWithPrefixSync,
+  listKeysWithPrefix,
+  openDatabase,
   removeItem,
   removeItemSync,
+  removeValue,
   setItem,
   setItemSync,
+  setValue,
+  type StoredValue,
 } from "./storage";
 
 // String

@@ -1,6 +1,7 @@
-import { getItem, setItemSync } from "@gilak/utils";
 import type { Dispatch, Reducer } from "react";
 import { useCallback, useEffect, useReducer, useState } from "react";
+
+import { localStorageAdapter, type PersistStorageAdapter } from "../storage";
 
 export interface UsePersistedReducerOptions<TState, TAction> {
   key: string;
@@ -11,6 +12,7 @@ export interface UsePersistedReducerOptions<TState, TAction> {
   onSave?: (savedAt: Date) => void;
   serialize?: (state: TState) => unknown;
   deserialize?: (value: unknown) => TState | null;
+  storage?: PersistStorageAdapter;
 }
 
 export interface UsePersistedReducerReturn<TState, TAction> {
@@ -38,6 +40,7 @@ export const usePersistedReducer = <TState, TAction>({
   onSave,
   serialize,
   deserialize,
+  storage = localStorageAdapter,
 }: UsePersistedReducerOptions<TState, TAction>): UsePersistedReducerReturn<
   TState,
   TAction
@@ -73,7 +76,7 @@ export const usePersistedReducer = <TState, TAction>({
       }
 
       try {
-        const persistedState = await getItem<unknown>(key);
+        const persistedState = await storage.getItem<unknown>(key);
 
         if (!isActive) {
           return;
@@ -121,38 +124,55 @@ export const usePersistedReducer = <TState, TAction>({
     return () => {
       isActive = false;
     };
-  }, [deserialize, enabled, initialState, key]);
+  }, [deserialize, enabled, initialState, key, storage]);
 
   useEffect(() => {
     if (!enabled || !isHydrated) {
       return;
     }
 
-    const persist = () => {
+    let isCancelled = false;
+
+    const persist = async () => {
       try {
         const valueToPersist = serialize ? serialize(state) : state;
 
-        setItemSync(key, valueToPersist);
+        await storage.setItem(key, valueToPersist);
+
+        if (isCancelled) {
+          return;
+        }
 
         const savedAt = new Date();
         setLastSavedAt(savedAt);
         onSave?.(savedAt);
       } catch (err) {
-        console.warn(`Failed to persist React reducer state for "${key}"`, err);
+        if (!isCancelled) {
+          console.warn(
+            `Failed to persist React reducer state for "${key}"`,
+            err,
+          );
+        }
       }
     };
 
     if (delayMs <= 0) {
-      persist();
-      return;
+      void persist();
+
+      return () => {
+        isCancelled = true;
+      };
     }
 
-    const timeout = setTimeout(persist, delayMs);
+    const timeout = setTimeout(() => {
+      void persist();
+    }, delayMs);
 
     return () => {
+      isCancelled = true;
       clearTimeout(timeout);
     };
-  }, [delayMs, enabled, isHydrated, key, onSave, serialize, state]);
+  }, [delayMs, enabled, isHydrated, key, onSave, serialize, state, storage]);
 
   return { state, dispatch, lastSavedAt };
 };

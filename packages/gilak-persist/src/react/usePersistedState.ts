@@ -1,6 +1,7 @@
-import { getItem, setItemSync } from "@gilak/utils";
 import type { Dispatch, SetStateAction } from "react";
 import { useEffect, useState } from "react";
+
+import { localStorageAdapter, type PersistStorageAdapter } from "../storage";
 
 export interface UsePersistedStateOptions<T> {
   key: string;
@@ -8,6 +9,7 @@ export interface UsePersistedStateOptions<T> {
   delayMs?: number;
   enabled?: boolean;
   onSave?: (savedAt: Date) => void;
+  storage?: PersistStorageAdapter;
 }
 
 export interface UsePersistedStateReturn<T> {
@@ -22,6 +24,7 @@ export const usePersistedState = <T>({
   delayMs = 0,
   enabled = true,
   onSave,
+  storage = localStorageAdapter,
 }: UsePersistedStateOptions<T>): UsePersistedStateReturn<T> => {
   const [state, setState] = useState<T>(() => initialState);
   const [isHydrated, setIsHydrated] = useState(false);
@@ -40,7 +43,7 @@ export const usePersistedState = <T>({
       }
 
       try {
-        const persistedState = await getItem<T>(key);
+        const persistedState = await storage.getItem<T>(key);
 
         if (!isActive) {
           return;
@@ -72,35 +75,50 @@ export const usePersistedState = <T>({
     return () => {
       isActive = false;
     };
-  }, [enabled, initialState, key]);
+  }, [enabled, initialState, key, storage]);
 
   useEffect(() => {
     if (!enabled || !isHydrated) {
       return;
     }
 
-    const persist = () => {
+    let isCancelled = false;
+
+    const persist = async () => {
       try {
-        setItemSync(key, state);
+        await storage.setItem(key, state);
+
+        if (isCancelled) {
+          return;
+        }
+
         const savedAt = new Date();
         setLastSavedAt(savedAt);
         onSave?.(savedAt);
       } catch (err) {
-        console.warn(`Failed to persist React state for "${key}"`, err);
+        if (!isCancelled) {
+          console.warn(`Failed to persist React state for "${key}"`, err);
+        }
       }
     };
 
     if (delayMs <= 0) {
-      persist();
-      return;
+      void persist();
+
+      return () => {
+        isCancelled = true;
+      };
     }
 
-    const timeout = setTimeout(persist, delayMs);
+    const timeout = setTimeout(() => {
+      void persist();
+    }, delayMs);
 
     return () => {
+      isCancelled = true;
       clearTimeout(timeout);
     };
-  }, [delayMs, enabled, isHydrated, key, onSave, state]);
+  }, [delayMs, enabled, isHydrated, key, onSave, state, storage]);
 
   return { state, setState, lastSavedAt };
 };

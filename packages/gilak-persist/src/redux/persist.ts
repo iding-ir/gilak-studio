@@ -1,6 +1,10 @@
-import { getItem, getItemSync, setItemSync } from "@gilak/utils";
 import type { Middleware } from "@reduxjs/toolkit";
 
+import {
+  localStorageAdapter,
+  type PersistStorageAdapter,
+  type SyncPersistStorageAdapter,
+} from "../storage";
 import type { PersistOptions, PersistSliceOption } from "./types";
 
 const normalizeSlices = <T extends Record<string, unknown>>(
@@ -39,13 +43,14 @@ const pickSlices = <T extends Record<string, unknown>>(
   return persistedState;
 };
 
-const persistState = <T extends Record<string, unknown>>(
+const persistState = async <T extends Record<string, unknown>>(
   key: string,
   persistedState: Partial<T>,
   serializedState: string,
   onPersisted: (value: string) => void,
+  storage: PersistStorageAdapter,
 ) => {
-  setItemSync(key, persistedState);
+  await storage.setItem(key, persistedState);
   onPersisted(serializedState);
 };
 
@@ -55,6 +60,7 @@ export const createPersistMiddleware = <T extends Record<string, unknown>>({
   whitelist,
   intervalMs,
   throttleMs,
+  storage = localStorageAdapter,
 }: PersistOptions<T>): Middleware<unknown, T> => {
   const configuredSlices = normalizeSlices(slices, whitelist);
   const sliceKeys = configuredSlices.map(({ key: sliceKey }) => sliceKey);
@@ -91,8 +97,16 @@ export const createPersistMiddleware = <T extends Record<string, unknown>>({
             return;
           }
 
-          persistState(key, persistedState, serializedState, (value) => {
-            lastSerializedState = value;
+          void persistState(
+            key,
+            persistedState,
+            serializedState,
+            (value) => {
+              lastSerializedState = value;
+            },
+            storage,
+          ).catch((err) => {
+            console.warn(`Failed to persist state for "${key}"`, err);
           });
         } catch (err) {
           console.warn(`Failed to persist state for "${key}"`, err);
@@ -128,9 +142,19 @@ export const createPersistMiddleware = <T extends Record<string, unknown>>({
   return middleware;
 };
 
-export const loadPersistedState = <T>(key: string): Partial<T> => {
+export const loadPersistedState = <T>(
+  key: string,
+  storage: SyncPersistStorageAdapter = localStorageAdapter,
+): Partial<T> => {
   try {
-    return getItemSync<Partial<T>>(key) ?? {};
+    if (!storage.getItemSync) {
+      console.warn(
+        `Synchronous persisted state loading is not supported for "${key}" by the configured storage adapter.`,
+      );
+      return {};
+    }
+
+    return storage.getItemSync<Partial<T>>(key) ?? {};
   } catch {
     return {};
   }
@@ -138,9 +162,10 @@ export const loadPersistedState = <T>(key: string): Partial<T> => {
 
 export const loadPersistedStateAsync = async <T>(
   key: string,
+  storage: PersistStorageAdapter = localStorageAdapter,
 ): Promise<Partial<T>> => {
   try {
-    return (await getItem<Partial<T>>(key)) ?? {};
+    return (await storage.getItem<Partial<T>>(key)) ?? {};
   } catch {
     return {};
   }
