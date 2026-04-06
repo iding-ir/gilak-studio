@@ -33,7 +33,12 @@
     "window": "Venstergrootte",
     "document": "Documentgrootte",
     "number": "Voer een nummer in",
-    "save": "Opslaan"
+    "save": "Opslaan",
+    "autoSave": {
+      "title": "Automatisch opslaan",
+      "enabled": "Ingeschakeld",
+      "disabled": "Uitgeschakeld"
+    }
   },
   "preferences": {
     "heading": "Voorkeuren",

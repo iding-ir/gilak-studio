@@ -33,7 +33,12 @@
     "window": "Window Size",
     "document": "Document Size",
     "number": "Enter a number",
-    "save": "Save"
+    "save": "Save",
+    "autoSave": {
+      "title": "Autosave",
+      "enabled": "Enabled",
+      "disabled": "Disabled"
+    }
   },
   "preferences": {
     "heading": "Preferences",

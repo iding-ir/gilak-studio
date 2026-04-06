@@ -9,11 +9,15 @@ import styles from "./ImageLibrary.module.scss";
 
 export type ImageLibraryProps = {
   itemRenderer?: ImageItemRenderer;
+  autoSave?: boolean;
 };
 
-export const ImageLibrary = ({ itemRenderer }: ImageLibraryProps) => {
+export const ImageLibrary = ({
+  itemRenderer,
+  autoSave = true,
+}: ImageLibraryProps) => {
   return (
-    <ImageLibraryProvider>
+    <ImageLibraryProvider autoSave={autoSave}>
       <section className={styles.root} aria-label={t("imageLibrary:title")}>
         <Controls />
         <ImageUploader />

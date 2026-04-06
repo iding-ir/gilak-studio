@@ -11,10 +11,12 @@ import { initialState } from "./state";
 
 export type ImageLibraryProviderProps = {
   children: ReactNode;
+  autoSave?: boolean;
 };
 
 export const ImageLibraryProvider = ({
   children,
+  autoSave = true,
 }: ImageLibraryProviderProps) => {
   const storage = useMemo(() => createImageLibraryPersistenceStorage(), []);
   const { state, dispatch } = usePersistedReducer({
@@ -22,6 +24,7 @@ export const ImageLibraryProvider = ({
     reducer,
     initialState,
     delayMs: 300,
+    enabled: autoSave,
     storage,
   });
 

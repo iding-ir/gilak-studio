@@ -13,10 +13,16 @@ type WindowSettings = {
   size: Size;
   title: string;
 };
+
+type PersistSettings = {
+  autoSaveEnabled: boolean;
+};
+
 export interface SettingsState {
   open: boolean;
   doc: DocumentSettings;
   win: WindowSettings;
+  persist: PersistSettings;
 }
 
 const initialState: SettingsState = {
@@ -29,6 +35,9 @@ const initialState: SettingsState = {
   win: {
     size: { w: 800, h: 600 },
     title: "Untitled",
+  },
+  persist: {
+    autoSaveEnabled: true,
   },
 };
 
@@ -50,19 +59,31 @@ export const settingsSlice = createAppSlice({
     setWindowSize: create.reducer((state, { payload }: PayloadAction<Size>) => {
       state.win.size = payload;
     }),
+    setAutoSaveEnabled: create.reducer(
+      (state, { payload }: PayloadAction<boolean>) => {
+        state.persist.autoSaveEnabled = payload;
+      },
+    ),
   }),
   selectors: {
     selectSettingsOpen: ({ open }) => open,
     selectSettingsDocument: ({ doc }) => doc,
     selectSettingsWindow: ({ win }) => win,
+    selectSettingsAutoSaveEnabled: ({ persist }) => persist.autoSaveEnabled,
   },
 });
 
-export const { openSettings, closeSettings, setDocumentSize, setWindowSize } =
-  settingsSlice.actions;
+export const {
+  openSettings,
+  closeSettings,
+  setDocumentSize,
+  setWindowSize,
+  setAutoSaveEnabled,
+} = settingsSlice.actions;
 
 export const {
   selectSettingsOpen,
   selectSettingsDocument,
   selectSettingsWindow,
+  selectSettingsAutoSaveEnabled,
 } = settingsSlice.selectors;

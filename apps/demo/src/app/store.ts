@@ -26,11 +26,20 @@ const rootReducer = combineSlices(
   appearanceSlice,
 );
 
-const preloadedState = loadPersistedState<RootState>("gilak");
+const persistedState = loadPersistedState<RootState>("gilak");
+const preloadedState: Partial<RootState> = persistedState.settings
+  ? {
+      ...persistedState,
+      settings: {
+        ...persistedState.settings,
+        open: false,
+      },
+    }
+  : persistedState;
 
 const persistMiddleware = createPersistMiddleware<RootState>({
   key: "gilak",
-  slices: ["brush", "color", "tools", "appearance"],
+  slices: ["brush", "color", "tools", "appearance", "settings"],
 });
 
 export const store = configureStore({

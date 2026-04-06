@@ -11,10 +11,12 @@ import { initialState } from "./state";
 
 export type FloatingWindowProviderProps = {
   children: ReactNode;
+  autoSave?: boolean;
 };
 
 export const FloatingWindowProvider = ({
   children,
+  autoSave = true,
 }: FloatingWindowProviderProps) => {
   const storage = useMemo(() => createFloatingWindowPersistenceStorage(), []);
   const { state, dispatch } = usePersistedReducer({
@@ -22,6 +24,7 @@ export const FloatingWindowProvider = ({
     reducer,
     initialState,
     delayMs: 1000,
+    enabled: autoSave,
     storage,
   });
 

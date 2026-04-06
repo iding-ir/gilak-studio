@@ -33,7 +33,12 @@
     "window": "Fenstergröße",
     "document": "Dokumentgröße",
     "number": "Geben Sie eine Zahl ein",
-    "save": "Speichern"
+    "save": "Speichern",
+    "autoSave": {
+      "title": "Automatisches Speichern",
+      "enabled": "Aktiviert",
+      "disabled": "Deaktiviert"
+    }
   },
   "preferences": {
     "heading": "Einstellungen",
