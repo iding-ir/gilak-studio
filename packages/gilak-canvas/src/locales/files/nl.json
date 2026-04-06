@@ -19,5 +19,17 @@
     "header": "Lettertype",
     "fontFamily": "Lettertypefamilie",
     "fontSize": "Lettergrootte"
+  },
+  "autoSave": {
+    "waiting": "Wachten op automatisch opslaan",
+    "savedAt": "Opgeslagen om {{time}}",
+    "fewSecondsAgo": "Een paar seconden geleden opgeslagen",
+    "lessThanSeconds_one": "Minder dan {{count}} seconde geleden opgeslagen",
+    "lessThanSeconds_other": "Minder dan {{count}} seconden geleden opgeslagen",
+    "lessThanMinutes_one": "Minder dan {{count}} minuut geleden opgeslagen",
+    "lessThanMinutes_other": "Minder dan {{count}} minuten geleden opgeslagen",
+    "moreThanMinutesAgo_one": "Meer dan {{count}} minuut geleden opgeslagen",
+    "moreThanMinutesAgo_other": "Meer dan {{count}} minuten geleden opgeslagen",
+    "moreThanHourAgo": "Meer dan een uur geleden opgeslagen"
   }
 }

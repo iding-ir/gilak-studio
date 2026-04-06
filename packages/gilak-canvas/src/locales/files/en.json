@@ -19,5 +19,17 @@
     "header": "Font",
     "fontFamily": "Font Family",
     "fontSize": "Font Size"
+  },
+  "autoSave": {
+    "waiting": "Waiting for auto-save",
+    "savedAt": "Saved at {{time}}",
+    "fewSecondsAgo": "Saved a few seconds ago",
+    "lessThanSeconds_one": "Saved less than {{count}} second ago",
+    "lessThanSeconds_other": "Saved less than {{count}} seconds ago",
+    "lessThanMinutes_one": "Saved less than {{count}} minute ago",
+    "lessThanMinutes_other": "Saved less than {{count}} minutes ago",
+    "moreThanMinutesAgo_one": "Saved more than {{count}} minute ago",
+    "moreThanMinutesAgo_other": "Saved more than {{count}} minutes ago",
+    "moreThanHourAgo": "Saved more than an hour ago"
   }
 }

@@ -19,6 +19,9 @@ export {
 // Performance utilities
 export { debounce, throttle } from "./performance";
 
+// Time utilities
+export { getRelativeTimeBucket, type RelativeTimeBucket } from "./time";
+
 // DOM utilities
 export { setAttribute, toggleFullscreen, useHead, watchElement } from "./dom";
 

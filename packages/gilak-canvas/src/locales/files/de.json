@@ -19,5 +19,17 @@
     "header": "Schriftart",
     "fontFamily": "Schriftfamilie",
     "fontSize": "Schriftgröße"
+  },
+  "autoSave": {
+    "waiting": "Warte auf automatisches Speichern",
+    "savedAt": "Gespeichert um {{time}}",
+    "fewSecondsAgo": "Vor ein paar Sekunden gespeichert",
+    "lessThanSeconds_one": "Vor weniger als {{count}} Sekunde gespeichert",
+    "lessThanSeconds_other": "Vor weniger als {{count}} Sekunden gespeichert",
+    "lessThanMinutes_one": "Vor weniger als {{count}} Minute gespeichert",
+    "lessThanMinutes_other": "Vor weniger als {{count}} Minuten gespeichert",
+    "moreThanMinutesAgo_one": "Vor mehr als {{count}} Minute gespeichert",
+    "moreThanMinutesAgo_other": "Vor mehr als {{count}} Minuten gespeichert",
+    "moreThanHourAgo": "Vor mehr als einer Stunde gespeichert"
   }
 }
