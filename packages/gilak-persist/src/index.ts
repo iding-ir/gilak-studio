@@ -9,11 +9,20 @@ export {
 } from "./redux";
 
 // Storage
-export { createIndexedDbStorageAdapter, localStorageAdapter } from "./storage";
+export {
+  createIndexedDbSchemaStorageAdapter,
+  createIndexedDbStorageAdapter,
+  defineIndexedDbCollection,
+  defineIndexedDbField,
+  localStorageAdapter,
+} from "./storage";
 
 // Types
 export type { PersistOptions, PersistSliceOption } from "./redux";
 export type {
+  IndexedDbSchemaStorageAdapterOptions,
+  IndexedDbStateCollection,
+  IndexedDbStateField,
   IndexedDbStorageAdapterOptions,
   PersistStorageAdapter,
   SyncPersistStorageAdapter,

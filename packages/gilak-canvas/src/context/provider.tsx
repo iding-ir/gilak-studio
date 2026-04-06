@@ -1,11 +1,11 @@
-import {
-  createIndexedDbStorageAdapter,
-  usePersistedReducer,
-} from "@gilak/persist";
+import { usePersistedReducer } from "@gilak/persist";
 import { type ReactNode, useMemo } from "react";
 
 import { CanvasContext } from "./context";
-import { deserializeState, getStateKey, serializeState } from "./persistence";
+import {
+  createCanvasPersistenceStorage,
+  getStateKey,
+} from "./persistence-schema";
 import { reducer } from "./reducer";
 import { initialState } from "./state";
 
@@ -15,22 +15,12 @@ export type CanvasProviderProps = {
 };
 
 export const CanvasProvider = ({ id, children }: CanvasProviderProps) => {
-  const storage = useMemo(
-    () =>
-      createIndexedDbStorageAdapter({
-        dbName: "gilak-studio",
-        storeName: "canvas-state",
-      }),
-    [],
-  );
-
+  const storage = useMemo(() => createCanvasPersistenceStorage(), []);
   const { state, dispatch, lastSavedAt } = usePersistedReducer({
     key: getStateKey(id),
     reducer,
     initialState,
     delayMs: 1000,
-    serialize: serializeState,
-    deserialize: deserializeState,
     storage,
   });
 
